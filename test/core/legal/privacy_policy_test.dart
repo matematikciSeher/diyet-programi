@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:diyet_programi/core/config/app_config.dart';
 import 'package:diyet_programi/core/config/app_environment.dart';
 import 'package:diyet_programi/core/legal/privacy_policy_link.dart';
+import 'package:diyet_programi/features/food/data/datasources/food_api_config.dart';
 import 'package:diyet_programi/core/routing/app_routes.dart';
 import 'package:diyet_programi/core/theme/app_theme.dart';
 import 'package:diyet_programi/features/profile/presentation/pages/profile_page.dart';
@@ -86,13 +87,40 @@ void main() {
     );
   });
 
+  test('gerçek iletişim e-postası config’te kabul edilir', () {
+    const config = AppConfig(
+      environment: AppEnvironment.prod,
+      appName: 'Diyet Programı',
+      apiBaseUrl: '',
+      aiProxyBaseUrl: '',
+      foodApiBaseUrl: '',
+      foodApiContactEmail: 'seheraydin42@gmail.com',
+      revenueCatApiKeyIos: '',
+      revenueCatApiKeyAndroid: '',
+      enableAnalytics: true,
+      enableCrashReporting: true,
+      useFakeServices: false,
+      privacyPolicyUrl: policyUrl,
+      privacyContactEmail: 'seheraydin42@gmail.com',
+    );
+    expect(config.isPrivacyContactEmailConfigured, isTrue);
+    expect(
+      FoodApiConfig.userAgentFor(contactEmail: config.foodApiContactEmail),
+      'DiyetProgrami/1.0.0 (seheraydin42@gmail.com)',
+    );
+  });
+
   test('gizlilik metni kod davranışıyla çelişen iddia içermez', () {
     final html = File('privacy-policy.html').readAsStringSync();
     final docs = File('docs/privacy-policy.html').readAsStringSync();
     expect(docs, html);
+    expect(html.contains('seheraydin42@gmail.com'), isTrue);
     expect(
-      RegExp(r'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}').hasMatch(html),
-      isFalse,
+      RegExp(r'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}')
+          .allMatches(html)
+          .map((match) => match.group(0))
+          .toSet(),
+      {'seheraydin42@gmail.com'},
     );
     for (final claim in [
       'Sağlık verileri cihazdan hiç çıkmaz',
