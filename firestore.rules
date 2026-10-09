@@ -1,0 +1,85 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    // Kullanıcı yalnızca kendi `users/{uid}` belgesini ve alt koleksiyonlarını
+    // okuyup yazabilir. Başka kullanıcının verisine erişim yok.
+    match /users/{uid} {
+      allow read, write: if isOwner(uid);
+
+      match /weight_entries/{document} {
+        allow read, write: if isOwner(uid);
+      }
+      match /measurements/{document} {
+        allow read, write: if isOwner(uid);
+      }
+      match /progress_photos/{document} {
+        allow read, write: if isOwner(uid);
+      }
+      match /water_logs/{document} {
+        allow read, write: if isOwner(uid);
+      }
+      match /meal_entries/{document} {
+        allow read, write: if isOwner(uid);
+      }
+      match /meal_plans/{document} {
+        allow read, write: if isOwner(uid);
+      }
+      match /shopping_lists/{document} {
+        allow read, write: if isOwner(uid);
+      }
+      match /nutrition_goal_history/{document} {
+        allow read, write: if isOwner(uid);
+      }
+      match /fasting_sessions/{document} {
+        allow read, write: if isOwner(uid);
+      }
+      match /custom_foods/{document} {
+        allow read, write: if isOwner(uid);
+      }
+      match /favorite_foods/{document} {
+        allow read, write: if isOwner(uid);
+      }
+      match /recent_foods/{document} {
+        allow read, write: if isOwner(uid);
+      }
+      match /recipes/{document} {
+        allow read, write: if isOwner(uid);
+      }
+      match /favorite_recipes/{document} {
+        allow read, write: if isOwner(uid);
+      }
+      match /recent_recipes/{document} {
+        allow read, write: if isOwner(uid);
+      }
+      match /daily_logs/{document} {
+        allow read, write: if isOwner(uid);
+      }
+      match /notification_settings/{document} {
+        allow read, write: if isOwner(uid);
+      }
+    }
+
+    // Sistem / varsayılan içerik: kimliği doğrulanmış kullanıcıya salt okunur.
+    match /recipes/{recipeId} {
+      allow read: if isSignedIn();
+      allow write: if false;
+    }
+
+    match /foods/{foodId} {
+      allow read: if isSignedIn();
+      allow write: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

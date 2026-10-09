@@ -1,0 +1,1870 @@
+{
+  "@@locale": "tr",
+  "appTitle": "Diyet Programı",
+
+  "navHome": "Bugün",
+  "navDiary": "Günlük",
+  "navPlans": "Planlar",
+  "navProgress": "İlerleme",
+  "navProfile": "Profil",
+
+  "featureDashboard": "Bugün",
+  "featureNutrition": "Beslenme Planı",
+  "featureDiary": "Öğün Günlüğü",
+  "featureFoodSearch": "Yemek Ara",
+  "featureRecipes": "Tarifler",
+  "featureMealPlans": "Yemek Planı",
+  "featureShoppingList": "Alışveriş Listesi",
+  "featureWater": "Su Takibi",
+  "featureWeight": "Kilo Takibi",
+  "featureMeasurements": "Vücut Ölçümleri",
+  "featureProgress": "İlerleme",
+  "featureFasting": "Aralıklı Oruç",
+  "featureActivity": "Aktivite",
+  "featureNotifications": "Bildirimler",
+  "featureAiCoach": "Beslenme Asistanı",
+  "featureBarcode": "Barkod Tara",
+  "featureProfile": "Profil",
+  "featurePremium": "Premium",
+  "featureSettings": "Ayarlar",
+  "featurePersonalInfo": "Kişisel Bilgiler",
+  "personalInfoSaved": "Bilgilerin kaydedildi.",
+  "personalInfoEmptyTitle": "Profil bilgisi yok",
+  "personalInfoEmptyMessage": "Hedeflerin ve tercihlerin burada toplanır. Onboarding’i tamamladığında bu alanlar dolar.",
+  "personalInfoBasics": "Temel bilgiler",
+  "personalInfoPreferences": "Beslenme tercihleri",
+  "personalInfoTargetsTitle": "Günlük hedefler",
+  "personalInfoTargetsHint": "Kalori ve makro hedefleri profilinden okunur; Beslenme Planı bunları ayrı saklamaz.",
+  "personalInfoCurrentWeightHint": "Güncel kilo Kilo Takibi ekranından güncellenir.",
+  "personalInfoOpenWeight": "Kilo takibine git",
+  "personalInfoRecalculate": "Hedefleri yeniden hesapla",
+  "personalInfoTargetsUpdated": "Kalori ve makro hedeflerin güncellendi.",
+  "personalInfoPlanUpdated": "Beslenme planın yeni tercihlerinle güncellendi.",
+  "personalInfoName": "Ad",
+  "personalInfoAge": "Yaş",
+  "personalInfoHeight": "Boy",
+  "personalInfoTargetWeight": "Hedef kilo",
+  "personalInfoWaterGoal": "Günlük su hedefi",
+
+  "onboardingHeadline": "Size özel beslenme planı",
+  "onboardingSubtitle": "Hedeflerinize, yaşam tarzınıza ve damak tadınıza göre hazırlanan bir plan ile başlayın.",
+  "signInTitle": "Hesabınıza giriş yapın",
+  "signInSubtitle": "İlerlemeniz tüm cihazlarınızda güvenle saklanır.",
+  "dashboardGreeting": "{period, select, morning{Günaydın} afternoon{İyi günler} evening{İyi akşamlar} other{Merhaba}} 👋",
+  "@dashboardGreeting": {
+    "placeholders": { "period": { "type": "String" } }
+  },
+  "dashboardGreetingNamed": "{period, select, morning{Günaydın} afternoon{İyi günler} evening{İyi akşamlar} other{Merhaba}}, {name} 👋",
+  "@dashboardGreetingNamed": {
+    "placeholders": {
+      "period": { "type": "String" },
+      "name": { "type": "String" }
+    }
+  },
+  "dashboardMotivation": "{index, select, 0{Küçük adımlar büyük farklar yaratır.} 1{Bugün tabağının yarısını sebzeyle doldurmayı dene.} 2{Su şişen yanında olsun; susamadan iç.} 3{Mükemmel değil, istikrarlı olmak kazandırır.} 4{Proteinli bir kahvaltı güne dengeli başlatır.} 5{Yavaş ye; tokluk hissi yaklaşık 20 dakikada gelir.} other{Dünkü seninle yarış, başkalarıyla değil.}}",
+  "@dashboardMotivation": {
+    "placeholders": { "index": { "type": "String" } }
+  },
+  "dashboardCaloriesTitle": "Günlük kalori",
+  "dashboardKcalOfTarget": "{consumed} / {target} kcal",
+  "@dashboardKcalOfTarget": {
+    "placeholders": {
+      "consumed": { "type": "String" },
+      "target": { "type": "String" }
+    }
+  },
+  "dashboardKcalLeft": "kcal kaldı",
+  "dashboardKcalOver": "kcal fazla",
+  "dashboardEaten": "Alınan",
+  "dashboardTarget": "Hedef",
+  "dashboardRemaining": "Kalan",
+  "kcalValue": "{value} kcal",
+  "@kcalValue": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+  "gramsOfTarget": "{value} / {target} g",
+  "@gramsOfTarget": {
+    "placeholders": {
+      "value": { "type": "String" },
+      "target": { "type": "String" }
+    }
+  },
+  "macroSummaryShort": "P {protein} g · K {carbs} g · Y {fat} g",
+  "@macroSummaryShort": {
+    "placeholders": {
+      "protein": { "type": "String" },
+      "carbs": { "type": "String" },
+      "fat": { "type": "String" }
+    }
+  },
+
+  "dashboardQuickActions": "Hızlı ekle",
+  "quickAddFood": "Yemek ekle",
+  "quickAddPhoto": "Fotoğrafla",
+  "quickAddBarcode": "Barkod tara",
+  "quickAddVoice": "Sesle ekle",
+
+  "dashboardMealsTitle": "Bugünün öğünleri",
+  "mealBreakfast": "Kahvaltı",
+  "mealLunch": "Öğle",
+  "mealDinner": "Akşam",
+  "mealSnack": "Atıştırmalık",
+  "mealEmpty": "Henüz bir şey eklenmedi",
+  "mealAddFoodTo": "{meal} öğününe yemek ekle",
+  "@mealAddFoodTo": {
+    "placeholders": { "meal": { "type": "String" } }
+  },
+  "mealMoreItems": "+{count} yiyecek daha",
+  "@mealMoreItems": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "actionSeeAll": "Tümü",
+  "actionUndo": "Geri al",
+
+  "dashboardWaterTitle": "Su",
+  "waterGlassesProgress": "{count} / {goal} bardak",
+  "@waterGlassesProgress": {
+    "placeholders": {
+      "count": { "type": "int" },
+      "goal": { "type": "int" }
+    }
+  },
+  "litersOfTarget": "{value} / {target} L",
+  "@litersOfTarget": {
+    "placeholders": {
+      "value": { "type": "String" },
+      "target": { "type": "String" }
+    }
+  },
+  "waterAddAmount": "+{ml} ml",
+  "@waterAddAmount": {
+    "placeholders": { "ml": { "type": "int" } }
+  },
+  "waterAdded": "{ml} ml su eklendi",
+  "@waterAdded": {
+    "placeholders": { "ml": { "type": "int" } }
+  },
+  "waterGoalReached": "Günlük su hedefine ulaştın!",
+
+  "dashboardActivityTitle": "Aktivite",
+  "activitySteps": "Adım",
+  "activityActiveKcal": "Aktif kalori",
+  "activityExercise": "Egzersiz",
+  "minutesValue": "{value} dk",
+  "@minutesValue": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+  "stepsGoal": "Hedef {goal}",
+  "@stepsGoal": {
+    "placeholders": { "goal": { "type": "String" } }
+  },
+
+  "dashboardScoreTitle": "Günlük beslenme skoru",
+  "scoreOutOf": "/ 100",
+  "scoreBandStarting": "Güne başlıyoruz",
+  "scoreBandFair": "Geliştirilebilir",
+  "scoreBandGood": "İyi gidiyorsun",
+  "scoreBandGreat": "Harika gidiyorsun",
+  "scoreFactorCalories": "Kalori hedefine yakınlık",
+  "scoreFactorProtein": "Protein hedefi",
+  "scoreFactorFiber": "Lif",
+  "scoreFactorWater": "Su",
+  "scoreFactorProduce": "Sebze ve meyve",
+  "scoreFactorProcessed": "İşlenmiş gıda oranı",
+  "scoreFactorMealRhythm": "Öğün düzeni",
+  "scoreTipCalories": "Hedefine yaklaşmak için dengeli bir öğün ekleyebilirsin.",
+  "scoreTipProtein": "Bir sonraki öğününe bir protein kaynağı eklemeyi dene.",
+  "scoreTipFiber": "Tam tahıl, baklagil ve sebzeyle lif alımını artırabilirsin.",
+  "scoreTipWater": "Bir bardak su içmek için iyi bir an.",
+  "scoreTipProduce": "Bir porsiyon sebze ya da meyve eklemeyi dene.",
+  "scoreTipProcessed": "Paketli atıştırmalıklar yerine doğal seçenekleri tercih et.",
+  "scoreTipMealRhythm": "Öğünlerini düzenli kaydetmek dengeyi kolaylaştırır.",
+  "scorePoints": "{points} / {max}",
+  "@scorePoints": {
+    "placeholders": {
+      "points": { "type": "String" },
+      "max": { "type": "int" }
+    }
+  },
+  "scoreDetails": "Skor nasıl hesaplanır?",
+  "scoreDisclaimerShort": "Genel bir alışkanlık göstergesidir, tıbbi teşhis değildir.",
+  "scoreDisclaimerLong": "Beslenme skoru; kalori hedefine yakınlık, protein, lif, su, sebze-meyve tüketimi, işlenmiş gıda oranı, makro dengesi ve öğün düzenine göre hesaplanan genel bir göstergedir. Bilimsel bir tıbbi değerlendirme ya da teşhis değildir. Sağlığınla ilgili kararlar için doktoruna veya diyetisyenine danış.",
+
+  "dashboardPlanTitle": "Bugünün planı",
+  "planLogged": "Eklendi",
+  "planEmpty": "Bugün için planlanmış öğün yok.",
+  "planCreate": "Plan oluştur",
+  "planTodayTitle": "Bugün için planım",
+  "planDayTotal": "{kcal} / {target} kcal",
+  "@planDayTotal": {
+    "placeholders": {
+      "kcal": { "type": "String" },
+      "target": { "type": "String" }
+    }
+  },
+  "planApproxNote": "Besin değerleri yaklaşıktır; tarif ve porsiyona göre değişebilir.",
+  "planPortion": "{factor} porsiyon",
+  "@planPortion": {
+    "placeholders": { "factor": { "type": "String" } }
+  },
+  "planSwapMeal": "Değiştir",
+  "planLogMeal": "Günlüğe ekle",
+  "planMealLogged": "{meal} günlüğe eklendi",
+  "@planMealLogged": {
+    "placeholders": { "meal": { "type": "String" } }
+  },
+  "planMealSwapped": "{meal} için yeni öneri: {title}",
+  "@planMealSwapped": {
+    "placeholders": {
+      "meal": { "type": "String" },
+      "title": { "type": "String" }
+    }
+  },
+  "planRegenerate": "Planı yenile",
+  "planAssistantName": "Plan asistanı",
+  "planChangeTitle": "Bu planı değiştir",
+  "planChangeSubtitle": "Sevmediğin bir şey mi var? Yaz, alternatif hazırlayayım.",
+  "planChangeHint": "Örn. Tavuğu sevmiyorum",
+  "planChangeSend": "Gönder",
+  "planSuggestionDislike": "Tavuğu sevmiyorum",
+  "planSuggestionSwapDinner": "Akşam yemeğini değiştir",
+  "planSuggestionNoEggBreakfast": "Kahvaltıda yumurta olmasın",
+  "planSuggestionFish": "Akşam balık olsun",
+  "planSuggestionWholePlan": "Bu planı değiştir",
+  "planReplyExcluded": "Şu öğünleri {ingredients} içermeyen alternatiflerle değiştirdim:",
+  "@planReplyExcluded": {
+    "placeholders": { "ingredients": { "type": "String" } }
+  },
+  "planReplyChangeLine": "{meal}: {from} → {to}",
+  "@planReplyChangeLine": {
+    "placeholders": {
+      "meal": { "type": "String" },
+      "from": { "type": "String" },
+      "to": { "type": "String" }
+    }
+  },
+  "planReplyAlreadyAbsent": "Planında zaten {ingredients} yok.",
+  "@planReplyAlreadyAbsent": {
+    "placeholders": { "ingredients": { "type": "String" } }
+  },
+  "planReplyRemembered": "Bundan sonraki planlarda {ingredients} önermeyeceğim.",
+  "@planReplyRemembered": {
+    "placeholders": { "ingredients": { "type": "String" } }
+  },
+  "planReplyNoAlternative": "{meal} için tercihlerine uyan başka bir öneri bulamadım.",
+  "@planReplyNoAlternative": {
+    "placeholders": { "meal": { "type": "String" } }
+  },
+  "planReplyDiet": "Planı güncelledim ({diet}):",
+  "@planReplyDiet": {
+    "placeholders": { "diet": { "type": "String" } }
+  },
+  "planReplyDietUnchanged": "Planın zaten buna uygun ({diet}).",
+  "@planReplyDietUnchanged": {
+    "placeholders": { "diet": { "type": "String" } }
+  },
+  "planReplyPreferred": "İstediğin gibi {ingredients} içeren bir öğün ekledim:",
+  "@planReplyPreferred": {
+    "placeholders": { "ingredients": { "type": "String" } }
+  },
+  "planReplyAlreadyPresent": "Planında zaten {ingredients} var: {meals}.",
+  "@planReplyAlreadyPresent": {
+    "placeholders": {
+      "ingredients": { "type": "String" },
+      "meals": { "type": "String" }
+    }
+  },
+  "planReplyPreferredNone": "Tercihlerine uyan ve {ingredients} içeren bir öneri bulamadım.",
+  "@planReplyPreferredNone": {
+    "placeholders": { "ingredients": { "type": "String" } }
+  },
+  "planReplySwapped": "Yeni önerilerim:",
+  "planReplyRegenerated": "Senin için yeni bir günlük plan hazırladım.",
+  "planReplyNotUnderstood": "Tam anlayamadım. Örneğin \"Tavuğu sevmiyorum\", \"Akşam yemeğini değiştir\" ya da \"Kahvaltıda yumurta olmasın\" yazabilirsin.",
+  "planIngredientChicken": "tavuk",
+  "planIngredientRedMeat": "kırmızı et",
+  "planIngredientFish": "balık",
+  "planIngredientShellfish": "karides ve midye",
+  "planIngredientEgg": "yumurta",
+  "planIngredientMilk": "süt",
+  "planIngredientCheese": "peynir",
+  "planIngredientYogurt": "yoğurt",
+  "planIngredientLegumes": "baklagil",
+  "planIngredientGluten": "gluten",
+  "planIngredientOats": "yulaf",
+  "planIngredientNuts": "kuruyemiş",
+  "planIngredientPeanut": "yer fıstığı",
+  "planIngredientSesame": "susam",
+  "planIngredientSoy": "soya",
+  "planIngredientEggplant": "patlıcan",
+  "planIngredientMushroom": "mantar",
+
+  "featurePhotoLog": "Fotoğrafla Ekle",
+  "featureVoiceLog": "Sesle Ekle",
+
+  "actionGetStarted": "Başlayalım",
+  "actionContinue": "Devam et",
+  "actionContinueAsGuest": "Misafir olarak devam et",
+  "actionSignIn": "Giriş yap",
+  "actionSignUp": "Hesap oluştur",
+  "actionForgotPassword": "Parolamı unuttum",
+  "actionSignInWithGoogle": "Google ile devam et",
+  "actionSignInWithApple": "Apple ile devam et",
+  "actionHaveAccount": "Hesabın var mı? Giriş yap",
+  "actionNeedAccount": "Yeni misin? Hesap oluştur",
+  "actionDeleteAccount": "Hesabı sil",
+  "signInEmailLabel": "E-posta",
+  "signInPasswordLabel": "Parola",
+  "signInNameLabel": "Ad (isteğe bağlı)",
+  "signInOrDivider": "veya",
+  "signInGuestAccount": "Misafir hesap",
+  "passwordResetSent": "Bu e-posta ile kayıtlı bir hesap varsa sıfırlama bağlantısı gönderilir.",
+  "deleteAccountTitle": "Hesap silinsin mi?",
+  "deleteAccountMessage": "Hesabın, buluttaki verilerin ve bu cihazdaki kişisel kayıtların silinir. Bu işlem geri alınamaz.",
+  "authInvalidEmail": "Geçerli bir e-posta adresi gir.",
+  "authInvalidCredentials": "E-posta veya parola hatalı.",
+  "authEmailInUse": "Bu e-posta ile bir hesap zaten var.",
+  "authWeakPassword": "Daha güçlü bir parola seç (en az 6 karakter).",
+  "authTooManyRequests": "Çok fazla deneme. Bir süre bekleyip tekrar dene.",
+  "authCancelled": "Giriş iptal edildi.",
+  "authRequiresRecentLogin": "Hesabı silmek için kısa süre önce giriş yapmış olman gerekiyor. Çıkış yapıp tekrar giriş yaptıktan sonra yeniden dene.",
+  "errorServiceUnavailable": "Bu giriş yöntemi henüz yapılandırılmadı.",
+  "actionSignOut": "Çıkış yap",
+  "actionRetry": "Tekrar dene",
+  "actionCancel": "Vazgeç",
+  "actionSave": "Kaydet",
+  "actionAdd": "Ekle",
+  "actionRemove": "Kaldır",
+
+  "comingSoonTitle": "Yakında",
+  "comingSoonMessage": "{feature} bölümü hazırlanıyor.",
+  "@comingSoonMessage": {
+    "placeholders": { "feature": { "type": "String" } }
+  },
+
+  "emptyStateTitle": "Henüz bir şey yok",
+  "errorGeneric": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
+  "errorNetwork": "İnternet bağlantınızı kontrol edin.",
+
+  "settingsTheme": "Görünüm",
+  "themeSystem": "Sistem",
+  "themeLight": "Açık",
+  "themeDark": "Koyu",
+
+  "pageNotFound": "Sayfa bulunamadı",
+
+  "splashTagline": "Dengeli beslen, iyi hisset",
+
+  "onboardingWelcomeTitle": "Hoş geldin",
+  "onboardingWelcomeBody": "Birkaç kısa soruyla sana özel kalori ve besin hedeflerini oluşturalım. Yalnızca birkaç dakika sürer.",
+  "onboardingBenefitPlanTitle": "Sana özel plan",
+  "onboardingBenefitPlanBody": "Hedefine, vücuduna ve yaşam tarzına göre bilimsel formüllerle hesaplanan günlük kalori ve makro hedefleri.",
+  "onboardingBenefitTrackingTitle": "Zahmetsiz takip",
+  "onboardingBenefitTrackingBody": "Öğünlerini, suyunu ve kilonu saniyeler içinde kaydet; ilerlemeni net grafiklerle izle.",
+  "onboardingBenefitHabitsTitle": "Kalıcı alışkanlıklar",
+  "onboardingBenefitHabitsBody": "Şok diyet yok. Sağlıklı bir tempo ve sevdiğin yiyeceklerle sürdürülebilir sonuçlar.",
+  "onboardingSkipIntro": "Atla",
+  "onboardingBack": "Geri",
+  "onboardingNext": "İleri",
+  "onboardingFinish": "Planımı başlat",
+  "onboardingStepCounter": "{current}/{total}",
+  "@onboardingStepCounter": {
+    "placeholders": {
+      "current": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "onboardingProgressSemantics": "Adım {current} / {total}",
+  "@onboardingProgressSemantics": {
+    "placeholders": {
+      "current": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "onboardingOptional": "İsteğe bağlı",
+
+  "qNameTitle": "Sana nasıl hitap edelim?",
+  "qNameSubtitle": "Boş bırakıp devam edebilirsin.",
+  "qNameHint": "Adın",
+
+  "qGoalTitle": "Ana hedefin ne?",
+  "qGoalSubtitle": "Planını bu hedefe göre şekillendireceğiz.",
+  "goalLoseWeight": "Kilo vermek",
+  "goalLoseWeightDesc": "Sağlıklı ve kontrollü bir kalori açığıyla",
+  "goalMaintainWeight": "Kilo korumak",
+  "goalMaintainWeightDesc": "Mevcut kilonda dengede kal",
+  "goalGainWeight": "Kilo almak",
+  "goalGainWeightDesc": "Kademeli ve sağlıklı şekilde",
+  "goalBuildMuscle": "Kas geliştirmek",
+  "goalBuildMuscleDesc": "Yüksek protein, ölçülü kalori fazlası",
+  "goalEatHealthier": "Daha sağlıklı beslenmek",
+  "goalEatHealthierDesc": "Kalite, çeşitlilik ve denge odaklı",
+
+  "qGenderTitle": "Cinsiyetin?",
+  "qGenderSubtitle": "Bazal metabolizma hızı hesaplamasında kullanılır.",
+  "genderFemale": "Kadın",
+  "genderMale": "Erkek",
+  "genderUnspecified": "Belirtmek istemiyorum",
+  "genderUnspecifiedDesc": "Hesaplamada iki değerin ortalaması kullanılır",
+
+  "qAgeTitle": "Kaç yaşındasın?",
+  "qAgeSubtitle": "Yaş, günlük enerji ihtiyacını etkiler.",
+  "unitYears": "yaş",
+  "qHeightTitle": "Boyun kaç?",
+  "qHeightSubtitle": "Santimetre cinsinden gir.",
+  "unitCm": "cm",
+  "qWeightTitle": "Şu anki kilon kaç?",
+  "qWeightSubtitle": "Sabah aç karnına ölçülen değer en doğrusudur.",
+  "unitKg": "kg",
+  "qTargetWeightTitle": "Hedef kilon kaç?",
+  "qTargetWeightSubtitle": "Gerçekçi bir hedef motivasyonunu korur.",
+  "targetWeightCurrent": "Şu anki kilon: {weight} kg",
+  "@targetWeightCurrent": {
+    "placeholders": { "weight": { "type": "String" } }
+  },
+  "targetWeightDiff": "Fark: {diff} kg",
+  "@targetWeightDiff": {
+    "placeholders": { "diff": { "type": "String" } }
+  },
+  "targetWeightHealthyMin": "Boyuna göre sağlıklı alt sınır: {weight} kg",
+  "@targetWeightHealthyMin": {
+    "placeholders": { "weight": { "type": "String" } }
+  },
+  "inputRangeHint": "{min}–{max} {unit}",
+  "@inputRangeHint": {
+    "placeholders": {
+      "min": { "type": "String" },
+      "max": { "type": "String" },
+      "unit": { "type": "String" }
+    }
+  },
+
+  "qActivityTitle": "Günlük aktivite seviyen?",
+  "qActivitySubtitle": "İşini ve gün içindeki genel hareketliliğini düşün.",
+  "activitySedentary": "Hareketsiz",
+  "activitySedentaryDesc": "Masa başı iş, çok az yürüyüş",
+  "activityLight": "Az aktif",
+  "activityLightDesc": "Hafif hareket, gün içinde biraz yürüyüş",
+  "activityModerate": "Orta aktif",
+  "activityModerateDesc": "Gün boyu ayakta ya da düzenli hareket halinde",
+  "activityActive": "Çok aktif",
+  "activityActiveDesc": "Fiziksel iş veya yoğun günlük hareket",
+  "activityVeryActive": "Çok yoğun aktif",
+  "activityVeryActiveDesc": "Ağır fiziksel iş veya günde iki antrenman",
+
+  "qExerciseTitle": "Ne sıklıkla egzersiz yapıyorsun?",
+  "qExerciseSubtitle": "Yürüyüş, spor salonu, koşu, yüzme gibi planlı egzersizler.",
+  "exerciseNone": "Hiç ya da nadiren",
+  "exerciseOneToTwo": "Haftada 1–2 gün",
+  "exerciseThreeToFour": "Haftada 3–4 gün",
+  "exerciseFiveToSix": "Haftada 5–6 gün",
+  "exerciseDaily": "Her gün",
+
+  "qDietTitle": "Beslenme tercihin?",
+  "qDietSubtitle": "Önerilerimiz bu tercihe uygun olacak.",
+  "dietOmnivore": "Her şeyi yerim",
+  "dietOmnivoreDesc": "Et, balık, süt ürünleri ve bitkisel gıdalar",
+  "dietVegetarian": "Vejetaryen",
+  "dietVegetarianDesc": "Et ve balık yok; yumurta ve süt ürünleri var",
+  "dietVegan": "Vegan",
+  "dietVeganDesc": "Hiçbir hayvansal ürün yok",
+  "dietPescatarian": "Pesketaryen",
+  "dietPescatarianDesc": "Et yok; balık ve deniz ürünleri var",
+
+  "qAllergiesTitle": "Alerji veya intoleransın var mı?",
+  "qAllergiesSubtitle": "Birden fazla seçebilirsin. Bu besinleri önerilerimizden çıkarırız.",
+  "allergyNone": "Yok",
+  "allergenGluten": "Gluten",
+  "allergenLactose": "Laktoz",
+  "allergenMilk": "Süt proteini",
+  "allergenEgg": "Yumurta",
+  "allergenPeanut": "Yer fıstığı",
+  "allergenTreeNuts": "Kuruyemiş",
+  "allergenSoy": "Soya",
+  "allergenFish": "Balık",
+  "allergenShellfish": "Kabuklu deniz ürünleri",
+  "allergenSesame": "Susam",
+  "allergyOtherHint": "Başka bir alerji ekle",
+
+  "qDislikedTitle": "Sevmediğin yiyecekler var mı?",
+  "qDislikedSubtitle": "Seç ya da kendin yaz. Boş bırakabilirsin.",
+  "dislikedHint": "Örn. bamya",
+  "foodOnion": "Soğan",
+  "foodGarlic": "Sarımsak",
+  "foodMushroom": "Mantar",
+  "foodEggplant": "Patlıcan",
+  "foodOffal": "Sakatat",
+  "foodSeafood": "Deniz ürünleri",
+  "foodOlive": "Zeytin",
+  "foodSpicy": "Acı",
+  "foodBroccoli": "Brokoli",
+  "foodLegumes": "Baklagiller",
+  "foodCoriander": "Kişniş",
+  "foodCelery": "Kereviz",
+
+  "qMealsTitle": "Günde kaç öğün yemek istersin?",
+  "qMealsSubtitle": "Kalori hedefin öğünlerine göre paylaştırılacak.",
+  "mealsCount": "{count} öğün",
+  "@mealsCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "meals2Desc": "İki doyurucu ana öğün",
+  "meals3Desc": "Kahvaltı, öğle ve akşam",
+  "meals4Desc": "3 ana öğün + 1 ara öğün",
+  "meals5Desc": "3 ana öğün + 2 ara öğün",
+
+  "qBreakfastTitle": "Kahvaltı alışkanlığın nasıl?",
+  "qBreakfastSubtitle": "Öğün planını buna göre düzenleyeceğiz.",
+  "breakfastAlways": "Her gün kahvaltı yaparım",
+  "breakfastSometimes": "Bazen yaparım",
+  "breakfastNever": "Genelde kahvaltı yapmam",
+
+  "qWaterTitle": "Günlük su hedefin?",
+  "qWaterSubtitle": "Kilona ve aktivitene göre bir öneri hazırladık; dilediğin gibi ayarlayabilirsin.",
+  "waterLiters": "{liters} L",
+  "@waterLiters": {
+    "placeholders": { "liters": { "type": "String" } }
+  },
+  "waterRecommended": "Önerilen: {liters} L",
+  "@waterRecommended": {
+    "placeholders": { "liters": { "type": "String" } }
+  },
+  "waterUseRecommended": "Öneriyi kullan",
+  "waterGlasses": "Yaklaşık {count} bardak",
+  "@waterGlasses": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "qFastingTitle": "Aralıklı oruç denemek ister misin?",
+  "qFastingSubtitle": "Tamamen isteğe bağlı; istediğin zaman değiştirebilirsin.",
+  "fastingNone": "İstemiyorum",
+  "fastingNoneDesc": "Normal öğün düzenimle devam edeceğim",
+  "fastingWindow": "{fast}:{eat}",
+  "@fastingWindow": {
+    "placeholders": {
+      "fast": { "type": "int" },
+      "eat": { "type": "int" }
+    }
+  },
+  "fastingWindowDesc": "{fast} saat oruç, {eat} saat yemek penceresi",
+  "@fastingWindowDesc": {
+    "placeholders": {
+      "fast": { "type": "int" },
+      "eat": { "type": "int" }
+    }
+  },
+  "fastingCautionNote": "Hamilelik, emzirme, diyabet, yeme bozukluğu öyküsü veya düzenli ilaç kullanımı varsa aralıklı oruca başlamadan önce doktoruna danış.",
+
+  "qTargetDateTitle": "Hedefine ne zaman ulaşmak istersin?",
+  "qTargetDateSubtitle": "Güvenli bir tempo, kalıcı sonuç demektir.",
+  "targetDateRecommended": "Önerilen güvenli tempo",
+  "targetDateRecommendedDesc": "Tahmini {date}",
+  "@targetDateRecommendedDesc": {
+    "placeholders": { "date": { "type": "String" } }
+  },
+  "targetDateCustom": "Kendi tarihimi seçeceğim",
+  "targetDateCustomPick": "Takvimden seç",
+  "targetDateTooSoon": "Bu tarih için haftada {required} kg değişim gerekir. Güvenli üst sınır {max} kg olduğundan planın güvenli tempoya göre hazırlanacak.",
+  "@targetDateTooSoon": {
+    "placeholders": {
+      "required": { "type": "String" },
+      "max": { "type": "String" }
+    }
+  },
+
+  "errorSelectOption": "Devam etmek için bir seçenek belirle.",
+  "errorValueRequired": "Lütfen bir değer gir.",
+  "errorOutOfRange": "{min} ile {max} arasında bir değer gir.",
+  "@errorOutOfRange": {
+    "placeholders": {
+      "min": { "type": "String" },
+      "max": { "type": "String" }
+    }
+  },
+  "errorTargetBelowCurrent": "Kilo verme hedefinde hedef kilon şu anki kilondan düşük olmalı.",
+  "errorTargetAboveCurrent": "Bu hedef için hedef kilon şu anki kilondan yüksek olmalı.",
+  "errorTargetBelowHealthy": "Bu hedef boyuna göre sağlıklı aralığın altında. En az {min} kg olmalı.",
+  "@errorTargetBelowHealthy": {
+    "placeholders": { "min": { "type": "String" } }
+  },
+  "errorTargetDatePast": "Hedef tarih bugünden sonra olmalı.",
+
+  "summaryTitle": "Planın hazır",
+  "summaryTitleNamed": "{name}, planın hazır",
+  "@summaryTitleNamed": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "summarySubtitle": "Verdiğin bilgilere göre hesapladığımız günlük hedeflerin:",
+  "summaryDailyTarget": "Önerilen günlük kalori",
+  "summaryKcalPerDay": "kcal / gün",
+  "summaryMaintenance": "Tahmini günlük ihtiyacın: {kcal} kcal",
+  "@summaryMaintenance": {
+    "placeholders": { "kcal": { "type": "String" } }
+  },
+  "summaryDeficit": "{kcal} kcal açık",
+  "@summaryDeficit": {
+    "placeholders": { "kcal": { "type": "String" } }
+  },
+  "summarySurplus": "{kcal} kcal fazla",
+  "@summarySurplus": {
+    "placeholders": { "kcal": { "type": "String" } }
+  },
+  "summaryBalanced": "Enerji dengesi",
+  "macroProtein": "Protein",
+  "macroCarbs": "Karbonhidrat",
+  "macroFat": "Yağ",
+  "gramsValue": "{value} g",
+  "@gramsValue": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+  "summaryWater": "Su hedefi",
+  "summaryGoalDuration": "Tahmini hedef süresi",
+  "summaryWeeks": "{count, plural, =1{~1 hafta} other{~{count} hafta}}",
+  "@summaryWeeks": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "summaryGoalDate": "Tahmini {date}",
+  "@summaryGoalDate": {
+    "placeholders": { "date": { "type": "String" } }
+  },
+  "summaryWeeklyRate": "Haftada yaklaşık {kg} kg",
+  "@summaryWeeklyRate": {
+    "placeholders": { "kg": { "type": "String" } }
+  },
+  "summaryNoDurationMaintain": "Hedefin mevcut kilonu korumak; bir bitiş tarihi yok.",
+  "summaryNoDurationSlow": "Güvenli kalori sınırı nedeniyle kilo değişimi çok yavaş olacak. Günlük hareketi artırmak süreci hızlandırır.",
+  "summaryMetrics": "Bazal metabolizma {bmr} kcal · VKİ {bmi}",
+  "@summaryMetrics": {
+    "placeholders": {
+      "bmr": { "type": "String" },
+      "bmi": { "type": "String" }
+    }
+  },
+  "summaryFormulaNote": "Mifflin-St Jeor denklemi ve aktivite katsayısıyla hesaplanmıştır.",
+
+  "noticeTitle": "Dikkat etmen gerekenler",
+  "noticeMinor": "18 yaşın altındasın. Büyüme döneminde kalori kısıtlaması önerilmez; hedefin sınırlı tutuldu. Lütfen bir doktor veya diyetisyenle görüş.",
+  "noticeSenior": "65 yaş ve üzerinde kas kaybını önlemek için yeterli protein önemlidir. Planını bir uzmanla birlikte oluşturman önerilir.",
+  "noticeUnderweight": "Vücut kitle indeksin sağlıklı aralığın altında. Kilo vermen önerilmez; bir sağlık uzmanına danışmanı öneririz.",
+  "noticeSevereObesity": "Vücut kitle indeksin yüksek. En güvenli ilerleme için doktor veya diyetisyen takibi önerilir.",
+  "noticePaceAdjusted": "Seçtiğin tarih için gereken tempo güvenli sınırın üzerinde olduğundan hedefin daha sağlıklı bir tempoya göre ayarlandı.",
+  "noticeCalorieFloor": "Kalori hedefin güvenli alt sınırın altına inmeyecek şekilde ayarlandı.",
+  "noticeFasting": "Profilin için aralıklı oruç ek dikkat gerektirir. Başlamadan önce doktoruna danış.",
+  "disclaimerTitle": "Bilgilendirme",
+  "disclaimerBody": "Bu uygulama genel bilgilendirme amaçlıdır ve doktor veya diyetisyen önerisinin yerine geçmez. Hamilelik, emzirme, kronik hastalık (diyabet, böbrek, kalp vb.), yeme bozukluğu öyküsü ya da düzenli ilaç kullanımı gibi durumlarda beslenme planını bir sağlık profesyoneliyle birlikte oluştur.",
+
+  "foodAddTitle": "Yemek ekle",
+  "foodSearchHint": "Yiyecek, yemek veya ürün ara...",
+  "foodClearSearch": "Aramayı temizle",
+  "foodTabRecent": "Son kullanılanlar",
+  "foodTabFavorites": "Favoriler",
+  "foodTabMine": "Benimkiler",
+  "foodRecentEmpty": "Eklediğin yiyecekler burada görünecek; tek dokunuşla tekrar ekleyebilirsin.",
+  "foodFavoritesEmpty": "Yiyecek detayındaki kalp simgesiyle favorilerine ekleyebilirsin.",
+  "foodMineEmpty": "Kendi yiyeceklerini ve tariflerini oluşturabilirsin.",
+  "foodDatabaseUnavailable": "Yiyecek veritabanına şu anda ulaşılamıyor.",
+  "foodDatabaseUnavailableHint": "Son kullanılanlar, favoriler ve kendi yiyeceklerin çalışmaya devam eder. Çevrimiçi olunca tekrar dene veya özel yiyecek oluştur.",
+  "foodAttributionOff": "Paketli ürün verileri Open Food Facts gönüllülerinden gelir (ODbL).",
+  "foodAttributionOffLink": "Open Food Facts",
+  "foodAttributionOffLicense": "Open Food Facts verileri ODbL kapsamında kullanılır.",
+  "foodCategoryFruit": "Meyve",
+  "foodCategoryVegetable": "Sebze",
+  "foodCategoryProtein": "Protein",
+  "foodCategoryDairy": "Süt ürünleri",
+  "foodCategoryGrain": "Tahıl",
+  "foodCategoryBeverage": "İçecek",
+  "foodNoResults": "\"{query}\" için sonuç bulunamadı",
+  "@foodNoResults": {
+    "placeholders": { "query": { "type": "String" } }
+  },
+  "foodNoResultsHint": "Farklı bir yazım dene ya da kendi yiyeceğini oluştur.",
+  "foodCreateCustom": "Yiyecek oluştur",
+  "foodCreateRecipe": "Tarif oluştur",
+  "foodSampleDataNotice": "Örnek veri: Besin değerleri {source} kayıtlarından yuvarlanmıştır; ürüne ve tarife göre farklılık gösterebilir.",
+  "@foodSampleDataNotice": {
+    "placeholders": { "source": { "type": "String" } }
+  },
+  "foodSampleBadge": "Örnek veri",
+  "foodCustomBadge": "Kendi yiyeceğim",
+  "foodRecipeBadge": "Tarif",
+  "foodQuickAdd": "{food} ekle",
+  "@foodQuickAdd": {
+    "placeholders": { "food": { "type": "String" } }
+  },
+  "foodAddedTo": "{food}, {meal} öğününe eklendi",
+  "@foodAddedTo": {
+    "placeholders": {
+      "food": { "type": "String" },
+      "meal": { "type": "String" }
+    }
+  },
+  "foodMeal": "Öğün",
+  "foodAmount": "Miktar",
+  "foodUnit": "Ölçü",
+  "foodNutrition": "Besin değerleri",
+  "foodPer100": "100 {unit} için {kcal} kcal",
+  "@foodPer100": {
+    "placeholders": {
+      "unit": { "type": "String" },
+      "kcal": { "type": "String" }
+    }
+  },
+  "foodAddToMeal": "{meal} öğününe ekle",
+  "@foodAddToMeal": {
+    "placeholders": { "meal": { "type": "String" } }
+  },
+  "foodFavoriteAdd": "Favorilere ekle",
+  "foodFavoriteRemove": "Favorilerden çıkar",
+  "foodIngredients": "Malzemeler",
+  "foodSource": "Kaynak: {source}",
+  "@foodSource": {
+    "placeholders": { "source": { "type": "String" } }
+  },
+  "foodNotFound": "Yiyecek bulunamadı.",
+  "foodInvalidAmount": "Geçerli bir miktar gir.",
+  "foodDelete": "Sil",
+  "foodDeleted": "{name} silindi",
+  "@foodDeleted": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "nutrientCalories": "Kalori",
+  "nutrientFiber": "Lif",
+  "nutrientSugar": "Şeker",
+  "nutrientSaturatedFat": "Doymuş yağ",
+  "nutrientSodium": "Sodyum",
+  "mgValue": "{value} mg",
+  "@mgValue": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+
+  "unitGram": "g",
+  "unitMilliliter": "ml",
+  "unitPiece": "{count, plural, other{adet}}",
+  "@unitPiece": {
+    "placeholders": { "count": { "type": "num" } }
+  },
+  "unitSlice": "{count, plural, other{dilim}}",
+  "@unitSlice": {
+    "placeholders": { "count": { "type": "num" } }
+  },
+  "unitServing": "{count, plural, other{porsiyon}}",
+  "@unitServing": {
+    "placeholders": { "count": { "type": "num" } }
+  },
+  "unitBowl": "{count, plural, other{kase}}",
+  "@unitBowl": {
+    "placeholders": { "count": { "type": "num" } }
+  },
+  "unitGlass": "{count, plural, other{bardak}}",
+  "@unitGlass": {
+    "placeholders": { "count": { "type": "num" } }
+  },
+  "unitTablespoon": "{count, plural, other{yemek kaşığı}}",
+  "@unitTablespoon": {
+    "placeholders": { "count": { "type": "num" } }
+  },
+  "unitTeaspoon": "{count, plural, other{tatlı kaşığı}}",
+  "@unitTeaspoon": {
+    "placeholders": { "count": { "type": "num" } }
+  },
+  "portionQuantity": "{quantity} {unit}",
+  "@portionQuantity": {
+    "placeholders": {
+      "quantity": { "type": "String" },
+      "unit": { "type": "String" }
+    }
+  },
+  "portionWithBase": "{portion} ({base})",
+  "@portionWithBase": {
+    "placeholders": {
+      "portion": { "type": "String" },
+      "base": { "type": "String" }
+    }
+  },
+
+  "customFoodTitle": "Yiyecek oluştur",
+  "customFoodName": "İsim",
+  "customFoodNameHint": "Örn. Ev yapımı granola",
+  "customFoodBrand": "Marka (isteğe bağlı)",
+  "customFoodBarcode": "Barkod",
+  "customFoodPortion": "Porsiyon",
+  "customFoodPortionAmount": "Porsiyon miktarı",
+  "customFoodPortionUnit": "Porsiyon türü",
+  "customFoodValuesTitle": "1 porsiyondaki besin değerleri",
+  "customFoodValuesHint": "Değerleri ürün etiketinden veya güvenilir bir kaynaktan gir.",
+  "customFoodCalories": "Kalori (kcal)",
+  "customFoodProtein": "Protein (g)",
+  "customFoodCarbs": "Karbonhidrat (g)",
+  "customFoodFat": "Yağ (g)",
+  "customFoodFiber": "Lif (g, isteğe bağlı)",
+  "customFoodSugar": "Şeker (g, isteğe bağlı)",
+  "customFoodSodium": "Sodyum (mg, isteğe bağlı)",
+  "customFoodSaved": "{name} kaydedildi",
+  "@customFoodSaved": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "customFoodEnergyMismatch": "Makrolardan hesaplanan enerji yaklaşık {kcal} kcal; girdiğin kaloriyle uyuşmuyor. Değerleri kontrol et.",
+  "@customFoodEnergyMismatch": {
+    "placeholders": { "kcal": { "type": "String" } }
+  },
+  "errorPositiveNumber": "0'dan büyük bir değer gir.",
+  "errorNonNegativeNumber": "Geçerli bir değer gir.",
+
+  "recipeBuilderTitle": "Tarif oluştur",
+  "recipeName": "Tarif adı",
+  "recipeNameHint": "Örn. Menemen",
+  "recipeServings": "Porsiyon sayısı",
+  "recipeAddIngredient": "Malzeme ekle",
+  "recipeNoIngredients": "Henüz malzeme eklenmedi. Tarifin besin değerleri malzemelerden otomatik hesaplanır.",
+  "recipeTotal": "Tarifin tamamı",
+  "recipePerServing": "1 porsiyon",
+  "recipeTotalWeight": "Toplam ağırlık: {value} g",
+  "@recipeTotalWeight": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+  "recipeWeightNote": "Değerler malzemelerin pişirilmeden önceki miktarlarına göre hesaplanır.",
+  "recipeNeedsIngredient": "En az bir malzeme ekle.",
+  "recipeSaved": "{name} tarifi kaydedildi",
+  "@recipeSaved": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "foodPickerTitle": "Malzeme seç",
+
+  "barcodeManualTitle": "Barkod numarasıyla ara",
+  "barcodeManualHint": "Barkod numarası",
+  "barcodeCameraUnavailable": "Kamerayla tarama bu cihazda kullanılamıyor. Ürünün barkod numarasını elle girebilirsin.",
+  "barcodeSearch": "Ürünü bul",
+  "barcodeNotFound": "Open Food Facts kataloğunda bu barkoda ait ürün bulunamadı.",
+  "barcodeIncompleteCatalog": "Barkod {barcode} Open Food Facts kataloğunda kayıtlı ancak ürün adı veya besin değerleri eksik. Özel yiyecek olarak ekleyebilirsin.",
+  "@barcodeIncompleteCatalog": {
+    "placeholders": { "barcode": { "type": "String" } }
+  },
+  "barcodeDemoHint": "Örnek veri barkodları: {codes}",
+  "@barcodeDemoHint": {
+    "placeholders": { "codes": { "type": "String" } }
+  },
+  "barcodeAlignHint": "Barkodu çerçevenin içine hizalayın",
+  "barcodeEnterManually": "Barkodu elle gir",
+  "barcodeScanAgain": "Tekrar tara",
+  "barcodeSearching": "Ürün aranıyor",
+  "barcodeCameraPermissionTitle": "Kamera izni gerekli",
+  "barcodeCameraPermissionMessage": "Barkod taramak için kamera iznine ihtiyaç var. İzni ayarlardan açabilir veya barkodu elle girebilirsin.",
+  "barcodeOpenSettings": "Ayarları aç",
+  "barcodeScanAreaLabel": "Barkod tarama alanı",
+
+  "errorPermission": "Bu işlem için izin vermen gerekiyor. İzni cihaz ayarlarından açabilirsin.",
+
+  "progressRange": "{range, select, week{7 gün} month{30 gün} quarter{90 gün} other{}}",
+  "@progressRange": {
+    "placeholders": { "range": { "type": "String" } }
+  },
+  "progressAddWeight": "Kilo ekle",
+  "progressAddMeasurement": "Ölçü ekle",
+  "progressAddPhoto": "Fotoğraf ekle",
+  "progressKg": "{value} kg",
+  "@progressKg": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+  "progressCm": "{value} cm",
+  "@progressCm": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+  "progressPercent": "%{value}",
+  "@progressPercent": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+
+  "progressGoalTitle": "Kilo hedefi",
+  "progressStartWeight": "Başlangıç",
+  "progressCurrentWeight": "Güncel",
+  "progressTargetWeight": "Hedef",
+  "progressLostWeight": "Verilen",
+  "progressGainedWeight": "Alınan",
+  "progressRemainingWeight": "Kalan",
+  "progressGoalPercent": "Hedefin %{percent}'i tamamlandı",
+  "@progressGoalPercent": {
+    "placeholders": { "percent": { "type": "String" } }
+  },
+  "progressGoalReached": "Hedef kilona ulaştın, tebrikler!",
+  "progressNoTarget": "Hedef kilo belirlenmedi. Profilinden ekleyebilirsin.",
+  "progressNoWeightTitle": "Henüz kilo kaydı yok",
+  "progressNoWeightMessage": "İlk kilonu ekleyerek ilerlemeni takip etmeye başla.",
+
+  "progressChartTitle": "Kilo grafiği",
+  "progressChartNeedsMore": "Grafik için bu dönemde en az iki kilo kaydı gerekiyor.",
+  "progressChartTarget": "Hedef {value}",
+  "@progressChartTarget": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+  "progressChartSemantics": "Kilo grafiği: {from} ile {to} arasında {count} kayıt, en düşük {min}, en yüksek {max}",
+  "@progressChartSemantics": {
+    "placeholders": {
+      "from": { "type": "String" },
+      "to": { "type": "String" },
+      "count": { "type": "int" },
+      "min": { "type": "String" },
+      "max": { "type": "String" }
+    }
+  },
+  "progressWeightHistory": "Kilo kayıtları",
+  "progressEntryDeleted": "Kayıt silindi",
+
+  "progressWeeklyTitle": "Haftalık ortalama",
+  "progressWeeklyWeight": "Ortalama kilo",
+  "progressWeeklyCalories": "Ortalama kalori",
+  "progressWeeklyScore": "Ortalama skor",
+  "progressWeeklyVsLast": "Geçen haftaya göre {change} kg",
+  "@progressWeeklyVsLast": {
+    "placeholders": { "change": { "type": "String" } }
+  },
+  "progressWeeklyKcal": "{value} kcal/gün",
+  "@progressWeeklyKcal": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+  "progressNoValue": "—",
+
+  "progressWaistTitle": "Bel ölçüsü",
+  "progressMeasurementsTitle": "Vücut ölçüleri",
+  "progressNoMeasurements": "Henüz ölçü kaydı yok. Bel, kalça ve diğer ölçülerini ekleyerek tartıda görünmeyen değişimi de takip et.",
+  "progressLastMeasured": "Son ölçüm: {date}",
+  "@progressLastMeasured": {
+    "placeholders": { "date": { "type": "String" } }
+  },
+  "progressSinceStart": "Başlangıçtan beri {change}",
+  "@progressSinceStart": {
+    "placeholders": { "change": { "type": "String" } }
+  },
+  "measureWaist": "Bel",
+  "measureHip": "Kalça",
+  "measureChest": "Göğüs",
+  "measureNeck": "Boyun",
+  "measureArm": "Kol",
+  "measureThigh": "Bacak",
+  "measureBodyFat": "Yağ oranı",
+
+  "progressPhotosTitle": "İlerleme fotoğrafları",
+  "progressPhotosEmpty": "Aynı ışıkta ve aynı pozda düzenli fotoğraf çekmek, değişimi görmenin en iyi yollarından biri.",
+  "progressPhotoCamera": "Fotoğraf çek",
+  "progressPhotoGallery": "Galeriden seç",
+  "progressPhotoFirst": "İlk",
+  "progressPhotoLatest": "Son",
+  "progressPhotoAdded": "Fotoğraf eklendi",
+  "progressPhotoDelete": "Fotoğrafı sil",
+  "progressPhotoDeleteConfirm": "Bu fotoğraf kalıcı olarak silinsin mi?",
+  "progressPhotoDeleted": "Fotoğraf silindi",
+  "progressPhotoUnavailable": "Fotoğraf yüklenemedi",
+  "actionDelete": "Sil",
+
+  "progressAdherenceTitle": "Hedef uyumu",
+  "progressAdherenceCalories": "Kalori uyumu",
+  "progressAdherenceProtein": "Protein uyumu",
+  "progressAdherenceWater": "Su uyumu",
+  "progressAdherenceDays": "{hit} / {total} gün",
+  "@progressAdherenceDays": {
+    "placeholders": {
+      "hit": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "progressAdherenceNoData": "Bu dönemde kayıt yok",
+  "progressAdherenceNote": "Kayıt girilen tamamlanmış günler üzerinden hesaplanır; bugün dahil değildir. Kalori: hedefin ±%10'u, protein: hedefin en az %90'ı, su: günlük su hedefi.",
+
+  "progressScoreTitle": "Günlük skor geçmişi",
+  "progressScoreAverage": "Ortalama {value}",
+  "@progressScoreAverage": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+  "progressScoreEmpty": "Bu dönemde skor hesaplanacak kayıt yok.",
+  "progressToday": "Bugün",
+  "progressNotLogged": "Kayıt yok",
+  "progressDaySummary": "{kcal} kcal · {protein} g protein · {water} L su",
+  "@progressDaySummary": {
+    "placeholders": {
+      "kcal": { "type": "String" },
+      "protein": { "type": "String" },
+      "water": { "type": "String" }
+    }
+  },
+
+  "progressWeightSheetTitle": "Kilo ekle",
+  "progressWeightField": "Kilo",
+  "progressDateField": "Tarih",
+  "progressWeightSaved": "{value} kg kaydedildi",
+  "@progressWeightSaved": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+  "progressMeasurementSheetTitle": "Ölçü ekle",
+  "progressMeasurementHint": "Ölçmek istediğin alanları doldur; boş bırakılanlar kaydedilmez. Mezuranı her seferinde aynı noktadan geçir.",
+  "progressMeasurementNeedsValue": "En az bir ölçü gir.",
+  "progressMeasurementSaved": "Ölçüler kaydedildi",
+
+  "errorPurchase": "Satın alma tamamlanamadı. Ücret alınmadı; lütfen tekrar dene.",
+  "errorPurchaseUnavailable": "Satın alma şu anda kullanılamıyor.",
+  "errorPremiumRequired": "Bu özellik Premium üyelere özel.",
+
+  "appFeatureCalorieTracking": "Kalori takibi",
+  "appFeatureWeightTracking": "Kilo takibi",
+  "appFeatureWaterTracking": "Su takibi",
+  "appFeatureFoodLogging": "Yemek ekleme",
+  "appFeatureBasicProgress": "Temel ilerleme",
+  "appFeaturePersonalMealPlan": "Kişisel yemek planı",
+  "appFeaturePersonalMealPlanDesc": "Hedefine ve damak tadına göre her gün hazırlanan plan.",
+  "appFeatureAiCoach": "AI beslenme koçu",
+  "appFeatureAiCoachDesc": "Sorularına sana özel, anında yanıtlar.",
+  "appFeaturePhotoFoodAnalysis": "Fotoğraftan yemek analizi",
+  "appFeaturePhotoFoodAnalysisDesc": "Tabağının fotoğrafını çek, kalorisi hesaplansın.",
+  "appFeatureAdvancedAnalytics": "Gelişmiş analizler",
+  "appFeatureAdvancedAnalyticsDesc": "Kalori, protein ve su hedeflerine uyumunu gör.",
+  "appFeatureAdvancedRecipes": "Gelişmiş tarifler",
+  "appFeatureAdvancedRecipesDesc": "Hedefine uygun özel tarif koleksiyonu.",
+  "appFeatureAutoShoppingList": "Otomatik alışveriş listesi",
+  "appFeatureAutoShoppingListDesc": "Planındaki malzemeler tek listede toplanır.",
+  "appFeatureAdvancedGoals": "Gelişmiş hedefler",
+  "appFeatureAdvancedGoalsDesc": "Makro ve öğün hedeflerini kişiselleştir.",
+  "appFeatureAdvancedReports": "Gelişmiş raporlar",
+  "appFeatureAdvancedReportsDesc": "Beslenme skoru geçmişi ve detaylı raporlar.",
+  "appFeatureAdFree": "Reklamsız kullanım",
+  "appFeatureAdFreeDesc": "Hiç reklam görmeden hedefine odaklan.",
+  "appFeatureFasting": "Aralıklı oruç",
+  "appFeatureFastingDesc": "16:8 gibi oruç planları ve zamanlayıcı.",
+  "appFeaturePeriodicReports": "Haftalık ve aylık raporlar",
+  "appFeaturePeriodicReportsDesc": "Haftalık ortalamalar ve dönem karşılaştırmaları.",
+
+  "premiumLockedTitle": "{feature} Premium'a özel",
+  "@premiumLockedTitle": {
+    "placeholders": { "feature": { "type": "String" } }
+  },
+  "premiumUnlockAction": "Premium'a geç",
+  "premiumProfileSubtitle": "Tüm özelliklerin kilidini aç",
+
+  "paywallTitle": "Hedefine Premium ile daha hızlı ulaş",
+  "paywallSubtitle": "Sana özel plan, AI koç ve gelişmiş raporlar tek abonelikte.",
+  "paywallPeriodWeekly": "Haftalık",
+  "paywallPeriodMonthly": "Aylık",
+  "paywallPeriodAnnual": "Yıllık",
+  "paywallPeriodLifetime": "Ömür boyu",
+  "paywallSavings": "%{percent} tasarruf",
+  "@paywallSavings": {
+    "placeholders": { "percent": { "type": "int" } }
+  },
+  "paywallPerMonth": "Aylık {price}",
+  "@paywallPerMonth": {
+    "placeholders": { "price": { "type": "String" } }
+  },
+  "paywallSubscribe": "Abone ol",
+  "paywallStartTrial": "{days} gün ücretsiz dene",
+  "@paywallStartTrial": {
+    "placeholders": { "days": { "type": "int" } }
+  },
+  "paywallRestore": "Satın alımları geri yükle",
+  "paywallLegal": "Abonelik, dönem bitmeden en az 24 saat önce iptal edilmezse otomatik olarak yenilenir. Mağaza hesap ayarlarından istediğin zaman iptal edebilirsin.",
+  "paywallTrialLegal": "{days} günlük ücretsiz deneme bitiminde {price} ücretlendirilir. Deneme bitmeden en az 24 saat önce iptal edersen ücret alınmaz.",
+  "@paywallTrialLegal": {
+    "placeholders": {
+      "days": { "type": "int" },
+      "price": { "type": "String" }
+    }
+  },
+  "paywallPurchaseSuccess": "Premium'a hoş geldin!",
+  "paywallRestored": "Premium üyeliğin geri yüklendi.",
+  "paywallNothingToRestore": "Geri yüklenecek bir satın alma bulunamadı.",
+  "paywallActiveTitle": "Premium aktif",
+  "paywallTrialUntil": "Ücretsiz deneme {date} tarihine kadar",
+  "@paywallTrialUntil": {
+    "placeholders": { "date": { "type": "String" } }
+  },
+  "paywallRenewsOn": "{date} tarihinde yenilenir",
+  "@paywallRenewsOn": {
+    "placeholders": { "date": { "type": "String" } }
+  },
+  "paywallActiveUntil": "{date} tarihine kadar geçerli",
+  "@paywallActiveUntil": {
+    "placeholders": { "date": { "type": "String" } }
+  },
+
+  "settingsSubscription": "Abonelik",
+  "settingsResetFakeSubscription": "Test aboneliğini sıfırla",
+  "settingsLegal": "Yasal",
+  "settingsPrivacyPolicy": "Gizlilik Politikası",
+  "settingsPrivacyPolicyUnavailable": "Gizlilik Politikası şu anda açılamıyor.",
+
+  "scoreFactorMacroBalance": "Makro dengesi",
+  "scoreTipMacroBalance": "Protein, karbonhidrat ve yağı hedeflerine yakın oranda dağıtmaya çalış.",
+
+  "diaryToday": "Bugün",
+  "diaryYesterday": "Dün",
+  "diaryTomorrow": "Yarın",
+  "diaryPreviousDay": "Önceki gün",
+  "diaryNextDay": "Sonraki gün",
+  "diaryPickDate": "Tarih seç",
+  "diaryCaloriesLeft": "{kcal} kcal kaldı",
+  "@diaryCaloriesLeft": {
+    "placeholders": { "kcal": { "type": "String" } }
+  },
+  "diaryCaloriesOver": "Hedefin {kcal} kcal üzerindesin",
+  "@diaryCaloriesOver": {
+    "placeholders": { "kcal": { "type": "String" } }
+  },
+  "diaryCaloriesOfTarget": "/ {target} kcal",
+  "@diaryCaloriesOfTarget": {
+    "placeholders": { "target": { "type": "String" } }
+  },
+  "diaryMealEmptyHint": "{meal, select, breakfast{Kahvaltını planlamaya başlayalım 🌱} lunch{Öğle yemeğini eklemeye ne dersin?} dinner{Akşam yemeğin henüz boş.} snack{Gün içindeki atıştırmalıklarını buraya ekleyebilirsin.} other{Henüz bir yiyecek eklenmedi.}}",
+  "@diaryMealEmptyHint": {
+    "placeholders": { "meal": { "type": "String" } }
+  },
+  "diaryExpand": "Genişlet",
+  "diaryCollapse": "Daralt",
+  "diaryEntryMenu": "Yiyecek seçenekleri",
+  "diaryEntryEdit": "Düzenle",
+  "diaryEntryCopy": "Kopyala",
+  "diaryEntryMove": "Başka öğüne taşı",
+  "diaryEditTitle": "Kaydı düzenle",
+  "diaryEditAmount": "Miktar",
+  "diaryEditDecrease": "Azalt",
+  "diaryEditIncrease": "Artır",
+  "diaryEntryUpdated": "{food} güncellendi",
+  "@diaryEntryUpdated": {
+    "placeholders": { "food": { "type": "String" } }
+  },
+  "diaryEntryCopied": "{food}, {date} tarihine kopyalandı",
+  "@diaryEntryCopied": {
+    "placeholders": { "food": { "type": "String" }, "date": { "type": "String" } }
+  },
+  "diaryEntryMoved": "{food}, {meal} öğününe taşındı",
+  "@diaryEntryMoved": {
+    "placeholders": { "food": { "type": "String" }, "meal": { "type": "String" } }
+  },
+  "diaryFavoriteAdded": "{food} favorilere eklendi",
+  "@diaryFavoriteAdded": {
+    "placeholders": { "food": { "type": "String" } }
+  },
+  "diaryFavoriteRemoved": "{food} favorilerden çıkarıldı",
+  "@diaryFavoriteRemoved": {
+    "placeholders": { "food": { "type": "String" } }
+  },
+  "diaryEntryDeleted": "{food} silindi",
+  "@diaryEntryDeleted": {
+    "placeholders": { "food": { "type": "String" } }
+  },
+  "diaryDeleteTitle": "Yiyeceği sil",
+  "diaryDeleteMessage": "Bu yiyeceği günlük kaydından silmek istediğine emin misin?",
+  "diaryMoveTitle": "Hangi öğüne taşınsın?",
+  "diaryCopyTitle": "Nereye kopyalansın?",
+  "diaryCopyToday": "Bugüne kopyala",
+  "diaryCopyTomorrow": "Yarına kopyala",
+  "diaryWaterTitle": "Su",
+  "diaryWaterOfGoal": "{value} / {goal} ml",
+  "@diaryWaterOfGoal": {
+    "placeholders": { "value": { "type": "String" }, "goal": { "type": "String" } }
+  },
+  "diaryWaterRemove": "{ml} ml azalt",
+  "@diaryWaterRemove": {
+    "placeholders": { "ml": { "type": "int" } }
+  },
+  "diaryMlValue": "{ml} ml",
+  "@diaryMlValue": {
+    "placeholders": { "ml": { "type": "int" } }
+  },
+  "diaryWaterRemoved": "{ml} ml su çıkarıldı",
+  "@diaryWaterRemoved": {
+    "placeholders": { "ml": { "type": "int" } }
+  },
+  "diaryScoreTitle": "{when, select, past{Günün Beslenme Skoru} future{Planlanan Beslenme Skoru} other{Bugünün Beslenme Skoru}}",
+  "@diaryScoreTitle": {
+    "placeholders": { "when": { "type": "String" } }
+  },
+  "diaryScoreDisclaimer": "Bu skor genel beslenme alışkanlıklarını takip etmeye yardımcı olan tahmini bir göstergedir.",
+  "diaryScoreStatus": "{status, select, met{hedefte} partial{geliştirilebilir} other{eksik}}",
+  "@diaryScoreStatus": {
+    "placeholders": { "status": { "type": "String" } }
+  },
+  "diaryQuickAddTitle": "Ne eklemek istiyorsun?",
+  "diaryAddWater": "Su ekle",
+  "diaryAddWeight": "Kilo ekle",
+  "diaryAddActivity": "Aktivite ekle",
+  "diaryEmptyDayTitle": "{when, select, past{Bu gün için kayıt yok.} future{Bu günü şimdiden planlayabilirsin.} other{Bugün henüz bir öğün eklemedin.}}",
+  "@diaryEmptyDayTitle": {
+    "placeholders": { "when": { "type": "String" } }
+  },
+  "diaryEmptyDayMessage": "Öğünlerini ekledikçe kalori, makro ve beslenme skorun burada güncellenir.",
+  "diaryPastDayNote": "Geçmiş bir günü görüntülüyorsun; yaptığın değişiklikler bu güne kaydedilir.",
+  "diaryFutureDayNote": "İleri bir tarih seçili; eklediğin öğünler plan olarak bu güne kaydedilir.",
+  "diaryActivityTitleToday": "Bugünkü aktivite",
+  "diaryWeightTitle": "Kilo",
+  "diaryWeightEmpty": "Bu gün için kilo kaydı yok.",
+  "diaryWeightValue": "{value} kg",
+  "@diaryWeightValue": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+
+  "activityConnectTitle": "Sağlık verilerini bağla",
+  "activityConnectMessage": "Apple Health veya Health Connect bağlandığında adım, mesafe ve aktif kalori bu cihazın günlüğünde tutulur ve Firebase'e yazılmaz. Asistana aktivite veya gün özeti sorarsan bu özet soruyla birlikte gönderilir.",
+  "activityConnectAction": "Bağlan",
+  "activityConnectGranted": "Sağlık verileri bağlandı.",
+  "activityConnectUnavailable": "Sağlık verisi bağlantısı bu cihazda henüz kullanılamıyor.",
+  "healthDataTitle": "Sağlık Verileri",
+  "healthConnectName": "Health Connect",
+  "healthAppleName": "Apple Health",
+  "healthStatusLinked": "Bağlı",
+  "healthStatusNotLinked": "Bağlı değil",
+  "healthUnavailableBody": "Bu özellik bu cihazda kullanılamıyor.",
+  "healthPermissionDenied": "Sağlık verileri bağlı değil. Ayarlardan tekrar deneyebilirsin.",
+  "healthPrivacyNote": "Adım, mesafe ve aktif kalori bu cihazda tutulur ve Firebase'e yazılmaz. Asistana aktivite veya gün özeti sorarsan bu özet soruyla birlikte gönderilir.",
+  "healthConnectAction": "Sağlık verilerini bağla",
+  "healthValueUnavailable": "—",
+  "activityDistance": "Mesafe",
+  "activityDistanceKm": "{value} km",
+  "@activityDistanceKm": {
+    "placeholders": {
+      "value": { "type": "String" }
+    }
+  },
+  "activityDistanceMeters": "{value} m",
+  "@activityDistanceMeters": {
+    "placeholders": {
+      "value": { "type": "String" }
+    }
+  },
+  "progressActivityTitle": "Hareket",
+  "progressActivityToday": "Bugünkü adım",
+  "progressActivityWeek": "Son 7 gün adım",
+
+  "weightNoteField": "Not (isteğe bağlı)",
+  "weightNoteHint": "ör. Sabah, aç karnına",
+  "weightAdd": "Kilo Ekle",
+  "weightAddFirst": "İlk kilomu ekle",
+  "weightEmptyTitle": "Henüz kilo kaydı eklemedin.",
+  "weightEmptyMessage": "Kilonu düzenli girdikçe ilerlemen, grafiğin ve hedefe kalan kilo burada görünür.",
+  "weightJourneyTitle": "Kilo yolculuğun",
+  "weightStatRemaining": "Hedefe kalan",
+  "weightStatPercent": "Başlangıçtan değişim",
+  "weightStatLast": "Son ölçüm",
+  "weightStatWeekly": "Haftalık ortalama",
+  "weightPerWeek": "{value} kg/hafta",
+  "@weightPerWeek": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+  "weightRange": "{range, select, week{7 gün} month{30 gün} quarter{3 ay} other{Tümü}}",
+  "@weightRange": {
+    "placeholders": { "range": { "type": "String" } }
+  },
+  "weightHistoryTitle": "Kayıt geçmişi",
+  "weightHistoryEmpty": "Girdiğin kilo kayıtları burada listelenir.",
+  "weightDeltaPrevious": "öncekine göre {change} kg",
+  "@weightDeltaPrevious": {
+    "placeholders": { "change": { "type": "String" } }
+  },
+  "targetSuggestionTitle": "Hedeflerini güncelleyebilirsin",
+  "targetSuggestionBody": "Güncel bilgilerine göre günlük kalori hedefin {current} yerine {suggested} kcal olarak öneriliyor.",
+  "@targetSuggestionBody": {
+    "placeholders": {
+      "current": { "type": "String" },
+      "suggested": { "type": "String" }
+    }
+  },
+  "targetSuggestionBodyNew": "Profiline göre günlük hedefin {suggested} kcal olarak hesaplandı.",
+  "@targetSuggestionBodyNew": {
+    "placeholders": { "suggested": { "type": "String" } }
+  },
+  "targetSuggestionLimited": "Değişiklik kademeli uygulanır: tek seferde en fazla 200 kcal.",
+  "targetSuggestionNote": "Bu öneri genel bir hesaplamadır; sağlık durumun varsa bir uzmana danış.",
+  "targetSuggestionLater": "Şimdi değil",
+  "targetSuggestionApply": "Hedefi güncelle",
+  "targetSuggestionApplied": "Günlük hedefin güncellendi. Planını yeni hedefe göre yenileyebilirsin.",
+
+  "measureEmptyTitle": "Henüz vücut ölçümü eklemedin.",
+  "measureEmptyMessage": "Bel, kalça, göğüs, boyun, kol ve uyluk ölçülerini ekleyerek kilodan bağımsız değişimi de takip edebilirsin.",
+  "measureAddFirst": "İlk ölçümümü ekle",
+  "measureSeeProgress": "Kilo ve ölçüleri İlerleme'de birlikte gör",
+  "measureSummaryTitle": "Ölçü özeti",
+  "measureStart": "Başlangıç",
+  "measureLatest": "Son",
+  "measureChange": "Değişim",
+  "measureChartTitle": "Ölçü grafiği",
+  "measureChartSemantics": "{field} grafiği; en düşük {min}, en yüksek {max}.",
+  "@measureChartSemantics": {
+    "placeholders": {
+      "field": { "type": "String" },
+      "min": { "type": "String" },
+      "max": { "type": "String" }
+    }
+  },
+  "measureHistoryTitle": "Ölçüm geçmişi",
+
+  "nutritionPlanTitle": "Beslenme Planım",
+  "nutritionPlanGoal": "Hedef: {goal}",
+  "@nutritionPlanGoal": {
+    "placeholders": { "goal": { "type": "String" } }
+  },
+  "nutritionPlanDailyTarget": "Günlük kalori hedefi",
+  "nutritionPlanEditGoals": "Hedefleri düzenle",
+  "nutritionPlanPreviousWeek": "Önceki hafta",
+  "nutritionPlanNextWeek": "Sonraki hafta",
+  "nutritionPlanWeekRange": "{start} – {end}",
+  "@nutritionPlanWeekRange": {
+    "placeholders": {
+      "start": { "type": "String" },
+      "end": { "type": "String" }
+    }
+  },
+  "nutritionPlanEatingWindow": "Yeme pencereni {start}–{end}; öğün saatleri buna göre ayarlandı.",
+  "@nutritionPlanEatingWindow": {
+    "placeholders": {
+      "start": { "type": "String" },
+      "end": { "type": "String" }
+    }
+  },
+  "nutritionPlanToday": "Bugünün öğünleri",
+  "nutritionPlanCreate": "Yeni Plan Oluştur",
+  "nutritionPlanCreated": "Yeni planın hazır.",
+  "nutritionPlanFromProfile": "Kalori ve makro hedeflerin profilinden alınır.",
+  "nutritionPlanMealsPerDay": "Günlük öğün sayısı",
+  "nutritionPlanDietType": "Beslenme tipi",
+  "nutritionPlanDisliked": "Sevmediğin yiyecekler",
+  "nutritionPlanDislikedHint": "ör. Brokoli",
+  "nutritionPlanGenerate": "Planı oluştur",
+  "nutritionPlanLogToday": "Bugünkü günlüğe ekle",
+  "nutritionPlanSwap": "Bu yemeği değiştir",
+  "nutritionPlanOpenRecipe": "Tarifi gör",
+  "nutritionPlanAlreadyLogged": "Bu öğün bugünkü günlüğünde zaten var.",
+  "nutritionPlanAlternativesTitle": "{meal} için alternatifler",
+  "@nutritionPlanAlternativesTitle": {
+    "placeholders": { "meal": { "type": "String" } }
+  },
+  "nutritionPlanAlternativesSubtitle": "Kalori hedefine, beslenme tipine, alerjilerine ve sevmediklerine uygun öneriler.",
+  "servingsCount": "{value} porsiyon",
+  "@servingsCount": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+
+  "recipeCategoryAll": "Tümü",
+  "recipeCategoryBreakfast": "Kahvaltı",
+  "recipeCategoryLunch": "Öğle",
+  "recipeCategoryDinner": "Akşam",
+  "recipeCategorySnack": "Atıştırmalık",
+  "recipeCategoryDessert": "Tatlı",
+  "recipeCategoryDrink": "İçecek",
+  "recipeCategoryHighProtein": "Yüksek Protein",
+  "recipeCategoryLowCalorie": "Düşük Kalori",
+  "recipeFavorites": "Favoriler",
+  "recipeFavorite": "Favori",
+  "recipeAddFavorite": "Favorilere ekle",
+  "recipeRemoveFavorite": "Favorilerden çıkar",
+  "recipeFavoritesEmptyTitle": "Henüz favori tarifin yok.",
+  "recipeFavoritesEmptyMessage": "Beğendiğin tariflerde kalp simgesine dokunarak burada topla.",
+  "recipeSearchHint": "Tarif veya malzeme ara",
+  "recipeNoResults": "Aramana uygun tarif bulunamadı.",
+  "recipeClearFilters": "Filtreleri temizle",
+  "recipeDemoNutrition": "Besin değerleri örnek USDA verisinden hesaplandı. Demo veridir.",
+  "recipeVegetarian": "Vejetaryen",
+  "recipeSalad": "Salata",
+  "recipeSoup": "Çorba",
+  "recipePractical": "Pratik",
+  "recipeRecentTitle": "Son görüntülenenler",
+  "recipeRecommendedTitle": "Sana uygun",
+  "recipeCalorieAny": "Kalori",
+  "recipeCalorieMax": "≤ {kcal} kcal",
+  "@recipeCalorieMax": {
+    "placeholders": { "kcal": { "type": "int" } }
+  },
+  "recipeSelectedServings": "Seçilen porsiyon",
+  "recipeLoadMore": "Daha fazla göster",
+  "recipeMinutes": "{minutes} dk",
+  "@recipeMinutes": {
+    "placeholders": { "minutes": { "type": "int" } }
+  },
+  "recipeCreate": "Tarif oluştur",
+  "recipeLogToday": "Bugünkü Günlüğe Ekle",
+  "recipeAddToPlan": "Beslenme Planına Ekle",
+  "recipePickDay": "Gün",
+  "recipePickMeal": "Öğün",
+  "recipeServingsLabel": "Porsiyon",
+  "recipeLessServings": "Porsiyonu azalt",
+  "recipeMoreServings": "Porsiyonu artır",
+  "recipeLogged": "{name} {meal} öğününe eklendi",
+  "@recipeLogged": {
+    "placeholders": {
+      "name": { "type": "String" },
+      "meal": { "type": "String" }
+    }
+  },
+  "recipeAddedToPlan": "Plana eklendi: {day}, {meal}",
+  "@recipeAddedToPlan": {
+    "placeholders": {
+      "day": { "type": "String" },
+      "meal": { "type": "String" }
+    }
+  },
+  "recipeOpenPlan": "Planı aç",
+  "recipeDeleteTitle": "Tarif silinsin mi?",
+  "recipeDeleteMessage": "{name} tarifin kalıcı olarak silinecek.",
+  "@recipeDeleteMessage": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "recipeDeleted": "Tarif silindi.",
+  "recipeNotFound": "Tarif bulunamadı.",
+  "recipeMine": "Benim tarifim",
+  "recipeNutritionPerServing": "Porsiyon başı besin değerleri",
+  "recipeIngredients": "Malzemeler",
+  "recipeNoIngredientList": "Malzeme listesi eklenmemiş.",
+  "recipeSteps": "Hazırlanışı",
+  "recipeNoSteps": "Hazırlanış adımı eklenmemiş.",
+  "recipeDescription": "Kısa açıklama (isteğe bağlı)",
+  "recipeCategories": "Kategori",
+  "recipeComputedCategoriesNote": "\"Yüksek Protein\" ve \"Düşük Kalori\" besin değerlerine göre otomatik belirlenir.",
+  "recipeNeedsCategory": "En az bir kategori seç.",
+  "recipePrepMinutes": "Hazırlık",
+  "recipeCookMinutes": "Pişirme",
+  "unitMinutes": "dk",
+  "recipeIngredientsHint": "Her satıra bir malzeme, ör.\n2 adet yumurta\n150 g lor peyniri",
+  "recipeStepsHint": "Her satıra bir adım, ör.\nYumurtaları çırpın.\nTavada pişirin.",
+
+  "fastingEmptyTitle": "Bugün henüz bir oruç planlamadın.",
+  "fastingEmptyMessage": "Yukarıdan bir protokol seçerek başlayabilirsin. Yeme pencerene göre öğün saatlerin ve hatırlatmaların da ayarlanır.",
+  "fastingProtocolTitle": "Protokol",
+  "fastingProtocolLocked": "Devam eden orucu bitirince protokolü değiştirebilirsin.",
+  "fastingPhaseFasting": "Oruç",
+  "fastingPhaseEating": "Yeme penceresi",
+  "fastingChangeWindow": "Yeme penceresi saatini değiştir",
+  "fastingEatingStartPicker": "Yeme penceresi başlangıcı",
+  "fastingRemaining": "Hedefe {time} kaldı",
+  "@fastingRemaining": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+  "fastingEatingRemaining": "Yeme pencerenin kapanmasına {time} kaldı",
+  "@fastingEatingRemaining": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+  "fastingTargetReached": "Hedef süreye ulaştın. Hazır olduğunda orucu bitirebilirsin.",
+  "fastingEndsAt": "Hedef bitiş: {time}",
+  "@fastingEndsAt": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+  "fastingEatingEndsAt": "Pencere kapanışı: {time}",
+  "@fastingEatingEndsAt": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+  "fastingTimerSemantics": "{phase}: {time}",
+  "@fastingTimerSemantics": {
+    "placeholders": {
+      "phase": { "type": "String" },
+      "time": { "type": "String" }
+    }
+  },
+  "fastingPaused": "Duraklatıldı",
+  "fastingStart": "Orucu Başlat",
+  "fastingPause": "Duraklat",
+  "fastingResume": "Devam et",
+  "fastingFinish": "Bitir",
+  "fastingStarted": "Oruç başladı. Bol su içmeyi unutma.",
+  "fastingFinishedCompleted": "Tebrikler! {duration} oruç tamamlandı.",
+  "@fastingFinishedCompleted": {
+    "placeholders": { "duration": { "type": "String" } }
+  },
+  "fastingFinishedEarly": "Oruç {duration} sonra bitirildi. Kendini iyi hissetmek her zaman önceliklidir.",
+  "@fastingFinishedEarly": {
+    "placeholders": { "duration": { "type": "String" } }
+  },
+  "fastingHoursMinutes": "{hours} sa {minutes} dk",
+  "@fastingHoursMinutes": {
+    "placeholders": {
+      "hours": { "type": "int" },
+      "minutes": { "type": "int" }
+    }
+  },
+  "fastingWindowMealsTitle": "Yeme penceresindeki öğünlerin",
+  "fastingHistoryTitle": "Oruç geçmişi",
+  "fastingHistoryEmpty": "Bitirdiğin oruçlar burada listelenir.",
+  "fastingStatCompleted": "Tamamlanan",
+  "fastingStatAverage": "Ortalama süre",
+  "fastingLast7Days": "Son 7 gün",
+  "fastingCompleted": "Tamamlandı",
+  "fastingEndedEarly": "Erken bitirildi",
+  "fastingSessionDeleted": "Oruç kaydı silindi.",
+  "fastingDisclaimer": "Aralıklı oruç tıbbi bir tavsiye değildir. Hamilelik, emzirme, diyabet, yeme bozukluğu geçmişi, düzenli ilaç kullanımı veya kronik bir rahatsızlık varsa başlamadan önce doktoruna danış. Baş dönmesi veya halsizlik hissedersen orucu bitir.",
+
+  "notificationsMaster": "Bildirimler",
+  "notificationsMasterOff": "Açtığında hatırlatmalar seçtiğin saatlerde gönderilir.",
+  "notificationsScheduledCount": "{count, plural, =0{Planlanmış hatırlatma yok} other{{count} hatırlatma planlandı}}",
+  "@notificationsScheduledCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "notificationsPermissionDenied": "Bildirim izni verilmedi. Cihaz ayarlarından izin verebilirsin.",
+  "notificationsOpenSettings": "Ayarları aç",
+  "notificationsFastingNeedsProtocol": "Oruç hatırlatmaları için Aralıklı Oruç ekranından bir protokol seç.",
+  "reminderGroupMeal": "Öğün",
+  "reminderGroupWater": "Su",
+  "reminderGroupGoal": "Hedef",
+  "reminderGroupFasting": "Oruç",
+  "reminderGroupMotivation": "Motivasyon",
+  "reminderGroupPlan": "Plan",
+  "reminderBreakfast": "Kahvaltı",
+  "reminderLunch": "Öğle yemeği",
+  "reminderSnack": "Atıştırmalık",
+  "reminderDinner": "Akşam yemeği",
+  "reminderWater": "Su içme",
+  "reminderDailyGoal": "Günlük hedef özeti",
+  "reminderWeighIn": "Kilo ölçümü",
+  "reminderFastingStart": "Oruç başlangıcı",
+  "reminderEatingStart": "Yeme penceresi başlangıcı",
+  "reminderEatingEnd": "Yeme penceresi bitişi",
+  "reminderFastingEnd": "Oruç bitişi",
+  "reminderMotivation": "Günlük motivasyon",
+  "reminderPlan": "Plan hatırlatmaları",
+  "reminderPlanHint": "Haftalık plandaki öğünün adıyla, öğün saatinde gönderilir.",
+  "reminderWaterBalanced": "Günlük su hedefine göre, uyanık saatlere yayılır.",
+  "reminderChangeTime": "Saati değiştir",
+  "reminderWaterEvery": "Her {hours} saatte bir, {start}–{end}",
+  "@reminderWaterEvery": {
+    "placeholders": {
+      "hours": { "type": "String" },
+      "start": { "type": "String" },
+      "end": { "type": "String" }
+    }
+  },
+  "reminderEveryHours": "{hours} saatte bir",
+  "@reminderEveryHours": {
+    "placeholders": { "hours": { "type": "String" } }
+  },
+  "reminderWeeklyMonday": "Her pazartesi {time}",
+  "@reminderWeeklyMonday": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+  "reminderFastingEndHint": "Devam eden orucun hedef süresi dolunca",
+  "reminderOutsideWindow": "Yeme penceren dışında olduğu için gönderilmez",
+  "reminderBreakfastTitle": "🍳 Kahvaltı zamanı",
+  "reminderLunchTitle": "🍽️ Öğle yemeği zamanı",
+  "reminderSnackTitle": "🍎 Ara öğün zamanı",
+  "reminderDinnerTitle": "🌙 Akşam yemeği zamanı",
+  "reminderBreakfastBody": "Güne güzel bir başlangıç yap.",
+  "reminderLunchBody": "Bugünkü planındaki öğünü unutma.",
+  "reminderSnackBody": "Ara öğününü atlamayı unutma.",
+  "reminderDinnerBody": "Bugünkü planına göz at.",
+  "reminderMealBody": "Bugünkü öğününü planına eklemeyi unutma.",
+  "reminderPlanMealTitle": "{meal}: {recipe}",
+  "@reminderPlanMealTitle": {
+    "placeholders": {
+      "meal": { "type": "String" },
+      "recipe": { "type": "String" }
+    }
+  },
+  "reminderWaterTitle": "💧 Su zamanı",
+  "reminderWaterBody": "Günlük su hedefin için bir bardak su iç.",
+  "reminderDailyGoalTitle": "Bugünü nasıl geçirdin?",
+  "reminderDailyGoalBody": "Kalori ve protein hedeflerine ne kadar yaklaştığını gör.",
+  "reminderWeighInTitle": "Haftalık kilo ölçümü",
+  "reminderWeighInBody": "Sabah aç karnına tartılıp kilonu kaydet.",
+  "reminderFastingStartTitle": "⏱️ Oruç başladı",
+  "reminderFastingStartBody": "Yeme penceren kapandı.",
+  "reminderEatingStartTitle": "🍽️ Yeme penceren başladı",
+  "reminderEatingStartBody": "Planındaki öğünle yemeğine başlayabilirsin.",
+  "reminderEatingEndTitle": "Yeme pencerin kapanıyor",
+  "reminderEatingEndBody": "Pencerenin kapanmasına {minutes} dakika kaldı.",
+  "@reminderEatingEndBody": {
+    "placeholders": { "minutes": { "type": "int" } }
+  },
+  "reminderFastingEndTitle": "🎉 Oruç süren tamamlandı",
+  "reminderFastingEndBody": "Hazır olduğunda orucunu bitirebilirsin.",
+  "reminderMotivationTitle": "Küçük adımlar, büyük değişim",
+  "reminderMotivationBody": "Bugün hedefin için yapabileceğin tek bir şeyi seç.",
+  "assistantEmptyTitle": "Bugünkü beslenmen hakkında bana istediğin şeyi sorabilirsin.",
+  "assistantEmptyMessage": "Profilin, günlüğün, planın, kilo kayıtların ve oruç bilgine bakarak yanıt veririm.",
+  "assistantHint": "Bir soru yaz…",
+  "assistantThinking": "Yanıt hazırlanıyor",
+  "assistantClear": "Sohbeti temizle",
+  "assistantError": "Şu an yanıt veremedim. Lütfen biraz sonra tekrar dene.",
+  "assistantDisclaimer": "Öneri amaçlıdır; tıbbi tanı veya tedavi yerine geçmez.",
+  "assistantQuickRemaining": "Bugün kaç kalori hakkım kaldı?",
+  "assistantQuickProtein": "Protein hedefime ulaştım mı?",
+  "assistantQuickDinner": "Akşam için ne yiyebilirim?",
+  "assistantQuickSwap": "Planımdaki yemeği değiştirebilir miyim?",
+  "assistantQuickOver": "Bugün çok fazla kalori aldım",
+  "assistantRemainingCalories": "Bugün {consumed} kcal aldın. Hedefin {target} kcal, yani {remaining} kcal hakkın kaldı.",
+  "@assistantRemainingCalories": {
+    "placeholders": { "consumed": { "type": "String" }, "target": { "type": "String" }, "remaining": { "type": "String" } }
+  },
+  "assistantOverCaloriesInfo": "Bugün {consumed} kcal aldın; hedefin {target} kcal. Hedefin {over} kcal üzerindesin — bu tek bir gün, sorun değil.",
+  "@assistantOverCaloriesInfo": {
+    "placeholders": { "consumed": { "type": "String" }, "target": { "type": "String" }, "over": { "type": "String" } }
+  },
+  "assistantProteinReached": "Evet! Bugün {consumed} g protein aldın, hedefin {target} g. Harika gidiyorsun.",
+  "@assistantProteinReached": {
+    "placeholders": { "consumed": { "type": "String" }, "target": { "type": "String" } }
+  },
+  "assistantProteinRemaining": "Henüz değil: {consumed} / {target} g protein. {remaining} g daha var. Profiline uygun protein kaynaklarını tariflerden seçebilirsin.",
+  "@assistantProteinRemaining": {
+    "placeholders": { "consumed": { "type": "String" }, "target": { "type": "String" }, "remaining": { "type": "String" } }
+  },
+  "assistantSuggestionIntro": "{meal} için yaklaşık {remaining} kcal hakkın var. Şunlar uyabilir:",
+  "@assistantSuggestionIntro": {
+    "placeholders": { "meal": { "type": "String" }, "remaining": { "type": "String" } }
+  },
+  "assistantSuggestionLight": "{meal} için {remaining} kcal kaldı; hafif ama doyurucu bir seçenek öneririm:",
+  "@assistantSuggestionLight": {
+    "placeholders": { "meal": { "type": "String" }, "remaining": { "type": "String" } }
+  },
+  "assistantSuggestionOver": "Bugünkü hedefine ulaştın; yine de {meal} öğününü atlama. Sebze ve protein ağırlıklı hafif bir seçenek iyi olur:",
+  "@assistantSuggestionOver": {
+    "placeholders": { "meal": { "type": "String" } }
+  },
+  "assistantSuggestionFromPlan": "Planındaki: {title} ({kcal} kcal)",
+  "@assistantSuggestionFromPlan": {
+    "placeholders": { "title": { "type": "String" }, "kcal": { "type": "String" } }
+  },
+  "assistantSuggestionNone": "Tercihlerine uyan bir öneri bulamadım. Tariflere göz atabilirsin.",
+  "assistantSwapGeneral": "Elbette. Beslenme Planı'nda bir öğüne dokunup “Bu yemeği değiştir”i seçersen hedefine, diyet tipine ve alerjilerine uygun alternatifler gösteririm.",
+  "assistantSwapMeal": "Evet. Bugünkü {meal} öğünün: {title}. Beslenme Planı'nda bu öğüne dokunup “Bu yemeği değiştir”i seçerek benzer kalorili alternatiflerden birini seçebilirsin.",
+  "@assistantSwapMeal": {
+    "placeholders": { "meal": { "type": "String" }, "title": { "type": "String" } }
+  },
+  "assistantOverTarget": "Bugün hedefinin yaklaşık {over} kcal üzerindesin. Bu tek bir gün ve ilerlemeni bozmaz. Kendini cezalandırmana ya da öğün atlamana gerek yok; su içmeye devam et, sonraki öğünü dengeli seç ve yarın planına kaldığın yerden devam et.",
+  "@assistantOverTarget": {
+    "placeholders": { "over": { "type": "String" } }
+  },
+  "assistantOverTargetNotReally": "Kayıtlarına göre bugün hedefinin üzerine çıkmadın. Bazen öyle hissettirebilir; dengeli devam ediyorsun.",
+  "assistantWaterReached": "Bugün {amount} su içtin, hedefine ulaştın.",
+  "@assistantWaterReached": {
+    "placeholders": { "amount": { "type": "String" } }
+  },
+  "assistantWaterRemaining": "Bugün {amount} su içtin; hedefin {goal}. {left} daha içebilirsin.",
+  "@assistantWaterRemaining": {
+    "placeholders": { "amount": { "type": "String" }, "goal": { "type": "String" }, "left": { "type": "String" } }
+  },
+  "assistantWeightEmpty": "Henüz kilo kaydın yok. Kilo Takibi'nden ilk kaydını ekleyebilirsin.",
+  "assistantWeightProgress": "Başlangıç: {start}, şu an: {current} ({change}).",
+  "@assistantWeightProgress": {
+    "placeholders": { "start": { "type": "String" }, "current": { "type": "String" }, "change": { "type": "String" } }
+  },
+  "assistantWeightTarget": "Hedefin {target}; {left} kaldı.",
+  "@assistantWeightTarget": {
+    "placeholders": { "target": { "type": "String" }, "left": { "type": "String" } }
+  },
+  "assistantWaist": "Son bel ölçün: {value}.",
+  "@assistantWaist": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+  "assistantWeightNote": "Haftada yaklaşık 0,25–1 kg arası değişim sürdürülebilir kabul edilir; günlük dalgalanmalar normaldir.",
+  "assistantFastingNone": "Henüz bir oruç protokolü seçmedin. Aralıklı Oruç sayfasından planlayabilirsin.",
+  "assistantFastingActive": "Oruçtasın. Hedefe kalan süre: {time}.",
+  "@assistantFastingActive": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+  "assistantFastingEating": "Yeme penceresindesin. Pencerenin kapanmasına {time} var.",
+  "@assistantFastingEating": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+  "assistantSafetyMedical": "Bu konu tıbbi bir değerlendirme gerektiriyor; teşhis koyamam veya ilaç ve tedavi hakkında öneri veremem. Lütfen doktoruna ya da bir diyetisyene danış. Genel beslenme sorularında yardımcı olmaya devam edebilirim.",
+  "assistantSafetyEatingDisorder": "Bunu paylaştığın için teşekkürler. Yemekle ilişkin seni zorluyorsa yalnız değilsin; bu konuda bir doktor, psikolog veya diyetisyenden destek almanı öneririm. Kendini güvende hissetmiyorsan hemen 112'yi arayabilirsin.",
+  "assistantSafetyRestriction": "Aşırı düşük kalori, öğün atlama veya çok hızlı kilo verme sağlığına zarar verebilir; bunu önermem. Sürdürülebilir ilerleme için hedefine uygun, dengeli bir plan daha etkilidir. Kişisel bir program için bir diyetisyene danışabilirsin.",
+  "assistantHelp": "Şunları sorabilirsin: kalan kalori hakkın, protein hedefin, bir öğün için öneri, plandaki yemeği değiştirme, su, kilo ilerlemen veya oruç durumun.",
+  "assistantNotConfigured": "Beslenme asistanı şu anda yapılandırılmamış.",
+  "assistantOffline": "İnternet bağlantısı yok. Önceki sohbetin duruyor; yeni bir yanıt için bağlantı gerekir.",
+  "assistantTimeout": "Yanıt zaman aşımına uğradı. Tekrar deneyebilirsin.",
+  "assistantRateLimited": "Çok sık istek gönderildi. Biraz sonra tekrar dene.",
+  "assistantInvalidResponse": "Asistan yanıtı okunamadı. Tekrar deneyebilirsin.",
+  "assistantEmptyResponse": "Asistan boş bir yanıt döndürdü. Tekrar deneyebilirsin.",
+  "assistantMalformed": "Asistan yanıtı bozuk. Tekrar deneyebilirsin.",
+  "assistantUnavailable": "Beslenme asistanı şu anda kullanılamıyor.",
+  "assistantMessageTooLong": "Mesajın çok uzun. Daha kısa bir soru yaz.",
+  "assistantRetry": "Tekrar dene",
+  "assistantPrivacyTitle": "Asistan hakkında",
+  "assistantPrivacyBody": "Beslenme asistanı öneri amaçlıdır. Tanı koymaz, ilaç veya tedavi önermez ve doktorun ya da diyetisyeninin yerine geçmez. Sohbet geçmişi yalnızca bu cihazda tutulur ve Firebase'e gönderilmez. Bir soru gönderildiğinde, yanıt için gereken sınırlı bağlam yapılandırılmış bir sunucu ucuna iletilebilir; sağlayıcı anahtarı uygulamada saklanmaz. Adım, mesafe ve aktif kalori Firebase'e yazılmaz; aktivite veya gün özeti sorduğunda cihazından giden isteğe eklenebilir. Asistan günlüğünü, planını, su kaydını veya kalori hedefini kendiliğinden değiştirmez.",
+  "assistantRecordsLabel": "Kayıtların",
+  "assistantCommentaryLabel": "Yorum",
+  "assistantMissingInfo": "Bu bilgiye erişemiyorum.",
+  "assistantAllergyBlocked": "Alerjine uymayan bir öneri gösteremem. Güvenli bir alternatif için tariflere bakabilirsin.",
+  "assistantConsumedOnly": "Bugün {consumed} kcal aldın. Kalori hedefin kayıtlı değil.",
+  "@assistantConsumedOnly": {
+    "placeholders": { "consumed": { "type": "String" } }
+  },
+  "assistantMacroLine": "{name}: {consumed} / {target} g",
+  "@assistantMacroLine": {
+    "placeholders": {
+      "name": { "type": "String" },
+      "consumed": { "type": "String" },
+      "target": { "type": "String" }
+    }
+  },
+  "assistantWaterOnly": "Bugün {amount} su içtin. Su hedefin kayıtlı değil.",
+  "@assistantWaterOnly": {
+    "placeholders": { "amount": { "type": "String" } }
+  },
+  "assistantActivitySteps": "Bugün {steps} adım attın.",
+  "@assistantActivitySteps": {
+    "placeholders": { "steps": { "type": "int" } }
+  },
+  "assistantActivityDistance": "Mesafe: {km} km.",
+  "@assistantActivityDistance": {
+    "placeholders": { "km": { "type": "String" } }
+  },
+  "assistantActivityCalories": "Aktif kalori: {kcal} kcal.",
+  "@assistantActivityCalories": {
+    "placeholders": { "kcal": { "type": "String" } }
+  },
+  "assistantActivityWorkouts": "Antrenman: {count}.",
+  "@assistantActivityWorkouts": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "assistantPlanEmpty": "Bugün için kayıtlı bir plan göremiyorum.",
+  "assistantRecipeHeading": "Kataloğundaki uygun tarifler:",
+  "assistantRecipeLine": "{title} ({kcal} kcal, {protein} g protein)",
+  "@assistantRecipeLine": {
+    "placeholders": {
+      "title": { "type": "String" },
+      "kcal": { "type": "String" },
+      "protein": { "type": "String" }
+    }
+  },
+  "assistantQuickToday": "Bugün nasıl besleniyorum?",
+  "assistantQuickProteinBoost": "Proteinimi nasıl artırırım?",
+  "assistantQuickWaterGoal": "Su hedefime ulaştım mı?",
+  "assistantQuickPlanReview": "Bugünkü planımı değerlendir",
+  "assistantQuickRecipe": "Bana uygun tarif öner",
+  "assistantQuickDinnerLose": "Kilo verme hedefime uygun akşam yemeği öner.",
+  "assistantQuickProteinMeal": "Protein ağırlıklı bir öğün öner.",
+
+  "targetChangeTitle": "Yeni kilo bilgine göre günlük hedefini yeniden hesaplamak ister misin?",
+  "targetChangeCurrentWeight": "Mevcut kilo",
+  "targetChangeNewWeight": "Yeni kilo",
+  "targetChangeCurrentCalories": "Mevcut günlük hedef",
+  "targetChangeNewCalories": "Yeni önerilen hedef",
+  "targetChangeUseNew": "Yeni hedefi kullan",
+  "targetChangeKeepCurrent": "Mevcut hedefi koru",
+  "targetChangeSafety": "Aşırı düşük kalori hedefleri güvenlik için sınırlanır. Bu bir tahmindir; tıbbi veya diyetisyen önerisi değildir.",
+  "targetChangeMacros": "Önerilen makrolar: {protein} g protein, {carbs} g karbonhidrat, {fat} g yağ.",
+  "@targetChangeMacros": {
+    "placeholders": {
+      "protein": { "type": "String" },
+      "carbs": { "type": "String" },
+      "fat": { "type": "String" }
+    }
+  },
+  "sleepHoursTitle": "Uyku saatleri",
+  "sleepHoursHint": "Bu saatlerde su hatırlatması gönderilmez.",
+  "sleepStart": "Uyku başlangıcı",
+  "sleepEnd": "Uyku bitişi",
+  "notificationsPermissionHint": "Bildirim izni, hatırlatıcıları açtığında sorulur.",
+  "waterTodayTitle": "Bugün",
+  "waterHistoryTitle": "Geçmiş günler",
+  "waterEmptyHistory": "Diğer günlerde henüz su kaydı yok.",
+  "waterRemoveAmount": "{amount} ml azalt",
+  "@waterRemoveAmount": {
+    "placeholders": { "amount": { "type": "int" } }
+  },
+  "shoppingMyList": "Alışveriş Listem",
+  "shoppingAddItem": "Ürün ekle",
+  "shoppingItemName": "Ürün",
+  "shoppingQuantity": "Miktar",
+  "shoppingUnit": "Birim",
+  "shoppingGenerateWeek": "Bu haftanın alışveriş listesini oluştur",
+  "shoppingGenerated": "Plandan {count} ürün eklendi.",
+  "@shoppingGenerated": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "shoppingEmptyTitle": "Listen boş",
+  "shoppingEmptyMessage": "Kendin ürün ekleyebilir veya bu haftanın planından liste oluşturabilirsin.",
+  "shoppingCompleted": "Tamamlandı",
+  "shoppingClearCompleted": "Tamamlananları temizle",
+  "shoppingFromRecipe": "Tariften",
+  "shoppingFromPlan": "Plandan",
+  "shoppingCategoryProduce": "Sebze & Meyve",
+  "shoppingCategoryMeat": "Et & Tavuk",
+  "shoppingCategoryDairy": "Süt Ürünleri",
+  "shoppingCategoryGrains": "Tahıl & Bakliyat",
+  "shoppingCategoryBreakfast": "Kahvaltılık",
+  "shoppingCategoryOther": "Diğer",
+  "recipeAddToShopping": "Malzemeleri alışveriş listesine ekle",
+  "recipeAddedToShopping": "Malzemeler alışveriş listesine eklendi.",
+  "photoLogPick": "Fotoğraf çek veya seç",
+  "photoLogCamera": "Kamera",
+  "photoLogGallery": "Galeri",
+  "photoLogAnalyzing": "Fotoğraf analiz ediliyor…",
+  "photoLogUploading": "Fotoğraf hazırlanıyor…",
+  "photoLogMatching": "Yiyecekler eşleştiriliyor…",
+  "photoLogResults": "Algılanan yiyecekler",
+  "photoLogEstimateBadge": "Aday",
+  "photoLogAddToDiary": "Günlüğe Ekle",
+  "photoLogAdded": "Yiyecekler günlüğe eklendi.",
+  "photoLogDisclaimer": "Sonuçlar adaydır. Besin değerleri onayından sonra yiyecek kaydından hesaplanır. Fotoğraf kaydedilmez.",
+  "photoLogName": "Yiyecek adı",
+  "photoLogAmount": "Miktar",
+  "photoLogPortion": "Porsiyon",
+  "photoLogMeal": "Öğün",
+  "voiceLogHint": "Örneğin: İki yumurta, elli gram peynir ve iki dilim ekmek yedim.",
+  "voiceLogSimulate": "Örnek cümleyi kullan",
+  "voiceLogParse": "Ayır",
+  "voiceLogResults": "Ayrıştırılmış sonuçlar",
+  "voiceLogEmpty": "Yiyecek bulunamadı. Metni düzenleyip yeniden deneyebilirsin.",
+  "voiceLogDisclaimer": "Konuşma metne çevrilir ve yiyecekler aday olarak ayrılır. Besin değerleri onayından sonra hesaplanır. Ses kaydı saklanmaz.",
+  "voiceLogListening": "Dinleniyor…",
+  "voiceLogStop": "Durdur",
+  "voiceLogMic": "Konuş",
+  "voiceLogMicSemantics": "Mikrofonla yiyecek söyle",
+  "voiceLogTranscript": "Metin",
+  "photoLogNoMatch": "Eşleşme bulunamadı",
+  "photoLogSearchAgain": "Tekrar ara",
+  "photoLogManualSearch": "Manuel ara",
+  "photoLogCreateCustom": "Özel yiyecek oluştur",
+  "photoLogRemove": "Yiyeceği sil",
+  "photoLogAddFood": "Yiyecek ekle",
+  "photoLogChangeFood": "Yiyeceği değiştir",
+  "photoLogChooseMatch": "Bir eşleşme seç",
+  "photoLogAmbiguousQuantity": "Miktarı seç",
+  "photoLogSelectMeal": "Öğün seç",
+  "photoLogAllergyWarning": "Bu yiyecek profilinizdeki alerjiyle eşleşiyor. Bu bir güvenlik doğrulaması değildir.",
+  "photoLogDislikeWarning": "Bu yiyecek profilinde sevmediğin yiyecekler arasında.",
+  "photoLogDietWarning": "Bu yiyecek profilindeki beslenme tercihiyle çakışıyor olabilir.",
+  "photoLogAcknowledge": "Uyarıyı gördüm, yine de ekle",
+  "photoLogCalculated": "Besin değeri yiyecek kaydından",
+  "photoLogAssumption": "{quantity} {unit} ≈ {grams} g. Miktarı değiştirebilirsin.",
+  "@photoLogAssumption": {
+    "placeholders": {
+      "quantity": { "type": "String" },
+      "unit": { "type": "String" },
+      "grams": { "type": "String" }
+    }
+  },
+  "photoLogConfidence": "Güven %{percent}",
+  "@photoLogConfidence": {
+    "placeholders": { "percent": { "type": "String" } }
+  },
+  "photoLogCameraSemantics": "Kamerayla fotoğraf çek",
+  "photoLogGallerySemantics": "Galeriden fotoğraf seç",
+  "photoLogManualGrams": "Manuel gram",
+  "voiceUnitTea": "çay kaşığı",
+  "voiceUnitSpoon": "kaşık",
+  "voiceUnitPlate": "tabak",
+  "voiceUnitDessert": "tatlı kaşığı",
+  "captureErrorNotConfigured": "Fotoğrafla yiyecek tanıma şu anda yapılandırılmamış.",
+  "captureErrorTimeout": "İstek zaman aşımına uğradı. Lütfen tekrar dene.",
+  "captureErrorOffline": "İnternet bağlantısı yok. Fotoğraf ve ses tanıma şu an kullanılamaz.",
+  "captureErrorRateLimited": "Çok fazla istek gönderildi. Biraz sonra tekrar dene.",
+  "captureErrorInvalid": "Yanıt okunamadı. Lütfen tekrar dene.",
+  "captureErrorEmpty": "Yiyecek bulunamadı.",
+  "captureErrorMalformed": "Yanıt bozuk. Lütfen tekrar dene.",
+  "captureErrorUnavailable": "Hizmet şu anda kullanılamıyor.",
+  "captureErrorImageTooLarge": "Fotoğraf çok büyük. Daha küçük bir görsel dene.",
+  "captureErrorUnsupportedImage": "Bu görsel biçimi desteklenmiyor.",
+  "captureErrorSpeechUnavailable": "Konuşma tanıma bu cihazda kullanılamıyor. Metni yazabilirsin.",
+  "captureErrorTranscription": "Konuşma metne çevrilemedi.",
+  "captureErrorAmbiguous": "Miktar veya yiyecek belirsiz. Seçim yapmadan kaydedilmez.",
+  "captureErrorNotFound": "Eşleşen yiyecek yok. Aramadan veya özel yiyecek oluşturmadan kaydedilmez.",
+  "captureErrorConfirmation": "Kaydetmek için onay gerekli.",
+  "captureErrorDuplicate": "Bu ekleme zaten işlendi.",
+  "captureErrorAllergy": "Alerji uyarısı onaylanmadan yiyecek kaydedilmez.",
+  "confirmNewPlanTitle": "Beslenme planını değiştirmek istiyor musun?",
+  "confirmNewPlanMessage": "Bu haftanın kalan öğünleri yeniden oluşturulur. Önceki öğünler tutulmaz.",
+  "confirmRegeneratePlanTitle": "Bugünün planını yenilemek istiyor musun?",
+  "confirmRegeneratePlanMessage": "Bugünün planlanan tüm öğünleri değişecek.",
+  "confirmFastingTitle": "Oruç planını değiştirmek istiyor musun?",
+  "confirmFastingMessage": "Yeme penceren ve oruç hatırlatmaların yeni protokole göre güncellenir.",
+  "waterAdd100": "+100 ml",
+  "waterAdd250": "+250 ml",
+  "waterAdd500": "+500 ml",
+  "weeklyPlanTitle": "7 Günlük Plan",
+  "confirmRegenerateWeekTitle": "7 günlük planı yenilemek istiyor musun?",
+  "confirmRegenerateWeekMessage": "Bu haftanın öğünleri profilindeki kalori ve makro hedeflerine göre yeniden oluşturulur. Onaylamadan mevcut plan değişmez.",
+  "planChangeRecipe": "Bu tarifi değiştir",
+  "macroFiber": "Lif"
+}

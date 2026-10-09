@@ -1,0 +1,76 @@
+name: diyet_programi
+description: "Kişiselleştirilmiş beslenme ve diyet uygulaması."
+publish_to: 'none'
+
+# build-name -> versionName / CFBundleShortVersionString
+# build-number -> versionCode / CFBundleVersion
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.5
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+  # State management
+  flutter_riverpod: ^3.3.2
+
+  # Routing
+  go_router: ^17.5.0
+
+  # Network
+  dio: ^5.11.1
+
+  # Local persistence
+  shared_preferences: ^2.5.5
+
+  # Utilities
+  equatable: ^3.0.0
+  intl: ^0.20.2
+
+  # Media
+  image_picker: ^1.2.3
+
+  # Local notifications (öğün, su, oruç, kilo, motivasyon)
+  flutter_local_notifications: ^19.5.0
+  timezone: ^0.10.1
+  flutter_timezone: ^4.1.1
+
+  # Firebase (yapılandırma dart-define / native dosyalar ile; sırlar koda gömülmez)
+  firebase_core: ^4.15.0
+  firebase_auth: ^6.7.0
+  cloud_firestore: ^6.10.0
+  firebase_crashlytics: ^5.4.0
+  firebase_analytics: ^12.6.0
+  google_sign_in: ^7.2.0
+  mobile_scanner: ^7.4.2
+  # 13.x pulls permission_handler_android 14.x (AGP 9 / built-in Kotlin).
+  # This app is on Flutter 3.41 + AGP 8.11; stay on 12.x until Flutter 3.44+.
+  permission_handler: ^12.0.3
+  speech_to_text: ^7.3.0
+  url_launcher: ^6.3.2
+  health: 13.3.2
+
+  # --- Sonraki aşamalarda eklenecek paketler (henüz bağlanmadı) ---
+  # firebase_storage, firebase_messaging,
+  # purchases_flutter (RevenueCat),
+  # fl_chart,
+  # flutter_secure_storage
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - assets/images/
+    - assets/icons/

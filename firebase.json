@@ -1,0 +1,34 @@
+{
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "diyet-programi-46db4",
+          "appId": "1:121756173045:android:02278f82648fd5452abbbc",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "diyet-programi-46db4",
+          "appId": "1:121756173045:ios:87bd3d61c5ea52272abbbc",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "diyet-programi-46db4",
+          "configurations": {
+            "android": "1:121756173045:android:02278f82648fd5452abbbc",
+            "ios": "1:121756173045:ios:87bd3d61c5ea52272abbbc"
+          }
+        }
+      }
+    }
+  }
+}

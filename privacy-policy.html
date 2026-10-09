@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gizlilik Politikası — Diyet Programı</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f6f7f4;
+      --card: #ffffff;
+      --text: #1c241c;
+      --muted: #4d5a4e;
+      --line: #d9e0d8;
+      --accent: #1f6b45;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121612;
+        --card: #1b211c;
+        --text: #e8eee8;
+        --muted: #b7c3b8;
+        --line: #2d382f;
+        --accent: #8dceab;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    main {
+      max-width: 42rem;
+      margin: 0 auto;
+      padding: 1.25rem 1rem 3rem;
+    }
+    header, section {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      margin-bottom: 0.85rem;
+    }
+    h1 { font-size: 1.55rem; line-height: 1.25; margin: 0 0 0.4rem; }
+    h2 { font-size: 1.12rem; margin: 0 0 0.55rem; color: var(--accent); }
+    p, li { font-size: 1rem; }
+    p { margin: 0.45rem 0; }
+    ul { margin: 0.35rem 0 0.2rem; padding-left: 1.15rem; }
+    li { margin: 0.28rem 0; }
+    .meta { color: var(--muted); font-size: 0.95rem; margin: 0; }
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Gizlilik Politikası</h1>
+    <p class="meta">Uygulama: Diyet Programı</p>
+    <p class="meta">Son güncelleme ve yürürlük tarihi: 6 Ekim 2026</p>
+    <p>Bu metin, uygulamanın bu sürümündeki kodun gerçekten yaptığı işlemleri anlatır. Uygulamada olmayan bir hizmet veya veri kullanımı burada varmış gibi yazılmamıştır.</p>
+  </header>
+
+  <section>
+    <h2>1. Kapsam</h2>
+    <p>Bu politika, Diyet Programı mobil uygulamasını kapsar. Uygulama hesap, beslenme kaydı, tarif, plan, su, kilo, ölçüm, oruç, hatırlatma ve isteğe bağlı yapay zeka özellikleri sunar.</p>
+    <p>Uygulama tıbbi tanı koymaz. Doktorun veya diyetisyenin yerine geçmez. Yapay zeka cevapları profesyonel sağlık tavsiyesi değildir.</p>
+  </section>
+
+  <section>
+    <h2>2. Toplanan ve işlenen veriler</h2>
+    <p>Veriler üç yerde durabilir: cihazınızda, Firebase hesabınıza bağlı Firestore kayıtlarında ve bir özelliği kullandığınızda ilgili üçüncü taraf hizmette. Hangi verinin nereye gittiği aşağıdaki bölümlerde ayrılmıştır.</p>
+    <p>Uygulama reklam kimliği izni istemez. Konum, rehber, satın alma kartı veya RevenueCat ödeme kaydı toplamaz. <code>purchases_flutter</code> ve Firebase Storage bu sürümde bağlı değildir.</p>
+  </section>
+
+  <section>
+    <h2>3. Hesap bilgileri</h2>
+    <p>Firebase kullanılabilir olduğunda oturum Firebase Authentication ile açılır. Uygulama şu yolları kullanır:</p>
+    <ul>
+      <li>E-posta ve şifre. Şifre sıfırlama e-postası Firebase üzerinden gönderilebilir.</li>
+      <li>Google ile giriş. Firebase kullanıcısında e-posta, görünen ad ve profil fotoğrafı bağlantısı bulunabilir.</li>
+      <li>Misafir (anonim) giriş. Bu oturumda e-posta olmayabilir; bir kullanıcı kimliği (uid) oluşur.</li>
+    </ul>
+    <p>Bu sürümde Apple ile giriş sunulmaz. Kimlik servisi Apple oturumunu tamamlamaz; Apple hesabından veri alınmaz.</p>
+    <p>Kayıt sırasında isteğe bağlı görünen ad Firebase Authentication profiline yazılır. E-posta adresi kullanıcı profili belgesinin alanı değildir; oturum kaydında tutulur.</p>
+    <p>Onboarding sırasında ad da sorulabilir. Bu ad, profil belgesindeki ad alanına yazılır ve aşağıda anlatılan profil kaydıyla birlikte saklanır.</p>
+  </section>
+
+  <section>
+    <h2>4. Beslenme ve sizin girdiğiniz veriler</h2>
+    <p>Profil belgesi cihazda tutulur. Firebase bağlıysa <code>users/{uid}</code> altına senkron edilir. Alanlar şunlardır: ad, yaş, cinsiyet, boy, güncel kilo, başlangıç kilosu, hedef kilo, aktivite düzeyi, egzersiz sıklığı, hedef, diyet tipi, alerjiler, sevilmeyen yiyecekler, öğün sayısı, kahvaltı tercihi, su hedefi, oruç tercihi, yeme penceresi, hedef tarih ve hesaplanan kalori ile protein, karbonhidrat ve yağ hedefleri.</p>
+    <p>Onboarding yaş adımı 16 yaşından küçük bir değeri kabul etmez.</p>
+    <p>Aşağıdaki kayıtlar önce cihazda durur. Firebase bağlıysa aynı kullanıcının Firestore alt koleksiyonlarına senkron kuyruğu ile yazılabilir:</p>
+    <ul>
+      <li>Öğün kayıtları (yiyecek adı, miktar, öğün tipi, besin değerleri)</li>
+      <li>Su kayıtları</li>
+      <li>Kilo kayıtları ve kısa not</li>
+      <li>Vücut ölçümleri (bel, kalça, göğüs, boyun, kol, bacak, yağ oranı)</li>
+      <li>Öğün planı ve alışveriş listesi</li>
+      <li>Kalori ve makro hedef geçmişi</li>
+      <li>Oruç oturumları</li>
+      <li>Özel yiyecekler, favoriler ve son kullanılanlar</li>
+      <li>Sizin tarifleriniz, favori tarifler ve son tarifler</li>
+      <li>Hatırlatma tercihleri (açık veya kapalı, saat, su aralığı, uyku aralığı)</li>
+    </ul>
+    <p>Gün özeti ekranı bu kayıtlardan uygulamada hesaplanır. Ayrı bir günlük özet belgesi bu sürümde yazılmaz.</p>
+    <p>Hatırlatmalar cihazdaki yerel bildirimlerle planlanır. Anlık bildirim (Firebase Cloud Messaging) bu sürümde yoktur.</p>
+    <p>Bu kayıtlar Analytics olaylarına eklenmez. Analytics yalnızca olay adı ve sınırlı teknik parametre gönderir; ayrıntı Firebase bölümündedir.</p>
+  </section>
+
+  <section>
+    <h2>5. Sağlık ve aktivite verileri</h2>
+    <p>Android’de Health Connect, iOS’ta HealthKit üzerinden yalnızca okuma istenir. Okunan ölçüler: adım, mesafe, aktif kalori ve antrenman özeti. Antrenman özetinden adım, süre, mesafe ve aktif kalori türetilebilir. Kilo, su, uyku ve nabız bu bağlantıdan okunmaz.</p>
+    <p>Uygulama Health Connect veya HealthKit’e yazmaz. Yazma çağrısı platforma gitmez.</p>
+    <p>Okunan aktivite özeti cihazdaki yerel önbellekte tutulur. Firestore’a ve senkron kuyruğuna yazılmaz.</p>
+    <p>Bu sağlık özeti Firebase’e gitmez. Buna karşılık, yapay zeka proxy’si yapılandırılmışsa ve aktivite ya da gün özeti sorarsanız ilgili özet o isteğe eklenebilir. Ayrıntı yapay zeka bölümündedir.</p>
+  </section>
+
+  <section>
+    <h2>6. Kamera ve fotoğraf</h2>
+    <p>Kamera üç ayrı iş için kullanılır.</p>
+    <ul>
+      <li><strong>Barkod.</strong> Kamera görüntüsü barkodu okumak için kullanılır. Fotoğraf olarak saklanmaz, Firebase Storage’a veya yapay zeka servisine gönderilmez. Okunan barkod numarası ürün aramasında kullanılır.</li>
+      <li><strong>Yiyecek fotoğrafı.</strong> Kamera veya galeriden seçilir. Geçici dosya işlem bitince silinmeye çalışılır. Fotoğraf günlüğe, Firestore’a, senkron kuyruğuna veya Firebase Storage’a yazılmaz. Yapay zeka ile tanıma yapılandırılmışsa sıkıştırılmış JPEG, o istek süresince proxy’ye gönderilir. Proxy yapılandırılmamışsa fotoğraf gönderilmez ve sahte bir sonuç üretilmez. Besin değeri, siz onayladıktan sonra uygulama içinde hesaplanır. Fotoğrafın kendisi öğün kaydına girmez.</li>
+      <li><strong>İlerleme fotoğrafı.</strong> Kamera veya galeriden alınır. Görüntü baytları bu sürümde yalnızca bellek içi depoda tutulur; uygulama kapanınca bu kopya kalmaz. Firebase Storage kullanılmaz. Tarih, depolama yolu ve varsa o andaki kilo gibi üst veri, diğer kullanıcı kayıtlarıyla birlikte cihazda ve Firebase bağlıysa Firestore’da durabilir. Bu üst veri kalıcı bir bulut fotoğraf arşivi değildir.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>7. Mikrofon ve konuşma tanıma</h2>
+    <p>Sesle yiyecek eklemek için mikrofon ve <code>speech_to_text</code> kullanılır. Uygulama tanınan metni alır ve bu metni cihazda ayrıştırır. Uygulama ses dosyasını kaydetmez, Firebase’e yüklemez ve yapay zeka proxy’sine ses göndermez.</p>
+    <p>Bu, işletim sisteminin konuşma tanıma hizmetinden ayrıdır. Uygulama tanımayı cihaza zorlamaz. Android veya iOS üzerindeki konuşma tanıma sağlayıcısı, sesi kendi hizmetinde işleyebilir. Bu işlem uygulamanın kaydettiği bir dosya değildir ve sağlayıcının kendi kurallarına tabidir.</p>
+  </section>
+
+  <section>
+    <h2>8. Yapay zeka özellikleri</h2>
+    <p>Asistan ve yiyecek fotoğrafı tanıma, ancak derlemede geçerli bir yapay zeka proxy adresi varsa o adrese istek atar. Adres boşsa veya örnek bir adres ise istek gönderilmez ve uygulama başarılı bir yapay zeka cevabı uydurmaz.</p>
+    <p>İstek, oturum açıksa Firebase kimlik jetonu ile gider. Sağlayıcı anahtarı uygulamada tutulmaz.</p>
+    <p>Asistan, sorunuzu ve o soru için gerekli sınırlı bağlamı gönderir. Her istekte tüm geçmişiniz gitmez.</p>
+    <ul>
+      <li>Gün özeti sorusunda: bugünkü kalori ve makro özeti, su özeti, aktivite özeti, sınırlı profil dilimi ve bugün kaydedilen öğün adları ile kalorileri.</li>
+      <li>Aktivite sorusunda: bilinen adım, mesafe, aktif kalori ve antrenman sayısı. Bu özet cihazdan okunur; Firebase’deki bir sağlık kaydı değildir.</li>
+      <li>Su sorusunda: bugünkü su miktarı ve su hedefi.</li>
+      <li>Öğün, tarif, plan veya protein sorusunda: ilgili besin özeti, plan satırları veya en fazla birkaç tarif adayı (kimlik, başlık, kalori, protein, öğün tipi) ve sınırlı profil dilimi.</li>
+      <li>Profil dilimi şunları içerebilir: yaş, cinsiyet, boy, kilo, hedef kilo, aktivite, hedef, diyet, alerji, sevilmeyen yiyecekler, öğün sayısı, kahvaltı tercihi, su hedefi, oruç tercihi ve kalori ile makro hedefleri. Ad ve e-posta bu dilime konmaz.</li>
+      <li>Kapsamı ayrılmayan bir soruda esas olarak soru metni gider. Soru metninde sizin yazdığınız her şey bu isteğin parçasıdır.</li>
+    </ul>
+    <p>Kilo, ölçüm, oruç, plan değişimi ve hedefin aşılmasıyla ilgili bazı cevaplar cihazda hesaplanır ve bu hesap için proxy çağrılmaz.</p>
+    <p>Yapay zeka şu kayıtlara doğrudan yazamaz: günlük özeti, öğün kaydı, su kaydı, kilo, planlanan öğün, alışveriş listesi ve kalori veya makro hedefleri. Dönebilecek eylemler yalnızca ilgili ekranı açmak veya katalogdaki bir tarifi önermektir. Öğün kaydı, siz onayladığınızda uygulama tarafından yazılır.</p>
+    <p>Sohbet geçmişi yalnızca cihazda tutulur. Firebase koleksiyonlarına ve senkron kuyruğuna yazılmaz. Proxy’den gelen cevap, sohbet satırı olarak bu yerel geçmişe eklenebilir. Ayrı bir istek veya cevap arşivi tutulmaz.</p>
+  </section>
+
+  <section>
+    <h2>9. Üçüncü taraf hizmetler</h2>
+    <p>Bu sürümde veri işleyebilen hizmetler şunlardır:</p>
+    <ul>
+      <li>Firebase Authentication, Cloud Firestore, Firebase Analytics ve Firebase Crashlytics. Ayrıntı sonraki bölümde.</li>
+      <li>Google ile giriş (Google Sign-In), bu yöntemi seçerseniz.</li>
+      <li>Open Food Facts, yiyecek araması ve barkod için.</li>
+      <li>Sizin yapılandırdığınız yapay zeka proxy’si, özellik kullanılırsa ve adres geçerliyse.</li>
+      <li>İşletim sisteminin konuşma tanıma sağlayıcısı, sesle ekleme kullanılırsa.</li>
+      <li>Health Connect veya HealthKit, sağlık verisini bağlamayı seçerseniz. Uygulama bu platformlara yazmaz.</li>
+    </ul>
+    <p>Her hizmet kendi saklama süresini kendisi belirler. Bu uygulama, Firebase, Google, Open Food Facts, proxy işletmecisi veya konuşma tanıma sağlayıcısı adına sabit bir yıl süresi ilan etmez.</p>
+  </section>
+
+  <section>
+    <h2>10. Firebase</h2>
+    <p>Firebase projesi başlatılabildiğinde Authentication ve Firestore kullanılır. Firestore kuralları, <code>users/{uid}</code> altındaki belgeleri oturumdaki kullanıcının kendisiyle sınırlar.</p>
+    <p>Firebase Storage kullanılmaz. Fotoğraflar Firebase Storage’a yüklenmez.</p>
+    <p>Analytics, <code>ENABLE_ANALYTICS</code> açık ve Firebase kullanılabilir olduğunda açılır. Üretim yapılandırma dosyasında bu bayrak açıktır. Uygulama olay adı ve ekran adı gönderir. Parametreler oturum yöntemi (e-posta, Google veya misafir), barkodün bulunup bulunmadığı gibi teknik sonuç, tarif ekranı kaynağı ve abonelik ekranındaki özellik veya ürün kimliği ile sınırlıdır. Öğün içeriği, kilo, boy, alerji veya sağlık ölçümü bu olaylara yazılmaz. Analytics kullanıcı kimliği olarak Firebase uid atanabilir. SDK’nın kendi otomatik cihaz ve kullanım alanları Google’ın Firebase Analytics davranışına bağlıdır; uygulama bu alanları ayrıca seçmez.</p>
+    <p>Crashlytics, <code>ENABLE_CRASH_REPORTING</code> açık ve Firebase kullanılabilir olduğunda açılır. Üretim yapılandırma dosyasında bu bayrak açıktır. Yakalanan Flutter hataları ve ciddi platform hataları, yığın izi ile gönderilebilir. Kullanıcı kimliği olarak Firebase uid atanabilir. Beslenme, kilo, boy veya profil alanları bu kayıtlara bilinçli olarak eklenmez.</p>
+    <p>Bu iki bayrak kapalıysa ilgili Firebase servisi bağlanmaz. Geliştirme derlemesinde sahte servisler açıksa Analytics ve Crashlytics de bağlanmaz. Yayın derlemesinde sahte servisler kapatılır.</p>
+  </section>
+
+  <section>
+    <h2>11. Open Food Facts</h2>
+    <p>Örnek veya boş bir yiyecek veritabanı adresi yerine <a href="https://world.openfoodfacts.org">Open Food Facts</a> kullanılır. Uygulama ürün arar, barkodla ürün okur ve dönen ad, marka ve besin bilgisini gösterir. Arayüzde Open Food Facts atfı ve lisans bağlantısı vardır. Veri ODbL ile sunulur.</p>
+    <p>İsteklere hesap jetonu, e-posta veya profil eklenmez. Giden bilgi arama metni, barkod, dil ve uygulamanın User-Agent bilgisidir. İletişim e-postası yapılandırmada boşsa User-Agent e-posta içermez.</p>
+    <p>Ürün cevapları cihazda önbelleğe alınır (arama yaklaşık 15 dakika, ürün yaklaşık 7 gün, en fazla 200 ürün). Bu önbellek Firebase’e senkron edilmez.</p>
+  </section>
+
+  <section>
+    <h2>12. Veri saklama</h2>
+    <p>Profil ve senkron edilen beslenme kayıtları, hesap durduğu sürece cihazda ve Firebase bağlıysa Firestore’da tutulur. Hesabı sildiğinizde aşağıdaki silme adımları çalışır.</p>
+    <p>Sağlık önbelleği, sohbet ve bildirim planı cihazdadır. Uygulama bunlar için sabit bir yıl süresi koymaz.</p>
+    <p>Yiyecek fotoğrafı ve ses dosyası kalıcı kayıt değildir. İlerleme fotoğrafının görüntü baytları oturum belleğindedir.</p>
+    <p>Üçüncü tarafların kopyaları kendi politikalarına göre durabilir. Bu metin o süreleri uygulamanın süresi gibi göstermez.</p>
+  </section>
+
+  <section>
+    <h2>13. Veri paylaşımı ve aktarım</h2>
+    <p>Uygulama verinizi reklam ağlarına satmaz. Aktarım, özelliğin çalışması için yukarıda sayılan hizmetlerle sınırlıdır.</p>
+    <p>Firestore’ya giden kayıtlar sizin kullanıcı belgeniz altındadır. Open Food Facts’e hesap verisi gitmez. Sağlık platformundan okunan ölçüler Firestore’a gitmez; yapılandırılmış asistan isteğinde, ilgili soru sorulduğunda özet gidebilir.</p>
+  </section>
+
+  <section>
+    <h2>14. Yapay zeka proxy aktarımı</h2>
+    <p>Proxy adresi yapılandırılmışsa, asistan sorusu veya yiyecek fotoğrafı tanıması sırasında sınırlı içerik bu HTTPS adresine gider. Fotoğraf isteği görüntünün base64 JPEG halini, türünü ve dil kodunu içerir. Asistan isteği soru metnini ve 8. bölümdeki bağlamı içerir. Oturum varsa Firebase kimlik jetonu da eklenir.</p>
+    <p>Proxy yapılandırılmamışsa bu aktarım yapılmaz.</p>
+    <p>Proxy’yi işleten tarafın saklama süresi bu uygulamanın süresi değildir. Uygulama, proxy işletmecisinin adını veya e-postasını bu yapılandırmada tutmaz.</p>
+  </section>
+
+  <section>
+    <h2>15. Veri güvenliği</h2>
+    <p>Firestore kuralları, bir kullanıcının başka kullanıcının <code>users/{uid}</code> belgelerini okuyup yazmasını engellemek üzere yazılmıştır. Ağ istekleri yapılandırılmış proxy ve Open Food Facts için HTTPS adreslerine gider.</p>
+    <p>Kimlik jetonu yapay zeka proxy isteğine eklenebilir. Yiyecek veritabanı isteğine eklenmez. Sağlayıcı anahtarları istemciye konmaz.</p>
+  </section>
+
+  <section>
+    <h2>16. Hesap silme</h2>
+    <p>Hesabı sildiğinizde uygulama önce bekleyen senkronu durdurmayı bekler, sonra buluttaki kullanıcı verisini silmeye çalışır. Silinen bulut yolları <code>users/{uid}</code> belgesi ve bu belgenin altındaki kilo, ölçüm, ilerleme fotoğrafı üst verisi, su, öğün, plan, alışveriş listesi, hedef geçmişi, oruç, özel yiyecek, favori, son kullanılanlar, tarif ve bildirim tercihi koleksiyonlarıdır.</p>
+    <p>Bulut silme başarısız olursa ve hesap daha önce silinmiş işaretlenmemişse Firebase Authentication hesabı silinmez. Yüklemeler yeniden açılır. İşlemi tekrar deneyebilirsiniz.</p>
+    <p>Bulut silme başarılı olursa hesap, yeniden yükleme yapılmasın diye cihazda işaretlenir, bu kullanıcıya ait senkron kuyruğu atılır ve ancak bundan sonra Authentication hesabı silinir. Authentication silme başarısız olursa yerel temizlik yapılmaz; yükleme engeli durur ve silme yeniden denenebilir.</p>
+    <p>Authentication silindikten sonra aynı koleksiyonların cihaz kopyası, yerel sohbet, profil anahtarı, onboarding taslağı (ad, yaş, boy, kilo, hedef kilo ve diğer cevaplar), bildirim ayarı ve planı, reddedilen kalori hedefi, sağlık önbelleği ve sağlık bağlantı işaretleri silinir. Yerel hatırlatmalar iptal edilmeye çalışılır.</p>
+    <p>Tema, dil tercihi ve Open Food Facts ürün önbelleği (genel katalog; kullanıcı hesabı içermez) bu silme listesinde yoktur. İlerleme fotoğrafının bellek kopyası süreç kapanınca zaten düşer; buluttaki görüntü dosyası yoktur.</p>
+  </section>
+
+  <section>
+    <h2>17. Kullanıcı hakları</h2>
+    <p>Hesabınızı uygulama içinden silebilirsiniz. Profil ve kayıtlar, hesap dururken uygulama içinde düzenlenebilir.</p>
+    <p>Analytics veya Crashlytics toplama bayrakları derleme yapılandırmasındadır. Uygulama içinde ayrı bir analytics anahtarı yoktur.</p>
+    <p>Sağlık verisini Health Connect veya Apple Health üzerinden bağlamayı siz seçersiniz. İzni işletim sistemi ayarlarından da kapatabilirsiniz. Uygulama bu platformlardaki özgün kayıtları silmez; sildiği kopya cihazdaki kendi önbelleğidir.</p>
+  </section>
+
+  <section>
+    <h2>18. Çocukların gizliliği</h2>
+    <p>Uygulama çocuklara yönelik değildir. Onboarding yaş adımı 16’dan küçük değeri kabul etmez. Bu, kimlik belgesiyle yapılan bir yaş doğrulaması değildir.</p>
+  </section>
+
+  <section>
+    <h2>19. Politika değişiklikleri</h2>
+    <p>Metin değişirse bu sayfadaki tarih güncellenir. Uygulamanın ayrıca bir politika duyuru bildirimi yoktur. Mağaza ve uygulama içi bağlantı aynı sayfayı açar.</p>
+  </section>
+
+  <section>
+    <h2>20. İletişim</h2>
+    <p>Yayınlanmış bir iletişim e-postası yoktur. Boş veya örnek bir adres bu sayfada gösterilmez. Gerçek bir adres yapılandırıldığında burada yer alır.</p>
+  </section>
+
+  <section>
+    <h2>21. Yürürlük</h2>
+    <p>Bu metin 6 Ekim 2026 tarihinde yürürlüğe girer. Anlatılan davranış, bu tarihteki uygulama koduna göredir.</p>
+  </section>
+</main>
+</body>
+</html>
