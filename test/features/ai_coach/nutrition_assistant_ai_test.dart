@@ -32,7 +32,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../helpers/test_profile.dart';
 
 void main() {
-  test('release sahte asistanı kapatır, örnek adres yapılandırma sayılmaz', () {
+  test('proxy yokken yerel kural asistanı seçilir, örnek adres sayılmaz', () {
     expect(
       AppConfig.resolveUseFakeServices(
         requestedFakeServices: true,
@@ -42,15 +42,16 @@ void main() {
     );
     final unconfigured = _config(useFakeServices: false, proxy: 'https://ai.example.com');
     expect(unconfigured.isAiProxyConfigured, isFalse);
+    const local = _FakeAssistant();
     final selected = selectNutritionAssistantService(
       config: unconfigured,
-      fake: const _FakeAssistant(),
+      fake: local,
       ai: const UnavailableAiNutritionService(),
       loadRecipes: (_) async => const [],
       loadWeek: (_) async => const [],
     );
-    expect(selected, isA<UnconfiguredNutritionAssistantService>());
-    expect(selected, isNot(isA<_FakeAssistant>()));
+    expect(identical(selected, local), isTrue);
+    expect(selected, isNot(isA<UnconfiguredNutritionAssistantService>()));
   });
 
   test('debug fake servisi yalnızca useFakeServices açıkken seçilir', () {

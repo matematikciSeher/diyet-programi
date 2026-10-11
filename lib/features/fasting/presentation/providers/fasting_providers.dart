@@ -98,15 +98,10 @@ class FastingController {
     if (saved.isFailure) return saved;
     await _resync();
     final today = _now.startOfDay;
-    await _ref
-        .read(weeklyMealPlannerProvider)
-        .retime(
-          [
-            for (final d in WeeklyMealPlanner.weekDays(today))
-              if (!d.isBefore(today)) d,
-          ],
-          MealPlanPreferences.fromProfile(updated),
-        );
+    await _ref.read(weeklyMealPlannerProvider).retime([
+      for (final d in WeeklyMealPlanner.weekDays(today))
+        if (!d.isBefore(today)) d,
+    ], MealPlanPreferences.fromProfile(updated));
     return saved;
   }
 

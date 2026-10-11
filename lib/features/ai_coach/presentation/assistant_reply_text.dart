@@ -8,6 +8,7 @@ import '../../fasting/presentation/pages/fasting_page.dart';
 import '../../progress/presentation/progress_labels.dart';
 import '../domain/models/assistant_grounded_facts.dart';
 import '../domain/models/assistant_reply.dart';
+import 'assistant_guide_text.dart';
 
 /// Yapılandırılmış yanıtı kullanıcının dilinde metne çevirir.
 abstract final class AssistantReplyText {
@@ -112,14 +113,95 @@ abstract final class AssistantReplyText {
           formatClock(remaining ?? Duration.zero),
         ),
       },
+      MacroStatusReply(:final macro, :final consumed, :final target, :final remaining) =>
+        consumed >= target
+            ? l10n.assistantMacroReached(
+                _macroName(l10n, macro),
+                g(consumed),
+                g(target),
+              )
+            : l10n.assistantMacroRemaining(
+                _macroName(l10n, macro),
+                g(consumed),
+                g(target),
+                g(remaining),
+              ),
+      DailyNutritionReply(
+        :final mealCount,
+        :final consumedCalories,
+        :final targetCalories,
+        :final proteinConsumed,
+        :final proteinTarget,
+        :final carbsConsumed,
+        :final carbsTarget,
+        :final fatConsumed,
+        :final fatTarget,
+        :final macrosRecorded,
+        :final hint,
+        :final targetBelowSafeFloor,
+      ) =>
+        [
+          l10n.assistantDailyIntro(
+            mealCount,
+            kcal(consumedCalories),
+            kcal(targetCalories),
+          ),
+          if (!macrosRecorded)
+            l10n.assistantMissingMacros
+          else ...[
+            l10n.assistantMacroLine(
+              l10n.macroProtein,
+              g(proteinConsumed),
+              g(proteinTarget),
+            ),
+            l10n.assistantMacroLine(
+              l10n.macroCarbs,
+              g(carbsConsumed),
+              g(carbsTarget),
+            ),
+            l10n.assistantMacroLine(
+              l10n.macroFat,
+              g(fatConsumed),
+              g(fatTarget),
+            ),
+          ],
+          switch (hint) {
+            DailyNutritionHint.overCalories => l10n.assistantDailyOver(
+              kcal(consumedCalories - targetCalories),
+            ),
+            DailyNutritionHint.proteinShort => l10n.assistantDailyProteinShort(
+              g(proteinConsumed),
+              g(proteinTarget),
+            ),
+            DailyNutritionHint.onTrack => l10n.assistantDailyOnTrack,
+          },
+          if (targetBelowSafeFloor) l10n.assistantDailyTargetLow,
+        ].join('\n'),
+      MissingRecordReply(:final record) => switch (record) {
+        MissingRecord.meals => l10n.assistantMissingMeals,
+        MissingRecord.macros => l10n.assistantMissingMacros,
+        MissingRecord.plan => l10n.assistantMissingPlan,
+      },
+      PlanStatusReply(:final meals) => [
+        l10n.assistantPlanHeading,
+        for (final meal in meals)
+          meal.nutrition.calories > 0
+              ? '• ${meal.mealType.label(l10n)}: ${meal.title} (${l10n.kcalValue(kcal(meal.nutrition.calories))})'
+              : '• ${meal.mealType.label(l10n)}: ${meal.title} (${l10n.assistantNutritionUnrecorded})',
+      ].join('\n'),
       SafetyReply(:final concern) => switch (concern) {
         SafetyConcern.medical => l10n.assistantSafetyMedical,
         SafetyConcern.eatingDisorder => l10n.assistantSafetyEatingDisorder,
         SafetyConcern.extremeRestriction =>
           l10n.assistantSafetyRestriction,
+        SafetyConcern.emergency => l10n.assistantSafetyEmergency,
       },
       HelpReply() => l10n.assistantHelp,
-      UnavailableAssistantReply() => l10n.assistantNotConfigured,
+      UnavailableAssistantReply(:final code) =>
+        code == AssistantErrorCodes.premiumRequired
+            ? l10n.assistantPremiumRequired
+            : l10n.assistantNotConfigured,
+      final GuideReply guide => AssistantGuideText.of(context, guide),
       AssistantFailureReply(:final code) => failureText(l10n, code),
       InterpretedReply(
         :final facts,
@@ -147,6 +229,7 @@ abstract final class AssistantReplyText {
         AssistantErrorCodes.emptyResponse => l10n.assistantEmptyResponse,
         AssistantErrorCodes.malformed => l10n.assistantMalformed,
         AssistantErrorCodes.messageTooLong => l10n.assistantMessageTooLong,
+        AssistantErrorCodes.premiumRequired => l10n.assistantPremiumRequired,
         _ => l10n.assistantUnavailable,
       };
 
@@ -282,4 +365,10 @@ abstract final class AssistantReplyText {
     if (lines.isEmpty) return l10n.assistantMissingInfo;
     return lines.join('\n');
   }
+
+  static String _macroName(AppLocalizations l10n, TrackedMacro macro) =>
+      switch (macro) {
+        TrackedMacro.carbs => l10n.macroCarbs,
+        TrackedMacro.fat => l10n.macroFat,
+      };
 }

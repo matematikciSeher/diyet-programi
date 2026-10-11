@@ -6,9 +6,10 @@ import '../../../meal_plans/domain/models/planned_meal.dart';
 import 'assistant_limits.dart';
 import 'nutrition_assistant_service.dart';
 import 'proxy_nutrition_assistant_service.dart';
-import 'unconfigured_nutrition_assistant_service.dart';
 
-/// Debug/test sahte asistanı release ve yapılandırılmamış üretimden ayırır.
+/// Yerel kural asistanı, sahte servislerde ve henüz proxy yapılandırılmamış
+/// sürümde kullanılır. Gerçek proxy adresi varsa ve sahte servisler kapalıysa
+/// istek mevcut proxy uygulamasına gider.
 NutritionAssistantService selectNutritionAssistantService({
   required AppConfig config,
   required NutritionAssistantService fake,
@@ -16,10 +17,7 @@ NutritionAssistantService selectNutritionAssistantService({
   required Future<List<Recipe>> Function(UserProfile? profile) loadRecipes,
   required Future<List<PlannedMeal>> Function(DateTime day) loadWeek,
 }) {
-  if (config.useFakeServices) return fake;
-  if (!config.isAiProxyConfigured) {
-    return const UnconfiguredNutritionAssistantService();
-  }
+  if (config.useFakeServices || !config.isAiProxyConfigured) return fake;
   return ProxyNutritionAssistantService(
     ai: ai,
     loadRecipes: loadRecipes,

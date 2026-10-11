@@ -12,6 +12,7 @@ enum AppFeature {
   waterTracking,
   foodLogging,
   basicProgress,
+  fasting,
 
   // Premium
   personalMealPlan(Entitlements.premium),
@@ -23,7 +24,6 @@ enum AppFeature {
   advancedGoals(Entitlements.premium),
   advancedReports(Entitlements.premium),
   adFree(Entitlements.premium),
-  fasting(Entitlements.premium),
   periodicReports(Entitlements.premium);
 
   const AppFeature([this.requiredEntitlement]);
@@ -35,4 +35,12 @@ enum AppFeature {
 
   static List<AppFeature> get premiumFeatures =>
       values.where((f) => f.isPremium).toList(growable: false);
+
+  /// Premium sayfasında anlatılan paket. Diğer kilitli özellikler
+  /// bu listeye eklenmez.
+  static const packageBenefits = <AppFeature>[
+    aiCoach,
+    personalMealPlan,
+    adFree,
+  ];
 }

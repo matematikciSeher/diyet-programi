@@ -5,21 +5,28 @@ import '../../../../core/errors/result.dart';
 import '../../../../shared/models/subscription_status.dart';
 import '../../../../shared/services/analytics/analytics_service.dart';
 import '../../../../shared/services/service_providers.dart';
+import '../../../../shared/services/ads/premium_ad_coordinator.dart';
 import '../../../../shared/services/subscription/subscription_service.dart';
 import '../../domain/models/app_feature.dart';
+import '../../domain/premium_access.dart';
 
 /// Özelliğe erişim kararının tek kaynağı. Durum henüz yüklenmediyse
 /// premium özellikler kilitli kabul edilir.
 final featureAccessProvider = Provider.family<bool, AppFeature>((ref, feature) {
-  final entitlement = feature.requiredEntitlement;
-  if (entitlement == null) return true;
   final status = ref.watch(subscriptionStatusProvider).value;
-  return status?.hasEntitlement(entitlement) ?? false;
+  return canAccessFeature(status, feature);
 });
 
-/// Reklam altyapısı eklendiğinde reklam gösterimi buna bağlanır.
+/// Premium reklamsız kullanım açıksa reklam yüklenmez ve gösterilmez.
 final showAdsProvider = Provider<bool>(
   (ref) => !ref.watch(featureAccessProvider(AppFeature.adFree)),
+);
+
+final premiumAdCoordinatorProvider = Provider<PremiumAdCoordinator>(
+  (ref) => PremiumAdCoordinator(
+    adsAllowed: () => ref.read(showAdsProvider),
+    backend: ref.read(adBackendProvider),
+  ),
 );
 
 final currentOfferingProvider = FutureProvider<SubscriptionOffering?>(

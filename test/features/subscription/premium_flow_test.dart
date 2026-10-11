@@ -56,7 +56,7 @@ Future<void> _tapVisible(WidgetTester tester, Finder finder) async {
 }
 
 void main() {
-  testWidgets('ücretsiz kullanıcı planı açamaz; satın alınca plan açılır', (
+  testWidgets('ücretsiz kullanıcı planı açamaz; test üyeliği planı açar', (
     tester,
   ) async {
     await _openApp(tester);
@@ -75,11 +75,16 @@ void main() {
       find.text(l10n.premiumLockedTitle(l10n.appFeaturePersonalMealPlan)),
       findsOneWidget,
     );
-    expect(find.text(l10n.paywallSavings(17)), findsOneWidget);
+    expect(find.text(l10n.appFeatureAiCoach), findsOneWidget);
+    expect(find.text(l10n.appFeatureAdFree), findsOneWidget);
+    expect(find.text(l10n.paywallSubscribe), findsNothing);
+    expect(find.text(l10n.paywallStartTrial(7)), findsNothing);
 
-    await _tapVisible(tester, find.text(l10n.paywallStartTrial(7)));
-    expect(find.text(l10n.paywallPurchaseSuccess), findsOneWidget);
-    expect(find.text(l10n.paywallActiveTitle), findsOneWidget);
+    await _tapVisible(tester, find.text(l10n.testPremiumStart));
+    await tester.tap(find.text(l10n.testPremiumConfirmAction));
+    await tester.pumpAndSettle();
+    expect(find.text(l10n.testPremiumActiveTitle), findsOneWidget);
+    expect(find.text(l10n.paywallPurchaseSuccess), findsNothing);
 
     await tester.tap(find.text(l10n.actionContinue));
     await tester.pumpAndSettle();
@@ -87,28 +92,20 @@ void main() {
     expect(find.byType(PremiumLockedPage), findsNothing);
   });
 
-  testWidgets('aylık paket seçilince deneme sunulmaz', (tester) async {
+  testWidgets('premium sayfasında fiyat ve abonelik taahhüdü yoktur', (
+    tester,
+  ) async {
     await _openApp(tester);
     await tester.tap(find.text(l10n.navPlans));
     await tester.pumpAndSettle();
     await tester.tap(find.text(l10n.premiumUnlockAction));
     await tester.pumpAndSettle();
 
-    await _tapVisible(tester, find.text(l10n.paywallPeriodMonthly));
-    expect(find.text(l10n.paywallSubscribe), findsOneWidget);
-    expect(find.text(l10n.paywallStartTrial(7)), findsNothing);
-  });
-
-  testWidgets('geri yüklenecek satın alma yoksa bilgi verilir', (tester) async {
-    await _openApp(tester);
-    await tester.tap(find.text(l10n.navPlans));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text(l10n.premiumUnlockAction));
-    await tester.pumpAndSettle();
-
-    await _tapVisible(tester, find.text(l10n.paywallRestore));
-    expect(find.text(l10n.paywallNothingToRestore), findsOneWidget);
-    expect(find.byType(PaywallPage), findsOneWidget);
+    expect(find.text(l10n.paywallPeriodMonthly), findsNothing);
+    expect(find.text(l10n.paywallSubscribe), findsNothing);
+    expect(find.text(l10n.paywallLegal), findsNothing);
+    expect(find.text(l10n.paywallRestore), findsNothing);
+    expect(find.textContaining('₺'), findsNothing);
   });
 
   testWidgets('paywall küçük telefonda taşmaz', (tester) async {

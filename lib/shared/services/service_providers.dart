@@ -7,6 +7,7 @@ import '../../core/network/dio_api_client.dart';
 import '../models/auth_session.dart';
 import '../models/auth_user.dart';
 import '../models/subscription_status.dart';
+import 'ads/ad_backend.dart';
 import 'ai/ai_nutrition_service.dart';
 import 'ai/proxy_ai_nutrition_service.dart';
 import 'analytics/analytics_service.dart';
@@ -105,6 +106,8 @@ final localNotificationServiceProvider = Provider<LocalNotificationService>(
 final subscriptionServiceProvider = Provider<SubscriptionService>(
   (ref) => const FreeTierSubscriptionService(),
 );
+
+final adBackendProvider = Provider<AdBackend>((ref) => const NoFillAdBackend());
 
 final healthDataServiceProvider = Provider<HealthDataService>((ref) {
   final config = ref.watch(appConfigProvider);

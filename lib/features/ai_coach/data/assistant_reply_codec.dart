@@ -3,6 +3,7 @@ import '../../fasting/domain/models/fasting_schedule.dart';
 import '../../meal_plans/domain/models/planned_meal.dart';
 import '../domain/models/assistant_grounded_facts.dart';
 import '../domain/models/assistant_reply.dart';
+import '../domain/models/guide_snapshot.dart';
 
 /// Sohbet kaydını yerel belgeye çevirir. Sağlayıcı sırrı veya ham istek gövdesi yok.
 abstract final class AssistantReplyCodec {
@@ -66,6 +67,49 @@ abstract final class AssistantReplyCodec {
       'concern': concern.name,
     },
     HelpReply() => {'type': 'help'},
+    MacroStatusReply(:final macro, :final consumed, :final target) => {
+      'type': 'macro',
+      'macro': macro.name,
+      'consumed': consumed,
+      'target': target,
+    },
+    DailyNutritionReply(
+      :final mealCount,
+      :final consumedCalories,
+      :final targetCalories,
+      :final proteinConsumed,
+      :final proteinTarget,
+      :final carbsConsumed,
+      :final carbsTarget,
+      :final fatConsumed,
+      :final fatTarget,
+      :final macrosRecorded,
+      :final hint,
+      :final targetBelowSafeFloor,
+    ) =>
+      {
+        'type': 'daily',
+        'mealCount': mealCount,
+        'consumedCalories': consumedCalories,
+        'targetCalories': targetCalories,
+        'proteinConsumed': proteinConsumed,
+        'proteinTarget': proteinTarget,
+        'carbsConsumed': carbsConsumed,
+        'carbsTarget': carbsTarget,
+        'fatConsumed': fatConsumed,
+        'fatTarget': fatTarget,
+        'macrosRecorded': macrosRecorded,
+        'hint': hint.name,
+        'targetBelowSafeFloor': targetBelowSafeFloor,
+      },
+    MissingRecordReply(:final record) => {
+      'type': 'missing',
+      'record': record.name,
+    },
+    PlanStatusReply(:final meals) => {
+      'type': 'plan',
+      'meals': [for (final meal in meals) meal.toJson()],
+    },
     UnavailableAssistantReply(:final code) => {
       'type': 'unavailable',
       'code': code,
@@ -88,6 +132,21 @@ abstract final class AssistantReplyCodec {
         'recipes': [for (final recipe in recipes) recipe.toJson()],
         'commentary': commentary,
         'commentarySuppressed': commentarySuppressed,
+        'actions': [for (final action in actions) action.name],
+      },
+    GuideReply(
+      :final questionId,
+      :final snapshot,
+      :final recipes,
+      :final disclaimer,
+      :final actions,
+    ) =>
+      {
+        'type': 'guide',
+        'questionId': questionId,
+        'snapshot': snapshot.toJson(),
+        'recipes': [for (final recipe in recipes) recipe.toJson()],
+        'disclaimer': disclaimer,
         'actions': [for (final action in actions) action.name],
       },
   };
@@ -143,6 +202,46 @@ abstract final class AssistantReplyCodec {
             SafetyConcern.medical,
       ),
       'help' => const HelpReply(),
+      'macro' => MacroStatusReply(
+        macro: TrackedMacro.values
+                .where((item) => item.name == json['macro'])
+                .firstOrNull ??
+            TrackedMacro.carbs,
+        consumed: d(json['consumed']) ?? 0,
+        target: d(json['target']) ?? 0,
+      ),
+      'daily' => DailyNutritionReply(
+        mealCount: i(json['mealCount']),
+        consumedCalories: d(json['consumedCalories']) ?? 0,
+        targetCalories: d(json['targetCalories']) ?? 0,
+        proteinConsumed: d(json['proteinConsumed']) ?? 0,
+        proteinTarget: d(json['proteinTarget']) ?? 0,
+        carbsConsumed: d(json['carbsConsumed']) ?? 0,
+        carbsTarget: d(json['carbsTarget']) ?? 0,
+        fatConsumed: d(json['fatConsumed']) ?? 0,
+        fatTarget: d(json['fatTarget']) ?? 0,
+        macrosRecorded: json['macrosRecorded'] == true,
+        hint: DailyNutritionHint.values
+                .where((item) => item.name == json['hint'])
+                .firstOrNull ??
+            DailyNutritionHint.onTrack,
+        targetBelowSafeFloor: json['targetBelowSafeFloor'] == true,
+      ),
+      'missing' => MissingRecordReply(
+        MissingRecord.values
+                .where((item) => item.name == json['record'])
+                .firstOrNull ??
+            MissingRecord.meals,
+        actions: json['record'] == MissingRecord.plan.name
+            ? const [AssistantAction.openPlan]
+            : const [AssistantAction.openDiary],
+      ),
+      'plan' => PlanStatusReply(
+        meals: [
+          for (final item in json['meals'] is List ? json['meals'] as List : const [])
+            if (item is Map) PlannedMeal.fromJson(Map<String, dynamic>.from(item)),
+        ],
+      ),
       'unavailable' => UnavailableAssistantReply(
         code: json['code'] as String? ?? AssistantErrorCodes.notConfigured,
       ),
@@ -161,6 +260,23 @@ abstract final class AssistantReplyCodec {
         ],
         commentary: json['commentary'] as String?,
         commentarySuppressed: json['commentarySuppressed'] == true,
+        actions: [
+          for (final name in json['actions'] is List ? json['actions'] as List : const [])
+            if (name is String)
+              ?AssistantAction.values.where((action) => action.name == name).firstOrNull,
+        ],
+      ),
+      'guide' => GuideReply(
+        questionId: json['questionId'] as String? ?? '',
+        snapshot: json['snapshot'] is Map
+            ? GuideSnapshot.fromJson(Map<String, dynamic>.from(json['snapshot'] as Map))
+            : const GuideSnapshot(),
+        recipes: [
+          for (final item in json['recipes'] is List ? json['recipes'] as List : const [])
+            if (item is Map)
+              AssistantRecipeRef.fromJson(Map<String, dynamic>.from(item)),
+        ],
+        disclaimer: json['disclaimer'] == true,
         actions: [
           for (final name in json['actions'] is List ? json['actions'] as List : const [])
             if (name is String)

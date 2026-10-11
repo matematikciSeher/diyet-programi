@@ -1,25 +1,38 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/subscription/presentation/providers/premium_providers.dart';
+import '../../features/subscription/presentation/widgets/ad_banner_slot.dart';
+import '../../shared/services/ads/ad_backend.dart';
 import '../utils/breakpoints.dart';
 import '../utils/extensions/context_extensions.dart';
 
 /// Ana sekmeli yapı. Telefonda alt [NavigationBar], tablet ve geniş
 /// ekranlarda [NavigationRail] kullanır.
-class MainShell extends StatelessWidget {
+class MainShell extends ConsumerWidget {
   const MainShell({super.key, required this.navigationShell});
 
   final StatefulNavigationShell navigationShell;
 
-  void _onSelect(int index) {
+  void _onSelect(WidgetRef ref, int index) {
+    final changed = index != navigationShell.currentIndex;
     navigationShell.goBranch(
       index,
       initialLocation: index == navigationShell.currentIndex,
     );
+    if (!changed) return;
+    unawaited(
+      ref
+          .read(premiumAdCoordinatorProvider)
+          .showInterstitial(AdPlacement.navigation),
+    );
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final destinations = [
       (Icons.today_outlined, Icons.today, l10n.navHome),
@@ -32,16 +45,22 @@ class MainShell extends StatelessWidget {
     if (Breakpoints.of(context) == WindowSize.compact) {
       return Scaffold(
         body: navigationShell,
-        bottomNavigationBar: NavigationBar(
-          selectedIndex: navigationShell.currentIndex,
-          onDestinationSelected: _onSelect,
-          destinations: [
-            for (final (icon, selected, label) in destinations)
-              NavigationDestination(
-                icon: Icon(icon),
-                selectedIcon: Icon(selected),
-                label: label,
-              ),
+        bottomNavigationBar: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const AdBannerSlot(),
+            NavigationBar(
+              selectedIndex: navigationShell.currentIndex,
+              onDestinationSelected: (index) => _onSelect(ref, index),
+              destinations: [
+                for (final (icon, selected, label) in destinations)
+                  NavigationDestination(
+                    icon: Icon(icon),
+                    selectedIcon: Icon(selected),
+                    label: label,
+                  ),
+              ],
+            ),
           ],
         ),
       );
@@ -53,7 +72,7 @@ class MainShell extends StatelessWidget {
           children: [
             NavigationRail(
               selectedIndex: navigationShell.currentIndex,
-              onDestinationSelected: _onSelect,
+              onDestinationSelected: (index) => _onSelect(ref, index),
               extended: Breakpoints.of(context) == WindowSize.expanded,
               labelType: Breakpoints.of(context) == WindowSize.expanded
                   ? NavigationRailLabelType.none
@@ -68,7 +87,14 @@ class MainShell extends StatelessWidget {
               ],
             ),
             const VerticalDivider(width: 1),
-            Expanded(child: navigationShell),
+            Expanded(
+              child: Column(
+                children: [
+                  Expanded(child: navigationShell),
+                  const AdBannerSlot(),
+                ],
+              ),
+            ),
           ],
         ),
       ),

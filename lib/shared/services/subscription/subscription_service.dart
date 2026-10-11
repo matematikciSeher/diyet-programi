@@ -93,6 +93,15 @@ abstract interface class SubscriptionService {
   Future<void> logOut();
 }
 
+/// Geliştirme ve test üyeliği. Gerçek mağaza satın alması değildir.
+///
+/// RevenueCat implementasyonu bu arayüzü uygulamaz; test düğmesi yalnızca
+/// bunu uygulayan serviste, debug derlemesinde görünür.
+abstract interface class TestMembershipControls {
+  Future<SubscriptionStatus> activateTestMembership();
+  Future<void> resetTestMembership();
+}
+
 /// RevenueCat panelindeki entitlement kimlikleri.
 abstract final class Entitlements {
   static const premium = 'premium';

@@ -640,10 +640,10 @@
   "appFeatureWaterTracking": "Water tracking",
   "appFeatureFoodLogging": "Food logging",
   "appFeatureBasicProgress": "Basic progress",
-  "appFeaturePersonalMealPlan": "Personal meal plan",
-  "appFeaturePersonalMealPlanDesc": "A daily plan built around your goal and taste.",
-  "appFeatureAiCoach": "AI nutrition coach",
-  "appFeatureAiCoachDesc": "Instant answers tailored to you.",
+  "appFeaturePersonalMealPlan": "Personalized weekly menu",
+  "appFeaturePersonalMealPlanDesc": "A 7-day menu from your calorie target, meal count, preferences and allergies.",
+  "appFeatureAiCoach": "Nutrition assistant",
+  "appFeatureAiCoachDesc": "A daily review and practical suggestions from your logged meals.",
   "appFeaturePhotoFoodAnalysis": "Photo food analysis",
   "appFeaturePhotoFoodAnalysisDesc": "Snap your plate and get its calories.",
   "appFeatureAdvancedAnalytics": "Advanced analytics",
@@ -656,8 +656,8 @@
   "appFeatureAdvancedGoalsDesc": "Customize macro and meal targets.",
   "appFeatureAdvancedReports": "Advanced reports",
   "appFeatureAdvancedReportsDesc": "Nutrition score history and detailed reports.",
-  "appFeatureAdFree": "Ad-free experience",
-  "appFeatureAdFreeDesc": "Stay focused without any ads.",
+  "appFeatureAdFree": "Ad-free use",
+  "appFeatureAdFreeDesc": "Banner, interstitial and rewarded ads stay off.",
   "appFeatureFasting": "Intermittent fasting",
   "appFeatureFastingDesc": "Fasting plans like 16:8 with a timer.",
   "appFeaturePeriodicReports": "Weekly and monthly reports",
@@ -668,10 +668,10 @@
     "placeholders": { "feature": { "type": "String" } }
   },
   "premiumUnlockAction": "Go Premium",
-  "premiumProfileSubtitle": "Unlock every feature",
+  "premiumProfileSubtitle": "Assistant, weekly menu and ad-free use",
 
   "paywallTitle": "Reach your goal faster with Premium",
-  "paywallSubtitle": "Your personal plan, AI coach and advanced reports in one subscription.",
+  "paywallSubtitle": "Nutrition assistant, a personalized weekly menu and ad-free use.",
   "paywallPeriodWeekly": "Weekly",
   "paywallPeriodMonthly": "Monthly",
   "paywallPeriodAnnual": "Yearly",
@@ -717,6 +717,17 @@
 
   "settingsSubscription": "Subscription",
   "settingsResetFakeSubscription": "Reset test subscription",
+  "testPremiumSectionTitle": "Development test",
+  "testPremiumSectionMessage": "This button does not charge a store. It unlocks Premium features on this device for development and testing only.",
+  "testPremiumStart": "Start test Premium membership",
+  "testPremiumConfirmTitle": "Start test membership?",
+  "testPremiumConfirmMessage": "This is not a real payment. Premium is activated only for development and testing. This test status is kept when you close and reopen the app.",
+  "testPremiumConfirmAction": "Start test membership",
+  "testPremiumStarted": "Test membership is on. No payment was made.",
+  "testPremiumActiveTitle": "Your Premium membership is active",
+  "testPremiumActiveMessage": "This membership is for development and testing only. It is not a real purchase or a store subscription.",
+  "testPremiumReset": "Reset test membership",
+  "testPremiumResetDone": "Test membership was reset.",
   "settingsLegal": "Legal",
   "settingsPrivacyPolicy": "Privacy Policy",
   "settingsPrivacyPolicyUnavailable": "Privacy Policy is unavailable right now.",
@@ -1062,7 +1073,7 @@
   "assistantSafetyMedical": "This needs a medical evaluation; I can't diagnose or advise on medication or treatment. Please talk to your doctor or a dietitian. I'm happy to keep helping with general nutrition questions.",
   "assistantSafetyEatingDisorder": "Thank you for sharing this. If your relationship with food feels hard, you're not alone; I'd encourage you to reach out to a doctor, psychologist or dietitian. If you feel unsafe, call your local emergency number right away.",
   "assistantSafetyRestriction": "Very low calories, skipping meals or losing weight very fast can harm your health, so I won't recommend it. A balanced plan that fits your goal works better long term. A dietitian can help with a personal program.",
-  "assistantHelp": "You can ask about: calories left, your protein goal, a suggestion for a meal, swapping a planned meal, water, weight progress or your fast.",
+  "assistantHelp": "You can ask about today's review, calories left, protein, carbohydrate and fat, a meal suggestion, swapping a planned meal, water, weight or fasting. If nothing is logged, I will say so instead of guessing.",
   "assistantNotConfigured": "The nutrition assistant is not configured right now.",
   "assistantOffline": "No internet connection. Your previous chat is still here; a new answer needs a connection.",
   "assistantTimeout": "The answer timed out. You can try again.",
@@ -1233,5 +1244,165 @@
   "confirmRegenerateWeekTitle": "Regenerate the 7-day plan?",
   "confirmRegenerateWeekMessage": "This week's meals will be rebuilt from your profile calorie and macro targets. The current plan stays until you confirm.",
   "planChangeRecipe": "Change this recipe",
-  "macroFiber": "Fiber"
+  "macroFiber": "Fiber",
+  "paywallPurchaseLater": "Real checkout is not part of this version. No price or subscription commitment is shown.",
+  "assistantMissingMeals": "There is no food log for today. Add a meal before I can review it. I will not guess.",
+  "assistantMissingMacros": "Meals are logged, but protein, carbohydrate and fat values are missing. I will not estimate those macros.",
+  "assistantMissingPlan": "There is no saved menu for today. I will not invent meals without a saved plan.",
+  "assistantDailyIntro": "You have logged {meals} meals today. {consumed} / {target} kcal.",
+  "@assistantDailyIntro": {
+    "placeholders": {
+      "meals": { "type": "int" },
+      "consumed": { "type": "String" },
+      "target": { "type": "String" }
+    }
+  },
+  "assistantDailyOver": "You are {over} kcal over your target. I will not suggest skipping a meal; a lighter next meal can fit.",
+  "@assistantDailyOver": {
+    "placeholders": { "over": { "type": "String" } }
+  },
+  "assistantDailyProteinShort": "Protein is still short ({consumed} / {target} g). You can add a protein source that fits your profile.",
+  "@assistantDailyProteinShort": {
+    "placeholders": {
+      "consumed": { "type": "String" },
+      "target": { "type": "String" }
+    }
+  },
+  "assistantDailyOnTrack": "Your logs line up with your target. This is not a medical assessment.",
+  "assistantDailyTargetLow": "The saved daily calorie target is below a general safety floor. I will not suggest a lower target.",
+  "assistantMacroReached": "{name}: {consumed} / {target} g. The saved target for this macro is met.",
+  "@assistantMacroReached": {
+    "placeholders": {
+      "name": { "type": "String" },
+      "consumed": { "type": "String" },
+      "target": { "type": "String" }
+    }
+  },
+  "assistantMacroRemaining": "{name}: {consumed} / {target} g. The logs leave {remaining} g.",
+  "@assistantMacroRemaining": {
+    "placeholders": {
+      "name": { "type": "String" },
+      "consumed": { "type": "String" },
+      "target": { "type": "String" },
+      "remaining": { "type": "String" }
+    }
+  },
+  "assistantPlanHeading": "Meals saved in today's menu:",
+  "assistantNutritionUnrecorded": "nutrition is not recorded",
+  "adBannerLabel": "Ad",
+  "assistantWelcome": "How can I help you eat in a more balanced way today?",
+  "assistantSummaryTitle": "Today's nutrition summary",
+  "assistantSummaryEmpty": "There is no meal log for today. After you add one, I can show intake, target and what is left.",
+  "assistantSummaryNoTarget": "{consumed} kcal logged. I am not calculating a remainder because a personal calorie target is not saved.",
+  "@assistantSummaryNoTarget": {
+    "placeholders": { "consumed": { "type": "String" } }
+  },
+  "assistantSummaryCalories": "{consumed} kcal logged. Target {target} kcal. {remaining} kcal left.",
+  "@assistantSummaryCalories": {
+    "placeholders": {
+      "consumed": { "type": "String" },
+      "target": { "type": "String" },
+      "remaining": { "type": "String" }
+    }
+  },
+  "assistantSummaryOver": "{consumed} kcal logged. Target {target} kcal. {over} kcal over the target.",
+  "@assistantSummaryOver": {
+    "placeholders": {
+      "consumed": { "type": "String" },
+      "target": { "type": "String" },
+      "over": { "type": "String" }
+    }
+  },
+  "assistantSummaryError": "The daily summary could not be read just now.",
+  "assistantSearchHint": "Search categories or questions",
+  "assistantSearchEmpty": "No category or question matches this search.",
+  "assistantNutritionSection": "Nutrition",
+  "assistantWellnessSection": "Healthy living",
+  "assistantSuggestedTitle": "Suggested questions",
+  "assistantQuickDaily": "Daily check",
+  "assistantQuickMeals": "Meal ideas",
+  "assistantQuickWellness": "Healthy living",
+  "assistantQuickWeek": "Weekly check",
+  "assistantBrowseTopics": "Categories",
+  "assistantClearTitle": "Clear this chat?",
+  "assistantClearBody": "The nutrition assistant conversation stored on this device will be deleted.",
+  "assistantGuideMissingMeals": "I cannot make a full check because today's meal log is missing. Add a meal in the diary and I can look again.",
+  "assistantGuideWaterMissing": "There is no water log for today. I am not guessing an amount.",
+  "assistantGuideWeekIntro": "So far this week, {logged} of {elapsed} days have a meal log.",
+  "@assistantGuideWeekIntro": {
+    "placeholders": {
+      "elapsed": { "type": "int" },
+      "logged": { "type": "int" }
+    }
+  },
+  "assistantGuideWeekDay": "{day}: {kcal} kcal.",
+  "@assistantGuideWeekDay": {
+    "placeholders": {
+      "day": { "type": "String" },
+      "kcal": { "type": "String" }
+    }
+  },
+  "assistantGuideWeekDayTarget": "{day}: {kcal} kcal, target {target} kcal.",
+  "@assistantGuideWeekDayTarget": {
+    "placeholders": {
+      "day": { "type": "String" },
+      "kcal": { "type": "String" },
+      "target": { "type": "String" }
+    }
+  },
+  "assistantGuideWeekNoMeals": "There is no meal log this week. I do not treat a missing day as poor eating.",
+  "assistantGuideWeekWater": "{amount} across {count} days with a water log.",
+  "@assistantGuideWeekWater": {
+    "placeholders": {
+      "count": { "type": "int" },
+      "amount": { "type": "String" }
+    }
+  },
+  "assistantGuideWeekWaterNone": "There is no water log this week. I am not guessing how much was drunk.",
+  "assistantGuideWeekNote": "I only use days that have records. A missing log is not poor eating.",
+  "assistantGuideMealCoverage": "Logged meal types: {logged}. Not logged: {missing}. An unlogged meal is not a verdict.",
+  "@assistantGuideMealCoverage": {
+    "placeholders": {
+      "logged": { "type": "String" },
+      "missing": { "type": "String" }
+    }
+  },
+  "assistantGuideTagsMissing": "These meal logs have no food-group tags. I will not guess which group was low.",
+  "assistantGuideTags": "Tags on the logs: {tags}. I do not judge groups that have no tag.",
+  "@assistantGuideTags": {
+    "placeholders": { "tags": { "type": "String" } }
+  },
+  "assistantGuideRecipesIntro": "Saved recipes that fit your preferences:",
+  "assistantGuideRecipesNone": "No saved recipe fits your preferences. I will not invent one.",
+  "assistantGuideRecipesEmpty": "There is no saved recipe on this device. I can show them after you add one.",
+  "assistantGuidePrefsNone": "I found no saved allergy, dislike or eating pattern. I am not assuming any.",
+  "assistantGuidePrefsKnown": "Saved details: {summary}. I will not suggest a food that conflicts with them.",
+  "@assistantGuidePrefsKnown": {
+    "placeholders": { "summary": { "type": "String" } }
+  },
+  "assistantGuidePlanEmpty": "There is no saved menu this week. I will not create or change a plan on my own.",
+  "assistantGuidePlanHeading": "Meals in the saved menu:",
+  "assistantGuideShopping": "{manual} items did not come from the plan and stay. {generated} plan rows can be refreshed. I do not delete the list.",
+  "@assistantGuideShopping": {
+    "placeholders": {
+      "manual": { "type": "int" },
+      "generated": { "type": "int" }
+    }
+  },
+  "assistantGuideShoppingEmpty": "Your shopping list is empty. Items you add by hand stay when a list is built from the weekly menu.",
+  "assistantGuideShoppingManual": "Not from the plan: {names}.",
+  "@assistantGuideShoppingManual": {
+    "placeholders": { "names": { "type": "String" } }
+  },
+  "assistantGuideDisclaimer": "This is general information. Talk with a health professional about your own health.",
+  "assistantGuideBoundary": "I cannot answer this beyond saved records and a safe general frame.",
+  "assistantGuideTips": "Practical steps:",
+  "assistantGuideNone": "none",
+  "assistantSafetyEmergency": "These symptoms can be an emergency. If you have severe chest pain, shortness of breath, fainting or sudden weakness, get emergency medical help. I cannot diagnose this.",
+  "assistantPremiumRequired": "The nutrition assistant requires Premium.",
+  "assistantDataHeading": "From your records:",
+  "assistantFoodTagVegetable": "Vegetable",
+  "assistantFoodTagFruit": "Fruit",
+  "assistantFoodTagWholeGrain": "Whole grain",
+  "assistantFoodTagProcessed": "Processed"
 }

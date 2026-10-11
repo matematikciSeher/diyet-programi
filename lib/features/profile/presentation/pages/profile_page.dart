@@ -53,7 +53,8 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final isPremium = ref.watch(isPremiumProvider);
+    final status = ref.watch(subscriptionStatusProvider).value;
+    final isPremium = status?.isPremium ?? false;
     final user = ref.watch(authStateProvider).value;
     final entries = <(String, IconData, String, AppFeature?)>[
       (
@@ -66,7 +67,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
         l10n.featureNutrition,
         Icons.pie_chart_outline_rounded,
         AppRoutes.nutritionPlan,
-        null,
+        AppFeature.personalMealPlan,
       ),
       (
         l10n.featureWeight,
@@ -90,7 +91,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
         l10n.featureFasting,
         Icons.timer_outlined,
         AppRoutes.fasting,
-        AppFeature.fasting,
+        null,
       ),
       (
         l10n.featureAiCoach,
@@ -147,7 +148,9 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                   ),
                   title: Text(l10n.featurePremium),
                   subtitle: Text(
-                    isPremium
+                    status?.isTestGrant == true
+                        ? l10n.testPremiumActiveTitle
+                        : isPremium
                         ? l10n.paywallActiveTitle
                         : l10n.premiumProfileSubtitle,
                   ),

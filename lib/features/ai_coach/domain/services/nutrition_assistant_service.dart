@@ -3,11 +3,11 @@ import '../models/assistant_reply.dart';
 
 /// Beslenme asistanı.
 ///
-/// Debug/test (`useFakeServices`) kural tabanlı sahte servisi kullanır.
-/// Release'te sahte yanıt üretilmez. Proxy adresi yoksa
-/// `AI_SERVICE_NOT_CONFIGURED` döner. Adres varsa istek, kullanıcının kimlik
-/// token'ıyla doğrulanan backend proxy'ye (`AiNutritionService`) gider;
-/// sağlayıcı anahtarı uygulamada tutulmaz.
+/// İlk sürüm, kayıtlı uygulama verisine bakan yerel kural servisini kullanır.
+/// Proxy adresi tanımlı değilse tahmin veya sahte övgü üretilmez; yanıt
+/// kayıtlardan gelir. Adres varsa ve sahte servisler kapalıysa istek,
+/// kullanıcının kimlik token'ıyla doğrulanan backend proxy'ye
+/// (`AiNutritionService`) gider; sağlayıcı anahtarı uygulamada tutulmaz.
 ///
 /// Her implementasyon güvenlik kurallarına uymalıdır: tıbbi teşhis
 /// koymaz, ilaç/doktor önerisinin yerine geçmez, aşırı kısıtlamayı veya

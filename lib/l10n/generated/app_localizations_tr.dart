@@ -2109,17 +2109,18 @@ class AppLocalizationsTr extends AppLocalizations {
   String get appFeatureBasicProgress => 'Temel ilerleme';
 
   @override
-  String get appFeaturePersonalMealPlan => 'Kişisel yemek planı';
+  String get appFeaturePersonalMealPlan => 'Kişiye Özel Haftalık Menü';
 
   @override
   String get appFeaturePersonalMealPlanDesc =>
-      'Hedefine ve damak tadına göre her gün hazırlanan plan.';
+      'Kalori hedefin, öğün sayın, tercihlerin ve alerjilerinle hazırlanan 7 günlük menü.';
 
   @override
-  String get appFeatureAiCoach => 'AI beslenme koçu';
+  String get appFeatureAiCoach => 'Beslenme Asistanı';
 
   @override
-  String get appFeatureAiCoachDesc => 'Sorularına sana özel, anında yanıtlar.';
+  String get appFeatureAiCoachDesc =>
+      'Günlük kayıtlarına göre değerlendirme ve uygulanabilir beslenme önerileri.';
 
   @override
   String get appFeaturePhotoFoodAnalysis => 'Fotoğraftan yemek analizi';
@@ -2164,10 +2165,11 @@ class AppLocalizationsTr extends AppLocalizations {
       'Beslenme skoru geçmişi ve detaylı raporlar.';
 
   @override
-  String get appFeatureAdFree => 'Reklamsız kullanım';
+  String get appFeatureAdFree => 'Reklamsız Kullanım';
 
   @override
-  String get appFeatureAdFreeDesc => 'Hiç reklam görmeden hedefine odaklan.';
+  String get appFeatureAdFreeDesc =>
+      'Banner, geçiş ve ödüllü reklamlar gösterilmez.';
 
   @override
   String get appFeatureFasting => 'Aralıklı oruç';
@@ -2191,14 +2193,15 @@ class AppLocalizationsTr extends AppLocalizations {
   String get premiumUnlockAction => 'Premium\'a geç';
 
   @override
-  String get premiumProfileSubtitle => 'Tüm özelliklerin kilidini aç';
+  String get premiumProfileSubtitle =>
+      'Asistan, haftalık menü ve reklamsız kullanım';
 
   @override
   String get paywallTitle => 'Hedefine Premium ile daha hızlı ulaş';
 
   @override
   String get paywallSubtitle =>
-      'Sana özel plan, AI koç ve gelişmiş raporlar tek abonelikte.';
+      'Beslenme asistanı, kişiye özel haftalık menü ve reklamsız kullanım.';
 
   @override
   String get paywallPeriodWeekly => 'Haftalık';
@@ -2275,6 +2278,43 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get settingsResetFakeSubscription => 'Test aboneliğini sıfırla';
+
+  @override
+  String get testPremiumSectionTitle => 'Geliştirme testi';
+
+  @override
+  String get testPremiumSectionMessage =>
+      'Bu düğme mağaza ödemesi yapmaz. Premium özellikleri yalnızca bu cihazda, geliştirme ve test amacıyla açar.';
+
+  @override
+  String get testPremiumStart => 'Test Premium Üyeliğini Başlat';
+
+  @override
+  String get testPremiumConfirmTitle => 'Test üyeliği başlatılsın mı?';
+
+  @override
+  String get testPremiumConfirmMessage =>
+      'Bu işlem gerçek bir ödeme değildir. Premium üyelik yalnızca geliştirme ve test amacıyla etkinleştirilir. Uygulama kapatılıp açıldığında bu test durumu korunur.';
+
+  @override
+  String get testPremiumConfirmAction => 'Test üyeliğini başlat';
+
+  @override
+  String get testPremiumStarted =>
+      'Test üyeliği etkinleştirildi. Gerçek bir ödeme yapılmadı.';
+
+  @override
+  String get testPremiumActiveTitle => 'Premium Üyeliğin Aktif';
+
+  @override
+  String get testPremiumActiveMessage =>
+      'Bu üyelik yalnızca geliştirme ve test içindir. Gerçek bir satın alma veya mağaza aboneliği değildir.';
+
+  @override
+  String get testPremiumReset => 'Test Üyeliğini Sıfırla';
+
+  @override
+  String get testPremiumResetDone => 'Test üyeliği sıfırlandı.';
 
   @override
   String get settingsLegal => 'Yasal';
@@ -3490,7 +3530,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get assistantHelp =>
-      'Şunları sorabilirsin: kalan kalori hakkın, protein hedefin, bir öğün için öneri, plandaki yemeği değiştirme, su, kilo ilerlemen veya oruç durumun.';
+      'Şunları sorabilirsin: bugünkü beslenme değerlendirmen, kalan kalori, protein, karbonhidrat ve yağ, bir öğün önerisi, plandaki yemeği değiştirme, su, kilo ilerlemen veya oruç durumun. Kayıt yoksa tahmin etmem.';
 
   @override
   String get assistantNotConfigured =>
@@ -4015,4 +4055,271 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get macroFiber => 'Lif';
+
+  @override
+  String get paywallPurchaseLater =>
+      'Gerçek satın alma bu sürümde yok. Fiyat veya abonelik taahhüdü gösterilmez.';
+
+  @override
+  String get assistantMissingMeals =>
+      'Bugün için beslenme kaydı yok. Değerlendirme yapmam için günlüğe bir öğün eklemen gerekir. Tahmin üretmiyorum.';
+
+  @override
+  String get assistantMissingMacros =>
+      'Öğün kaydın var ama protein, karbonhidrat ve yağ değerleri yok. Bu makroları tahmin etmiyorum.';
+
+  @override
+  String get assistantMissingPlan =>
+      'Bugün için kayıtlı bir menü yok. Kayıtlı plana dayanmadan öğün uydurmuyorum.';
+
+  @override
+  String assistantDailyIntro(int meals, String consumed, String target) {
+    return 'Bugün $meals öğün kaydın var. $consumed / $target kcal.';
+  }
+
+  @override
+  String assistantDailyOver(String over) {
+    return 'Hedefinin $over kcal üstündesin. Öğün atlamayı önermem; sıradaki öğünü daha hafif tutabilirsin.';
+  }
+
+  @override
+  String assistantDailyProteinShort(String consumed, String target) {
+    return 'Protein hedefin dolmadı ($consumed / $target g). Profiline uyan bir protein kaynağı ekleyebilirsin.';
+  }
+
+  @override
+  String get assistantDailyOnTrack =>
+      'Kayıtların hedefinle uyumlu görünüyor. Bu bir tıbbi değerlendirme değildir.';
+
+  @override
+  String get assistantDailyTargetLow =>
+      'Kayıtlı günlük kalori hedefin genel güvenlik sınırının altında. Daha düşük bir hedef önermiyorum.';
+
+  @override
+  String assistantMacroReached(String name, String consumed, String target) {
+    return '$name: $consumed / $target g. Bu makro için kayıtlı hedefe ulaşmışsın.';
+  }
+
+  @override
+  String assistantMacroRemaining(
+    String name,
+    String consumed,
+    String target,
+    String remaining,
+  ) {
+    return '$name: $consumed / $target g. Kayıtlara göre $remaining g daha var.';
+  }
+
+  @override
+  String get assistantPlanHeading => 'Bugün kayıtlı menündeki öğünler:';
+
+  @override
+  String get assistantNutritionUnrecorded => 'besin değeri kayıtlı değil';
+
+  @override
+  String get adBannerLabel => 'Reklam';
+
+  @override
+  String get assistantWelcome =>
+      'Bugün daha dengeli beslenmek için sana nasıl yardımcı olabilirim?';
+
+  @override
+  String get assistantSummaryTitle => 'Günlük beslenme özeti';
+
+  @override
+  String get assistantSummaryEmpty =>
+      'Bugün için öğün kaydı yok. Kayıt eklediğinde alınan, hedef ve kalan kaloriyi burada gösterebilirim.';
+
+  @override
+  String assistantSummaryNoTarget(String consumed) {
+    return 'Alınan $consumed kcal. Kişisel kalori hedefin kayıtlı olmadığı için kalan kaloriyi hesaplamıyorum.';
+  }
+
+  @override
+  String assistantSummaryCalories(
+    String consumed,
+    String target,
+    String remaining,
+  ) {
+    return 'Alınan $consumed kcal. Hedef $target kcal. Kalan $remaining kcal.';
+  }
+
+  @override
+  String assistantSummaryOver(String consumed, String target, String over) {
+    return 'Alınan $consumed kcal. Hedef $target kcal. Hedefin $over kcal üzerinde.';
+  }
+
+  @override
+  String get assistantSummaryError => 'Günlük özet şu anda okunamadı.';
+
+  @override
+  String get assistantSearchHint => 'Kategori veya soru ara';
+
+  @override
+  String get assistantSearchEmpty =>
+      'Bu aramayla eşleşen kategori veya soru yok.';
+
+  @override
+  String get assistantNutritionSection => 'Beslenme';
+
+  @override
+  String get assistantWellnessSection => 'Sağlıklı Yaşam';
+
+  @override
+  String get assistantSuggestedTitle => 'Önerilen sorular';
+
+  @override
+  String get assistantQuickDaily => 'Günlük değerlendirme';
+
+  @override
+  String get assistantQuickMeals => 'Öğün önerileri';
+
+  @override
+  String get assistantQuickWellness => 'Sağlıklı yaşam';
+
+  @override
+  String get assistantQuickWeek => 'Haftalık değerlendirme';
+
+  @override
+  String get assistantBrowseTopics => 'Kategoriler';
+
+  @override
+  String get assistantClearTitle => 'Sohbet temizlensin mi?';
+
+  @override
+  String get assistantClearBody =>
+      'Bu cihazdaki beslenme asistanı konuşması silinir.';
+
+  @override
+  String get assistantGuideMissingMeals =>
+      'Bugünkü öğün kayıtların eksik olduğu için tam bir değerlendirme yapamıyorum. Günlüğe bir öğün ekleyince buradan bakabilirim.';
+
+  @override
+  String get assistantGuideWaterMissing =>
+      'Bugün için su kaydı yok. Miktarı tahmin etmiyorum.';
+
+  @override
+  String assistantGuideWeekIntro(int elapsed, int logged) {
+    return 'Bu hafta bugüne kadar $elapsed günün $logged gününde öğün kaydı var.';
+  }
+
+  @override
+  String assistantGuideWeekDay(String day, String kcal) {
+    return '$day: $kcal kcal.';
+  }
+
+  @override
+  String assistantGuideWeekDayTarget(String day, String kcal, String target) {
+    return '$day: $kcal kcal, hedef $target kcal.';
+  }
+
+  @override
+  String get assistantGuideWeekNoMeals =>
+      'Bu hafta için öğün kaydı yok. Kayıt olmayan günleri başarısızlık saymıyorum.';
+
+  @override
+  String assistantGuideWeekWater(int count, String amount) {
+    return 'Su kaydı olan $count günde toplam $amount.';
+  }
+
+  @override
+  String get assistantGuideWeekWaterNone =>
+      'Bu hafta su kaydı yok. İçilen miktarı tahmin etmiyorum.';
+
+  @override
+  String get assistantGuideWeekNote =>
+      'Yalnızca kayıtlı günleri değerlendiriyorum. Eksik kayıt yanlış beslenme değildir.';
+
+  @override
+  String assistantGuideMealCoverage(String logged, String missing) {
+    return 'Kayıtlı öğün türleri: $logged. Kaydı olmayanlar: $missing. Kaydı olmayan öğünü yanlış beslenme saymıyorum.';
+  }
+
+  @override
+  String get assistantGuideTagsMissing =>
+      'Öğün kayıtlarında besin grubu etiketi yok. Hangi grubu az tükettiğini tahmin etmiyorum.';
+
+  @override
+  String assistantGuideTags(String tags) {
+    return 'Kayıtlardaki etiketler: $tags. Etiketi olmayan gruplar hakkında kesin konuşmuyorum.';
+  }
+
+  @override
+  String get assistantGuideRecipesIntro =>
+      'Kayıtlı tariflerden tercihlerine uygun olanlar:';
+
+  @override
+  String get assistantGuideRecipesNone =>
+      'Kayıtlı tariflerde tercihlerine uyan bir sonuç bulamadım. Var olmayan tarif yazmıyorum.';
+
+  @override
+  String get assistantGuideRecipesEmpty =>
+      'Bu cihazda kayıtlı tarif yok. Tarif ekleyince buradan gösterebilirim.';
+
+  @override
+  String get assistantGuidePrefsNone =>
+      'Kayıtlı alerji, sevmediğin besin veya beslenme düzeni bulamadım. Bunları varsaymıyorum.';
+
+  @override
+  String assistantGuidePrefsKnown(String summary) {
+    return 'Kayıtlı bilgiler: $summary. Bunlarla çelişen bir besin önermem.';
+  }
+
+  @override
+  String get assistantGuidePlanEmpty =>
+      'Bu hafta için kayıtlı menü yok. Planı kendiliğimden oluşturmam veya değiştirmem.';
+
+  @override
+  String get assistantGuidePlanHeading => 'Kayıtlı menüdeki öğünler:';
+
+  @override
+  String assistantGuideShopping(int manual, int generated) {
+    return 'Plandan gelmeyen $manual ürün durur. Plan kaynaklı $generated satır, liste yenilenirken güncellenebilir. Ben listeyi silmem.';
+  }
+
+  @override
+  String get assistantGuideShoppingEmpty =>
+      'Kayıtlı alışveriş listen boş. Haftalık menüden liste oluşturduğunda elle eklediğin ürünler durur.';
+
+  @override
+  String assistantGuideShoppingManual(String names) {
+    return 'Plandan gelmeyenler: $names.';
+  }
+
+  @override
+  String get assistantGuideDisclaimer =>
+      'Bu bilgi genel bilgilendirme amaçlıdır; kişisel sağlık durumun için bir sağlık profesyoneline danışmalısın.';
+
+  @override
+  String get assistantGuideBoundary =>
+      'Bu soruyu kayıtlı bilgiler ve güvenli genel çerçeve dışında yanıtlayamıyorum.';
+
+  @override
+  String get assistantGuideTips => 'Uygulanabilecek genel adımlar:';
+
+  @override
+  String get assistantGuideNone => 'yok';
+
+  @override
+  String get assistantSafetyEmergency =>
+      'Bu belirtiler acil olabilir. Şiddetli göğüs ağrısı, nefes darlığı, bayılma veya ani güçsüzlük varsa acil tıbbi yardım al. Teşhis koyamam.';
+
+  @override
+  String get assistantPremiumRequired =>
+      'Beslenme asistanı Premium üyelik gerektirir.';
+
+  @override
+  String get assistantDataHeading => 'Kayıtlı verin:';
+
+  @override
+  String get assistantFoodTagVegetable => 'Sebze';
+
+  @override
+  String get assistantFoodTagFruit => 'Meyve';
+
+  @override
+  String get assistantFoodTagWholeGrain => 'Tam tahıl';
+
+  @override
+  String get assistantFoodTagProcessed => 'İşlenmiş';
 }

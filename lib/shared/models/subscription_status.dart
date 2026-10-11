@@ -16,6 +16,7 @@ class SubscriptionStatus extends Equatable {
     this.isInTrial = false,
     this.productId,
     this.managementUrl,
+    this.isTestGrant = false,
   });
 
   static const free = SubscriptionStatus(tier: SubscriptionTier.free);
@@ -30,6 +31,9 @@ class SubscriptionStatus extends Equatable {
   /// Mağazanın abonelik yönetim sayfası (iptal / plan değişikliği).
   final String? managementUrl;
 
+  /// Geliştirme amaçlı yerel test üyeliği. Mağaza satın alması değildir.
+  final bool isTestGrant;
+
   bool get isPremium => tier == SubscriptionTier.premium;
 
   bool hasEntitlement(String id) => activeEntitlements.contains(id);
@@ -43,5 +47,6 @@ class SubscriptionStatus extends Equatable {
     isInTrial,
     productId,
     managementUrl,
+    isTestGrant,
   ];
 }

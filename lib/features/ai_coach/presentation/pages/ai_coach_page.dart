@@ -8,14 +8,15 @@ import '../../../../core/routing/app_routes.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/utils/extensions/context_extensions.dart';
 import '../../../../core/widgets/responsive_center.dart';
-import '../../../../core/widgets/state_views.dart';
 import '../../../../l10n/generated/app_localizations.dart';
 import '../../../../shared/models/enums.dart';
 import '../../../../shared/repositories/user_profile_repository.dart';
+import '../../domain/catalog/assistant_catalog.dart';
 import '../../domain/models/assistant_grounded_facts.dart';
 import '../../domain/models/assistant_reply.dart';
 import '../assistant_reply_text.dart';
 import '../providers/assistant_providers.dart';
+import '../widgets/assistant_browse.dart';
 
 /// Beslenme Asistanı: kullanıcının profil, günlük, su, kilo, ölçüm, plan
 /// ve oruç verisine göre yanıt verir. Tıbbi tavsiye vermez.
@@ -29,11 +30,17 @@ class AiCoachPage extends ConsumerStatefulWidget {
 class _AiCoachPageState extends ConsumerState<AiCoachPage> {
   final _scroll = ScrollController();
   final _input = TextEditingController();
+  final _search = TextEditingController();
+  final _categoryKeys = <String, GlobalKey>{};
+  var _browse = true;
+  var _query = '';
+  String? _openCategoryId;
 
   @override
   void dispose() {
     _scroll.dispose();
     _input.dispose();
+    _search.dispose();
     super.dispose();
   }
 
@@ -42,7 +49,31 @@ class _AiCoachPageState extends ConsumerState<AiCoachPage> {
     if (value.isEmpty) return;
     _input.clear();
     ref.read(assistantChatProvider.notifier).send(value);
+    if (mounted) setState(() => _browse = false);
   }
+
+  void _ask(AssistantQuestion question) {
+    final turkish = Localizations.localeOf(context).languageCode == 'tr';
+    _send(turkish ? question.tr : question.en);
+  }
+
+  void _openCategory(String id) {
+    setState(() {
+      _browse = true;
+      _query = '';
+      _search.clear();
+      _openCategoryId = id;
+    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final target = _categoryKeys[id]?.currentContext;
+      if (target != null) {
+        Scrollable.ensureVisible(target, alignment: 0.1);
+      }
+    });
+  }
+
+  GlobalKey _categoryKey(String id) =>
+      _categoryKeys.putIfAbsent(id, GlobalKey.new);
 
   void _scrollToEnd() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -60,10 +91,16 @@ class _AiCoachPageState extends ConsumerState<AiCoachPage> {
     final l10n = context.l10n;
     final chat = ref.watch(assistantChatProvider);
     final profile = ref.watch(userProfileProvider).value;
-    ref.listen(
-      assistantChatProvider.select((s) => s.messages.length),
-      (_, _) => _scrollToEnd(),
-    );
+    ref.listen(assistantChatProvider, (previous, next) {
+      if (previous?.messages.length != next.messages.length) _scrollToEnd();
+      final restored =
+          (previous == null || !previous.historyReady) &&
+          next.historyReady &&
+          next.messages.isNotEmpty;
+      if (restored && _browse) {
+        setState(() => _browse = false);
+      }
+    });
     final suggestions = assistantQuickPrompts(l10n, profile?.goal);
 
     return Scaffold(
@@ -71,6 +108,15 @@ class _AiCoachPageState extends ConsumerState<AiCoachPage> {
       appBar: AppBar(
         title: Text(l10n.featureAiCoach),
         actions: [
+          if (!_browse || chat.messages.isNotEmpty)
+            IconButton(
+              tooltip: l10n.assistantBrowseTopics,
+              icon: Icon(_browse ? Icons.forum_outlined : Icons.grid_view_outlined),
+              onPressed: () {
+                setState(() => _browse = !_browse);
+                if (_browse) ref.invalidate(assistantTodayProvider);
+              },
+            ),
           IconButton(
             tooltip: l10n.assistantPrivacyTitle,
             icon: const Icon(Icons.info_outline),
@@ -80,9 +126,7 @@ class _AiCoachPageState extends ConsumerState<AiCoachPage> {
             IconButton(
               tooltip: l10n.assistantClear,
               icon: const Icon(Icons.delete_sweep_outlined),
-              onPressed: chat.busy
-                  ? null
-                  : () => ref.read(assistantChatProvider.notifier).clear(),
+              onPressed: chat.busy ? null : () => _confirmClear(context),
             ),
         ],
       ),
@@ -91,19 +135,26 @@ class _AiCoachPageState extends ConsumerState<AiCoachPage> {
           Expanded(
             child: !chat.historyReady
                 ? const Center(child: CircularProgressIndicator())
-                : chat.messages.isEmpty
-                ? EmptyStateView(
-                    icon: Icons.auto_awesome_outlined,
-                    title: l10n.assistantEmptyTitle,
-                    message: l10n.assistantEmptyMessage,
+                : _browse
+                ? ResponsiveCenter(
+                    child: AssistantBrowse(
+                      query: _query,
+                      openCategoryId: _openCategoryId,
+                      searchController: _search,
+                      categoryKey: _categoryKey,
+                      busy: chat.busy,
+                      onQuery: (value) => setState(() => _query = value),
+                      onToggleCategory: (id) => setState(() {
+                        _openCategoryId = _openCategoryId == id ? null : id;
+                      }),
+                      onQuick: _openCategory,
+                      onAsk: _ask,
+                    ),
                   )
                 : ListView(
                     controller: _scroll,
-                    keyboardDismissBehavior:
-                        ScrollViewKeyboardDismissBehavior.onDrag,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: AppSpacing.lg,
-                    ),
+                    keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                    padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
                     children: [
                       ResponsiveCenter(
                         child: Column(
@@ -122,9 +173,7 @@ class _AiCoachPageState extends ConsumerState<AiCoachPage> {
                                     label: l10n.assistantThinking,
                                     child: const SizedBox.square(
                                       dimension: 20,
-                                      child: CircularProgressIndicator(
-                                        strokeWidth: 2,
-                                      ),
+                                      child: CircularProgressIndicator(strokeWidth: 2),
                                     ),
                                   ),
                                 ),
@@ -150,21 +199,20 @@ class _AiCoachPageState extends ConsumerState<AiCoachPage> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    SizedBox(
-                      height: 40,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: suggestions.length,
-                        separatorBuilder: (_, _) => AppSpacing.gapSm,
-                        itemBuilder: (context, i) => ActionChip(
-                          label: Text(suggestions[i]),
-                          onPressed: chat.busy
-                              ? null
-                              : () => _send(suggestions[i]),
+                    if (!_browse)
+                      SizedBox(
+                        height: 40,
+                        child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: suggestions.length,
+                          separatorBuilder: (_, _) => AppSpacing.gapSm,
+                          itemBuilder: (context, i) => ActionChip(
+                            label: Text(suggestions[i]),
+                            onPressed: chat.busy ? null : () => _send(suggestions[i]),
+                          ),
                         ),
                       ),
-                    ),
-                    AppSpacing.gapSm,
+                    if (!_browse) AppSpacing.gapSm,
                     Row(
                       children: [
                         Expanded(
@@ -204,6 +252,34 @@ class _AiCoachPageState extends ConsumerState<AiCoachPage> {
         ],
       ),
     );
+  }
+
+  Future<void> _confirmClear(BuildContext context) async {
+    final l10n = context.l10n;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.assistantClearTitle),
+        content: Text(l10n.assistantClearBody),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text(l10n.actionCancel),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text(l10n.assistantClear),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true || !mounted) return;
+    await ref.read(assistantChatProvider.notifier).clear();
+    if (!mounted) return;
+    setState(() {
+      _browse = true;
+      _openCategoryId = null;
+    });
   }
 
   void _showPrivacy(BuildContext context) {
@@ -263,6 +339,11 @@ class _Bubble extends ConsumerWidget {
         l10n.featureRecipes,
         Icons.soup_kitchen_outlined,
       ),
+      AssistantAction.openWater => (l10n.featureWater, Icons.water_drop_outlined),
+      AssistantAction.openShopping => (
+        l10n.featureShoppingList,
+        Icons.shopping_basket_outlined,
+      ),
     };
   }
 
@@ -272,6 +353,8 @@ class _Bubble extends ConsumerWidget {
     AssistantAction.openWeight => AppRoutes.weight,
     AssistantAction.openFasting => AppRoutes.fasting,
     AssistantAction.openRecipes => AppRoutes.recipes,
+    AssistantAction.openWater => AppRoutes.water,
+    AssistantAction.openShopping => AppRoutes.shoppingList,
   };
 
   @override
@@ -293,7 +376,11 @@ class _Bubble extends ConsumerWidget {
         reply.actions,
         reply is SafetyReply,
         reply is AssistantFailureReply && reply.canRetry ? reply.question : null,
-        reply is InterpretedReply ? reply.recipes : const <AssistantRecipeRef>[],
+        reply is InterpretedReply
+            ? reply.recipes
+            : reply is GuideReply
+            ? reply.recipes
+            : const <AssistantRecipeRef>[],
       ),
       AssistantErrorMessage(:final code, :final question) => (
         AssistantReplyText.failureText(l10n, code),

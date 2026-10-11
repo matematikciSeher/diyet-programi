@@ -55,6 +55,48 @@ abstract final class AssistantSafety {
     'crash diet',
   ];
 
+  static const _emergency = [
+    'göğüs ağr',
+    'gogus agr',
+    'nefes dar',
+    'nefesi dar',
+    'nefesim dar',
+    'bayıl',
+    'bayil',
+    'bayıld',
+    'bayildi',
+    'ani güçsüz',
+    'ani gucsuz',
+    'chest pain',
+    'shortness of breath',
+    'short of breath',
+    "can't breathe",
+    'cannot breathe',
+    'fainting',
+    'i fainted',
+    'passed out',
+    'sudden weakness',
+  ];
+
+  static const _dose = [
+    'kaç mg',
+    'kac mg',
+    'kaç iu',
+    'kac iu',
+    'mg almal',
+    'mg almali',
+    'dozunu değiş',
+    'dozunu degis',
+    'doz değiş',
+    'doz degis',
+    'ilaç doz',
+    'ilac doz',
+    'takviye doz',
+    'how many mg',
+    'what dose',
+    'supplement dose',
+  ];
+
   static const _medical = [
     'hastalı',
     'teşhis',
@@ -88,10 +130,15 @@ abstract final class AssistantSafety {
 
   static final _kcalAmount = RegExp(r'(\d{2,4})\s*(kcal|kalori|calorie)');
 
-  static SafetyConcern? check(String normalized) {
+  /// Acil belirti, yeme bozukluğu, aşırı kısıtlama ve doz soruları.
+  /// Katalogdaki genel bilgilendirme soruları bu süzgeçten geçer;
+  /// geniş tıbbi kelime listesi yalnızca serbest metinde kullanılır.
+  static SafetyConcern? checkUrgent(String normalized) {
     bool any(List<String> words) => words.any(normalized.contains);
+    if (any(_emergency)) return SafetyConcern.emergency;
     if (any(_eatingDisorder)) return SafetyConcern.eatingDisorder;
     if (any(_extremeRestriction)) return SafetyConcern.extremeRestriction;
+    if (any(_dose)) return SafetyConcern.medical;
     for (final m in _kcalAmount.allMatches(normalized)) {
       final value = int.parse(m.group(1)!);
       final aboutDaily =
@@ -103,6 +150,12 @@ abstract final class AssistantSafety {
         return SafetyConcern.extremeRestriction;
       }
     }
+    return null;
+  }
+
+  static SafetyConcern? check(String normalized) {
+    if (checkUrgent(normalized) case final concern?) return concern;
+    bool any(List<String> words) => words.any(normalized.contains);
     if (any(_medical)) return SafetyConcern.medical;
     return null;
   }

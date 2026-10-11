@@ -2115,17 +2115,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appFeatureBasicProgress => 'Basic progress';
 
   @override
-  String get appFeaturePersonalMealPlan => 'Personal meal plan';
+  String get appFeaturePersonalMealPlan => 'Personalized weekly menu';
 
   @override
   String get appFeaturePersonalMealPlanDesc =>
-      'A daily plan built around your goal and taste.';
+      'A 7-day menu from your calorie target, meal count, preferences and allergies.';
 
   @override
-  String get appFeatureAiCoach => 'AI nutrition coach';
+  String get appFeatureAiCoach => 'Nutrition assistant';
 
   @override
-  String get appFeatureAiCoachDesc => 'Instant answers tailored to you.';
+  String get appFeatureAiCoachDesc =>
+      'A daily review and practical suggestions from your logged meals.';
 
   @override
   String get appFeaturePhotoFoodAnalysis => 'Photo food analysis';
@@ -2169,10 +2170,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'Nutrition score history and detailed reports.';
 
   @override
-  String get appFeatureAdFree => 'Ad-free experience';
+  String get appFeatureAdFree => 'Ad-free use';
 
   @override
-  String get appFeatureAdFreeDesc => 'Stay focused without any ads.';
+  String get appFeatureAdFreeDesc =>
+      'Banner, interstitial and rewarded ads stay off.';
 
   @override
   String get appFeatureFasting => 'Intermittent fasting';
@@ -2196,14 +2198,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get premiumUnlockAction => 'Go Premium';
 
   @override
-  String get premiumProfileSubtitle => 'Unlock every feature';
+  String get premiumProfileSubtitle => 'Assistant, weekly menu and ad-free use';
 
   @override
   String get paywallTitle => 'Reach your goal faster with Premium';
 
   @override
   String get paywallSubtitle =>
-      'Your personal plan, AI coach and advanced reports in one subscription.';
+      'Nutrition assistant, a personalized weekly menu and ad-free use.';
 
   @override
   String get paywallPeriodWeekly => 'Weekly';
@@ -2279,6 +2281,43 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsResetFakeSubscription => 'Reset test subscription';
+
+  @override
+  String get testPremiumSectionTitle => 'Development test';
+
+  @override
+  String get testPremiumSectionMessage =>
+      'This button does not charge a store. It unlocks Premium features on this device for development and testing only.';
+
+  @override
+  String get testPremiumStart => 'Start test Premium membership';
+
+  @override
+  String get testPremiumConfirmTitle => 'Start test membership?';
+
+  @override
+  String get testPremiumConfirmMessage =>
+      'This is not a real payment. Premium is activated only for development and testing. This test status is kept when you close and reopen the app.';
+
+  @override
+  String get testPremiumConfirmAction => 'Start test membership';
+
+  @override
+  String get testPremiumStarted =>
+      'Test membership is on. No payment was made.';
+
+  @override
+  String get testPremiumActiveTitle => 'Your Premium membership is active';
+
+  @override
+  String get testPremiumActiveMessage =>
+      'This membership is for development and testing only. It is not a real purchase or a store subscription.';
+
+  @override
+  String get testPremiumReset => 'Reset test membership';
+
+  @override
+  String get testPremiumResetDone => 'Test membership was reset.';
 
   @override
   String get settingsLegal => 'Legal';
@@ -3501,7 +3540,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get assistantHelp =>
-      'You can ask about: calories left, your protein goal, a suggestion for a meal, swapping a planned meal, water, weight progress or your fast.';
+      'You can ask about today\'s review, calories left, protein, carbohydrate and fat, a meal suggestion, swapping a planned meal, water, weight or fasting. If nothing is logged, I will say so instead of guessing.';
 
   @override
   String get assistantNotConfigured =>
@@ -4026,4 +4065,272 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get macroFiber => 'Fiber';
+
+  @override
+  String get paywallPurchaseLater =>
+      'Real checkout is not part of this version. No price or subscription commitment is shown.';
+
+  @override
+  String get assistantMissingMeals =>
+      'There is no food log for today. Add a meal before I can review it. I will not guess.';
+
+  @override
+  String get assistantMissingMacros =>
+      'Meals are logged, but protein, carbohydrate and fat values are missing. I will not estimate those macros.';
+
+  @override
+  String get assistantMissingPlan =>
+      'There is no saved menu for today. I will not invent meals without a saved plan.';
+
+  @override
+  String assistantDailyIntro(int meals, String consumed, String target) {
+    return 'You have logged $meals meals today. $consumed / $target kcal.';
+  }
+
+  @override
+  String assistantDailyOver(String over) {
+    return 'You are $over kcal over your target. I will not suggest skipping a meal; a lighter next meal can fit.';
+  }
+
+  @override
+  String assistantDailyProteinShort(String consumed, String target) {
+    return 'Protein is still short ($consumed / $target g). You can add a protein source that fits your profile.';
+  }
+
+  @override
+  String get assistantDailyOnTrack =>
+      'Your logs line up with your target. This is not a medical assessment.';
+
+  @override
+  String get assistantDailyTargetLow =>
+      'The saved daily calorie target is below a general safety floor. I will not suggest a lower target.';
+
+  @override
+  String assistantMacroReached(String name, String consumed, String target) {
+    return '$name: $consumed / $target g. The saved target for this macro is met.';
+  }
+
+  @override
+  String assistantMacroRemaining(
+    String name,
+    String consumed,
+    String target,
+    String remaining,
+  ) {
+    return '$name: $consumed / $target g. The logs leave $remaining g.';
+  }
+
+  @override
+  String get assistantPlanHeading => 'Meals saved in today\'s menu:';
+
+  @override
+  String get assistantNutritionUnrecorded => 'nutrition is not recorded';
+
+  @override
+  String get adBannerLabel => 'Ad';
+
+  @override
+  String get assistantWelcome =>
+      'How can I help you eat in a more balanced way today?';
+
+  @override
+  String get assistantSummaryTitle => 'Today\'s nutrition summary';
+
+  @override
+  String get assistantSummaryEmpty =>
+      'There is no meal log for today. After you add one, I can show intake, target and what is left.';
+
+  @override
+  String assistantSummaryNoTarget(String consumed) {
+    return '$consumed kcal logged. I am not calculating a remainder because a personal calorie target is not saved.';
+  }
+
+  @override
+  String assistantSummaryCalories(
+    String consumed,
+    String target,
+    String remaining,
+  ) {
+    return '$consumed kcal logged. Target $target kcal. $remaining kcal left.';
+  }
+
+  @override
+  String assistantSummaryOver(String consumed, String target, String over) {
+    return '$consumed kcal logged. Target $target kcal. $over kcal over the target.';
+  }
+
+  @override
+  String get assistantSummaryError =>
+      'The daily summary could not be read just now.';
+
+  @override
+  String get assistantSearchHint => 'Search categories or questions';
+
+  @override
+  String get assistantSearchEmpty =>
+      'No category or question matches this search.';
+
+  @override
+  String get assistantNutritionSection => 'Nutrition';
+
+  @override
+  String get assistantWellnessSection => 'Healthy living';
+
+  @override
+  String get assistantSuggestedTitle => 'Suggested questions';
+
+  @override
+  String get assistantQuickDaily => 'Daily check';
+
+  @override
+  String get assistantQuickMeals => 'Meal ideas';
+
+  @override
+  String get assistantQuickWellness => 'Healthy living';
+
+  @override
+  String get assistantQuickWeek => 'Weekly check';
+
+  @override
+  String get assistantBrowseTopics => 'Categories';
+
+  @override
+  String get assistantClearTitle => 'Clear this chat?';
+
+  @override
+  String get assistantClearBody =>
+      'The nutrition assistant conversation stored on this device will be deleted.';
+
+  @override
+  String get assistantGuideMissingMeals =>
+      'I cannot make a full check because today\'s meal log is missing. Add a meal in the diary and I can look again.';
+
+  @override
+  String get assistantGuideWaterMissing =>
+      'There is no water log for today. I am not guessing an amount.';
+
+  @override
+  String assistantGuideWeekIntro(int elapsed, int logged) {
+    return 'So far this week, $logged of $elapsed days have a meal log.';
+  }
+
+  @override
+  String assistantGuideWeekDay(String day, String kcal) {
+    return '$day: $kcal kcal.';
+  }
+
+  @override
+  String assistantGuideWeekDayTarget(String day, String kcal, String target) {
+    return '$day: $kcal kcal, target $target kcal.';
+  }
+
+  @override
+  String get assistantGuideWeekNoMeals =>
+      'There is no meal log this week. I do not treat a missing day as poor eating.';
+
+  @override
+  String assistantGuideWeekWater(int count, String amount) {
+    return '$amount across $count days with a water log.';
+  }
+
+  @override
+  String get assistantGuideWeekWaterNone =>
+      'There is no water log this week. I am not guessing how much was drunk.';
+
+  @override
+  String get assistantGuideWeekNote =>
+      'I only use days that have records. A missing log is not poor eating.';
+
+  @override
+  String assistantGuideMealCoverage(String logged, String missing) {
+    return 'Logged meal types: $logged. Not logged: $missing. An unlogged meal is not a verdict.';
+  }
+
+  @override
+  String get assistantGuideTagsMissing =>
+      'These meal logs have no food-group tags. I will not guess which group was low.';
+
+  @override
+  String assistantGuideTags(String tags) {
+    return 'Tags on the logs: $tags. I do not judge groups that have no tag.';
+  }
+
+  @override
+  String get assistantGuideRecipesIntro =>
+      'Saved recipes that fit your preferences:';
+
+  @override
+  String get assistantGuideRecipesNone =>
+      'No saved recipe fits your preferences. I will not invent one.';
+
+  @override
+  String get assistantGuideRecipesEmpty =>
+      'There is no saved recipe on this device. I can show them after you add one.';
+
+  @override
+  String get assistantGuidePrefsNone =>
+      'I found no saved allergy, dislike or eating pattern. I am not assuming any.';
+
+  @override
+  String assistantGuidePrefsKnown(String summary) {
+    return 'Saved details: $summary. I will not suggest a food that conflicts with them.';
+  }
+
+  @override
+  String get assistantGuidePlanEmpty =>
+      'There is no saved menu this week. I will not create or change a plan on my own.';
+
+  @override
+  String get assistantGuidePlanHeading => 'Meals in the saved menu:';
+
+  @override
+  String assistantGuideShopping(int manual, int generated) {
+    return '$manual items did not come from the plan and stay. $generated plan rows can be refreshed. I do not delete the list.';
+  }
+
+  @override
+  String get assistantGuideShoppingEmpty =>
+      'Your shopping list is empty. Items you add by hand stay when a list is built from the weekly menu.';
+
+  @override
+  String assistantGuideShoppingManual(String names) {
+    return 'Not from the plan: $names.';
+  }
+
+  @override
+  String get assistantGuideDisclaimer =>
+      'This is general information. Talk with a health professional about your own health.';
+
+  @override
+  String get assistantGuideBoundary =>
+      'I cannot answer this beyond saved records and a safe general frame.';
+
+  @override
+  String get assistantGuideTips => 'Practical steps:';
+
+  @override
+  String get assistantGuideNone => 'none';
+
+  @override
+  String get assistantSafetyEmergency =>
+      'These symptoms can be an emergency. If you have severe chest pain, shortness of breath, fainting or sudden weakness, get emergency medical help. I cannot diagnose this.';
+
+  @override
+  String get assistantPremiumRequired =>
+      'The nutrition assistant requires Premium.';
+
+  @override
+  String get assistantDataHeading => 'From your records:';
+
+  @override
+  String get assistantFoodTagVegetable => 'Vegetable';
+
+  @override
+  String get assistantFoodTagFruit => 'Fruit';
+
+  @override
+  String get assistantFoodTagWholeGrain => 'Whole grain';
+
+  @override
+  String get assistantFoodTagProcessed => 'Processed';
 }

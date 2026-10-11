@@ -18,6 +18,7 @@ import '../../../../shared/models/nutrition_facts.dart';
 import '../../../../shared/presentation/enum_labels.dart';
 import '../../../../shared/services/service_providers.dart';
 import '../../../nutrition/presentation/widgets/plan_meal_sheets.dart';
+import '../../../shopping/presentation/providers/shopping_list_providers.dart';
 import '../../../recipes/data/repositories/recipe_repository_impl.dart';
 import '../../data/repositories/meal_plan_repository_impl.dart';
 import '../../domain/models/planned_meal.dart';
@@ -35,6 +36,28 @@ class MealPlansPage extends ConsumerStatefulWidget {
 
 class _MealPlansPageState extends ConsumerState<MealPlansPage> {
   var _busy = false;
+  String? _syncedPlanKey;
+
+  @override
+  void initState() {
+    super.initState();
+    ref.listenManual(weeklyMealPlanProvider, (previous, next) {
+      final meals = next.asData?.value;
+      if (meals == null) return;
+      _syncShopping(meals);
+    }, fireImmediately: true);
+  }
+
+  void _syncShopping(List<PlannedMeal> meals) {
+    if (meals.isEmpty || ref.read(currentUserIdProvider) == null) return;
+    final key = [
+      for (final meal in meals)
+        '${meal.id}|${meal.recipeId}|${meal.portionFactor}|${meal.nutrition.calories}',
+    ].join(';');
+    if (key == _syncedPlanKey) return;
+    _syncedPlanKey = key;
+    ref.read(shoppingListActionsProvider).syncWeek(meals).ignore();
+  }
 
   Future<void> _regenerate(List<PlannedMeal> current) async {
     final l10n = context.l10n;

@@ -116,11 +116,14 @@ Future<void> bootstrap() async {
         crashReportingServiceProvider.overrideWithValue(
           FirebaseCrashReportingService(),
         ),
-      if (config.useFakeServices)
+      // Release'te FreeTier kalır. Debug/profile yerel test üyeliği kullanır;
+      // sahte mağaza fiyatları yalnızca USE_FAKE_SERVICES ile gösterilir.
+      if (!kReleaseMode)
         subscriptionServiceProvider.overrideWith((ref) {
           final service = FakeSubscriptionService(
             storage,
             clock: ref.watch(clockProvider),
+            exposeOfferings: config.useFakeServices,
           );
           ref.onDispose(service.dispose);
           return service;

@@ -1007,10 +1007,10 @@
   "appFeatureWaterTracking": "Su takibi",
   "appFeatureFoodLogging": "Yemek ekleme",
   "appFeatureBasicProgress": "Temel ilerleme",
-  "appFeaturePersonalMealPlan": "Kişisel yemek planı",
-  "appFeaturePersonalMealPlanDesc": "Hedefine ve damak tadına göre her gün hazırlanan plan.",
-  "appFeatureAiCoach": "AI beslenme koçu",
-  "appFeatureAiCoachDesc": "Sorularına sana özel, anında yanıtlar.",
+  "appFeaturePersonalMealPlan": "Kişiye Özel Haftalık Menü",
+  "appFeaturePersonalMealPlanDesc": "Kalori hedefin, öğün sayın, tercihlerin ve alerjilerinle hazırlanan 7 günlük menü.",
+  "appFeatureAiCoach": "Beslenme Asistanı",
+  "appFeatureAiCoachDesc": "Günlük kayıtlarına göre değerlendirme ve uygulanabilir beslenme önerileri.",
   "appFeaturePhotoFoodAnalysis": "Fotoğraftan yemek analizi",
   "appFeaturePhotoFoodAnalysisDesc": "Tabağının fotoğrafını çek, kalorisi hesaplansın.",
   "appFeatureAdvancedAnalytics": "Gelişmiş analizler",
@@ -1023,8 +1023,8 @@
   "appFeatureAdvancedGoalsDesc": "Makro ve öğün hedeflerini kişiselleştir.",
   "appFeatureAdvancedReports": "Gelişmiş raporlar",
   "appFeatureAdvancedReportsDesc": "Beslenme skoru geçmişi ve detaylı raporlar.",
-  "appFeatureAdFree": "Reklamsız kullanım",
-  "appFeatureAdFreeDesc": "Hiç reklam görmeden hedefine odaklan.",
+  "appFeatureAdFree": "Reklamsız Kullanım",
+  "appFeatureAdFreeDesc": "Banner, geçiş ve ödüllü reklamlar gösterilmez.",
   "appFeatureFasting": "Aralıklı oruç",
   "appFeatureFastingDesc": "16:8 gibi oruç planları ve zamanlayıcı.",
   "appFeaturePeriodicReports": "Haftalık ve aylık raporlar",
@@ -1035,10 +1035,10 @@
     "placeholders": { "feature": { "type": "String" } }
   },
   "premiumUnlockAction": "Premium'a geç",
-  "premiumProfileSubtitle": "Tüm özelliklerin kilidini aç",
+  "premiumProfileSubtitle": "Asistan, haftalık menü ve reklamsız kullanım",
 
   "paywallTitle": "Hedefine Premium ile daha hızlı ulaş",
-  "paywallSubtitle": "Sana özel plan, AI koç ve gelişmiş raporlar tek abonelikte.",
+  "paywallSubtitle": "Beslenme asistanı, kişiye özel haftalık menü ve reklamsız kullanım.",
   "paywallPeriodWeekly": "Haftalık",
   "paywallPeriodMonthly": "Aylık",
   "paywallPeriodAnnual": "Yıllık",
@@ -1084,6 +1084,17 @@
 
   "settingsSubscription": "Abonelik",
   "settingsResetFakeSubscription": "Test aboneliğini sıfırla",
+  "testPremiumSectionTitle": "Geliştirme testi",
+  "testPremiumSectionMessage": "Bu düğme mağaza ödemesi yapmaz. Premium özellikleri yalnızca bu cihazda, geliştirme ve test amacıyla açar.",
+  "testPremiumStart": "Test Premium Üyeliğini Başlat",
+  "testPremiumConfirmTitle": "Test üyeliği başlatılsın mı?",
+  "testPremiumConfirmMessage": "Bu işlem gerçek bir ödeme değildir. Premium üyelik yalnızca geliştirme ve test amacıyla etkinleştirilir. Uygulama kapatılıp açıldığında bu test durumu korunur.",
+  "testPremiumConfirmAction": "Test üyeliğini başlat",
+  "testPremiumStarted": "Test üyeliği etkinleştirildi. Gerçek bir ödeme yapılmadı.",
+  "testPremiumActiveTitle": "Premium Üyeliğin Aktif",
+  "testPremiumActiveMessage": "Bu üyelik yalnızca geliştirme ve test içindir. Gerçek bir satın alma veya mağaza aboneliği değildir.",
+  "testPremiumReset": "Test Üyeliğini Sıfırla",
+  "testPremiumResetDone": "Test üyeliği sıfırlandı.",
   "settingsLegal": "Yasal",
   "settingsPrivacyPolicy": "Gizlilik Politikası",
   "settingsPrivacyPolicyUnavailable": "Gizlilik Politikası şu anda açılamıyor.",
@@ -1657,7 +1668,7 @@
   "assistantSafetyMedical": "Bu konu tıbbi bir değerlendirme gerektiriyor; teşhis koyamam veya ilaç ve tedavi hakkında öneri veremem. Lütfen doktoruna ya da bir diyetisyene danış. Genel beslenme sorularında yardımcı olmaya devam edebilirim.",
   "assistantSafetyEatingDisorder": "Bunu paylaştığın için teşekkürler. Yemekle ilişkin seni zorluyorsa yalnız değilsin; bu konuda bir doktor, psikolog veya diyetisyenden destek almanı öneririm. Kendini güvende hissetmiyorsan hemen 112'yi arayabilirsin.",
   "assistantSafetyRestriction": "Aşırı düşük kalori, öğün atlama veya çok hızlı kilo verme sağlığına zarar verebilir; bunu önermem. Sürdürülebilir ilerleme için hedefine uygun, dengeli bir plan daha etkilidir. Kişisel bir program için bir diyetisyene danışabilirsin.",
-  "assistantHelp": "Şunları sorabilirsin: kalan kalori hakkın, protein hedefin, bir öğün için öneri, plandaki yemeği değiştirme, su, kilo ilerlemen veya oruç durumun.",
+  "assistantHelp": "Şunları sorabilirsin: bugünkü beslenme değerlendirmen, kalan kalori, protein, karbonhidrat ve yağ, bir öğün önerisi, plandaki yemeği değiştirme, su, kilo ilerlemen veya oruç durumun. Kayıt yoksa tahmin etmem.",
   "assistantNotConfigured": "Beslenme asistanı şu anda yapılandırılmamış.",
   "assistantOffline": "İnternet bağlantısı yok. Önceki sohbetin duruyor; yeni bir yanıt için bağlantı gerekir.",
   "assistantTimeout": "Yanıt zaman aşımına uğradı. Tekrar deneyebilirsin.",
@@ -1866,5 +1877,165 @@
   "confirmRegenerateWeekTitle": "7 günlük planı yenilemek istiyor musun?",
   "confirmRegenerateWeekMessage": "Bu haftanın öğünleri profilindeki kalori ve makro hedeflerine göre yeniden oluşturulur. Onaylamadan mevcut plan değişmez.",
   "planChangeRecipe": "Bu tarifi değiştir",
-  "macroFiber": "Lif"
+  "macroFiber": "Lif",
+  "paywallPurchaseLater": "Gerçek satın alma bu sürümde yok. Fiyat veya abonelik taahhüdü gösterilmez.",
+  "assistantMissingMeals": "Bugün için beslenme kaydı yok. Değerlendirme yapmam için günlüğe bir öğün eklemen gerekir. Tahmin üretmiyorum.",
+  "assistantMissingMacros": "Öğün kaydın var ama protein, karbonhidrat ve yağ değerleri yok. Bu makroları tahmin etmiyorum.",
+  "assistantMissingPlan": "Bugün için kayıtlı bir menü yok. Kayıtlı plana dayanmadan öğün uydurmuyorum.",
+  "assistantDailyIntro": "Bugün {meals} öğün kaydın var. {consumed} / {target} kcal.",
+  "@assistantDailyIntro": {
+    "placeholders": {
+      "meals": { "type": "int" },
+      "consumed": { "type": "String" },
+      "target": { "type": "String" }
+    }
+  },
+  "assistantDailyOver": "Hedefinin {over} kcal üstündesin. Öğün atlamayı önermem; sıradaki öğünü daha hafif tutabilirsin.",
+  "@assistantDailyOver": {
+    "placeholders": { "over": { "type": "String" } }
+  },
+  "assistantDailyProteinShort": "Protein hedefin dolmadı ({consumed} / {target} g). Profiline uyan bir protein kaynağı ekleyebilirsin.",
+  "@assistantDailyProteinShort": {
+    "placeholders": {
+      "consumed": { "type": "String" },
+      "target": { "type": "String" }
+    }
+  },
+  "assistantDailyOnTrack": "Kayıtların hedefinle uyumlu görünüyor. Bu bir tıbbi değerlendirme değildir.",
+  "assistantDailyTargetLow": "Kayıtlı günlük kalori hedefin genel güvenlik sınırının altında. Daha düşük bir hedef önermiyorum.",
+  "assistantMacroReached": "{name}: {consumed} / {target} g. Bu makro için kayıtlı hedefe ulaşmışsın.",
+  "@assistantMacroReached": {
+    "placeholders": {
+      "name": { "type": "String" },
+      "consumed": { "type": "String" },
+      "target": { "type": "String" }
+    }
+  },
+  "assistantMacroRemaining": "{name}: {consumed} / {target} g. Kayıtlara göre {remaining} g daha var.",
+  "@assistantMacroRemaining": {
+    "placeholders": {
+      "name": { "type": "String" },
+      "consumed": { "type": "String" },
+      "target": { "type": "String" },
+      "remaining": { "type": "String" }
+    }
+  },
+  "assistantPlanHeading": "Bugün kayıtlı menündeki öğünler:",
+  "assistantNutritionUnrecorded": "besin değeri kayıtlı değil",
+  "adBannerLabel": "Reklam",
+  "assistantWelcome": "Bugün daha dengeli beslenmek için sana nasıl yardımcı olabilirim?",
+  "assistantSummaryTitle": "Günlük beslenme özeti",
+  "assistantSummaryEmpty": "Bugün için öğün kaydı yok. Kayıt eklediğinde alınan, hedef ve kalan kaloriyi burada gösterebilirim.",
+  "assistantSummaryNoTarget": "Alınan {consumed} kcal. Kişisel kalori hedefin kayıtlı olmadığı için kalan kaloriyi hesaplamıyorum.",
+  "@assistantSummaryNoTarget": {
+    "placeholders": { "consumed": { "type": "String" } }
+  },
+  "assistantSummaryCalories": "Alınan {consumed} kcal. Hedef {target} kcal. Kalan {remaining} kcal.",
+  "@assistantSummaryCalories": {
+    "placeholders": {
+      "consumed": { "type": "String" },
+      "target": { "type": "String" },
+      "remaining": { "type": "String" }
+    }
+  },
+  "assistantSummaryOver": "Alınan {consumed} kcal. Hedef {target} kcal. Hedefin {over} kcal üzerinde.",
+  "@assistantSummaryOver": {
+    "placeholders": {
+      "consumed": { "type": "String" },
+      "target": { "type": "String" },
+      "over": { "type": "String" }
+    }
+  },
+  "assistantSummaryError": "Günlük özet şu anda okunamadı.",
+  "assistantSearchHint": "Kategori veya soru ara",
+  "assistantSearchEmpty": "Bu aramayla eşleşen kategori veya soru yok.",
+  "assistantNutritionSection": "Beslenme",
+  "assistantWellnessSection": "Sağlıklı Yaşam",
+  "assistantSuggestedTitle": "Önerilen sorular",
+  "assistantQuickDaily": "Günlük değerlendirme",
+  "assistantQuickMeals": "Öğün önerileri",
+  "assistantQuickWellness": "Sağlıklı yaşam",
+  "assistantQuickWeek": "Haftalık değerlendirme",
+  "assistantBrowseTopics": "Kategoriler",
+  "assistantClearTitle": "Sohbet temizlensin mi?",
+  "assistantClearBody": "Bu cihazdaki beslenme asistanı konuşması silinir.",
+  "assistantGuideMissingMeals": "Bugünkü öğün kayıtların eksik olduğu için tam bir değerlendirme yapamıyorum. Günlüğe bir öğün ekleyince buradan bakabilirim.",
+  "assistantGuideWaterMissing": "Bugün için su kaydı yok. Miktarı tahmin etmiyorum.",
+  "assistantGuideWeekIntro": "Bu hafta bugüne kadar {elapsed} günün {logged} gününde öğün kaydı var.",
+  "@assistantGuideWeekIntro": {
+    "placeholders": {
+      "elapsed": { "type": "int" },
+      "logged": { "type": "int" }
+    }
+  },
+  "assistantGuideWeekDay": "{day}: {kcal} kcal.",
+  "@assistantGuideWeekDay": {
+    "placeholders": {
+      "day": { "type": "String" },
+      "kcal": { "type": "String" }
+    }
+  },
+  "assistantGuideWeekDayTarget": "{day}: {kcal} kcal, hedef {target} kcal.",
+  "@assistantGuideWeekDayTarget": {
+    "placeholders": {
+      "day": { "type": "String" },
+      "kcal": { "type": "String" },
+      "target": { "type": "String" }
+    }
+  },
+  "assistantGuideWeekNoMeals": "Bu hafta için öğün kaydı yok. Kayıt olmayan günleri başarısızlık saymıyorum.",
+  "assistantGuideWeekWater": "Su kaydı olan {count} günde toplam {amount}.",
+  "@assistantGuideWeekWater": {
+    "placeholders": {
+      "count": { "type": "int" },
+      "amount": { "type": "String" }
+    }
+  },
+  "assistantGuideWeekWaterNone": "Bu hafta su kaydı yok. İçilen miktarı tahmin etmiyorum.",
+  "assistantGuideWeekNote": "Yalnızca kayıtlı günleri değerlendiriyorum. Eksik kayıt yanlış beslenme değildir.",
+  "assistantGuideMealCoverage": "Kayıtlı öğün türleri: {logged}. Kaydı olmayanlar: {missing}. Kaydı olmayan öğünü yanlış beslenme saymıyorum.",
+  "@assistantGuideMealCoverage": {
+    "placeholders": {
+      "logged": { "type": "String" },
+      "missing": { "type": "String" }
+    }
+  },
+  "assistantGuideTagsMissing": "Öğün kayıtlarında besin grubu etiketi yok. Hangi grubu az tükettiğini tahmin etmiyorum.",
+  "assistantGuideTags": "Kayıtlardaki etiketler: {tags}. Etiketi olmayan gruplar hakkında kesin konuşmuyorum.",
+  "@assistantGuideTags": {
+    "placeholders": { "tags": { "type": "String" } }
+  },
+  "assistantGuideRecipesIntro": "Kayıtlı tariflerden tercihlerine uygun olanlar:",
+  "assistantGuideRecipesNone": "Kayıtlı tariflerde tercihlerine uyan bir sonuç bulamadım. Var olmayan tarif yazmıyorum.",
+  "assistantGuideRecipesEmpty": "Bu cihazda kayıtlı tarif yok. Tarif ekleyince buradan gösterebilirim.",
+  "assistantGuidePrefsNone": "Kayıtlı alerji, sevmediğin besin veya beslenme düzeni bulamadım. Bunları varsaymıyorum.",
+  "assistantGuidePrefsKnown": "Kayıtlı bilgiler: {summary}. Bunlarla çelişen bir besin önermem.",
+  "@assistantGuidePrefsKnown": {
+    "placeholders": { "summary": { "type": "String" } }
+  },
+  "assistantGuidePlanEmpty": "Bu hafta için kayıtlı menü yok. Planı kendiliğimden oluşturmam veya değiştirmem.",
+  "assistantGuidePlanHeading": "Kayıtlı menüdeki öğünler:",
+  "assistantGuideShopping": "Plandan gelmeyen {manual} ürün durur. Plan kaynaklı {generated} satır, liste yenilenirken güncellenebilir. Ben listeyi silmem.",
+  "@assistantGuideShopping": {
+    "placeholders": {
+      "manual": { "type": "int" },
+      "generated": { "type": "int" }
+    }
+  },
+  "assistantGuideShoppingEmpty": "Kayıtlı alışveriş listen boş. Haftalık menüden liste oluşturduğunda elle eklediğin ürünler durur.",
+  "assistantGuideShoppingManual": "Plandan gelmeyenler: {names}.",
+  "@assistantGuideShoppingManual": {
+    "placeholders": { "names": { "type": "String" } }
+  },
+  "assistantGuideDisclaimer": "Bu bilgi genel bilgilendirme amaçlıdır; kişisel sağlık durumun için bir sağlık profesyoneline danışmalısın.",
+  "assistantGuideBoundary": "Bu soruyu kayıtlı bilgiler ve güvenli genel çerçeve dışında yanıtlayamıyorum.",
+  "assistantGuideTips": "Uygulanabilecek genel adımlar:",
+  "assistantGuideNone": "yok",
+  "assistantSafetyEmergency": "Bu belirtiler acil olabilir. Şiddetli göğüs ağrısı, nefes darlığı, bayılma veya ani güçsüzlük varsa acil tıbbi yardım al. Teşhis koyamam.",
+  "assistantPremiumRequired": "Beslenme asistanı Premium üyelik gerektirir.",
+  "assistantDataHeading": "Kayıtlı verin:",
+  "assistantFoodTagVegetable": "Sebze",
+  "assistantFoodTagFruit": "Meyve",
+  "assistantFoodTagWholeGrain": "Tam tahıl",
+  "assistantFoodTagProcessed": "İşlenmiş"
 }

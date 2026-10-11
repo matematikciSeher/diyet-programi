@@ -3623,25 +3623,25 @@ abstract class AppLocalizations {
   /// No description provided for @appFeaturePersonalMealPlan.
   ///
   /// In tr, this message translates to:
-  /// **'Kişisel yemek planı'**
+  /// **'Kişiye Özel Haftalık Menü'**
   String get appFeaturePersonalMealPlan;
 
   /// No description provided for @appFeaturePersonalMealPlanDesc.
   ///
   /// In tr, this message translates to:
-  /// **'Hedefine ve damak tadına göre her gün hazırlanan plan.'**
+  /// **'Kalori hedefin, öğün sayın, tercihlerin ve alerjilerinle hazırlanan 7 günlük menü.'**
   String get appFeaturePersonalMealPlanDesc;
 
   /// No description provided for @appFeatureAiCoach.
   ///
   /// In tr, this message translates to:
-  /// **'AI beslenme koçu'**
+  /// **'Beslenme Asistanı'**
   String get appFeatureAiCoach;
 
   /// No description provided for @appFeatureAiCoachDesc.
   ///
   /// In tr, this message translates to:
-  /// **'Sorularına sana özel, anında yanıtlar.'**
+  /// **'Günlük kayıtlarına göre değerlendirme ve uygulanabilir beslenme önerileri.'**
   String get appFeatureAiCoachDesc;
 
   /// No description provided for @appFeaturePhotoFoodAnalysis.
@@ -3719,13 +3719,13 @@ abstract class AppLocalizations {
   /// No description provided for @appFeatureAdFree.
   ///
   /// In tr, this message translates to:
-  /// **'Reklamsız kullanım'**
+  /// **'Reklamsız Kullanım'**
   String get appFeatureAdFree;
 
   /// No description provided for @appFeatureAdFreeDesc.
   ///
   /// In tr, this message translates to:
-  /// **'Hiç reklam görmeden hedefine odaklan.'**
+  /// **'Banner, geçiş ve ödüllü reklamlar gösterilmez.'**
   String get appFeatureAdFreeDesc;
 
   /// No description provided for @appFeatureFasting.
@@ -3767,7 +3767,7 @@ abstract class AppLocalizations {
   /// No description provided for @premiumProfileSubtitle.
   ///
   /// In tr, this message translates to:
-  /// **'Tüm özelliklerin kilidini aç'**
+  /// **'Asistan, haftalık menü ve reklamsız kullanım'**
   String get premiumProfileSubtitle;
 
   /// No description provided for @paywallTitle.
@@ -3779,7 +3779,7 @@ abstract class AppLocalizations {
   /// No description provided for @paywallSubtitle.
   ///
   /// In tr, this message translates to:
-  /// **'Sana özel plan, AI koç ve gelişmiş raporlar tek abonelikte.'**
+  /// **'Beslenme asistanı, kişiye özel haftalık menü ve reklamsız kullanım.'**
   String get paywallSubtitle;
 
   /// No description provided for @paywallPeriodWeekly.
@@ -3901,6 +3901,72 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Test aboneliğini sıfırla'**
   String get settingsResetFakeSubscription;
+
+  /// No description provided for @testPremiumSectionTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Geliştirme testi'**
+  String get testPremiumSectionTitle;
+
+  /// No description provided for @testPremiumSectionMessage.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu düğme mağaza ödemesi yapmaz. Premium özellikleri yalnızca bu cihazda, geliştirme ve test amacıyla açar.'**
+  String get testPremiumSectionMessage;
+
+  /// No description provided for @testPremiumStart.
+  ///
+  /// In tr, this message translates to:
+  /// **'Test Premium Üyeliğini Başlat'**
+  String get testPremiumStart;
+
+  /// No description provided for @testPremiumConfirmTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Test üyeliği başlatılsın mı?'**
+  String get testPremiumConfirmTitle;
+
+  /// No description provided for @testPremiumConfirmMessage.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu işlem gerçek bir ödeme değildir. Premium üyelik yalnızca geliştirme ve test amacıyla etkinleştirilir. Uygulama kapatılıp açıldığında bu test durumu korunur.'**
+  String get testPremiumConfirmMessage;
+
+  /// No description provided for @testPremiumConfirmAction.
+  ///
+  /// In tr, this message translates to:
+  /// **'Test üyeliğini başlat'**
+  String get testPremiumConfirmAction;
+
+  /// No description provided for @testPremiumStarted.
+  ///
+  /// In tr, this message translates to:
+  /// **'Test üyeliği etkinleştirildi. Gerçek bir ödeme yapılmadı.'**
+  String get testPremiumStarted;
+
+  /// No description provided for @testPremiumActiveTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Premium Üyeliğin Aktif'**
+  String get testPremiumActiveTitle;
+
+  /// No description provided for @testPremiumActiveMessage.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu üyelik yalnızca geliştirme ve test içindir. Gerçek bir satın alma veya mağaza aboneliği değildir.'**
+  String get testPremiumActiveMessage;
+
+  /// No description provided for @testPremiumReset.
+  ///
+  /// In tr, this message translates to:
+  /// **'Test Üyeliğini Sıfırla'**
+  String get testPremiumReset;
+
+  /// No description provided for @testPremiumResetDone.
+  ///
+  /// In tr, this message translates to:
+  /// **'Test üyeliği sıfırlandı.'**
+  String get testPremiumResetDone;
 
   /// No description provided for @settingsLegal.
   ///
@@ -5875,7 +5941,7 @@ abstract class AppLocalizations {
   /// No description provided for @assistantHelp.
   ///
   /// In tr, this message translates to:
-  /// **'Şunları sorabilirsin: kalan kalori hakkın, protein hedefin, bir öğün için öneri, plandaki yemeği değiştirme, su, kilo ilerlemen veya oruç durumun.'**
+  /// **'Şunları sorabilirsin: bugünkü beslenme değerlendirmen, kalan kalori, protein, karbonhidrat ve yağ, bir öğün önerisi, plandaki yemeği değiştirme, su, kilo ilerlemen veya oruç durumun. Kayıt yoksa tahmin etmem.'**
   String get assistantHelp;
 
   /// No description provided for @assistantNotConfigured.
@@ -6795,6 +6861,411 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Lif'**
   String get macroFiber;
+
+  /// No description provided for @paywallPurchaseLater.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gerçek satın alma bu sürümde yok. Fiyat veya abonelik taahhüdü gösterilmez.'**
+  String get paywallPurchaseLater;
+
+  /// No description provided for @assistantMissingMeals.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugün için beslenme kaydı yok. Değerlendirme yapmam için günlüğe bir öğün eklemen gerekir. Tahmin üretmiyorum.'**
+  String get assistantMissingMeals;
+
+  /// No description provided for @assistantMissingMacros.
+  ///
+  /// In tr, this message translates to:
+  /// **'Öğün kaydın var ama protein, karbonhidrat ve yağ değerleri yok. Bu makroları tahmin etmiyorum.'**
+  String get assistantMissingMacros;
+
+  /// No description provided for @assistantMissingPlan.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugün için kayıtlı bir menü yok. Kayıtlı plana dayanmadan öğün uydurmuyorum.'**
+  String get assistantMissingPlan;
+
+  /// No description provided for @assistantDailyIntro.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugün {meals} öğün kaydın var. {consumed} / {target} kcal.'**
+  String assistantDailyIntro(int meals, String consumed, String target);
+
+  /// No description provided for @assistantDailyOver.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hedefinin {over} kcal üstündesin. Öğün atlamayı önermem; sıradaki öğünü daha hafif tutabilirsin.'**
+  String assistantDailyOver(String over);
+
+  /// No description provided for @assistantDailyProteinShort.
+  ///
+  /// In tr, this message translates to:
+  /// **'Protein hedefin dolmadı ({consumed} / {target} g). Profiline uyan bir protein kaynağı ekleyebilirsin.'**
+  String assistantDailyProteinShort(String consumed, String target);
+
+  /// No description provided for @assistantDailyOnTrack.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kayıtların hedefinle uyumlu görünüyor. Bu bir tıbbi değerlendirme değildir.'**
+  String get assistantDailyOnTrack;
+
+  /// No description provided for @assistantDailyTargetLow.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kayıtlı günlük kalori hedefin genel güvenlik sınırının altında. Daha düşük bir hedef önermiyorum.'**
+  String get assistantDailyTargetLow;
+
+  /// No description provided for @assistantMacroReached.
+  ///
+  /// In tr, this message translates to:
+  /// **'{name}: {consumed} / {target} g. Bu makro için kayıtlı hedefe ulaşmışsın.'**
+  String assistantMacroReached(String name, String consumed, String target);
+
+  /// No description provided for @assistantMacroRemaining.
+  ///
+  /// In tr, this message translates to:
+  /// **'{name}: {consumed} / {target} g. Kayıtlara göre {remaining} g daha var.'**
+  String assistantMacroRemaining(
+    String name,
+    String consumed,
+    String target,
+    String remaining,
+  );
+
+  /// No description provided for @assistantPlanHeading.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugün kayıtlı menündeki öğünler:'**
+  String get assistantPlanHeading;
+
+  /// No description provided for @assistantNutritionUnrecorded.
+  ///
+  /// In tr, this message translates to:
+  /// **'besin değeri kayıtlı değil'**
+  String get assistantNutritionUnrecorded;
+
+  /// No description provided for @adBannerLabel.
+  ///
+  /// In tr, this message translates to:
+  /// **'Reklam'**
+  String get adBannerLabel;
+
+  /// No description provided for @assistantWelcome.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugün daha dengeli beslenmek için sana nasıl yardımcı olabilirim?'**
+  String get assistantWelcome;
+
+  /// No description provided for @assistantSummaryTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Günlük beslenme özeti'**
+  String get assistantSummaryTitle;
+
+  /// No description provided for @assistantSummaryEmpty.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugün için öğün kaydı yok. Kayıt eklediğinde alınan, hedef ve kalan kaloriyi burada gösterebilirim.'**
+  String get assistantSummaryEmpty;
+
+  /// No description provided for @assistantSummaryNoTarget.
+  ///
+  /// In tr, this message translates to:
+  /// **'Alınan {consumed} kcal. Kişisel kalori hedefin kayıtlı olmadığı için kalan kaloriyi hesaplamıyorum.'**
+  String assistantSummaryNoTarget(String consumed);
+
+  /// No description provided for @assistantSummaryCalories.
+  ///
+  /// In tr, this message translates to:
+  /// **'Alınan {consumed} kcal. Hedef {target} kcal. Kalan {remaining} kcal.'**
+  String assistantSummaryCalories(
+    String consumed,
+    String target,
+    String remaining,
+  );
+
+  /// No description provided for @assistantSummaryOver.
+  ///
+  /// In tr, this message translates to:
+  /// **'Alınan {consumed} kcal. Hedef {target} kcal. Hedefin {over} kcal üzerinde.'**
+  String assistantSummaryOver(String consumed, String target, String over);
+
+  /// No description provided for @assistantSummaryError.
+  ///
+  /// In tr, this message translates to:
+  /// **'Günlük özet şu anda okunamadı.'**
+  String get assistantSummaryError;
+
+  /// No description provided for @assistantSearchHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kategori veya soru ara'**
+  String get assistantSearchHint;
+
+  /// No description provided for @assistantSearchEmpty.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu aramayla eşleşen kategori veya soru yok.'**
+  String get assistantSearchEmpty;
+
+  /// No description provided for @assistantNutritionSection.
+  ///
+  /// In tr, this message translates to:
+  /// **'Beslenme'**
+  String get assistantNutritionSection;
+
+  /// No description provided for @assistantWellnessSection.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sağlıklı Yaşam'**
+  String get assistantWellnessSection;
+
+  /// No description provided for @assistantSuggestedTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Önerilen sorular'**
+  String get assistantSuggestedTitle;
+
+  /// No description provided for @assistantQuickDaily.
+  ///
+  /// In tr, this message translates to:
+  /// **'Günlük değerlendirme'**
+  String get assistantQuickDaily;
+
+  /// No description provided for @assistantQuickMeals.
+  ///
+  /// In tr, this message translates to:
+  /// **'Öğün önerileri'**
+  String get assistantQuickMeals;
+
+  /// No description provided for @assistantQuickWellness.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sağlıklı yaşam'**
+  String get assistantQuickWellness;
+
+  /// No description provided for @assistantQuickWeek.
+  ///
+  /// In tr, this message translates to:
+  /// **'Haftalık değerlendirme'**
+  String get assistantQuickWeek;
+
+  /// No description provided for @assistantBrowseTopics.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kategoriler'**
+  String get assistantBrowseTopics;
+
+  /// No description provided for @assistantClearTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sohbet temizlensin mi?'**
+  String get assistantClearTitle;
+
+  /// No description provided for @assistantClearBody.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu cihazdaki beslenme asistanı konuşması silinir.'**
+  String get assistantClearBody;
+
+  /// No description provided for @assistantGuideMissingMeals.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugünkü öğün kayıtların eksik olduğu için tam bir değerlendirme yapamıyorum. Günlüğe bir öğün ekleyince buradan bakabilirim.'**
+  String get assistantGuideMissingMeals;
+
+  /// No description provided for @assistantGuideWaterMissing.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugün için su kaydı yok. Miktarı tahmin etmiyorum.'**
+  String get assistantGuideWaterMissing;
+
+  /// No description provided for @assistantGuideWeekIntro.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu hafta bugüne kadar {elapsed} günün {logged} gününde öğün kaydı var.'**
+  String assistantGuideWeekIntro(int elapsed, int logged);
+
+  /// No description provided for @assistantGuideWeekDay.
+  ///
+  /// In tr, this message translates to:
+  /// **'{day}: {kcal} kcal.'**
+  String assistantGuideWeekDay(String day, String kcal);
+
+  /// No description provided for @assistantGuideWeekDayTarget.
+  ///
+  /// In tr, this message translates to:
+  /// **'{day}: {kcal} kcal, hedef {target} kcal.'**
+  String assistantGuideWeekDayTarget(String day, String kcal, String target);
+
+  /// No description provided for @assistantGuideWeekNoMeals.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu hafta için öğün kaydı yok. Kayıt olmayan günleri başarısızlık saymıyorum.'**
+  String get assistantGuideWeekNoMeals;
+
+  /// No description provided for @assistantGuideWeekWater.
+  ///
+  /// In tr, this message translates to:
+  /// **'Su kaydı olan {count} günde toplam {amount}.'**
+  String assistantGuideWeekWater(int count, String amount);
+
+  /// No description provided for @assistantGuideWeekWaterNone.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu hafta su kaydı yok. İçilen miktarı tahmin etmiyorum.'**
+  String get assistantGuideWeekWaterNone;
+
+  /// No description provided for @assistantGuideWeekNote.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yalnızca kayıtlı günleri değerlendiriyorum. Eksik kayıt yanlış beslenme değildir.'**
+  String get assistantGuideWeekNote;
+
+  /// No description provided for @assistantGuideMealCoverage.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kayıtlı öğün türleri: {logged}. Kaydı olmayanlar: {missing}. Kaydı olmayan öğünü yanlış beslenme saymıyorum.'**
+  String assistantGuideMealCoverage(String logged, String missing);
+
+  /// No description provided for @assistantGuideTagsMissing.
+  ///
+  /// In tr, this message translates to:
+  /// **'Öğün kayıtlarında besin grubu etiketi yok. Hangi grubu az tükettiğini tahmin etmiyorum.'**
+  String get assistantGuideTagsMissing;
+
+  /// No description provided for @assistantGuideTags.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kayıtlardaki etiketler: {tags}. Etiketi olmayan gruplar hakkında kesin konuşmuyorum.'**
+  String assistantGuideTags(String tags);
+
+  /// No description provided for @assistantGuideRecipesIntro.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kayıtlı tariflerden tercihlerine uygun olanlar:'**
+  String get assistantGuideRecipesIntro;
+
+  /// No description provided for @assistantGuideRecipesNone.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kayıtlı tariflerde tercihlerine uyan bir sonuç bulamadım. Var olmayan tarif yazmıyorum.'**
+  String get assistantGuideRecipesNone;
+
+  /// No description provided for @assistantGuideRecipesEmpty.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu cihazda kayıtlı tarif yok. Tarif ekleyince buradan gösterebilirim.'**
+  String get assistantGuideRecipesEmpty;
+
+  /// No description provided for @assistantGuidePrefsNone.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kayıtlı alerji, sevmediğin besin veya beslenme düzeni bulamadım. Bunları varsaymıyorum.'**
+  String get assistantGuidePrefsNone;
+
+  /// No description provided for @assistantGuidePrefsKnown.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kayıtlı bilgiler: {summary}. Bunlarla çelişen bir besin önermem.'**
+  String assistantGuidePrefsKnown(String summary);
+
+  /// No description provided for @assistantGuidePlanEmpty.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu hafta için kayıtlı menü yok. Planı kendiliğimden oluşturmam veya değiştirmem.'**
+  String get assistantGuidePlanEmpty;
+
+  /// No description provided for @assistantGuidePlanHeading.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kayıtlı menüdeki öğünler:'**
+  String get assistantGuidePlanHeading;
+
+  /// No description provided for @assistantGuideShopping.
+  ///
+  /// In tr, this message translates to:
+  /// **'Plandan gelmeyen {manual} ürün durur. Plan kaynaklı {generated} satır, liste yenilenirken güncellenebilir. Ben listeyi silmem.'**
+  String assistantGuideShopping(int manual, int generated);
+
+  /// No description provided for @assistantGuideShoppingEmpty.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kayıtlı alışveriş listen boş. Haftalık menüden liste oluşturduğunda elle eklediğin ürünler durur.'**
+  String get assistantGuideShoppingEmpty;
+
+  /// No description provided for @assistantGuideShoppingManual.
+  ///
+  /// In tr, this message translates to:
+  /// **'Plandan gelmeyenler: {names}.'**
+  String assistantGuideShoppingManual(String names);
+
+  /// No description provided for @assistantGuideDisclaimer.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu bilgi genel bilgilendirme amaçlıdır; kişisel sağlık durumun için bir sağlık profesyoneline danışmalısın.'**
+  String get assistantGuideDisclaimer;
+
+  /// No description provided for @assistantGuideBoundary.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu soruyu kayıtlı bilgiler ve güvenli genel çerçeve dışında yanıtlayamıyorum.'**
+  String get assistantGuideBoundary;
+
+  /// No description provided for @assistantGuideTips.
+  ///
+  /// In tr, this message translates to:
+  /// **'Uygulanabilecek genel adımlar:'**
+  String get assistantGuideTips;
+
+  /// No description provided for @assistantGuideNone.
+  ///
+  /// In tr, this message translates to:
+  /// **'yok'**
+  String get assistantGuideNone;
+
+  /// No description provided for @assistantSafetyEmergency.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu belirtiler acil olabilir. Şiddetli göğüs ağrısı, nefes darlığı, bayılma veya ani güçsüzlük varsa acil tıbbi yardım al. Teşhis koyamam.'**
+  String get assistantSafetyEmergency;
+
+  /// No description provided for @assistantPremiumRequired.
+  ///
+  /// In tr, this message translates to:
+  /// **'Beslenme asistanı Premium üyelik gerektirir.'**
+  String get assistantPremiumRequired;
+
+  /// No description provided for @assistantDataHeading.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kayıtlı verin:'**
+  String get assistantDataHeading;
+
+  /// No description provided for @assistantFoodTagVegetable.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sebze'**
+  String get assistantFoodTagVegetable;
+
+  /// No description provided for @assistantFoodTagFruit.
+  ///
+  /// In tr, this message translates to:
+  /// **'Meyve'**
+  String get assistantFoodTagFruit;
+
+  /// No description provided for @assistantFoodTagWholeGrain.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tam tahıl'**
+  String get assistantFoodTagWholeGrain;
+
+  /// No description provided for @assistantFoodTagProcessed.
+  ///
+  /// In tr, this message translates to:
+  /// **'İşlenmiş'**
+  String get assistantFoodTagProcessed;
 }
 
 class _AppLocalizationsDelegate

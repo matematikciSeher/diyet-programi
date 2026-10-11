@@ -130,5 +130,67 @@ void main() {
       ),
       isNull,
     );
+    expect(
+      await assistant.reply('Günde 800 kalori hedefle', context),
+      const SafetyReply(SafetyConcern.extremeRestriction),
+    );
+  });
+
+  test('kayıt yokken alım tahmini üretmez', () async {
+    final context = await contextRepo.snapshot();
+    expect(context.todayMeals, isEmpty);
+    expect(
+      await assistant.reply('Bugün nasıl besleniyorum?', context),
+      isA<MissingRecordReply>().having(
+        (reply) => reply.record,
+        'record',
+        MissingRecord.meals,
+      ),
+    );
+    expect(
+      await assistant.reply('Karbonhidratım nasıl?', context),
+      isA<MissingRecordReply>(),
+    );
+    expect(
+      await assistant.reply('Yağ kaydım ne durumda?', context),
+      isA<MissingRecordReply>(),
+    );
+  });
+
+  test('günlük kayıt protein karbonhidrat ve yağı değerlendirir', () async {
+    await meals.addEntry(
+      MealEntry(
+        id: '',
+        dayKey: '',
+        mealType: MealType.lunch,
+        name: 'Izgara tavuk',
+        quantityGrams: 200,
+        nutrition: const NutritionFacts(
+          calories: 520,
+          proteinG: 45,
+          carbsG: 10,
+          fatG: 18,
+        ),
+        loggedAt: testNow,
+      ),
+    );
+    final context = await contextRepo.snapshot();
+    final review = await assistant.reply('Bugün nasıl besleniyorum?', context);
+    expect(review, isA<DailyNutritionReply>());
+    final daily = review as DailyNutritionReply;
+    expect(daily.mealCount, 1);
+    expect(daily.consumedCalories, 520);
+    expect(daily.macrosRecorded, isTrue);
+    expect(daily.carbsConsumed, 10);
+    expect(daily.fatConsumed, 18);
+    expect(daily.targetBelowSafeFloor, isFalse);
+
+    final carbs = await assistant.reply('Karbonhidrat durumum ne?', context);
+    expect(
+      carbs,
+      isA<MacroStatusReply>()
+          .having((reply) => reply.macro, 'macro', TrackedMacro.carbs)
+          .having((reply) => reply.consumed, 'consumed', 10),
+    );
   });
 }

@@ -163,7 +163,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       _route(AppRoutes.water, (_) => const WaterPage()),
       _route(AppRoutes.weight, (_) => const WeightPage()),
       _route(AppRoutes.measurements, (_) => const MeasurementsPage()),
-      _premiumRoute(AppRoutes.fasting, AppFeature.fasting, const FastingPage()),
+      _route(AppRoutes.fasting, (_) => const FastingPage()),
       _route(AppRoutes.activity, (_) => const ActivityPage()),
       _route(AppRoutes.notifications, (_) => const NotificationsPage()),
       _route(AppRoutes.personalInfo, (_) => const PersonalInfoPage()),

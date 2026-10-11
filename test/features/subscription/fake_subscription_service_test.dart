@@ -60,6 +60,30 @@ void main() {
       expect((await service.getStatus()).isPremium, isTrue);
     });
 
+    test(
+      'test üyeliği ödeme gibi kaydolmaz ve yeniden açılınca durur',
+      () async {
+        final status = await service.activateTestMembership();
+        expect(status.isPremium, isTrue);
+        expect(status.isTestGrant, isTrue);
+        expect(status.willRenew, isFalse);
+        expect(status.isInTrial, isFalse);
+        expect(status.productId, isNull);
+        expect(status.expiresAt, isNull);
+
+        now = now.add(const Duration(days: 400));
+        expect((await service.getStatus()).isTestGrant, isTrue);
+
+        final reopened = FakeSubscriptionService(storage, clock: () => now);
+        await reopened.initialize(appUserId: 'user-1');
+        expect((await reopened.getStatus()).isTestGrant, isTrue);
+        await reopened.resetTestMembership();
+        expect(await reopened.getStatus(), SubscriptionStatus.free);
+        expect(await service.getStatus(), SubscriptionStatus.free);
+        await reopened.dispose();
+      },
+    );
+
     test('süresi dolan abonelik ücretsiz katmana düşer', () async {
       await service.purchase(monthly);
       now = now.add(const Duration(days: 31));
@@ -116,8 +140,14 @@ void main() {
         AppFeature.waterTracking,
         AppFeature.foodLogging,
         AppFeature.basicProgress,
+        AppFeature.fasting,
       ]);
-      expect(AppFeature.premiumFeatures, hasLength(11));
+      expect(AppFeature.premiumFeatures, hasLength(10));
+      expect(AppFeature.packageBenefits, [
+        AppFeature.aiCoach,
+        AppFeature.personalMealPlan,
+        AppFeature.adFree,
+      ]);
     });
   });
 }

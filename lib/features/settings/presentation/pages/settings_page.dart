@@ -12,7 +12,6 @@ import '../../../../core/utils/extensions/context_extensions.dart';
 import '../../../../core/widgets/responsive_center.dart';
 import '../../../../core/widgets/section_header.dart';
 import '../../../../shared/services/service_providers.dart';
-import '../../../../shared/services/subscription/fake_subscription_service.dart';
 import '../../../../shared/services/subscription/subscription_service.dart';
 import '../../../activity/presentation/widgets/health_data_section.dart';
 import '../../../subscription/presentation/providers/premium_providers.dart';
@@ -69,12 +68,13 @@ class SettingsPage extends ConsumerWidget {
                 title: Text(l10n.paywallRestore),
                 onTap: () => _restore(context, ref),
               ),
-              if (kDebugMode && service is FakeSubscriptionService)
+              if (kDebugMode && service is TestMembershipControls)
                 ListTile(
                   contentPadding: EdgeInsets.zero,
                   leading: const Icon(Icons.bug_report_outlined),
-                  title: Text(l10n.settingsResetFakeSubscription),
-                  onTap: service.reset,
+                  title: Text(l10n.testPremiumReset),
+                  onTap: () =>
+                      (service as TestMembershipControls).resetTestMembership(),
                 ),
               AppSpacing.gapXl,
               SectionHeader(title: l10n.settingsLegal),
@@ -92,7 +92,10 @@ class SettingsPage extends ConsumerWidget {
     );
   }
 
-  Future<void> _openPrivacyPolicy(BuildContext context, AppConfig config) async {
+  Future<void> _openPrivacyPolicy(
+    BuildContext context,
+    AppConfig config,
+  ) async {
     final opened = await PrivacyPolicyLink.open(config);
     if (!context.mounted || opened) return;
     context.showSnack(context.l10n.settingsPrivacyPolicyUnavailable);

@@ -3,27 +3,45 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/config/app_config.dart';
 import '../../../../shared/services/service_providers.dart';
+import '../../../subscription/domain/models/app_feature.dart';
+import '../../../subscription/domain/premium_access.dart';
 import '../../../meal_plans/data/repositories/meal_plan_repository_impl.dart';
 import '../../../meal_plans/presentation/providers/meal_plan_providers.dart';
 import '../../../recipes/data/repositories/recipe_repository_impl.dart';
 import '../../data/assistant_chat_store.dart';
 import '../../data/repositories/assistant_context_repository_impl.dart';
+import '../../domain/models/assistant_context.dart';
 import '../../domain/models/assistant_reply.dart';
 import '../../domain/services/assistant_service_selector.dart';
 import '../../domain/services/mock_nutrition_assistant_service.dart';
 import '../../domain/services/nutrition_assistant_service.dart';
+import '../../domain/services/premium_nutrition_assistant.dart';
 
-final nutritionAssistantServiceProvider = Provider<NutritionAssistantService>((ref) {
+final nutritionAssistantServiceProvider = Provider<NutritionAssistantService>((
+  ref,
+) {
   final config = ref.watch(appConfigProvider);
-  return selectNutritionAssistantService(
+  final inner = selectNutritionAssistantService(
     config: config,
     fake: MockNutritionAssistantService(ref.watch(mealPlanGeneratorProvider)),
     ai: ref.watch(aiNutritionServiceProvider),
     loadRecipes: (profile) =>
         ref.read(recipeRepositoryProvider).getRecommendedRecipes(profile),
-    loadWeek: (day) => ref.read(mealPlanRepositoryProvider).watchWeek(day).first,
+    loadWeek: (day) =>
+        ref.read(mealPlanRepositoryProvider).watchWeek(day).first,
+  );
+  return PremiumAwareNutritionAssistant(
+    inner: inner,
+    allowed: () => canAccessFeature(
+      ref.read(subscriptionStatusProvider).asData?.value,
+      AppFeature.aiCoach,
+    ),
   );
 });
+
+final assistantTodayProvider = FutureProvider<AssistantContext>(
+  (ref) => ref.watch(assistantContextRepositoryProvider).snapshot(),
+);
 
 final assistantChatStoreProvider = Provider<AssistantChatStore>(
   (ref) => AssistantChatStore(ref.watch(localDocumentDatabaseProvider)),
@@ -113,6 +131,7 @@ class AssistantChatController extends Notifier<AssistantChatState> {
     await ready;
     final question = text.trim();
     if (question.isEmpty || state.busy) return;
+    if (!_hasPremium()) return;
     final messages = [...state.messages, AssistantUserMessage(question)];
     final epoch = _epoch;
     state = state.copyWith(messages: messages, busy: true);
@@ -125,6 +144,7 @@ class AssistantChatController extends Notifier<AssistantChatState> {
     await ready;
     final trimmed = question.trim();
     if (trimmed.isEmpty || state.busy) return;
+    if (!_hasPremium()) return;
     final messages = [...state.messages];
     if (messages.isNotEmpty && _isRetryable(messages.last)) {
       messages.removeLast();
@@ -141,6 +161,11 @@ class AssistantChatController extends Notifier<AssistantChatState> {
     await ref.read(assistantChatStoreProvider).replaceAll(const []);
   }
 
+  bool _hasPremium() => canAccessFeature(
+    ref.read(subscriptionStatusProvider).asData?.value,
+    AppFeature.aiCoach,
+  );
+
   Future<void> _complete(
     String question,
     List<AssistantMessage> base,
@@ -148,8 +173,12 @@ class AssistantChatController extends Notifier<AssistantChatState> {
   ) async {
     AssistantMessage answer;
     try {
-      final context = await ref.read(assistantContextRepositoryProvider).snapshot();
-      final reply = await ref.read(nutritionAssistantServiceProvider).reply(question, context);
+      final context = await ref
+          .read(assistantContextRepositoryProvider)
+          .snapshot();
+      final reply = await ref
+          .read(nutritionAssistantServiceProvider)
+          .reply(question, context);
       answer = AssistantBotMessage(reply);
     } on Object {
       answer = AssistantErrorMessage(
@@ -187,12 +216,15 @@ class AssistantChatController extends Notifier<AssistantChatState> {
     _ => null,
   };
 
-  AssistantTranscript? _transcriptOf(AssistantMessage message) => switch (message) {
-    AssistantUserMessage(:final text) => AssistantTranscript.user(text),
-    AssistantBotMessage(:final reply) => AssistantTranscript.assistant(reply),
-    AssistantErrorMessage(:final code, :final question) =>
-      AssistantTranscript.error(code: code, question: question),
-  };
+  AssistantTranscript? _transcriptOf(AssistantMessage message) =>
+      switch (message) {
+        AssistantUserMessage(:final text) => AssistantTranscript.user(text),
+        AssistantBotMessage(:final reply) => AssistantTranscript.assistant(
+          reply,
+        ),
+        AssistantErrorMessage(:final code, :final question) =>
+          AssistantTranscript.error(code: code, question: question),
+      };
 }
 
 final assistantChatProvider =

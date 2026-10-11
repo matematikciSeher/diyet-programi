@@ -73,8 +73,12 @@ class ShoppingListActions {
     for (final day in WeeklyMealPlanner.weekDays(today)) {
       meals.addAll(await plans.watchDay(day).first);
     }
-    return _aggregator.replaceWeek(meals);
+    return syncWeek(meals);
   }
+
+  /// Plan kaynaklı satırları [meals] ile yeniler. Elle eklenen ürünler kalır.
+  Future<int> syncWeek(List<PlannedMeal> meals) =>
+      _aggregator.replaceWeek(meals);
 }
 
 final shoppingListActionsProvider = Provider<ShoppingListActions>(

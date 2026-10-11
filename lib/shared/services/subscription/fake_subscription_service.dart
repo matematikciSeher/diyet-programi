@@ -7,13 +7,19 @@ import '../../models/subscription_status.dart';
 import '../local_storage/key_value_storage.dart';
 import 'subscription_service.dart';
 
-/// Geliştirme ortamı için mağaza simülasyonu (`USE_FAKE_SERVICES=true`).
+/// Geliştirme ortamı için yerel abonelik simülasyonu.
 ///
-/// RevenueCat ile aynı davranır: satın alma entitlement'ı aktifleştirir,
-/// durum kullanıcıya göre saklanır ve geri yüklenebilir. Gerçek ödeme almaz.
-class FakeSubscriptionService implements SubscriptionService {
-  FakeSubscriptionService(this._storage, {DateTime Function()? clock})
-    : _clock = clock ?? DateTime.now;
+/// [exposeOfferings] açıksa paywall sahte mağaza paketlerini gösterir.
+/// [activateTestMembership] ise ödeme taklidi yapmaz: süre, yenileme ve
+/// ürün kimliği olmayan, açıkça test amaçlı bir entitlement yazar.
+/// Durum kullanıcıya göre yerel depoda kalır. Gerçek ödeme almaz.
+class FakeSubscriptionService
+    implements SubscriptionService, TestMembershipControls {
+  FakeSubscriptionService(
+    this._storage, {
+    DateTime Function()? clock,
+    this.exposeOfferings = true,
+  }) : _clock = clock ?? DateTime.now;
 
   static const _anonymousUserId = r'$anonymous';
 
@@ -42,6 +48,9 @@ class FakeSubscriptionService implements SubscriptionService {
 
   final KeyValueStorage _storage;
   final DateTime Function() _clock;
+
+  /// `false` iken mağaza paketi dönmez; test üyeliği yine çalışır.
+  final bool exposeOfferings;
   final _changes = StreamController<SubscriptionStatus>.broadcast();
   String _appUserId = _anonymousUserId;
 
@@ -63,7 +72,17 @@ class FakeSubscriptionService implements SubscriptionService {
   Future<SubscriptionStatus> getStatus() async => _read();
 
   @override
-  Future<SubscriptionOffering?> getCurrentOffering() async => offering;
+  Future<SubscriptionOffering?> getCurrentOffering() async =>
+      exposeOfferings ? offering : null;
+
+  @override
+  Future<SubscriptionStatus> activateTestMembership() async {
+    await _storage.setString(_key, jsonEncode({'test': true}));
+    return _emit();
+  }
+
+  @override
+  Future<void> resetTestMembership() => reset();
 
   @override
   Future<SubscriptionStatus> purchase(SubscriptionPackage package) async {
@@ -123,18 +142,22 @@ class FakeSubscriptionService implements SubscriptionService {
     final raw = _storage.getString(_key);
     if (raw == null) return SubscriptionStatus.free;
     final json = jsonDecode(raw) as Map<String, dynamic>;
+    final test = json['test'] == true;
     final expiresAt = DateTime.tryParse(json['expiresAt'] as String? ?? '');
     final lifetime = json['lifetime'] == true;
-    if (!lifetime && (expiresAt == null || !expiresAt.isAfter(_clock()))) {
+    if (!test &&
+        !lifetime &&
+        (expiresAt == null || !expiresAt.isAfter(_clock()))) {
       return SubscriptionStatus.free;
     }
     return SubscriptionStatus(
       tier: SubscriptionTier.premium,
       activeEntitlements: const {Entitlements.premium},
-      expiresAt: expiresAt,
-      willRenew: !lifetime,
-      isInTrial: json['trial'] == true,
-      productId: json['productId'] as String?,
+      expiresAt: test ? null : expiresAt,
+      willRenew: !test && !lifetime,
+      isInTrial: !test && json['trial'] == true,
+      productId: test ? null : json['productId'] as String?,
+      isTestGrant: test,
     );
   }
 }

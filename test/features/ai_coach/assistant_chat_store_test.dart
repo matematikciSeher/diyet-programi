@@ -15,6 +15,7 @@ import 'package:diyet_programi/shared/services/service_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/subscription_overrides.dart';
 import '../../helpers/test_profile.dart';
 
 void main() {
@@ -50,57 +51,64 @@ void main() {
   test('sohbet koleksiyonu Firebase kullanıcı yollarında yoktur', () async {
     final db = InMemoryDocumentDatabase();
     addTearDown(db.dispose);
-    await AssistantChatStore(db).replaceAll(const [
-      AssistantTranscript.user('Su hedefime ulaştım mı?'),
-    ]);
+    await AssistantChatStore(
+      db,
+    ).replaceAll(const [AssistantTranscript.user('Su hedefime ulaştım mı?')]);
     expect(db.snapshot().keys, [AssistantChatStore.collection]);
     expect(
-      FirestorePaths.userCollectionPaths('user-1').any(
-        (path) => path.contains(AssistantChatStore.collection),
-      ),
+      FirestorePaths.userCollectionPaths(
+        'user-1',
+      ).any((path) => path.contains(AssistantChatStore.collection)),
       isFalse,
     );
   });
 
-  test('boş mesaj ve çift dokunuş istek üretmez, çevrimdışı geçmiş kalır', () async {
-    final db = InMemoryDocumentDatabase();
-    final ai = _HoldAssistant();
-    final container = ProviderContainer(
-      overrides: [
-        localDocumentDatabaseProvider.overrideWithValue(db),
-        nutritionAssistantServiceProvider.overrideWithValue(ai),
-        assistantContextRepositoryProvider.overrideWithValue(_FixedContext()),
-      ],
-    );
-    addTearDown(() {
-      container.dispose();
-      db.dispose();
-    });
-    final notifier = container.read(assistantChatProvider.notifier);
-    await notifier.ready;
-    await notifier.send('   ');
-    expect(container.read(assistantChatProvider).messages, isEmpty);
-    expect(ai.calls, 0);
+  test(
+    'boş mesaj ve çift dokunuş istek üretmez, çevrimdışı geçmiş kalır',
+    () async {
+      final db = InMemoryDocumentDatabase();
+      final ai = _HoldAssistant();
+      final container = ProviderContainer(
+        overrides: [
+          premiumOverride,
+          localDocumentDatabaseProvider.overrideWithValue(db),
+          nutritionAssistantServiceProvider.overrideWithValue(ai),
+          assistantContextRepositoryProvider.overrideWithValue(_FixedContext()),
+        ],
+      );
+      addTearDown(() {
+        container.dispose();
+        db.dispose();
+      });
+      container.listen(subscriptionStatusProvider, (_, _) {});
+      await container.read(subscriptionStatusProvider.future);
+      final notifier = container.read(assistantChatProvider.notifier);
+      await notifier.ready;
+      await notifier.send('   ');
+      expect(container.read(assistantChatProvider).messages, isEmpty);
+      expect(ai.calls, 0);
 
-    final first = notifier.send('Bugün nasıl besleniyorum?');
-    for (var i = 0; i < 50 && ai.calls == 0; i++) {
-      await Future<void>.delayed(Duration.zero);
-    }
-    expect(container.read(assistantChatProvider).busy, isTrue);
-    await notifier.send('ikinci');
-    expect(ai.calls, 1);
-    ai.release();
-    await first;
+      final first = notifier.send('Bugün nasıl besleniyorum?');
+      for (var i = 0; i < 50 && ai.calls == 0; i++) {
+        await Future<void>.delayed(Duration.zero);
+      }
+      expect(container.read(assistantChatProvider).busy, isTrue);
+      await notifier.send('ikinci');
+      expect(ai.calls, 1);
+      ai.release();
+      await first;
 
-    await notifier.clear();
-    expect(container.read(assistantChatProvider).messages, isEmpty);
-    expect(await AssistantChatStore(db).load(), isEmpty);
-  });
+      await notifier.clear();
+      expect(container.read(assistantChatProvider).messages, isEmpty);
+      expect(await AssistantChatStore(db).load(), isEmpty);
+    },
+  );
 
   test('çevrimdışı hata geçmişi uygulama yeniden açılınca durur', () async {
     final db = InMemoryDocumentDatabase();
     final container = ProviderContainer(
       overrides: [
+        premiumOverride,
         localDocumentDatabaseProvider.overrideWithValue(db),
         nutritionAssistantServiceProvider.overrideWithValue(
           const _FixedReplyAssistant(
@@ -113,6 +121,8 @@ void main() {
         assistantContextRepositoryProvider.overrideWithValue(_FixedContext()),
       ],
     );
+    container.listen(subscriptionStatusProvider, (_, _) {});
+    await container.read(subscriptionStatusProvider.future);
     final notifier = container.read(assistantChatProvider.notifier);
     await notifier.ready;
     await notifier.send('Su hedefime ulaştım mı?');
@@ -120,6 +130,7 @@ void main() {
 
     final reopened = ProviderContainer(
       overrides: [
+        premiumOverride,
         localDocumentDatabaseProvider.overrideWithValue(db),
         nutritionAssistantServiceProvider.overrideWithValue(
           const _FixedReplyAssistant(HelpReply()),
@@ -135,8 +146,33 @@ void main() {
     final messages = reopened.read(assistantChatProvider).messages;
     expect(messages, hasLength(2));
     expect(messages.first, isA<AssistantUserMessage>());
-    final failure = (messages.last as AssistantBotMessage).reply as AssistantFailureReply;
+    final failure =
+        (messages.last as AssistantBotMessage).reply as AssistantFailureReply;
     expect(failure.code, AssistantErrorCodes.offline);
+  });
+
+  test('premium olmayan kullanıcının sorusu asistanı çağırmaz', () async {
+    final db = InMemoryDocumentDatabase();
+    final ai = _HoldAssistant();
+    final container = ProviderContainer(
+      overrides: [
+        localDocumentDatabaseProvider.overrideWithValue(db),
+        nutritionAssistantServiceProvider.overrideWithValue(ai),
+        assistantContextRepositoryProvider.overrideWithValue(_FixedContext()),
+      ],
+    );
+    addTearDown(() {
+      container.dispose();
+      db.dispose();
+    });
+    container.listen(subscriptionStatusProvider, (_, _) {});
+    await container.read(subscriptionStatusProvider.future);
+    final notifier = container.read(assistantChatProvider.notifier);
+    await notifier.ready;
+    await notifier.send('Bugün ne yemeliyim?');
+    expect(ai.calls, 0);
+    expect(container.read(assistantChatProvider).messages, isEmpty);
+    expect(await AssistantChatStore(db).load(), isEmpty);
   });
 }
 
@@ -162,7 +198,10 @@ class _HoldAssistant implements NutritionAssistantService {
   }
 
   @override
-  Future<AssistantReply> reply(String question, AssistantContext context) async {
+  Future<AssistantReply> reply(
+    String question,
+    AssistantContext context,
+  ) async {
     calls++;
     await _gate.future;
     return const HelpReply();
@@ -175,6 +214,8 @@ class _FixedReplyAssistant implements NutritionAssistantService {
   final AssistantReply response;
 
   @override
-  Future<AssistantReply> reply(String question, AssistantContext context) async =>
-      response;
+  Future<AssistantReply> reply(
+    String question,
+    AssistantContext context,
+  ) async => response;
 }
