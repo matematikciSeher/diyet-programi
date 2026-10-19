@@ -6,8 +6,18 @@ import '../../../../shared/models/recipe.dart';
 /// Etiket tek başına yetmez: alerjen veya hayvansal ürün malzemede varsa
 /// tarif uygun sayılmaz.
 abstract final class RecipeSuitability {
-  static const meatFoodIds = {'sample-chicken-breast', 'chicken-breast'};
-  static const fishFoodIds = {'sample-salmon', 'salmon'};
+  static const meatFoodIds = {
+    'sample-chicken-breast',
+    'chicken-breast',
+    'sample-turkey-breast',
+    'turkey-breast',
+  };
+  static const fishFoodIds = {
+    'sample-salmon',
+    'salmon',
+    'sample-tuna-water',
+    'tuna-water',
+  };
   static const eggFoodIds = {'sample-egg-raw', 'egg-raw', 'sample-egg-boiled', 'egg-boiled'};
   static const dairyFoodIds = {
     'sample-milk-whole',
@@ -18,8 +28,14 @@ abstract final class RecipeSuitability {
     'feta',
     'sample-butter',
     'butter',
+    'sample-cottage-cheese',
+    'cottage-cheese',
+    'sample-yogurt-greek',
+    'yogurt-greek',
     'sample-demo-yogurt',
     'demo-yogurt',
+    'sample-kefir',
+    'kefir',
   };
   static const honeyFoodIds = {'sample-honey', 'honey'};
   static const glutenFoodIds = {
@@ -33,6 +49,20 @@ abstract final class RecipeSuitability {
     'oats',
     'sample-demo-oats',
     'demo-oats',
+    'sample-bulgur-cooked',
+    'bulgur-cooked',
+    'sample-bulgur-dry',
+    'bulgur-dry',
+    'sample-pasta-dry-whole-wheat',
+    'pasta-dry-whole-wheat',
+    'sample-wheat-cooked',
+    'wheat-cooked',
+    'sample-orzo-dry',
+    'orzo-dry',
+    'sample-lavash',
+    'lavash',
+    'sample-whole-wheat-flour',
+    'whole-wheat-flour',
   };
   static const nutFoodIds = {
     'sample-walnuts',
@@ -100,13 +130,24 @@ abstract final class RecipeSuitability {
       'feta',
       'lor',
       'ayran',
+      'kefir',
     ])) {
       found
         ..add(Allergen.milk.name)
         ..add(Allergen.lactose.name);
     }
     if (_has(n, const ['laktoz', 'lactose'])) found.add(Allergen.lactose.name);
-    if (_has(n, const ['gluten', 'ekmek', 'makarna', 'yulaf', 'bulgur', 'un '])) {
+    if (_has(n, const [
+      'gluten',
+      'ekmek',
+      'makarna',
+      'yulaf',
+      'bulgur',
+      'un ',
+      'bugday',
+      'sehriye',
+      'lavas',
+    ])) {
       found.add(Allergen.gluten.name);
     }
     if (_has(n, const ['ceviz', 'badem', 'findik', 'walnut', 'almond'])) {

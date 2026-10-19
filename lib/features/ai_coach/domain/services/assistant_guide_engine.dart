@@ -30,11 +30,7 @@ class AssistantGuideEngine {
   bool _disclaimer(AssistantQuestion question) {
     final category = AssistantCatalog.categoryOf(question.id);
     if (category == null) return true;
-    if (category.section == AssistantSection.wellness) return true;
-    return category.id == 'facts' ||
-        category.id == 'weight' ||
-        category.id == 'preferences' ||
-        category.id == 'swaps';
+    return category.cautious;
   }
 
   List<AssistantAction> _actions(AssistantQuestion question) {
@@ -51,13 +47,19 @@ class AssistantGuideEngine {
     };
     if (fromData != null) return [fromData];
     return switch (AssistantCatalog.categoryOf(question.id)?.id) {
-      'recipes' || 'breakfast' || 'main_meals' || 'snacks' => [
-        AssistantAction.openRecipes,
-      ],
-      'planning' => [AssistantAction.openPlan],
+      'soups' ||
+      'breakfast' ||
+      'salads' ||
+      'snacks' ||
+      'high_protein' ||
+      'low_calorie' => [AssistantAction.openRecipes],
+      'meal_pattern' => [AssistantAction.openPlan],
       'shopping' => [AssistantAction.openShopping],
       'water' => [AssistantAction.openWater],
-      'weight' => [AssistantAction.openWeight],
+      'weight_loss' || 'weight_maintain' || 'portions' => [
+        AssistantAction.openWeight,
+      ],
+      'calories' => [AssistantAction.openPlan],
       _ => const [],
     };
   }

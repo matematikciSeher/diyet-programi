@@ -4058,6 +4058,12 @@ abstract class AppLocalizations {
   /// **'{meal, select, breakfast{Kahvaltını planlamaya başlayalım 🌱} lunch{Öğle yemeğini eklemeye ne dersin?} dinner{Akşam yemeğin henüz boş.} snack{Gün içindeki atıştırmalıklarını buraya ekleyebilirsin.} other{Henüz bir yiyecek eklenmedi.}}'**
   String diaryMealEmptyHint(String meal);
 
+  /// No description provided for @diaryShowAllMeals.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tüm öğünler'**
+  String get diaryShowAllMeals;
+
   /// No description provided for @diaryExpand.
   ///
   /// In tr, this message translates to:
@@ -5066,6 +5072,24 @@ abstract class AppLocalizations {
   /// **'Benim tarifim'**
   String get recipeMine;
 
+  /// No description provided for @recipePortionGrams.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bir porsiyon yaklaşık {grams}'**
+  String recipePortionGrams(String grams);
+
+  /// No description provided for @recipeAllergens.
+  ///
+  /// In tr, this message translates to:
+  /// **'Alerjenler'**
+  String get recipeAllergens;
+
+  /// No description provided for @recipeNoDeclaredAllergens.
+  ///
+  /// In tr, this message translates to:
+  /// **'Listelenen malzemelerde belirgin alerjen görünmüyor.'**
+  String get recipeNoDeclaredAllergens;
+
   /// No description provided for @recipeNutritionPerServing.
   ///
   /// In tr, this message translates to:
@@ -5717,8 +5741,14 @@ abstract class AppLocalizations {
   /// No description provided for @assistantHint.
   ///
   /// In tr, this message translates to:
-  /// **'Bir soru yaz…'**
+  /// **'Merak ettiğin sağlık veya beslenme sorusunu yaz…'**
   String get assistantHint;
+
+  /// No description provided for @assistantSend.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gönder'**
+  String get assistantSend;
 
   /// No description provided for @assistantThinking.
   ///
@@ -5941,8 +5971,62 @@ abstract class AppLocalizations {
   /// No description provided for @assistantHelp.
   ///
   /// In tr, this message translates to:
-  /// **'Şunları sorabilirsin: bugünkü beslenme değerlendirmen, kalan kalori, protein, karbonhidrat ve yağ, bir öğün önerisi, plandaki yemeği değiştirme, su, kilo ilerlemen veya oruç durumun. Kayıt yoksa tahmin etmem.'**
+  /// **'Bu soru mevcut yerel beslenme bilgisinin kapsamında değil. Uydurma veya kişiye özel tıbbi bilgi üretmiyorum. Şunları sorabilirsin: bugünkü beslenme değerlendirmen, aldığın veya kalan kalori, protein kaynakları, bir öğün veya tarif, su takibi, haftalık menün, alışveriş listen, kilo hedefi veya uyku. Kayıt yoksa tahmin etmem.'**
   String get assistantHelp;
+
+  /// No description provided for @assistantClarifyPrompt.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bunu hangi açıdan öğrenmek istiyorsun?'**
+  String get assistantClarifyPrompt;
+
+  /// No description provided for @assistantDetailAsk.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bunu biraz daha açar mısın? Örneğin bugünkü kalorini, bir öğün önerisini veya su takibini sorabilirsin.'**
+  String get assistantDetailAsk;
+
+  /// No description provided for @assistantOpenDiary.
+  ///
+  /// In tr, this message translates to:
+  /// **'Öğünlerimi aç'**
+  String get assistantOpenDiary;
+
+  /// No description provided for @assistantOpenWater.
+  ///
+  /// In tr, this message translates to:
+  /// **'Su takibine git'**
+  String get assistantOpenWater;
+
+  /// No description provided for @assistantOpenPlan.
+  ///
+  /// In tr, this message translates to:
+  /// **'Menümü görüntüle'**
+  String get assistantOpenPlan;
+
+  /// No description provided for @assistantOpenRecipes.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tarifleri incele'**
+  String get assistantOpenRecipes;
+
+  /// No description provided for @assistantOpenShopping.
+  ///
+  /// In tr, this message translates to:
+  /// **'Alışveriş listemi aç'**
+  String get assistantOpenShopping;
+
+  /// No description provided for @assistantOpenWeight.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kilo takibine git'**
+  String get assistantOpenWeight;
+
+  /// No description provided for @assistantOpenFasting.
+  ///
+  /// In tr, this message translates to:
+  /// **'Oruç takibine git'**
+  String get assistantOpenFasting;
 
   /// No description provided for @assistantNotConfigured.
   ///
@@ -7000,13 +7084,13 @@ abstract class AppLocalizations {
   /// No description provided for @assistantSearchHint.
   ///
   /// In tr, this message translates to:
-  /// **'Kategori veya soru ara'**
+  /// **'Kategori ara'**
   String get assistantSearchHint;
 
   /// No description provided for @assistantSearchEmpty.
   ///
   /// In tr, this message translates to:
-  /// **'Bu aramayla eşleşen kategori veya soru yok.'**
+  /// **'Bu aramayla eşleşen kategori yok.'**
   String get assistantSearchEmpty;
 
   /// No description provided for @assistantNutritionSection.
@@ -7020,6 +7104,36 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Sağlıklı Yaşam'**
   String get assistantWellnessSection;
+
+  /// No description provided for @assistantSectionDiet.
+  ///
+  /// In tr, this message translates to:
+  /// **'Beslenme ve diyet'**
+  String get assistantSectionDiet;
+
+  /// No description provided for @assistantSectionFoods.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yiyecekler ve besin seçimi'**
+  String get assistantSectionFoods;
+
+  /// No description provided for @assistantSectionHabits.
+  ///
+  /// In tr, this message translates to:
+  /// **'Günlük yaşam ve alışkanlıklar'**
+  String get assistantSectionHabits;
+
+  /// No description provided for @assistantSectionDigestion.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sindirim ve genel sağlık'**
+  String get assistantSectionDigestion;
+
+  /// No description provided for @assistantSectionSpecial.
+  ///
+  /// In tr, this message translates to:
+  /// **'Özel beslenme ihtiyaçları'**
+  String get assistantSectionSpecial;
 
   /// No description provided for @assistantSuggestedTitle.
   ///
@@ -7228,7 +7342,7 @@ abstract class AppLocalizations {
   /// No description provided for @assistantSafetyEmergency.
   ///
   /// In tr, this message translates to:
-  /// **'Bu belirtiler acil olabilir. Şiddetli göğüs ağrısı, nefes darlığı, bayılma veya ani güçsüzlük varsa acil tıbbi yardım al. Teşhis koyamam.'**
+  /// **'Bu belirtiler acil olabilir. Şiddetli göğüs ağrısı, nefes darlığı, bayılma, ani güçsüzlük, durmayan kanama veya ciddi alerji tepkisi varsa gecikmeden acil sağlık hizmetine başvur. Teşhis koyamam.'**
   String get assistantSafetyEmergency;
 
   /// No description provided for @assistantPremiumRequired.

@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/meals/presentation/providers/diary_providers.dart';
 import '../../features/subscription/presentation/providers/premium_providers.dart';
 import '../../features/subscription/presentation/widgets/ad_banner_slot.dart';
 import '../../shared/services/ads/ad_backend.dart';
 import '../utils/breakpoints.dart';
 import '../utils/extensions/context_extensions.dart';
+import 'app_routes.dart';
 
 /// Ana sekmeli yapı. Telefonda alt [NavigationBar], tablet ve geniş
 /// ekranlarda [NavigationRail] kullanır.
@@ -17,12 +19,19 @@ class MainShell extends ConsumerWidget {
 
   final StatefulNavigationShell navigationShell;
 
-  void _onSelect(WidgetRef ref, int index) {
+  void _onSelect(BuildContext context, WidgetRef ref, int index) {
     final changed = index != navigationShell.currentIndex;
-    navigationShell.goBranch(
-      index,
-      initialLocation: index == navigationShell.currentIndex,
-    );
+    // Günlük sekmesi her zaman tüm öğünleri açar. Tek öğün görünümü
+    // yalnızca anasayfadaki öğün satırından gelir.
+    if (index == 1) {
+      ref.read(diaryMealFilterProvider.notifier).clear();
+      context.go(AppRoutes.diary);
+    } else {
+      navigationShell.goBranch(
+        index,
+        initialLocation: index == navigationShell.currentIndex,
+      );
+    }
     if (!changed) return;
     unawaited(
       ref
@@ -51,7 +60,7 @@ class MainShell extends ConsumerWidget {
             const AdBannerSlot(),
             NavigationBar(
               selectedIndex: navigationShell.currentIndex,
-              onDestinationSelected: (index) => _onSelect(ref, index),
+              onDestinationSelected: (index) => _onSelect(context, ref, index),
               destinations: [
                 for (final (icon, selected, label) in destinations)
                   NavigationDestination(
@@ -72,7 +81,7 @@ class MainShell extends ConsumerWidget {
           children: [
             NavigationRail(
               selectedIndex: navigationShell.currentIndex,
-              onDestinationSelected: (index) => _onSelect(ref, index),
+              onDestinationSelected: (index) => _onSelect(context, ref, index),
               extended: Breakpoints.of(context) == WindowSize.expanded,
               labelType: Breakpoints.of(context) == WindowSize.expanded
                   ? NavigationRailLabelType.none

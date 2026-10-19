@@ -16,6 +16,7 @@ import '../../../../core/widgets/responsive_center.dart';
 import '../../../../core/widgets/section_header.dart';
 import '../../../../core/widgets/stat_tile.dart';
 import '../../../../core/widgets/state_views.dart';
+import '../../../../shared/models/enums.dart';
 import '../../../../shared/models/recipe.dart';
 import '../../../../shared/presentation/enum_labels.dart';
 import '../../../../shared/services/analytics/analytics_service.dart';
@@ -370,6 +371,15 @@ class _RecipeBody extends StatelessWidget {
                       AppFormat.integer(context, recipe.servings),
                     ),
                   ),
+                  if (recipe.gramsPerServing case final perServing?)
+                    _Meta(
+                      icon: Icons.scale_outlined,
+                      text: l10n.recipePortionGrams(
+                        l10n.gramsValue(
+                          AppFormat.integer(context, perServing * servings),
+                        ),
+                      ),
+                    ),
                   if (recipe.isUserCreated)
                     _Meta(
                       icon: Icons.person_outline_rounded,
@@ -419,6 +429,29 @@ class _RecipeBody extends StatelessWidget {
                   ],
                 ),
               ],
+              AppSpacing.gapMd,
+              Text(l10n.recipeAllergens, style: context.textStyles.labelLarge),
+              AppSpacing.gapSm,
+              recipe.allergens.isEmpty
+                  ? Text(
+                      l10n.recipeNoDeclaredAllergens,
+                      style: context.textStyles.bodyMedium?.copyWith(
+                        color: variant,
+                      ),
+                    )
+                  : Wrap(
+                      spacing: AppSpacing.sm,
+                      runSpacing: AppSpacing.sm,
+                      children: [
+                        for (final name in recipe.allergens)
+                          Chip(
+                            label: Text(
+                              Allergen.tryParse(name)?.label(l10n) ?? name,
+                            ),
+                            visualDensity: VisualDensity.compact,
+                          ),
+                      ],
+                    ),
               SectionHeader(
                 title: servings == 1
                     ? l10n.recipeNutritionPerServing

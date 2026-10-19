@@ -2379,6 +2379,9 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
+  String get diaryShowAllMeals => 'Tüm öğünler';
+
+  @override
   String get diaryExpand => 'Genişlet';
 
   @override
@@ -2987,6 +2990,18 @@ class AppLocalizationsTr extends AppLocalizations {
   String get recipeMine => 'Benim tarifim';
 
   @override
+  String recipePortionGrams(String grams) {
+    return 'Bir porsiyon yaklaşık $grams';
+  }
+
+  @override
+  String get recipeAllergens => 'Alerjenler';
+
+  @override
+  String get recipeNoDeclaredAllergens =>
+      'Listelenen malzemelerde belirgin alerjen görünmüyor.';
+
+  @override
   String get recipeNutritionPerServing => 'Porsiyon başı besin değerleri';
 
   @override
@@ -3364,7 +3379,11 @@ class AppLocalizationsTr extends AppLocalizations {
       'Profilin, günlüğün, planın, kilo kayıtların ve oruç bilgine bakarak yanıt veririm.';
 
   @override
-  String get assistantHint => 'Bir soru yaz…';
+  String get assistantHint =>
+      'Merak ettiğin sağlık veya beslenme sorusunu yaz…';
+
+  @override
+  String get assistantSend => 'Gönder';
 
   @override
   String get assistantThinking => 'Yanıt hazırlanıyor';
@@ -3530,7 +3549,35 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get assistantHelp =>
-      'Şunları sorabilirsin: bugünkü beslenme değerlendirmen, kalan kalori, protein, karbonhidrat ve yağ, bir öğün önerisi, plandaki yemeği değiştirme, su, kilo ilerlemen veya oruç durumun. Kayıt yoksa tahmin etmem.';
+      'Bu soru mevcut yerel beslenme bilgisinin kapsamında değil. Uydurma veya kişiye özel tıbbi bilgi üretmiyorum. Şunları sorabilirsin: bugünkü beslenme değerlendirmen, aldığın veya kalan kalori, protein kaynakları, bir öğün veya tarif, su takibi, haftalık menün, alışveriş listen, kilo hedefi veya uyku. Kayıt yoksa tahmin etmem.';
+
+  @override
+  String get assistantClarifyPrompt => 'Bunu hangi açıdan öğrenmek istiyorsun?';
+
+  @override
+  String get assistantDetailAsk =>
+      'Bunu biraz daha açar mısın? Örneğin bugünkü kalorini, bir öğün önerisini veya su takibini sorabilirsin.';
+
+  @override
+  String get assistantOpenDiary => 'Öğünlerimi aç';
+
+  @override
+  String get assistantOpenWater => 'Su takibine git';
+
+  @override
+  String get assistantOpenPlan => 'Menümü görüntüle';
+
+  @override
+  String get assistantOpenRecipes => 'Tarifleri incele';
+
+  @override
+  String get assistantOpenShopping => 'Alışveriş listemi aç';
+
+  @override
+  String get assistantOpenWeight => 'Kilo takibine git';
+
+  @override
+  String get assistantOpenFasting => 'Oruç takibine git';
 
   @override
   String get assistantNotConfigured =>
@@ -4153,17 +4200,31 @@ class AppLocalizationsTr extends AppLocalizations {
   String get assistantSummaryError => 'Günlük özet şu anda okunamadı.';
 
   @override
-  String get assistantSearchHint => 'Kategori veya soru ara';
+  String get assistantSearchHint => 'Kategori ara';
 
   @override
-  String get assistantSearchEmpty =>
-      'Bu aramayla eşleşen kategori veya soru yok.';
+  String get assistantSearchEmpty => 'Bu aramayla eşleşen kategori yok.';
 
   @override
   String get assistantNutritionSection => 'Beslenme';
 
   @override
   String get assistantWellnessSection => 'Sağlıklı Yaşam';
+
+  @override
+  String get assistantSectionDiet => 'Beslenme ve diyet';
+
+  @override
+  String get assistantSectionFoods => 'Yiyecekler ve besin seçimi';
+
+  @override
+  String get assistantSectionHabits => 'Günlük yaşam ve alışkanlıklar';
+
+  @override
+  String get assistantSectionDigestion => 'Sindirim ve genel sağlık';
+
+  @override
+  String get assistantSectionSpecial => 'Özel beslenme ihtiyaçları';
 
   @override
   String get assistantSuggestedTitle => 'Önerilen sorular';
@@ -4302,7 +4363,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get assistantSafetyEmergency =>
-      'Bu belirtiler acil olabilir. Şiddetli göğüs ağrısı, nefes darlığı, bayılma veya ani güçsüzlük varsa acil tıbbi yardım al. Teşhis koyamam.';
+      'Bu belirtiler acil olabilir. Şiddetli göğüs ağrısı, nefes darlığı, bayılma, ani güçsüzlük, durmayan kanama veya ciddi alerji tepkisi varsa gecikmeden acil sağlık hizmetine başvur. Teşhis koyamam.';
 
   @override
   String get assistantPremiumRequired =>

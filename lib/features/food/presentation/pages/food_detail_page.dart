@@ -36,6 +36,7 @@ class FoodDetailPage extends ConsumerWidget {
     required this.foodId,
     this.initialFood,
     this.initialMeal,
+    this.lockMeal = false,
     this.logDate,
   });
 
@@ -44,6 +45,7 @@ class FoodDetailPage extends ConsumerWidget {
   /// Listeden gelindiğinde yiyecek tekrar yüklenmez.
   final Food? initialFood;
   final MealType? initialMeal;
+  final bool lockMeal;
 
   /// Verilirse yemek bu güne eklenir (Günlük'te seçili gün).
   final DateTime? logDate;
@@ -52,7 +54,12 @@ class FoodDetailPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final food = initialFood;
     if (food != null) {
-      return _FoodDetailView(food: food, meal: initialMeal, logDate: logDate);
+      return _FoodDetailView(
+        food: food,
+        meal: initialMeal,
+        lockMeal: lockMeal,
+        logDate: logDate,
+      );
     }
 
     final value = ref.watch(foodByIdProvider(foodId));
@@ -74,16 +81,27 @@ class FoodDetailPage extends ConsumerWidget {
                 title: context.l10n.foodNotFound,
               ),
             )
-          : _FoodDetailView(food: loaded, meal: initialMeal, logDate: logDate),
+          : _FoodDetailView(
+              food: loaded,
+              meal: initialMeal,
+              lockMeal: lockMeal,
+              logDate: logDate,
+            ),
     );
   }
 }
 
 class _FoodDetailView extends ConsumerStatefulWidget {
-  const _FoodDetailView({required this.food, this.meal, this.logDate});
+  const _FoodDetailView({
+    required this.food,
+    this.meal,
+    this.lockMeal = false,
+    this.logDate,
+  });
 
   final Food food;
   final MealType? meal;
+  final bool lockMeal;
   final DateTime? logDate;
 
   @override
@@ -218,11 +236,13 @@ class _FoodDetailViewState extends ConsumerState<_FoodDetailView> {
                     ),
                   ),
                 ],
-                SectionHeader(title: l10n.foodMeal),
-                MealTypeSelector(
-                  value: _meal,
-                  onChanged: (m) => setState(() => _meal = m),
-                ),
+                if (!widget.lockMeal) ...[
+                  SectionHeader(title: l10n.foodMeal),
+                  MealTypeSelector(
+                    value: _meal,
+                    onChanged: (m) => setState(() => _meal = m),
+                  ),
+                ],
                 AppSpacing.gapXl,
                 if (_food.isSample && reference != null)
                   SampleDataNotice(source: reference)

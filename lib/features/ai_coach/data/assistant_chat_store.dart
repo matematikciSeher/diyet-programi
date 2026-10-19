@@ -37,8 +37,26 @@ class AssistantChatStore {
   const AssistantChatStore(this._database);
 
   static const collection = FirestorePaths.assistantChatLocal;
+  static const metaCollection = FirestorePaths.assistantChatMetaLocal;
+  static const metaId = 'session';
 
   final DocumentDatabase _database;
+
+  Future<String?> loadCategory() async {
+    final doc = await _database.getDocument('$metaCollection/$metaId');
+    final id = doc?.data['categoryId'];
+    if (id is! String || id.isEmpty) return null;
+    return id;
+  }
+
+  Future<void> saveCategory(String? categoryId) async {
+    final path = '$metaCollection/$metaId';
+    if (categoryId == null || categoryId.isEmpty) {
+      await _database.deleteDocument(path);
+      return;
+    }
+    await _database.setDocument(path, {'categoryId': categoryId});
+  }
 
   Future<List<AssistantTranscript>> load() async {
     final docs = await _database.getCollection(

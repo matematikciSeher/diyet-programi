@@ -69,6 +69,9 @@ class AssistantContext extends Equatable {
     this.weekPlan = const [],
     this.knownRecipes = const [],
     this.shoppingLines = const [],
+    this.pinnedQuestionId,
+    this.priorUserQuestion,
+    this.categoryId,
   });
 
   final DateTime now;
@@ -103,6 +106,44 @@ class AssistantContext extends Equatable {
   final List<PlannedMeal> weekPlan;
   final List<AssistantKnownRecipe> knownRecipes;
   final List<AssistantShoppingLine> shoppingLines;
+
+  /// Katalogdan seçilen soru. Serbest metin eşleştirmesini atlar.
+  final String? pinnedQuestionId;
+
+  /// Bir önceki kullanıcı cümlesi. Belirsiz soruyu daraltmak için okunur.
+  final String? priorUserQuestion;
+
+  /// Seçili kategori. Eşleşmeyi yalnızca bu kategoriye zorlamaz.
+  final String? categoryId;
+
+  AssistantContext withDialogue({
+    String? pinnedQuestionId,
+    String? priorUserQuestion,
+    String? categoryId,
+  }) {
+    return AssistantContext(
+      now: now,
+      targets: targets,
+      profile: profile,
+      todayMeals: todayMeals,
+      todayWaterMl: todayWaterMl,
+      todayWaterLogCount: todayWaterLogCount,
+      weights: weights,
+      measurements: measurements,
+      todayPlan: todayPlan,
+      fastingSchedule: fastingSchedule,
+      activeFast: activeFast,
+      todayActivity: todayActivity,
+      weekMeals: weekMeals,
+      weekWaterLogs: weekWaterLogs,
+      weekPlan: weekPlan,
+      knownRecipes: knownRecipes,
+      shoppingLines: shoppingLines,
+      pinnedQuestionId: pinnedQuestionId,
+      priorUserQuestion: priorUserQuestion,
+      categoryId: categoryId,
+    );
+  }
 
   bool get hasPersonalTargets => profile?.nutritionTargets != null;
 
@@ -153,5 +194,8 @@ class AssistantContext extends Equatable {
     weekPlan,
     knownRecipes,
     shoppingLines,
+    pinnedQuestionId,
+    priorUserQuestion,
+    categoryId,
   ];
 }

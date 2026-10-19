@@ -21,6 +21,7 @@ class FoodCaptureReview extends StatelessWidget {
     super.key,
     required this.drafts,
     required this.meal,
+    this.lockMeal = false,
     required this.saving,
     required this.calculator,
     required this.onMeal,
@@ -36,6 +37,9 @@ class FoodCaptureReview extends StatelessWidget {
 
   final List<FoodLogDraft> drafts;
   final MealType? meal;
+
+  /// Öğün sabitlendiğinde kahvaltı/öğle/akşam/atıştırmalık seçimi gösterilmez.
+  final bool lockMeal;
   final bool saving;
   final FoodCalculationService calculator;
   final ValueChanged<MealType> onMeal;
@@ -49,7 +53,9 @@ class FoodCaptureReview extends StatelessWidget {
   final VoidCallback onSave;
 
   bool get _ready =>
-      meal != null && drafts.isNotEmpty && drafts.every((draft) => draft.canSave);
+      meal != null &&
+      drafts.isNotEmpty &&
+      drafts.every((draft) => draft.canSave);
 
   @override
   Widget build(BuildContext context) {
@@ -65,22 +71,24 @@ class FoodCaptureReview extends StatelessWidget {
             color: context.colors.onSurfaceVariant,
           ),
         ),
-        AppSpacing.gapMd,
-        Text(l10n.photoLogMeal, style: context.textStyles.titleSmall),
-        AppSpacing.gapSm,
-        Wrap(
-          spacing: AppSpacing.sm,
-          runSpacing: AppSpacing.sm,
-          children: [
-            for (final type in MealType.values)
-              ChoiceChip(
-                label: Text(type.label(l10n)),
-                selected: meal == type,
-                onSelected: (_) => onMeal(type),
-              ),
-          ],
-        ),
-        if (meal == null) ...[
+        if (!lockMeal) ...[
+          AppSpacing.gapMd,
+          Text(l10n.photoLogMeal, style: context.textStyles.titleSmall),
+          AppSpacing.gapSm,
+          Wrap(
+            spacing: AppSpacing.sm,
+            runSpacing: AppSpacing.sm,
+            children: [
+              for (final type in MealType.values)
+                ChoiceChip(
+                  label: Text(type.label(l10n)),
+                  selected: meal == type,
+                  onSelected: (_) => onMeal(type),
+                ),
+            ],
+          ),
+        ],
+        if (!lockMeal && meal == null) ...[
           AppSpacing.gapSm,
           Text(l10n.photoLogSelectMeal, style: context.textStyles.bodyMedium),
         ],
@@ -176,7 +184,10 @@ class _DraftTile extends StatelessWidget {
                 onPressed: () => onRemove(draft),
                 icon: const Icon(Icons.delete_outline),
                 style: IconButton.styleFrom(
-                  minimumSize: const Size(AppSizes.minTouchTarget, AppSizes.minTouchTarget),
+                  minimumSize: const Size(
+                    AppSizes.minTouchTarget,
+                    AppSizes.minTouchTarget,
+                  ),
                 ),
               ),
             ],
@@ -349,8 +360,9 @@ class _DraftTile extends StatelessWidget {
     };
   }
 
-  String _qty(double value) =>
-      value == value.roundToDouble() ? '${value.round()}' : value.toStringAsFixed(1);
+  String _qty(double value) => value == value.roundToDouble()
+      ? '${value.round()}'
+      : value.toStringAsFixed(1);
 }
 
 class _SearchRow extends StatefulWidget {

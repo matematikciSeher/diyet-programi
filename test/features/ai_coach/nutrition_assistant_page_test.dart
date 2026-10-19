@@ -29,7 +29,22 @@ import '../../helpers/test_profile.dart';
 void main() {
   final l10n = lookupAppLocalizations(const Locale('tr'));
 
-  Widget app({required bool premium, Widget? home}) {
+  Future<void> scrollCatalogTo(WidgetTester tester, Finder target) async {
+    final list = find.byKey(const ValueKey('assistant-catalog'));
+    for (var attempt = 0; attempt < 50 && target.evaluate().isEmpty; attempt++) {
+      await tester.drag(list, const Offset(0, -700));
+      await tester.pump();
+    }
+    expect(target, findsWidgets);
+  }
+
+  Future<void> scrollCatalogToTop(WidgetTester tester) async {
+    final list = tester.widget<ListView>(find.byKey(const ValueKey('assistant-catalog')));
+    list.controller!.jumpTo(0);
+    await tester.pump();
+  }
+
+  Widget app({required bool premium, Widget? home, Locale locale = const Locale('tr')}) {
     return ProviderScope(
       overrides: [
         if (premium) premiumOverride,
@@ -42,7 +57,7 @@ void main() {
         ),
       ],
       child: MaterialApp(
-        locale: const Locale('tr'),
+        locale: locale,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         theme: AppTheme.light,
@@ -76,37 +91,112 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text(l10n.assistantWelcome), findsOneWidget);
-    expect(find.text(l10n.assistantNutritionSection), findsOneWidget);
-    expect(find.text(l10n.assistantWellnessSection), findsOneWidget);
+    expect(find.text(l10n.assistantSectionDiet), findsOneWidget);
+    expect(find.text(l10n.assistantSuggestedTitle), findsNothing);
+    expect(find.byKey(const ValueKey('assistant-input')), findsOneWidget);
+    expect(find.text(l10n.assistantSend), findsOneWidget);
 
+    var sawSpecial = false;
     for (final category in AssistantCatalog.categories) {
-      expect(find.text(category.titleTr), findsOneWidget);
-      await tester.tap(find.byKey(ValueKey('assistant-category-${category.id}')));
-      await tester.pump();
-      for (final question in category.questions) {
-        expect(
-          find.byKey(ValueKey('assistant-question-${question.id}')),
-          findsOneWidget,
-        );
-      }
-      await tester.tap(find.byKey(ValueKey('assistant-category-${category.id}')));
-      await tester.pump();
+      expect(category.questions, isNotEmpty);
+      final title = find.byKey(ValueKey('assistant-category-${category.id}'));
+      final question = find.byKey(
+        ValueKey('assistant-question-${category.questions.first.id}'),
+      );
+      await scrollCatalogTo(tester, question);
+      expect(title, findsOneWidget);
+      expect(question, findsOneWidget);
+      if (category.section == AssistantSection.special) sawSpecial = true;
     }
+    expect(sawSpecial, isTrue);
 
+    await scrollCatalogToTop(tester);
     await tester.enterText(find.byKey(const ValueKey('assistant-search')), 'zzzz');
     await tester.pump();
     expect(find.byKey(const ValueKey('assistant-search-empty')), findsOneWidget);
 
+    await tester.enterText(find.byKey(const ValueKey('assistant-search')), 'kahvalti');
+    await tester.pump();
+    await scrollCatalogTo(
+      tester,
+      find.byKey(const ValueKey('assistant-category-breakfast')),
+    );
+
     await tester.enterText(find.byKey(const ValueKey('assistant-search')), '');
     await tester.pump();
 
-    await tester.tap(find.byKey(const ValueKey('assistant-category-calories')));
-    await tester.pump();
-    await tester.tap(find.byKey(const ValueKey('assistant-question-cal.consumed')));
+    final calories = find.byKey(const ValueKey('assistant-question-cal.consumed'));
+    await scrollCatalogTo(tester, calories);
+    await tester.tap(calories);
     await tester.pumpAndSettle();
-
+    expect(find.byKey(const ValueKey('assistant-chat-category')), findsOneWidget);
+    expect(find.text('Kalori ve Enerji İhtiyacı'), findsOneWidget);
+    expect(find.byKey(const ValueKey('assistant-input')), findsOneWidget);
+    await tester.enterText(
+      find.byKey(const ValueKey('assistant-input')),
+      'Bugün kaç kalori aldım?',
+    );
+    await tester.tap(find.byKey(const ValueKey('assistant-send')));
+    await tester.pumpAndSettle();
+    expect(find.text('Bugün kaç kalori aldım?'), findsWidgets);
     expect(find.textContaining('520'), findsWidgets);
-    expect(find.text('Bugün kaç kalori aldım?'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('dar ekranda premium kapısı taşmaz', (tester) async {
+    tester.view.physicalSize = const Size(320, 700);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(app(premium: false));
+    await tester.pumpAndSettle();
+    expect(find.byType(PremiumLockedPage), findsOneWidget);
+    expect(find.byKey(const ValueKey('assistant-welcome')), findsNothing);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('dar ekranda kategori sohbeti ve seçenekler taşmaz', (tester) async {
+    tester.view.physicalSize = const Size(320, 5000);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(app(premium: true));
+    await tester.pumpAndSettle();
+    expect(find.text(l10n.assistantSuggestedTitle), findsNothing);
+    expect(find.bySemanticsLabel(l10n.assistantSearchHint), findsWidgets);
+    expect(tester.takeException(), isNull);
+
+    final calcium = find.byKey(const ValueKey('assistant-question-vit.calcium'));
+    await scrollCatalogTo(tester, calcium);
+    await tester.tap(calcium);
+    await tester.pumpAndSettle();
+    expect(find.text('Kalsiyum kaynakları nelerdir?'), findsOneWidget);
+    expect(find.byKey(const ValueKey('assistant-choice-bone.calcium')), findsNothing);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('İngilizce karşılama ve boş arama görünür', (tester) async {
+    final english = lookupAppLocalizations(const Locale('en'));
+    tester.view.physicalSize = const Size(360, 4200);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(app(premium: true, locale: const Locale('en')));
+    await tester.pumpAndSettle();
+    expect(find.text(english.assistantWelcome), findsOneWidget);
+    expect(find.text(english.assistantSectionDiet), findsWidgets);
+    await scrollCatalogTo(tester, find.text(english.assistantSectionFoods));
+    expect(find.text(english.assistantSectionFoods), findsWidgets);
+    expect(find.byType(PremiumLockedPage), findsNothing);
+
+    await scrollCatalogToTop(tester);
+    await tester.enterText(find.byKey(const ValueKey('assistant-search')), 'zzzz');
+    await tester.pump();
+    expect(find.text(english.assistantSearchEmpty), findsOneWidget);
+    expect(tester.takeException(), isNull);
   });
 }
 

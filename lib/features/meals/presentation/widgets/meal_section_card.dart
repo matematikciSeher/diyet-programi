@@ -24,19 +24,23 @@ class MealSectionCard extends ConsumerWidget {
     required this.type,
     required this.onAddFood,
     required this.onEntryAction,
+    this.lockExpanded = false,
   });
 
   final MealType type;
   final VoidCallback onAddFood;
   final void Function(MealEntry entry, FoodEntryAction action) onEntryAction;
 
+  /// Tek öğün görünümünde kart daraltılamaz; yiyecekler hemen görünür.
+  final bool lockExpanded;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final meal = ref.watch(mealLogProvider(type)) ?? MealLog(type: type);
-    final collapsed = ref.watch(
-      collapsedMealsProvider.select((s) => s.contains(type)),
-    );
+    final collapsed =
+        !lockExpanded &&
+        ref.watch(collapsedMealsProvider.select((s) => s.contains(type)));
     final favorites = ref.watch(favoriteFoodIdsProvider);
 
     return AppCard(
@@ -47,8 +51,9 @@ class MealSectionCard extends ConsumerWidget {
           _MealHeader(
             meal: meal,
             collapsed: collapsed,
-            onToggle: () =>
-                ref.read(collapsedMealsProvider.notifier).toggle(type),
+            onToggle: lockExpanded
+                ? null
+                : () => ref.read(collapsedMealsProvider.notifier).toggle(type),
           ),
           AnimatedSize(
             duration: const Duration(milliseconds: 220),
@@ -121,7 +126,7 @@ class _MealHeader extends StatelessWidget {
 
   final MealLog meal;
   final bool collapsed;
-  final VoidCallback onToggle;
+  final VoidCallback? onToggle;
 
   @override
   Widget build(BuildContext context) {
@@ -202,15 +207,16 @@ class _MealHeader extends StatelessWidget {
                 ),
               ),
             ),
-            IconButton(
-              tooltip: collapsed ? l10n.diaryExpand : l10n.diaryCollapse,
-              onPressed: onToggle,
-              icon: AnimatedRotation(
-                turns: collapsed ? -0.25 : 0,
-                duration: const Duration(milliseconds: 200),
-                child: const Icon(Icons.expand_more_rounded),
+            if (onToggle != null)
+              IconButton(
+                tooltip: collapsed ? l10n.diaryExpand : l10n.diaryCollapse,
+                onPressed: onToggle,
+                icon: AnimatedRotation(
+                  turns: collapsed ? -0.25 : 0,
+                  duration: const Duration(milliseconds: 200),
+                  child: const Icon(Icons.expand_more_rounded),
+                ),
               ),
-            ),
           ],
         ),
       ),

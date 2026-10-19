@@ -7,6 +7,7 @@ import '../../../../shared/repositories/user_profile_repository.dart';
 import '../../../../shared/services/service_providers.dart';
 import '../../../meal_plans/presentation/providers/meal_plan_providers.dart';
 import '../../../meals/data/repositories/meal_log_repository_impl.dart';
+import '../../data/datasources/recipe_images.dart';
 import '../../data/repositories/recipe_repository_impl.dart';
 import '../../domain/models/recipe_category.dart';
 import '../../domain/services/recipe_portion_service.dart';
@@ -116,46 +117,30 @@ class RecipeFilter extends Equatable {
 }
 
 class RecipeFilterController extends Notifier<RecipeFilter> {
+  static const initial = RecipeFilter(mealType: MealType.breakfast);
+
   @override
-  RecipeFilter build() => const RecipeFilter();
+  RecipeFilter build() => initial;
 
   void search(String query) => state = state.copyWith(query: query);
 
-  /// `null`: tüm kategoriler. Öğün ve favori seçimini kapatır.
-  void selectCategory(RecipeCategory? category) => state = state.copyWith(
-    category: category,
-    clearCategory: category == null,
-    clearMealType: true,
-    favoritesOnly: false,
-  );
+  /// Seçilen öğünün tarifleri. Başka kategori seçimi kapanır.
+  void selectMealType(MealType mealType) =>
+      state = RecipeFilter(query: state.query, mealType: mealType);
 
-  void selectMealType(MealType? mealType) => state = state.copyWith(
-    mealType: mealType,
-    clearMealType: mealType == null,
-    clearCategory: true,
-    favoritesOnly: false,
-  );
+  /// Seçilen etiketin tarifleri. Başka kategori seçimi kapanır.
+  void selectTag(String tag) =>
+      state = RecipeFilter(query: state.query, tags: {tag});
 
-  void toggleTag(String tag) {
-    final next = {...state.tags};
-    if (!next.add(tag)) next.remove(tag);
-    state = state.copyWith(tags: next, favoritesOnly: false);
-  }
+  /// Seçilen kalori sınırının tarifleri. Başka kategori seçimi kapanır.
+  void selectMaxCalories(double kcal) =>
+      state = RecipeFilter(query: state.query, maxCalories: kcal);
 
-  void setMaxCalories(double? kcal) => state = state.copyWith(
-    maxCalories: kcal,
-    clearMaxCalories: kcal == null,
-  );
+  void showFavorites() =>
+      state = RecipeFilter(query: state.query, favoritesOnly: true);
 
-  void showFavorites() => state = state.copyWith(
-    clearCategory: true,
-    clearMealType: true,
-    tags: const {},
-    clearMaxCalories: true,
-    favoritesOnly: true,
-  );
-
-  void clear() => state = const RecipeFilter();
+  /// Aramayı siler ve varsayılan kategoriye döner.
+  void clear() => state = initial;
 }
 
 final recipeFilterProvider =
@@ -228,9 +213,9 @@ final filteredRecipesProvider = Provider<AsyncValue<List<Recipe>>>((ref) {
   final filter = ref.watch(recipeFilterProvider);
   final favorites = ref.watch(favoriteRecipeIdsProvider).value ?? const {};
   final cache = ref.watch(recipeSearchCacheProvider);
-  return ref
-      .watch(recipesProvider)
-      .whenData(
-        (all) => cache.filter(all, filter, favorites: favorites),
-      );
+  return ref.watch(recipesProvider).whenData(
+    (all) => RecipeImages.withImagesFirst(
+      cache.filter(all, filter, favorites: favorites),
+    ),
+  );
 });

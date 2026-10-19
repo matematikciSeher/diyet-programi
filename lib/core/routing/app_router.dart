@@ -94,6 +94,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         AppRoutes.foodSearch,
         (state) => FoodSearchPage(
           initialMeal: _mealParam(state),
+          lockMeal: _mealLocked(state),
           logDate: _dateParam(state),
         ),
       ),
@@ -103,6 +104,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           foodId: state.pathParameters['id'] ?? '',
           initialFood: state.extra is Food ? state.extra! as Food : null,
           initialMeal: _mealParam(state),
+          lockMeal: _mealLocked(state),
           logDate: _dateParam(state),
         ),
       ),
@@ -136,6 +138,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           feature: AppFeature.photoFoodAnalysis,
           child: PhotoLogPage(
             initialMeal: _mealParam(state),
+            lockMeal: _mealLocked(state),
             logDate: _dateParam(state),
           ),
         ),
@@ -146,6 +149,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         parentNavigatorKey: rootNavigatorKey,
         builder: (context, state) => VoiceLogPage(
           initialMeal: _mealParam(state),
+          lockMeal: _mealLocked(state),
           logDate: _dateParam(state),
         ),
       ),
@@ -227,6 +231,9 @@ MealType? _mealParam(GoRouterState state) => JsonUtils.readEnumOrNull(
   MealType.values,
   state.uri.queryParameters[AppRoutes.mealQueryParam],
 );
+
+bool _mealLocked(GoRouterState state) =>
+    state.uri.queryParameters[AppRoutes.mealLockedQueryParam] == '1';
 
 DateTime? _dateParam(GoRouterState state) =>
     JsonUtils.readDate(state.uri.queryParameters[AppRoutes.dateQueryParam]);

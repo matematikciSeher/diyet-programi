@@ -149,6 +149,11 @@ class CollapsedMealsController extends Notifier<Set<MealType>> {
   void toggle(MealType type) => state = state.contains(type)
       ? ({...state}..remove(type))
       : {...state, type};
+
+  void expand(MealType type) {
+    if (!state.contains(type)) return;
+    state = {...state}..remove(type);
+  }
 }
 
 final collapsedMealsProvider =
@@ -185,3 +190,18 @@ class DiaryFocusController extends Notifier<DiaryFocus?> {
 final diaryFocusProvider = NotifierProvider<DiaryFocusController, DiaryFocus?>(
   DiaryFocusController.new,
 );
+
+/// Anasayfadaki bir öğüne dokunulunca günlük yalnızca o öğünü gösterir.
+class DiaryMealFilterController extends Notifier<MealType?> {
+  @override
+  MealType? build() => null;
+
+  void select(MealType type) => state = type;
+
+  void clear() => state = null;
+}
+
+final diaryMealFilterProvider =
+    NotifierProvider<DiaryMealFilterController, MealType?>(
+      DiaryMealFilterController.new,
+    );

@@ -45,6 +45,9 @@ abstract final class AppRoutes {
   /// parametresiyle alır (ör. `/food/search?meal=lunch`).
   static const mealQueryParam = 'meal';
 
+  /// Öğün baştan belli ise seçici gizlenir (`locked=1`).
+  static const mealLockedQueryParam = 'locked';
+
   /// Günlük'te su kartına veya belirli bir öğüne odaklanmak için.
   static const sectionQueryParam = 'section';
   static const waterSection = 'water';
@@ -53,32 +56,43 @@ abstract final class AppRoutes {
   /// (`yyyy-MM-dd`). Verilmezse bugüne eklenir.
   static const dateQueryParam = 'date';
 
-  static String withMeal(String route, Enum? meal, {DateTime? date}) =>
-      _withQuery(route, {
-        if (meal != null) mealQueryParam: meal.name,
-        if (date != null) dateQueryParam: date.dayKey,
-      });
+  static String withMeal(
+    String route,
+    Enum? meal, {
+    DateTime? date,
+    bool lockMeal = false,
+  }) => _withQuery(route, {
+    if (meal != null) mealQueryParam: meal.name,
+    if (lockMeal) mealLockedQueryParam: '1',
+    if (date != null) dateQueryParam: date.dayKey,
+  });
 
   static String diaryFocus({Enum? meal, String? section}) => _withQuery(diary, {
     mealQueryParam: ?meal?.name,
     sectionQueryParam: ?section,
   });
 
-  static String foodDetailPath(String id, {Enum? meal, DateTime? date}) =>
-      withMeal('/food/item/${Uri.encodeComponent(id)}', meal, date: date);
+  static String foodDetailPath(
+    String id, {
+    Enum? meal,
+    DateTime? date,
+    bool lockMeal = false,
+  }) => withMeal(
+    '/food/item/${Uri.encodeComponent(id)}',
+    meal,
+    date: date,
+    lockMeal: lockMeal,
+  );
 
   /// Barkodla bulunamayan ürünü oluştururken barkod ön-doldurulur.
   static const barcodeQueryParam = 'barcode';
 
-  static String customFoodPath({
-    Enum? meal,
-    String? barcode,
-    DateTime? date,
-  }) => _withQuery(customFood, {
-    if (meal != null) mealQueryParam: meal.name,
-    barcodeQueryParam: ?barcode,
-    if (date != null) dateQueryParam: date.dayKey,
-  });
+  static String customFoodPath({Enum? meal, String? barcode, DateTime? date}) =>
+      _withQuery(customFood, {
+        if (meal != null) mealQueryParam: meal.name,
+        barcodeQueryParam: ?barcode,
+        if (date != null) dateQueryParam: date.dayKey,
+      });
 
   static String _withQuery(String path, Map<String, String> query) =>
       query.isEmpty ? path : Uri(path: path, queryParameters: query).toString();

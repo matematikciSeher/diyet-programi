@@ -27,9 +27,15 @@ import '../widgets/food_picker_sheet.dart';
 
 /// Ses adayları onaylanmadan günlüğe yazılmaz. Kayıt saklanmaz.
 class VoiceLogPage extends ConsumerStatefulWidget {
-  const VoiceLogPage({super.key, this.initialMeal, this.logDate});
+  const VoiceLogPage({
+    super.key,
+    this.initialMeal,
+    this.lockMeal = false,
+    this.logDate,
+  });
 
   final MealType? initialMeal;
+  final bool lockMeal;
   final DateTime? logDate;
 
   @override
@@ -64,7 +70,9 @@ class _VoiceLogPageState extends ConsumerState<VoiceLogPage> {
 
   Future<void> _listen() async {
     if (_listening) return;
-    final access = await ref.read(mediaPermissionGatewayProvider).requestMicrophone();
+    final access = await ref
+        .read(mediaPermissionGatewayProvider)
+        .requestMicrophone();
     if (!mounted) return;
     if (access != MediaAccess.granted) {
       setState(() => _error = context.l10n.errorPermission);
@@ -119,14 +127,16 @@ class _VoiceLogPageState extends ConsumerState<VoiceLogPage> {
   Future<void> _parse() async {
     final generation = ++_generation;
     setState(() => _phase = FoodCapturePhase.parsing);
-    final result = await ref.read(foodCaptureActionsProvider).analyzeTranscript(
-      _text.text,
-      profile: ref.read(userProfileProvider).value,
-      onPhase: (phase) {
-        if (!mounted || generation != _generation) return;
-        setState(() => _phase = phase);
-      },
-    );
+    final result = await ref
+        .read(foodCaptureActionsProvider)
+        .analyzeTranscript(
+          _text.text,
+          profile: ref.read(userProfileProvider).value,
+          onPhase: (phase) {
+            if (!mounted || generation != _generation) return;
+            setState(() => _phase = phase);
+          },
+        );
     if (!mounted || generation != _generation) return;
     switch (result) {
       case Success(:final value):
@@ -160,11 +170,13 @@ class _VoiceLogPageState extends ConsumerState<VoiceLogPage> {
     );
     if (!mounted) return;
     _replace(
-      ref.read(foodDraftBuilderProvider).applyMatch(
-        draft.copyWith(queryName: name),
-        match,
-        profile: ref.read(userProfileProvider).value,
-      ),
+      ref
+          .read(foodDraftBuilderProvider)
+          .applyMatch(
+            draft.copyWith(queryName: name),
+            match,
+            profile: ref.read(userProfileProvider).value,
+          ),
     );
   }
 
@@ -172,11 +184,9 @@ class _VoiceLogPageState extends ConsumerState<VoiceLogPage> {
     final food = await pickFood(context);
     if (food == null || !mounted) return;
     _replace(
-      ref.read(foodDraftBuilderProvider).relink(
-        draft,
-        food,
-        profile: ref.read(userProfileProvider).value,
-      ),
+      ref
+          .read(foodDraftBuilderProvider)
+          .relink(draft, food, profile: ref.read(userProfileProvider).value),
     );
   }
 
@@ -184,33 +194,39 @@ class _VoiceLogPageState extends ConsumerState<VoiceLogPage> {
     final picked = await pickIngredient(context);
     if (picked == null || !mounted) return;
     final (food, selection) = picked;
-    final grams = ref.read(foodCalculationServiceProvider).gramsFor(food, selection);
-    final draft = ref.read(foodDraftBuilderProvider).relink(
-      FoodLogDraft(
-        localId: 'voice-add-${food.id}-${_drafts.length}',
-        queryName: food.name,
-        matchStatus: FoodMatchStatus.matched,
-        quantity: selection.quantity,
-        unit: selection.portion.unit,
-        source: FoodSource.voice,
-        baseAmount: grams ?? selection.baseAmount,
-      ),
-      food,
-      profile: ref.read(userProfileProvider).value,
-    );
+    final grams = ref
+        .read(foodCalculationServiceProvider)
+        .gramsFor(food, selection);
+    final draft = ref
+        .read(foodDraftBuilderProvider)
+        .relink(
+          FoodLogDraft(
+            localId: 'voice-add-${food.id}-${_drafts.length}',
+            queryName: food.name,
+            matchStatus: FoodMatchStatus.matched,
+            quantity: selection.quantity,
+            unit: selection.portion.unit,
+            source: FoodSource.voice,
+            baseAmount: grams ?? selection.baseAmount,
+          ),
+          food,
+          profile: ref.read(userProfileProvider).value,
+        );
     setState(() => _drafts = [..._drafts, draft]);
   }
 
   Future<void> _save() async {
     if (_saving || _submissionId == null || _meal == null) return;
     setState(() => _saving = true);
-    final result = await ref.read(confirmCapturedFoodsProvider).call(
-      drafts: _drafts,
-      mealType: _meal,
-      submissionId: _submissionId!,
-      day: widget.logDate,
-      confirmed: true,
-    );
+    final result = await ref
+        .read(confirmCapturedFoodsProvider)
+        .call(
+          drafts: _drafts,
+          mealType: _meal,
+          submissionId: _submissionId!,
+          day: widget.logDate,
+          confirmed: true,
+        );
     if (!mounted) return;
     setState(() => _saving = false);
     switch (result) {
@@ -229,7 +245,10 @@ class _VoiceLogPageState extends ConsumerState<VoiceLogPage> {
     return Scaffold(
       appBar: AppBar(title: Text(l10n.featureVoiceLog)),
       body: ListView(
-        padding: const EdgeInsets.only(top: AppSpacing.lg, bottom: AppSpacing.xxxl),
+        padding: const EdgeInsets.only(
+          top: AppSpacing.lg,
+          bottom: AppSpacing.xxxl,
+        ),
         children: [
           ResponsiveCenter(
             child: Column(
@@ -237,12 +256,18 @@ class _VoiceLogPageState extends ConsumerState<VoiceLogPage> {
               children: [
                 Semantics(
                   button: true,
-                  label: _listening ? l10n.voiceLogStop : l10n.voiceLogMicSemantics,
+                  label: _listening
+                      ? l10n.voiceLogStop
+                      : l10n.voiceLogMicSemantics,
                   child: FilledButton.icon(
                     key: const ValueKey('voice-mic'),
                     onPressed: _listening ? _stop : _listen,
-                    icon: Icon(_listening ? Icons.stop_rounded : Icons.mic_none_rounded),
-                    label: Text(_listening ? l10n.voiceLogStop : l10n.voiceLogMic),
+                    icon: Icon(
+                      _listening ? Icons.stop_rounded : Icons.mic_none_rounded,
+                    ),
+                    label: Text(
+                      _listening ? l10n.voiceLogStop : l10n.voiceLogMic,
+                    ),
                     style: const ButtonStyle(
                       minimumSize: WidgetStatePropertyAll(
                         Size(48, AppSizes.minTouchTarget),
@@ -255,7 +280,9 @@ class _VoiceLogPageState extends ConsumerState<VoiceLogPage> {
                   Semantics(
                     liveRegion: true,
                     child: Text(
-                      _listening ? l10n.voiceLogListening : l10n.photoLogMatching,
+                      _listening
+                          ? l10n.voiceLogListening
+                          : l10n.photoLogMatching,
                     ),
                   ),
                 ],
@@ -294,10 +321,7 @@ class _VoiceLogPageState extends ConsumerState<VoiceLogPage> {
                     ),
                   ],
                 ),
-                if (_error != null) ...[
-                  AppSpacing.gapMd,
-                  Text(_error!),
-                ],
+                if (_error != null) ...[AppSpacing.gapMd, Text(_error!)],
                 if (_parsed) ...[
                   AppSpacing.gapLg,
                   if (_drafts.isEmpty)
@@ -306,16 +330,19 @@ class _VoiceLogPageState extends ConsumerState<VoiceLogPage> {
                     FoodCaptureReview(
                       drafts: _drafts,
                       meal: _meal,
+                      lockMeal: widget.lockMeal,
                       saving: _saving,
                       calculator: ref.watch(foodCalculationServiceProvider),
                       onMeal: (meal) => setState(() => _meal = meal),
                       onChanged: _replace,
                       onSelectFood: (draft, food) => _replace(
-                        ref.read(foodDraftBuilderProvider).relink(
-                          draft,
-                          food,
-                          profile: ref.read(userProfileProvider).value,
-                        ),
+                        ref
+                            .read(foodDraftBuilderProvider)
+                            .relink(
+                              draft,
+                              food,
+                              profile: ref.read(userProfileProvider).value,
+                            ),
                       ),
                       onRemove: (draft) => setState(
                         () => _drafts = [

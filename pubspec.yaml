@@ -85,4 +85,5 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/recipes/
     - assets/icons/

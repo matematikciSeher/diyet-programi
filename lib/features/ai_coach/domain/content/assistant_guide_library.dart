@@ -1,4 +1,5 @@
 import 'assistant_guides_nutrition.dart';
+import 'assistant_guides_topics.dart';
 import 'assistant_guides_wellness.dart';
 import 'guide_copy.dart';
 
@@ -11,5 +12,6 @@ abstract final class AssistantGuideLibrary {
   static final Map<String, LocalizedGuide> _all = {
     ...nutritionGuides,
     ...wellnessGuides,
+    ...topicGuides,
   };
 }

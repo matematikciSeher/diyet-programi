@@ -1,0 +1,1554 @@
+{
+  "schemaVersion": 1,
+  "language": "tr-TR",
+  "title": "Diyet Uygulaması Tarifleri - Başlangıç Paketi",
+  "notes": [
+    "Besin değerleri yaklaşık değerlerdir; kullanılan ürün ve gramaja göre doğrulanmalıdır.",
+    "imageSearchQuery görsel bulma/eşleştirme içindir; doğrudan çalışan bir imageUrl değildir.",
+    "Bu dosya projedeki mevcut modelle eşleştirilmeden doğrudan production verisine aktarılmamalıdır."
+  ],
+  "categories": [
+    "Yüksek Protein",
+    "Düşük Kalori",
+    "Vejetaryen",
+    "Salatalar",
+    "Çorbalar",
+    "Pratik Tarifler",
+    "300 Kalori Altı",
+    "500 Kalori Altı"
+  ],
+  "recipes": [
+    {
+      "id": "recipe_001",
+      "name": "Yoğurt Soslu Tavuk Kasesi",
+      "description": "Baharatlı tavuk, taze sebzeler ve yoğurt sosuyla dengeli ana öğün.",
+      "categories": [
+        "Yüksek Protein",
+        "Düşük Kalori",
+        "Pratik Tarifler",
+        "500 Kalori Altı"
+      ],
+      "servings": 1,
+      "prepMinutes": 10,
+      "cookMinutes": 15,
+      "totalMinutes": 25,
+      "ingredients": [
+        {
+          "name": "Tavuk göğsü",
+          "quantity": 120,
+          "unit": "g"
+        },
+        {
+          "name": "Yoğurt",
+          "quantity": 100,
+          "unit": "g"
+        },
+        {
+          "name": "Domates",
+          "quantity": 100,
+          "unit": "g"
+        },
+        {
+          "name": "Salatalık",
+          "quantity": 100,
+          "unit": "g"
+        },
+        {
+          "name": "Zeytinyağı",
+          "quantity": 5,
+          "unit": "g"
+        },
+        {
+          "name": "Kekik, karabiber, pul biber",
+          "quantity": 1,
+          "unit": "tutam"
+        }
+      ],
+      "steps": [
+        "Tavuğu küp küp doğrayıp baharatlarla harmanla.",
+        "Tavayı ısıt, zeytinyağıyla tavuğu tamamen pişir.",
+        "Domates ve salatalığı doğra.",
+        "Yoğurdu karıştırıp sos hazırla; tüm malzemeleri kasede birleştir."
+      ],
+      "nutritionPerServing": {
+        "caloriesKcal": 330,
+        "proteinG": 42,
+        "carbohydrateG": 15,
+        "fatG": 11,
+        "fiberG": 3,
+        "isEstimated": true
+      },
+      "allergens": [
+        "Süt"
+      ],
+      "dietFlags": [
+        "Yüksek protein"
+      ],
+      "imageSearchQuery": "grilled chicken breast yogurt sauce cucumber tomato healthy bowl food photography",
+      "imageAlt": "Yoğurt soslu tavuk, domates ve salatalık içeren kase"
+    },
+    {
+      "id": "recipe_002",
+      "name": "Fırında Hafif Kabak Mücveri",
+      "description": "Kızartılmadan hazırlanan, yoğurtla servis edilen hafif kabak mücveri.",
+      "categories": [
+        "Düşük Kalori",
+        "Vejetaryen",
+        "Pratik Tarifler",
+        "300 Kalori Altı"
+      ],
+      "servings": 1,
+      "prepMinutes": 10,
+      "cookMinutes": 20,
+      "totalMinutes": 30,
+      "ingredients": [
+        {
+          "name": "Kabak",
+          "quantity": 200,
+          "unit": "g"
+        },
+        {
+          "name": "Yumurta",
+          "quantity": 1,
+          "unit": "adet"
+        },
+        {
+          "name": "Yulaf unu",
+          "quantity": 20,
+          "unit": "g"
+        },
+        {
+          "name": "Yoğurt",
+          "quantity": 30,
+          "unit": "g"
+        },
+        {
+          "name": "Dereotu",
+          "quantity": 5,
+          "unit": "g"
+        },
+        {
+          "name": "Karabiber",
+          "quantity": 1,
+          "unit": "tutam"
+        }
+      ],
+      "steps": [
+        "Kabağı rendele ve fazla suyunu sık.",
+        "Yumurta, yulaf unu, dereotu ve karabiberle karıştır.",
+        "Yağlı kâğıt serili tepsiye küçük parçalar halinde yerleştir.",
+        "Önceden ısıtılmış 200°C fırında yaklaşık 20 dakika, içi pişip üzeri kızarana kadar pişir. Yoğurtla servis et."
+      ],
+      "nutritionPerServing": {
+        "caloriesKcal": 190,
+        "proteinG": 10,
+        "carbohydrateG": 22,
+        "fatG": 7,
+        "fiberG": 4,
+        "isEstimated": true
+      },
+      "allergens": [
+        "Yumurta",
+        "Gluten içerebilir",
+        "Süt"
+      ],
+      "dietFlags": [
+        "Vejetaryen"
+      ],
+      "imageSearchQuery": "baked zucchini fritters yogurt dip healthy food photography",
+      "imageAlt": "Fırında pişmiş kabak mücveri ve yanında yoğurt"
+    },
+    {
+      "id": "recipe_003",
+      "name": "Nohutlu Sebzeli Bulgur",
+      "description": "Nohut ve sebzelerle zenginleştirilmiş pratik bulgur pilavı.",
+      "categories": [
+        "Vejetaryen",
+        "Pratik Tarifler",
+        "500 Kalori Altı"
+      ],
+      "servings": 1,
+      "prepMinutes": 8,
+      "cookMinutes": 17,
+      "totalMinutes": 25,
+      "ingredients": [
+        {
+          "name": "İnce bulgur (kuru)",
+          "quantity": 50,
+          "unit": "g"
+        },
+        {
+          "name": "Haşlanmış nohut",
+          "quantity": 80,
+          "unit": "g"
+        },
+        {
+          "name": "Domates",
+          "quantity": 50,
+          "unit": "g"
+        },
+        {
+          "name": "Yeşil biber",
+          "quantity": 40,
+          "unit": "g"
+        },
+        {
+          "name": "Soğan",
+          "quantity": 25,
+          "unit": "g"
+        },
+        {
+          "name": "Zeytinyağı",
+          "quantity": 5,
+          "unit": "g"
+        },
+        {
+          "name": "Kimyon ve pul biber",
+          "quantity": 1,
+          "unit": "tutam"
+        }
+      ],
+      "steps": [
+        "Soğan ve biberi doğra; zeytinyağında birkaç dakika sotele.",
+        "Domatesi ve haşlanmış nohudu ekle.",
+        "Bulguru ve tarifte gerektikçe sıcak suyu ilave et.",
+        "Kısık ateşte bulgur yumuşayıp suyunu çekene kadar pişir."
+      ],
+      "nutritionPerServing": {
+        "caloriesKcal": 350,
+        "proteinG": 12,
+        "carbohydrateG": 59,
+        "fatG": 7,
+        "fiberG": 11,
+        "isEstimated": true
+      },
+      "allergens": [],
+      "dietFlags": [
+        "Vejetaryen",
+        "Vegan"
+      ],
+      "imageSearchQuery": "Turkish vegetarian chickpea bulgur pilaf tomato pepper parsley bowl food photography",
+      "imageAlt": "Nohut ve sebzelerle hazırlanmış bulgur pilavı"
+    },
+    {
+      "id": "recipe_004",
+      "name": "Proteinli Ton Balıklı Salata",
+      "description": "Yağ eklemeden hazırlanan, bol sebzeli ve protein açısından zengin salata.",
+      "categories": [
+        "Yüksek Protein",
+        "Salatalar",
+        "Pratik Tarifler",
+        "Düşük Kalori",
+        "300 Kalori Altı"
+      ],
+      "servings": 1,
+      "prepMinutes": 10,
+      "cookMinutes": 0,
+      "totalMinutes": 10,
+      "ingredients": [
+        {
+          "name": "Ton balığı (süzülmüş, suda)",
+          "quantity": 100,
+          "unit": "g"
+        },
+        {
+          "name": "Marul",
+          "quantity": 100,
+          "unit": "g"
+        },
+        {
+          "name": "Salatalık",
+          "quantity": 100,
+          "unit": "g"
+        },
+        {
+          "name": "Domates",
+          "quantity": 100,
+          "unit": "g"
+        },
+        {
+          "name": "Haşlanmış mısır",
+          "quantity": 30,
+          "unit": "g"
+        },
+        {
+          "name": "Limon suyu",
+          "quantity": 10,
+          "unit": "ml"
+        }
+      ],
+      "steps": [
+        "Marul, salatalık ve domatesi yıka ve doğra.",
+        "Süzülmüş ton balığını ve mısırı ekle.",
+        "Limon suyu ve karabiberle tatlandırıp servis et."
+      ],
+      "nutritionPerServing": {
+        "caloriesKcal": 260,
+        "proteinG": 27,
+        "carbohydrateG": 20,
+        "fatG": 5,
+        "fiberG": 6,
+        "isEstimated": true
+      },
+      "allergens": [
+        "Balık"
+      ],
+      "dietFlags": [
+        "Yüksek protein"
+      ],
+      "imageSearchQuery": "healthy tuna salad lettuce tomato cucumber corn bowl food photography",
+      "imageAlt": "Ton balığı, marul, domates, salatalık ve mısır içeren salata"
+    },
+    {
+      "id": "recipe_005",
+      "name": "Kırmızı Mercimek Çorbası",
+      "description": "Evde kolayca hazırlanan, doyurucu klasik mercimek çorbası.",
+      "categories": [
+        "Çorbalar",
+        "Vejetaryen",
+        "Düşük Kalori",
+        "300 Kalori Altı"
+      ],
+      "servings": 1,
+      "prepMinutes": 5,
+      "cookMinutes": 25,
+      "totalMinutes": 30,
+      "ingredients": [
+        {
+          "name": "Kırmızı mercimek (kuru)",
+          "quantity": 50,
+          "unit": "g"
+        },
+        {
+          "name": "Havuç",
+          "quantity": 40,
+          "unit": "g"
+        },
+        {
+          "name": "Soğan",
+          "quantity": 30,
+          "unit": "g"
+        },
+        {
+          "name": "Zeytinyağı",
+          "quantity": 5,
+          "unit": "g"
+        },
+        {
+          "name": "Kimyon",
+          "quantity": 1,
+          "unit": "tutam"
+        },
+        {
+          "name": "Su",
+          "quantity": 350,
+          "unit": "ml"
+        }
+      ],
+      "steps": [
+        "Mercimeği yıka; havuç ve soğanı doğra.",
+        "Tüm malzemeleri suyla tencereye alıp mercimek yumuşayana kadar pişir.",
+        "Blenderdan geçir, kimyon ekle ve kıvamını suyla ayarla."
+      ],
+      "nutritionPerServing": {
+        "caloriesKcal": 220,
+        "proteinG": 12,
+        "carbohydrateG": 34,
+        "fatG": 5,
+        "fiberG": 8,
+        "isEstimated": true
+      },
+      "allergens": [],
+      "dietFlags": [
+        "Vejetaryen",
+        "Vegan"
+      ],
+      "imageSearchQuery": "Turkish red lentil soup mercimek çorbası lemon bowl food photography",
+      "imageAlt": "Limon dilimiyle servis edilen kırmızı mercimek çorbası"
+    },
+    {
+      "id": "recipe_006",
+      "name": "Ispanaklı Mantarlı Omlet",
+      "description": "Kahvaltıya veya hafif öğüne uygun sebzeli omlet.",
+      "categories": [
+        "Yüksek Protein",
+        "Vejetaryen",
+        "Pratik Tarifler",
+        "300 Kalori Altı"
+      ],
+      "servings": 1,
+      "prepMinutes": 5,
+      "cookMinutes": 10,
+      "totalMinutes": 15,
+      "ingredients": [
+        {
+          "name": "Yumurta",
+          "quantity": 2,
+          "unit": "adet"
+        },
+        {
+          "name": "Mantar",
+          "quantity": 100,
+          "unit": "g"
+        },
+        {
+          "name": "Ispanak",
+          "quantity": 50,
+          "unit": "g"
+        },
+        {
+          "name": "Zeytinyağı",
+          "quantity": 5,
+          "unit": "g"
+        },
+        {
+          "name": "Karabiber",
+          "quantity": 1,
+          "unit": "tutam"
+        }
+      ],
+      "steps": [
+        "Mantarları dilimleyip zeytinyağında pişir.",
+        "Ispanağı ekleyip yumuşayana kadar çevir.",
+        "Çırpılmış yumurtayı dök; kısık ateşte tamamen pişir."
+      ],
+      "nutritionPerServing": {
+        "caloriesKcal": 240,
+        "proteinG": 17,
+        "carbohydrateG": 8,
+        "fatG": 16,
+        "fiberG": 3,
+        "isEstimated": true
+      },
+      "allergens": [
+        "Yumurta"
+      ],
+      "dietFlags": [
+        "Vejetaryen"
+      ],
+      "imageSearchQuery": "spinach mushroom omelette healthy breakfast plate food photography",
+      "imageAlt": "Ispanak ve mantarla hazırlanmış omlet"
+    },
+    {
+      "id": "recipe_007",
+      "name": "Naneli Yoğurtlu Salatalık",
+      "description": "Serinletici, az malzemeli yoğurtlu salatalık kasesi.",
+      "categories": [
+        "Düşük Kalori",
+        "Vejetaryen",
+        "Pratik Tarifler",
+        "300 Kalori Altı",
+        "Salatalar"
+      ],
+      "servings": 1,
+      "prepMinutes": 5,
+      "cookMinutes": 0,
+      "totalMinutes": 5,
+      "ingredients": [
+        {
+          "name": "Yoğurt",
+          "quantity": 150,
+          "unit": "g"
+        },
+        {
+          "name": "Salatalık",
+          "quantity": 150,
+          "unit": "g"
+        },
+        {
+          "name": "Taze nane",
+          "quantity": 5,
+          "unit": "g"
+        },
+        {
+          "name": "Limon suyu",
+          "quantity": 5,
+          "unit": "ml"
+        }
+      ],
+      "steps": [
+        "Salatalığı rendele veya küçük küpler halinde doğra.",
+        "Yoğurt, nane ve limon suyuyla karıştır.",
+        "Soğuk servis et; istersen kıvamını az suyla incelt."
+      ],
+      "nutritionPerServing": {
+        "caloriesKcal": 125,
+        "proteinG": 7,
+        "carbohydrateG": 10,
+        "fatG": 5,
+        "fiberG": 2,
+        "isEstimated": true
+      },
+      "allergens": [
+        "Süt"
+      ],
+      "dietFlags": [
+        "Vejetaryen"
+      ],
+      "imageSearchQuery": "Turkish yogurt cucumber mint cacik bowl food photography",
+      "imageAlt": "Nane serpilmiş yoğurtlu salatalık"
+    },
+    {
+      "id": "recipe_008",
+      "name": "Lor Peynirli Avokado Tostu",
+      "description": "Tam tahıllı ekmek, lor ve avokadoyla hazırlanan hızlı kahvaltı.",
+      "categories": [
+        "Yüksek Protein",
+        "Vejetaryen",
+        "Pratik Tarifler",
+        "300 Kalori Altı"
+      ],
+      "servings": 1,
+      "prepMinutes": 5,
+      "cookMinutes": 2,
+      "totalMinutes": 7,
+      "ingredients": [
+        {
+          "name": "Tam tahıllı ekmek",
+          "quantity": 40,
+          "unit": "g"
+        },
+        {
+          "name": "Lor peyniri",
+          "quantity": 60,
+          "unit": "g"
+        },
+        {
+          "name": "Avokado",
+          "quantity": 25,
+          "unit": "g"
+        },
+        {
+          "name": "Domates",
+          "quantity": 50,
+          "unit": "g"
+        },
+        {
+          "name": "Limon suyu",
+          "quantity": 5,
+          "unit": "ml"
+        }
+      ],
+      "steps": [
+        "Ekmeği kızart.",
+        "Avokadoyu limon suyuyla ez.",
+        "Ekmeğin üzerine lor peyniri ve avokadoyu sür; domatesle tamamla."
+      ],
+      "nutritionPerServing": {
+        "caloriesKcal": 230,
+        "proteinG": 15,
+        "carbohydrateG": 26,
+        "fatG": 8,
+        "fiberG": 5,
+        "isEstimated": true
+      },
+      "allergens": [
+        "Süt",
+        "Gluten"
+      ],
+      "dietFlags": [
+        "Vejetaryen"
+      ],
+      "imageSearchQuery": "whole grain toast cottage cheese avocado tomato healthy breakfast food photography",
+      "imageAlt": "Lor peyniri, avokado ve domatesli tam tahıllı tost"
+    },
+    {
+      "id": "recipe_009",
+      "name": "Fırında Limonlu Somon ve Brokoli",
+      "description": "Somon ve brokolinin aynı tepside piştiği kolay ana yemek.",
+      "categories": [
+        "Yüksek Protein",
+        "Düşük Kalori",
+        "Pratik Tarifler",
+        "500 Kalori Altı"
+      ],
+      "servings": 1,
+      "prepMinutes": 5,
+      "cookMinutes": 20,
+      "totalMinutes": 25,
+      "ingredients": [
+        {
+          "name": "Somon",
+          "quantity": 120,
+          "unit": "g"
+        },
+        {
+          "name": "Brokoli",
+          "quantity": 150,
+          "unit": "g"
+        },
+        {
+          "name": "Zeytinyağı",
+          "quantity": 5,
+          "unit": "g"
+        },
+        {
+          "name": "Limon",
+          "quantity": 20,
+          "unit": "g"
+        },
+        {
+          "name": "Dereotu",
+          "quantity": 3,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Somonu ve brokoliyi fırın tepsisine yerleştir.",
+        "Zeytinyağı, limon ve dereotuyla tatlandır.",
+        "200°C fırında somon tamamen pişene ve brokoli yumuşayana kadar yaklaşık 15–20 dakika pişir."
+      ],
+      "nutritionPerServing": {
+        "caloriesKcal": 350,
+        "proteinG": 30,
+        "carbohydrateG": 12,
+        "fatG": 21,
+        "fiberG": 5,
+        "isEstimated": true
+      },
+      "allergens": [
+        "Balık"
+      ],
+      "dietFlags": [
+        "Yüksek protein"
+      ],
+      "imageSearchQuery": "baked lemon herb salmon broccoli healthy dinner plate food photography",
+      "imageAlt": "Fırında limonlu somon ve brokoli"
+    },
+    {
+      "id": "recipe_010",
+      "name": "Kinoalı Akdeniz Salatası",
+      "description": "Kinoa, nohut ve sebzelerle hazırlanan doyurucu vejetaryen salata.",
+      "categories": [
+        "Salatalar",
+        "Vejetaryen",
+        "Pratik Tarifler",
+        "500 Kalori Altı"
+      ],
+      "servings": 1,
+      "prepMinutes": 12,
+      "cookMinutes": 0,
+      "totalMinutes": 12,
+      "ingredients": [
+        {
+          "name": "Kinoa (pişmiş)",
+          "quantity": 100,
+          "unit": "g"
+        },
+        {
+          "name": "Haşlanmış nohut",
+          "quantity": 50,
+          "unit": "g"
+        },
+        {
+          "name": "Salatalık",
+          "quantity": 80,
+          "unit": "g"
+        },
+        {
+          "name": "Domates",
+          "quantity": 80,
+          "unit": "g"
+        },
+        {
+          "name": "Beyaz peynir",
+          "quantity": 25,
+          "unit": "g"
+        },
+        {
+          "name": "Limon suyu",
+          "quantity": 10,
+          "unit": "ml"
+        }
+      ],
+      "steps": [
+        "Kinoanın önceden pişmiş ve soğumuş olduğundan emin ol.",
+        "Sebzeleri doğra; nohut ve kinoayla karıştır.",
+        "Beyaz peyniri ufala, limon suyu ekleyip servis et."
+      ],
+      "nutritionPerServing": {
+        "caloriesKcal": 350,
+        "proteinG": 13,
+        "carbohydrateG": 48,
+        "fatG": 11,
+        "fiberG": 8,
+        "isEstimated": true
+      },
+      "allergens": [
+        "Süt"
+      ],
+      "dietFlags": [
+        "Vejetaryen"
+      ],
+      "imageSearchQuery": "quinoa chickpea feta cucumber tomato Mediterranean salad bowl food photography",
+      "imageAlt": "Kinoa, nohut, sebze ve beyaz peynirli Akdeniz salatası"
+    },
+    {
+      "id": "recipe_011",
+      "name": "Yoğurtlu Kabak Çorbası",
+      "description": "Kabak ve yoğurtla hazırlanan hafif, yumuşak içimli çorba.",
+      "categories": [
+        "Çorbalar",
+        "Düşük Kalori",
+        "Vejetaryen",
+        "300 Kalori Altı"
+      ],
+      "servings": 1,
+      "prepMinutes": 5,
+      "cookMinutes": 15,
+      "totalMinutes": 20,
+      "ingredients": [
+        {
+          "name": "Kabak",
+          "quantity": 200,
+          "unit": "g"
+        },
+        {
+          "name": "Yoğurt",
+          "quantity": 80,
+          "unit": "g"
+        },
+        {
+          "name": "Yulaf",
+          "quantity": 10,
+          "unit": "g"
+        },
+        {
+          "name": "Dereotu",
+          "quantity": 3,
+          "unit": "g"
+        },
+        {
+          "name": "Su",
+          "quantity": 250,
+          "unit": "ml"
+        }
+      ],
+      "steps": [
+        "Kabağı doğra, yulaf ve suyla yumuşayana kadar pişir.",
+        "İstersen pürüzsüz olması için blenderdan geçir.",
+        "Yoğurdu ayrı kapta biraz sıcak çorbayla ılıştırıp tencereye yavaşça ekle. Yoğurdu ekledikten sonra kuvvetli kaynatma.",
+        "Dereotuyla servis et."
+      ],
+      "nutritionPerServing": {
+        "caloriesKcal": 150,
+        "proteinG": 7,
+        "carbohydrateG": 22,
+        "fatG": 4,
+        "fiberG": 4,
+        "isEstimated": true
+      },
+      "allergens": [
+        "Süt",
+        "Gluten içerebilir"
+      ],
+      "dietFlags": [
+        "Vejetaryen"
+      ],
+      "imageSearchQuery": "healthy zucchini yogurt dill soup bowl food photography",
+      "imageAlt": "Dereotlu yoğurtlu kabak çorbası"
+    },
+    {
+      "id": "recipe_012",
+      "name": "Domatesli Yumurtalı Menemen",
+      "description": "Klasik menemenin ölçülü yağla hazırlanmış pratik hali.",
+      "categories": [
+        "Yüksek Protein",
+        "Vejetaryen",
+        "Pratik Tarifler",
+        "300 Kalori Altı"
+      ],
+      "servings": 1,
+      "prepMinutes": 5,
+      "cookMinutes": 10,
+      "totalMinutes": 15,
+      "ingredients": [
+        {
+          "name": "Yumurta",
+          "quantity": 2,
+          "unit": "adet"
+        },
+        {
+          "name": "Domates",
+          "quantity": 150,
+          "unit": "g"
+        },
+        {
+          "name": "Yeşil biber",
+          "quantity": 50,
+          "unit": "g"
+        },
+        {
+          "name": "Zeytinyağı",
+          "quantity": 5,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Biberi doğrayıp zeytinyağında kısa süre sotele.",
+        "Doğranmış domatesi ekleyip suyunu biraz çektir.",
+        "Yumurtaları kırıp karıştırarak tamamen pişir."
+      ],
+      "nutritionPerServing": {
+        "caloriesKcal": 220,
+        "proteinG": 14,
+        "carbohydrateG": 12,
+        "fatG": 13,
+        "fiberG": 3,
+        "isEstimated": true
+      },
+      "allergens": [
+        "Yumurta"
+      ],
+      "dietFlags": [
+        "Vejetaryen"
+      ],
+      "imageSearchQuery": "Turkish menemen eggs tomato green pepper skillet food photography",
+      "imageAlt": "Domates ve yeşil biberli menemen"
+    },
+    {
+      "id": "recipe_013",
+      "name": "Yoğurtlu Pancar Salatası",
+      "description": "Renkli pancar ve yoğurtla hazırlanan ferah bir salata.",
+      "categories": [
+        "Salatalar",
+        "Vejetaryen",
+        "Pratik Tarifler",
+        "300 Kalori Altı"
+      ],
+      "servings": 1,
+      "prepMinutes": 8,
+      "cookMinutes": 0,
+      "totalMinutes": 8,
+      "ingredients": [
+        {
+          "name": "Haşlanmış pancar",
+          "quantity": 150,
+          "unit": "g"
+        },
+        {
+          "name": "Yoğurt",
+          "quantity": 100,
+          "unit": "g"
+        },
+        {
+          "name": "Sarımsak",
+          "quantity": 2,
+          "unit": "g"
+        },
+        {
+          "name": "Dereotu",
+          "quantity": 3,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Haşlanmış pancarı rendele.",
+        "Yoğurdu ezilmiş sarımsakla karıştır.",
+        "Pancarı yoğurtla harmanla ve dereotuyla süsle."
+      ],
+      "nutritionPerServing": {
+        "caloriesKcal": 130,
+        "proteinG": 6,
+        "carbohydrateG": 20,
+        "fatG": 3,
+        "fiberG": 4,
+        "isEstimated": true
+      },
+      "allergens": [
+        "Süt"
+      ],
+      "dietFlags": [
+        "Vejetaryen"
+      ],
+      "imageSearchQuery": "Turkish beetroot yogurt salad pink bowl dill food photography",
+      "imageAlt": "Yoğurtlu pancar salatası"
+    },
+    {
+      "id": "recipe_014",
+      "name": "Hindi Köfte ve Fırın Sebze",
+      "description": "Yağ miktarı ölçülü, sebzelerle birlikte fırında pişen hindi köfte.",
+      "categories": [
+        "Yüksek Protein",
+        "Düşük Kalori",
+        "500 Kalori Altı"
+      ],
+      "servings": 1,
+      "prepMinutes": 10,
+      "cookMinutes": 25,
+      "totalMinutes": 35,
+      "ingredients": [
+        {
+          "name": "Yağsız hindi kıyma",
+          "quantity": 130,
+          "unit": "g"
+        },
+        {
+          "name": "Kabak",
+          "quantity": 100,
+          "unit": "g"
+        },
+        {
+          "name": "Kırmızı biber",
+          "quantity": 80,
+          "unit": "g"
+        },
+        {
+          "name": "Soğan",
+          "quantity": 20,
+          "unit": "g"
+        },
+        {
+          "name": "Yulaf unu",
+          "quantity": 10,
+          "unit": "g"
+        },
+        {
+          "name": "Zeytinyağı",
+          "quantity": 5,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Hindi kıymayı rendelenmiş soğan ve yulaf unuyla karıştırıp küçük köfteler yap.",
+        "Sebzeleri doğra ve fırın tepsisine yerleştir.",
+        "Köfte ve sebzeleri az zeytinyağıyla harmanla.",
+        "200°C fırında köfteler tamamen pişene kadar yaklaşık 20–25 dakika pişir."
+      ],
+      "nutritionPerServing": {
+        "caloriesKcal": 330,
+        "proteinG": 34,
+        "carbohydrateG": 20,
+        "fatG": 12,
+        "fiberG": 5,
+        "isEstimated": true
+      },
+      "allergens": [
+        "Gluten içerebilir"
+      ],
+      "dietFlags": [
+        "Yüksek protein"
+      ],
+      "imageSearchQuery": "baked turkey meatballs zucchini bell pepper healthy sheet pan dinner food photography",
+      "imageAlt": "Fırında hindi köfte, kabak ve biber"
+    },
+    {
+      "id": "recipe_015",
+      "name": "Sebzeli Yoğurtlu Makarna",
+      "description": "Yoğurt ve sebzelerle tamamlanan pratik, etsiz makarna.",
+      "categories": [
+        "Vejetaryen",
+        "Pratik Tarifler",
+        "500 Kalori Altı"
+      ],
+      "servings": 1,
+      "prepMinutes": 8,
+      "cookMinutes": 12,
+      "totalMinutes": 20,
+      "ingredients": [
+        {
+          "name": "Tam buğday makarna (kuru)",
+          "quantity": 60,
+          "unit": "g"
+        },
+        {
+          "name": "Yoğurt",
+          "quantity": 100,
+          "unit": "g"
+        },
+        {
+          "name": "Kabak",
+          "quantity": 80,
+          "unit": "g"
+        },
+        {
+          "name": "Havuç",
+          "quantity": 40,
+          "unit": "g"
+        },
+        {
+          "name": "Zeytinyağı",
+          "quantity": 5,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Makarnayı paketindeki süreye göre haşla.",
+        "Kabak ve havucu küçük doğrayıp zeytinyağında yumuşat.",
+        "Sebzeleri makarnayla karıştır.",
+        "Biraz ılındığında yoğurdu ekleyip servis et."
+      ],
+      "nutritionPerServing": {
+        "caloriesKcal": 390,
+        "proteinG": 15,
+        "carbohydrateG": 59,
+        "fatG": 10,
+        "fiberG": 8,
+        "isEstimated": true
+      },
+      "allergens": [
+        "Gluten",
+        "Süt"
+      ],
+      "dietFlags": [
+        "Vejetaryen"
+      ],
+      "imageSearchQuery": "whole wheat pasta yogurt sauce zucchini carrot healthy vegetarian bowl food photography",
+      "imageAlt": "Sebze ve yoğurt sosuyla hazırlanmış tam buğday makarna"
+    },
+    {
+      "id": "recipe_016",
+      "name": "Fırında Baharatlı Karnabahar",
+      "description": "Baharatlarla lezzetlenen, garnitür veya hafif öğün olarak tüketilebilen karnabahar.",
+      "categories": [
+        "Düşük Kalori",
+        "Vejetaryen",
+        "Pratik Tarifler",
+        "300 Kalori Altı"
+      ],
+      "servings": 1,
+      "prepMinutes": 8,
+      "cookMinutes": 22,
+      "totalMinutes": 30,
+      "ingredients": [
+        {
+          "name": "Karnabahar",
+          "quantity": 250,
+          "unit": "g"
+        },
+        {
+          "name": "Zeytinyağı",
+          "quantity": 5,
+          "unit": "g"
+        },
+        {
+          "name": "Toz kırmızı biber",
+          "quantity": 1,
+          "unit": "g"
+        },
+        {
+          "name": "Kimyon",
+          "quantity": 1,
+          "unit": "g"
+        },
+        {
+          "name": "Sarımsak tozu",
+          "quantity": 1,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Karnabaharı küçük çiçeklere ayır.",
+        "Baharat ve zeytinyağıyla harmanla.",
+        "200°C fırında kenarları kızarana kadar 20–22 dakika pişir."
+      ],
+      "nutritionPerServing": {
+        "caloriesKcal": 130,
+        "proteinG": 5,
+        "carbohydrateG": 13,
+        "fatG": 7,
+        "fiberG": 6,
+        "isEstimated": true
+      },
+      "allergens": [],
+      "dietFlags": [
+        "Vejetaryen",
+        "Vegan"
+      ],
+      "imageSearchQuery": "oven roasted spiced cauliflower florets healthy food photography",
+      "imageAlt": "Baharatlı fırın karnabahar"
+    },
+    {
+      "id": "recipe_017",
+      "name": "Elmalı Tarçınlı Yoğurt Kasesi",
+      "description": "Tatlı isteğine uygun, meyveli ve yoğurt bazlı pratik ara öğün.",
+      "categories": [
+        "Pratik Tarifler",
+        "Vejetaryen",
+        "300 Kalori Altı"
+      ],
+      "servings": 1,
+      "prepMinutes": 5,
+      "cookMinutes": 0,
+      "totalMinutes": 5,
+      "ingredients": [
+        {
+          "name": "Yoğurt",
+          "quantity": 150,
+          "unit": "g"
+        },
+        {
+          "name": "Elma",
+          "quantity": 100,
+          "unit": "g"
+        },
+        {
+          "name": "Yulaf ezmesi",
+          "quantity": 15,
+          "unit": "g"
+        },
+        {
+          "name": "Tarçın",
+          "quantity": 1,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Elmayı küçük küpler halinde doğra.",
+        "Yoğurdu kaseye al, elma ve yulafı ekle.",
+        "Tarçın serperek servis et."
+      ],
+      "nutritionPerServing": {
+        "caloriesKcal": 210,
+        "proteinG": 9,
+        "carbohydrateG": 34,
+        "fatG": 4,
+        "fiberG": 5,
+        "isEstimated": true
+      },
+      "allergens": [
+        "Süt",
+        "Gluten içerebilir"
+      ],
+      "dietFlags": [
+        "Vejetaryen"
+      ],
+      "imageSearchQuery": "Greek yogurt apple cinnamon oats breakfast bowl healthy food photography",
+      "imageAlt": "Elma, yulaf ve tarçınlı yoğurt kasesi"
+    },
+    {
+      "id": "recipe_018",
+      "name": "Zeytinyağlı Taze Fasulye",
+      "description": "Domatesle pişen klasik zeytinyağlı taze fasulye.",
+      "categories": [
+        "Düşük Kalori",
+        "Vejetaryen",
+        "500 Kalori Altı"
+      ],
+      "servings": 1,
+      "prepMinutes": 10,
+      "cookMinutes": 30,
+      "totalMinutes": 40,
+      "ingredients": [
+        {
+          "name": "Taze fasulye",
+          "quantity": 200,
+          "unit": "g"
+        },
+        {
+          "name": "Domates",
+          "quantity": 100,
+          "unit": "g"
+        },
+        {
+          "name": "Soğan",
+          "quantity": 40,
+          "unit": "g"
+        },
+        {
+          "name": "Zeytinyağı",
+          "quantity": 5,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Fasulyeleri ayıkla ve doğra.",
+        "Soğanı ince doğrayıp zeytinyağıyla kısa süre çevir.",
+        "Domates ve fasulyeyi ekle; az su ilavesiyle kapağı kapalı pişir.",
+        "Fasulyeler yumuşayınca ılık veya soğuk servis et."
+      ],
+      "nutritionPerServing": {
+        "caloriesKcal": 170,
+        "proteinG": 5,
+        "carbohydrateG": 23,
+        "fatG": 7,
+        "fiberG": 8,
+        "isEstimated": true
+      },
+      "allergens": [],
+      "dietFlags": [
+        "Vejetaryen",
+        "Vegan"
+      ],
+      "imageSearchQuery": "Turkish olive oil green beans zeytinyağlı taze fasulye tomato plate food photography",
+      "imageAlt": "Domatesli zeytinyağlı taze fasulye"
+    },
+    {
+      "id": "recipe_019",
+      "name": "Tavuklu Yoğurtlu Marul Dürüm",
+      "description": "Ekmek yerine marul yapraklarıyla hazırlanan hafif tavuk dürüm.",
+      "categories": [
+        "Yüksek Protein",
+        "Düşük Kalori",
+        "Pratik Tarifler",
+        "300 Kalori Altı"
+      ],
+      "servings": 1,
+      "prepMinutes": 8,
+      "cookMinutes": 10,
+      "totalMinutes": 18,
+      "ingredients": [
+        {
+          "name": "Tavuk göğsü",
+          "quantity": 100,
+          "unit": "g"
+        },
+        {
+          "name": "Yoğurt",
+          "quantity": 50,
+          "unit": "g"
+        },
+        {
+          "name": "Büyük marul yaprakları",
+          "quantity": 80,
+          "unit": "g"
+        },
+        {
+          "name": "Salatalık",
+          "quantity": 50,
+          "unit": "g"
+        },
+        {
+          "name": "Limon suyu",
+          "quantity": 5,
+          "unit": "ml"
+        }
+      ],
+      "steps": [
+        "Tavuğu ince şeritler halinde kesip tavada tamamen pişir.",
+        "Yoğurt ve limon suyunu karıştır.",
+        "Marul yapraklarına tavuk ve doğranmış salatalığı koy.",
+        "Yoğurt sosunu ekleyip dürüm gibi sar."
+      ],
+      "nutritionPerServing": {
+        "caloriesKcal": 220,
+        "proteinG": 31,
+        "carbohydrateG": 8,
+        "fatG": 6,
+        "fiberG": 3,
+        "isEstimated": true
+      },
+      "allergens": [
+        "Süt"
+      ],
+      "dietFlags": [
+        "Yüksek protein"
+      ],
+      "imageSearchQuery": "chicken lettuce wraps yogurt sauce healthy low carb food photography",
+      "imageAlt": "Marul yapraklarına sarılmış yoğurt soslu tavuk"
+    },
+    {
+      "id": "recipe_020",
+      "name": "Sebzeli Domates Çorbası",
+      "description": "Domates, havuç ve soğanla hazırlanan hafif çorba.",
+      "categories": [
+        "Çorbalar",
+        "Düşük Kalori",
+        "Vejetaryen",
+        "Vegan",
+        "300 Kalori Altı",
+        "Pratik Tarifler"
+      ],
+      "servings": 1,
+      "prepMinutes": 8,
+      "cookMinutes": 18,
+      "totalMinutes": 26,
+      "ingredients": [
+        {
+          "name": "Domates",
+          "quantity": 200,
+          "unit": "g"
+        },
+        {
+          "name": "Havuç",
+          "quantity": 40,
+          "unit": "g"
+        },
+        {
+          "name": "Soğan",
+          "quantity": 30,
+          "unit": "g"
+        },
+        {
+          "name": "Zeytinyağı",
+          "quantity": 5,
+          "unit": "g"
+        },
+        {
+          "name": "Su veya tuzsuz sebze suyu",
+          "quantity": 250,
+          "unit": "ml"
+        }
+      ],
+      "steps": [
+        "Soğan ve havucu doğrayıp zeytinyağında birkaç dakika sotele.",
+        "Doğranmış domates ve suyu ekle.",
+        "Sebzeler yumuşayana kadar pişir.",
+        "Blenderdan geçir; kıvamını suyla ayarla."
+      ],
+      "nutritionPerServing": {
+        "caloriesKcal": 140,
+        "proteinG": 4,
+        "carbohydrateG": 20,
+        "fatG": 6,
+        "fiberG": 5,
+        "isEstimated": true
+      },
+      "allergens": [],
+      "dietFlags": [
+        "Vejetaryen",
+        "Vegan"
+      ],
+      "imageSearchQuery": "homemade tomato vegetable soup bowl basil healthy food photography",
+      "imageAlt": "Fesleğenle süslenmiş domates çorbası"
+    },
+    {
+      "id": "recipe_021",
+      "name": "Fırında Baharatlı Nohut",
+      "description": "Salatalara eklenebilen veya tek başına tüketilebilen çıtır nohut.",
+      "categories": [
+        "Vejetaryen",
+        "Vegan",
+        "Pratik Tarifler",
+        "300 Kalori Altı"
+      ],
+      "servings": 1,
+      "prepMinutes": 5,
+      "cookMinutes": 25,
+      "totalMinutes": 30,
+      "ingredients": [
+        {
+          "name": "Haşlanmış nohut",
+          "quantity": 100,
+          "unit": "g"
+        },
+        {
+          "name": "Zeytinyağı",
+          "quantity": 3,
+          "unit": "g"
+        },
+        {
+          "name": "Toz kırmızı biber",
+          "quantity": 1,
+          "unit": "g"
+        },
+        {
+          "name": "Kimyon",
+          "quantity": 1,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Nohutları süzüp iyice kurula.",
+        "Zeytinyağı ve baharatlarla harmanla.",
+        "200°C fırında ara sıra karıştırarak dışı çıtırlaşana kadar 20–25 dakika pişir."
+      ],
+      "nutritionPerServing": {
+        "caloriesKcal": 180,
+        "proteinG": 8,
+        "carbohydrateG": 25,
+        "fatG": 5,
+        "fiberG": 7,
+        "isEstimated": true
+      },
+      "allergens": [],
+      "dietFlags": [
+        "Vejetaryen",
+        "Vegan"
+      ],
+      "imageSearchQuery": "crispy roasted spiced chickpeas bowl healthy snack food photography",
+      "imageAlt": "Baharatlarla fırınlanmış çıtır nohut"
+    },
+    {
+      "id": "recipe_022",
+      "name": "Lor Peynirli Biber Dolması",
+      "description": "Biberlerin lor ve otlarla doldurulduğu hafif vejetaryen tarif.",
+      "categories": [
+        "Yüksek Protein",
+        "Vejetaryen",
+        "Düşük Kalori",
+        "500 Kalori Altı"
+      ],
+      "servings": 1,
+      "prepMinutes": 10,
+      "cookMinutes": 20,
+      "totalMinutes": 30,
+      "ingredients": [
+        {
+          "name": "Dolmalık biber",
+          "quantity": 150,
+          "unit": "g"
+        },
+        {
+          "name": "Lor peyniri",
+          "quantity": 100,
+          "unit": "g"
+        },
+        {
+          "name": "Yoğurt",
+          "quantity": 30,
+          "unit": "g"
+        },
+        {
+          "name": "Maydanoz",
+          "quantity": 5,
+          "unit": "g"
+        },
+        {
+          "name": "Karabiber",
+          "quantity": 1,
+          "unit": "tutam"
+        }
+      ],
+      "steps": [
+        "Biberi boyuna kesip çekirdeklerini çıkar.",
+        "Lor peyniri, maydanoz ve karabiberi karıştır.",
+        "Biberleri karışımla doldur.",
+        "180°C fırında biber yumuşayana kadar yaklaşık 20 dakika pişir; yoğurtla servis et."
+      ],
+      "nutritionPerServing": {
+        "caloriesKcal": 230,
+        "proteinG": 23,
+        "carbohydrateG": 15,
+        "fatG": 8,
+        "fiberG": 4,
+        "isEstimated": true
+      },
+      "allergens": [
+        "Süt"
+      ],
+      "dietFlags": [
+        "Vejetaryen",
+        "Yüksek protein"
+      ],
+      "imageSearchQuery": "bell peppers stuffed with cottage cheese herbs baked healthy vegetarian food photography",
+      "imageAlt": "Lor peyniri ve otlarla doldurulmuş fırın biber"
+    },
+    {
+      "id": "recipe_023",
+      "name": "Mercimekli Yeşil Salata",
+      "description": "Yeşil yapraklar ve yeşil mercimekle hazırlanan doyurucu salata.",
+      "categories": [
+        "Salatalar",
+        "Vejetaryen",
+        "Vegan",
+        "Düşük Kalori",
+        "500 Kalori Altı"
+      ],
+      "servings": 1,
+      "prepMinutes": 10,
+      "cookMinutes": 0,
+      "totalMinutes": 10,
+      "ingredients": [
+        {
+          "name": "Haşlanmış yeşil mercimek",
+          "quantity": 100,
+          "unit": "g"
+        },
+        {
+          "name": "Marul veya roka",
+          "quantity": 70,
+          "unit": "g"
+        },
+        {
+          "name": "Salatalık",
+          "quantity": 80,
+          "unit": "g"
+        },
+        {
+          "name": "Domates",
+          "quantity": 80,
+          "unit": "g"
+        },
+        {
+          "name": "Zeytinyağı",
+          "quantity": 5,
+          "unit": "g"
+        },
+        {
+          "name": "Limon suyu",
+          "quantity": 10,
+          "unit": "ml"
+        }
+      ],
+      "steps": [
+        "Yeşillikleri yıka ve kurula.",
+        "Salatalık ve domatesi doğra.",
+        "Mercimekle birleştir; limon ve zeytinyağıyla tatlandır."
+      ],
+      "nutritionPerServing": {
+        "caloriesKcal": 240,
+        "proteinG": 13,
+        "carbohydrateG": 35,
+        "fatG": 7,
+        "fiberG": 12,
+        "isEstimated": true
+      },
+      "allergens": [],
+      "dietFlags": [
+        "Vejetaryen",
+        "Vegan"
+      ],
+      "imageSearchQuery": "green lentil salad arugula cucumber tomato lemon dressing healthy bowl food photography",
+      "imageAlt": "Yeşil mercimek, roka ve sebzeli salata"
+    },
+    {
+      "id": "recipe_024",
+      "name": "Yulaflı Muzlu Pankek",
+      "description": "Şeker ilavesiz, muzla tatlandırılmış pratik kahvaltı pankeki.",
+      "categories": [
+        "Vejetaryen",
+        "Pratik Tarifler",
+        "300 Kalori Altı"
+      ],
+      "servings": 1,
+      "prepMinutes": 5,
+      "cookMinutes": 8,
+      "totalMinutes": 13,
+      "ingredients": [
+        {
+          "name": "Yulaf ezmesi",
+          "quantity": 30,
+          "unit": "g"
+        },
+        {
+          "name": "Yumurta",
+          "quantity": 1,
+          "unit": "adet"
+        },
+        {
+          "name": "Muz",
+          "quantity": 50,
+          "unit": "g"
+        },
+        {
+          "name": "Tarçın",
+          "quantity": 1,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Yulafı rondodan geçirerek un haline getir.",
+        "Muz ve yumurtayla karıştır; tarçın ekle.",
+        "Yapışmaz tavada küçük pankekler halinde, iki tarafını da pişir."
+      ],
+      "nutritionPerServing": {
+        "caloriesKcal": 250,
+        "proteinG": 11,
+        "carbohydrateG": 34,
+        "fatG": 8,
+        "fiberG": 5,
+        "isEstimated": true
+      },
+      "allergens": [
+        "Yumurta",
+        "Gluten içerebilir"
+      ],
+      "dietFlags": [
+        "Vejetaryen"
+      ],
+      "imageSearchQuery": "banana oatmeal pancakes small stack healthy breakfast food photography",
+      "imageAlt": "Muz ve yulafla hazırlanmış küçük pankekler"
+    }
+  ]
+}

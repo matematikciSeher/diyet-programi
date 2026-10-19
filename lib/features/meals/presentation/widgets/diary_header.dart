@@ -12,7 +12,10 @@ import '../providers/diary_providers.dart';
 
 /// Başlık, gün değiştirme okları, "Bugün" kısayolu ve yatay tarih şeridi.
 class DiaryHeader extends ConsumerWidget {
-  const DiaryHeader({super.key});
+  const DiaryHeader({super.key, this.title});
+
+  /// Verilirse "Günlük" yerine bu başlık yazılır (tek öğün görünümü).
+  final String? title;
 
   Future<void> _pickDate(
     BuildContext context,
@@ -49,7 +52,7 @@ class DiaryHeader extends ConsumerWidget {
                 child: Semantics(
                   header: true,
                   child: Text(
-                    l10n.navDiary,
+                    title ?? l10n.navDiary,
                     style: context.textStyles.headlineSmall?.copyWith(
                       fontWeight: FontWeight.w700,
                     ),

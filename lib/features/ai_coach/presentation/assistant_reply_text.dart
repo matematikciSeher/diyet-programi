@@ -197,6 +197,8 @@ abstract final class AssistantReplyText {
         SafetyConcern.emergency => l10n.assistantSafetyEmergency,
       },
       HelpReply() => l10n.assistantHelp,
+      ClarificationReply() => l10n.assistantClarifyPrompt,
+      DetailRequestReply() => l10n.assistantDetailAsk,
       UnavailableAssistantReply(:final code) =>
         code == AssistantErrorCodes.premiumRequired
             ? l10n.assistantPremiumRequired

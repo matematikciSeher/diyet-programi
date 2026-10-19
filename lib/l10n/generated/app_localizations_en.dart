@@ -2382,6 +2382,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get diaryShowAllMeals => 'All meals';
+
+  @override
   String get diaryExpand => 'Expand';
 
   @override
@@ -2993,6 +2996,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recipeMine => 'My recipe';
 
   @override
+  String recipePortionGrams(String grams) {
+    return 'About $grams per serving';
+  }
+
+  @override
+  String get recipeAllergens => 'Allergens';
+
+  @override
+  String get recipeNoDeclaredAllergens =>
+      'No notable allergen appears in the listed ingredients.';
+
+  @override
   String get recipeNutritionPerServing => 'Nutrition per serving';
 
   @override
@@ -3373,7 +3388,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'I answer using your profile, diary, plan, weight log and fasting info.';
 
   @override
-  String get assistantHint => 'Type a question…';
+  String get assistantHint =>
+      'Write the health or nutrition question you are curious about…';
+
+  @override
+  String get assistantSend => 'Send';
 
   @override
   String get assistantThinking => 'Preparing an answer';
@@ -3540,7 +3559,35 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get assistantHelp =>
-      'You can ask about today\'s review, calories left, protein, carbohydrate and fat, a meal suggestion, swapping a planned meal, water, weight or fasting. If nothing is logged, I will say so instead of guessing.';
+      'This question is outside the local nutrition notes I have. I will not invent an answer or personal medical advice. You can ask about today\'s eating, calories eaten or left, protein foods, a meal or recipe, water, your weekly menu, shopping list, weight goal or sleep. If nothing is logged, I will say so instead of guessing.';
+
+  @override
+  String get assistantClarifyPrompt => 'Which angle do you want to look at?';
+
+  @override
+  String get assistantDetailAsk =>
+      'Could you add a little more detail? For example, you can ask about today\'s calories, a meal idea, or water tracking.';
+
+  @override
+  String get assistantOpenDiary => 'Open my meals';
+
+  @override
+  String get assistantOpenWater => 'Go to water tracking';
+
+  @override
+  String get assistantOpenPlan => 'View my menu';
+
+  @override
+  String get assistantOpenRecipes => 'Browse recipes';
+
+  @override
+  String get assistantOpenShopping => 'Open my shopping list';
+
+  @override
+  String get assistantOpenWeight => 'Go to weight tracking';
+
+  @override
+  String get assistantOpenFasting => 'Go to fasting';
 
   @override
   String get assistantNotConfigured =>
@@ -4164,17 +4211,31 @@ class AppLocalizationsEn extends AppLocalizations {
       'The daily summary could not be read just now.';
 
   @override
-  String get assistantSearchHint => 'Search categories or questions';
+  String get assistantSearchHint => 'Search categories';
 
   @override
-  String get assistantSearchEmpty =>
-      'No category or question matches this search.';
+  String get assistantSearchEmpty => 'No category matches this search.';
 
   @override
   String get assistantNutritionSection => 'Nutrition';
 
   @override
   String get assistantWellnessSection => 'Healthy living';
+
+  @override
+  String get assistantSectionDiet => 'Nutrition and diet';
+
+  @override
+  String get assistantSectionFoods => 'Foods and choices';
+
+  @override
+  String get assistantSectionHabits => 'Daily life and habits';
+
+  @override
+  String get assistantSectionDigestion => 'Digestion and general health';
+
+  @override
+  String get assistantSectionSpecial => 'Special nutrition needs';
 
   @override
   String get assistantSuggestedTitle => 'Suggested questions';
@@ -4313,7 +4374,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get assistantSafetyEmergency =>
-      'These symptoms can be an emergency. If you have severe chest pain, shortness of breath, fainting or sudden weakness, get emergency medical help. I cannot diagnose this.';
+      'These symptoms can be an emergency. If you have severe chest pain, shortness of breath, fainting, sudden weakness, bleeding that does not stop or a serious allergic reaction, get emergency medical help without delay. I cannot diagnose this.';
 
   @override
   String get assistantPremiumRequired =>

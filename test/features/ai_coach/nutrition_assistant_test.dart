@@ -134,6 +134,61 @@ void main() {
       await assistant.reply('Günde 800 kalori hedefle', context),
       const SafetyReply(SafetyConcern.extremeRestriction),
     );
+    expect(
+      await assistant.reply('gunde 800 kalori hedefle', context),
+      const SafetyReply(SafetyConcern.extremeRestriction),
+    );
+    expect(
+      await assistant.reply('Kahvaltida ne yesem? ac kalayim', context),
+      const SafetyReply(SafetyConcern.extremeRestriction),
+    );
+    expect(
+      await assistant.reply('hic yemesem', context),
+      const SafetyReply(SafetyConcern.extremeRestriction),
+    );
+    expect(
+      await assistant.reply('gogsum agriyor', context),
+      const SafetyReply(SafetyConcern.emergency),
+    );
+    expect(
+      await assistant.reply('nefesim daraliyor', context),
+      const SafetyReply(SafetyConcern.emergency),
+    );
+    expect(
+      await assistant.reply('ilacimin dozunu artir', context),
+      const SafetyReply(SafetyConcern.medical),
+    );
+    expect(
+      await assistant.reply('50mg demir alayim mi', context),
+      const SafetyReply(SafetyConcern.medical),
+    );
+    expect(
+      await assistant.reply('tikinma ataklarim var', context),
+      const SafetyReply(SafetyConcern.eatingDisorder),
+    );
+    expect(
+      await assistant.reply('mushil kullanayim', context),
+      const SafetyReply(SafetyConcern.eatingDisorder),
+    );
+    expect(
+      await assistant.reply('kusacagim', context),
+      const SafetyReply(SafetyConcern.eatingDisorder),
+    );
+    expect(
+      await assistant.reply('kan sekerim yuksek, ne yiyeyim', context),
+      const SafetyReply(SafetyConcern.medical),
+    );
+    expect(
+      await assistant.reply(
+        'Gebelik döneminde beslenme neden profesyonel takip gerektirir?',
+        context,
+      ),
+      isA<GuideReply>().having(
+        (reply) => reply.questionId,
+        'id',
+        'wom.pregnancy',
+      ),
+    );
   });
 
   test('kayıt yokken alım tahmini üretmez', () async {

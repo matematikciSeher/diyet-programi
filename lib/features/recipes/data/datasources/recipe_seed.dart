@@ -6,6 +6,10 @@ import '../../domain/models/recipe_tags.dart';
 import '../../domain/services/recipe_nutrition_calculator.dart';
 import '../../domain/services/recipe_suitability.dart';
 
+part 'recipe_seed_extra.dart';
+part 'recipe_starter_pack.dart';
+part 'recipe_starter_more.dart';
+
 /// Örnek katalogdan hesaplanan başlangıç tarifleri.
 ///
 /// Besin değerleri [SampleFoodCatalog] (USDA SR Legacy, yuvarlanmış demo
@@ -26,13 +30,18 @@ abstract final class RecipeSeed {
         if (food.id.startsWith('sample-')) food.id.substring(7): food,
     };
     final calculator = RecipeNutritionCalculator((id) => byId[id]);
-    return [for (final spec in _specs) _recipe(spec, calculator)];
+    final recipesById = <String, Recipe>{};
+    for (final spec in _specs) {
+      final recipe = _recipe(spec, calculator);
+      recipesById.putIfAbsent(recipe.id, () => recipe);
+    }
+    return recipesById.values.toList();
   }
 
   static Recipe _recipe(_Spec spec, RecipeNutritionCalculator calculator) {
     final built = calculator.build(servings: spec.servings, lines: spec.lines);
     final draft = Recipe(
-      id: 'catalog-${spec.id}',
+      id: spec.canonicalId ?? 'catalog-${spec.id}',
       title: spec.title,
       servings: spec.servings,
       nutritionPerServing: built.perServing,
@@ -98,8 +107,9 @@ class _Spec {
     this.meal,
     this.extra,
     this.lines,
-    this.steps,
-  );
+    this.steps, {
+    this.canonicalId,
+  });
 
   final String id;
   final String title;
@@ -111,6 +121,9 @@ class _Spec {
   final List<String> extra;
   final List<RecipeIngredientLine> lines;
   final List<String> steps;
+
+  /// JSON paketindeki kimlik. Boşsa `catalog-{id}` üretilir.
+  final String? canonicalId;
 }
 
 RecipeIngredientLine _l(String foodId, double quantity, String unit) =>
@@ -919,22 +932,23 @@ final _specs = <_Spec>[
   _Spec(
     'yogurtlu-tavuk',
     'Yoğurtlu tavuk kasesi',
-    'Izgara tavuk, yoğurt, salatalık ve domates.',
+    'Izgara tavuk, sade yoğurt, salatalık, domates ve ölçülü zeytinyağı. Bir porsiyon.',
     1,
     10,
-    12,
+    15,
     MealType.lunch,
     _tr,
     [
-      _l('chicken-breast', 130, 'g'),
-      _l('yogurt-whole', 80, 'g'),
+      _l('chicken-breast', 120, 'g'),
+      _l('yogurt-whole', 100, 'g'),
       _l('cucumber', 100, 'g'),
-      _l('tomato', 50, 'g'),
+      _l('tomato', 100, 'g'),
+      _l('olive-oil', 5, 'g'),
     ],
     const [
-      'Tavuğu ızgarada pişirip dilimleyin.',
-      'Salatalık ve domatesi doğrayın.',
-      'Yoğurdu kenara koyup tavukla servis edin.',
+      'Tavuğu kekik ve karabiberle ovup ızgarada veya tavada içi beyazlayana kadar pişirin.',
+      'Domates ve salatalığı küp doğrayıp tabağa alın.',
+      'Yoğurdu sos olarak ekleyin, üzerine 5 gram zeytinyağı gezdirin.',
     ],
   ),
   _Spec(
@@ -1564,4 +1578,7 @@ final _specs = <_Spec>[
       'Balı üzerine gezdirin.',
     ],
   ),
+  ...extraRecipeSpecs,
+  ...starterRecipeSpecs,
+  ...starterRecipeSpecsMore,
 ];

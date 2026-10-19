@@ -83,6 +83,32 @@ void main() {
     );
   }
 
+  testWidgets('kategori seçimi yalnızca o kategorideki tarifi gösterir', (
+    tester,
+  ) async {
+    await tester.pumpWidget(listApp(Stream.value(const [recipe])));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 50));
+
+    expect(find.text(l10n.recipeCategoryAll), findsNothing);
+    expect(find.text('Widget Bowl'), findsOneWidget);
+
+    await tester.ensureVisible(find.text(l10n.recipeCategoryHighProtein));
+    await tester.tap(find.text(l10n.recipeCategoryHighProtein));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 50));
+
+    expect(find.text('Widget Bowl'), findsNothing);
+    expect(find.text(l10n.recipeNoResults), findsOneWidget);
+
+    await tester.ensureVisible(find.text(l10n.mealBreakfast));
+    await tester.tap(find.text(l10n.mealBreakfast));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 50));
+
+    expect(find.text('Widget Bowl'), findsOneWidget);
+  });
+
   testWidgets('tarif listesi koyu temada kartı çizer', (tester) async {
     await tester.pumpWidget(
       listApp(Stream.value(const [recipe]), themeMode: ThemeMode.dark),

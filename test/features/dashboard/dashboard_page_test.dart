@@ -2,6 +2,9 @@ import 'package:diyet_programi/app.dart';
 import 'package:diyet_programi/core/constants/storage_keys.dart';
 import 'package:diyet_programi/core/routing/app_startup.dart';
 import 'package:diyet_programi/features/dashboard/presentation/pages/dashboard_page.dart';
+import 'package:diyet_programi/features/food/presentation/pages/food_search_page.dart';
+import 'package:diyet_programi/features/food/presentation/widgets/meal_type_selector.dart';
+import 'package:diyet_programi/features/meals/presentation/pages/diary_page.dart';
 import 'package:diyet_programi/features/dashboard/presentation/widgets/calorie_summary_card.dart';
 import 'package:diyet_programi/features/dashboard/presentation/widgets/nutrition_score_card.dart';
 import 'package:diyet_programi/l10n/generated/app_localizations.dart';
@@ -72,6 +75,80 @@ void main() {
     await tester.tap(find.text(l10n.actionUndo));
     await tester.pumpAndSettle();
     expect(find.text(l10n.waterGlassesProgress(5, 10)), findsOneWidget);
+  });
+
+  testWidgets('öğüne dokununca yalnızca o öğünün kaydı açılır', (tester) async {
+    await _openDashboard(tester, size: const Size(390, 844));
+
+    final breakfast = find.text(l10n.mealBreakfast);
+    await tester.scrollUntilVisible(breakfast, 300);
+    await tester.pumpAndSettle();
+    await tester.tap(breakfast);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Haşlanmış yumurta'), findsOneWidget);
+    expect(find.text('Mercimek çorbası'), findsNothing);
+    expect(find.text(l10n.mealLunch), findsNothing);
+    expect(find.text(l10n.diaryShowAllMeals), findsOneWidget);
+
+    await tester.tap(find.text(l10n.diaryShowAllMeals));
+    await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(
+      find.text(l10n.mealLunch),
+      400,
+      scrollable: find
+          .descendant(
+            of: find.byType(DiaryPage),
+            matching: find.byType(Scrollable),
+          )
+          .last,
+    );
+    await tester.pumpAndSettle();
+    expect(find.text(l10n.mealLunch), findsOneWidget);
+    expect(find.text('Mercimek çorbası'), findsOneWidget);
+  });
+
+  testWidgets('öğün artısı yalnızca o öğünün ekleme sayfasını açar', (
+    tester,
+  ) async {
+    await _openDashboard(tester, size: const Size(390, 844));
+
+    final add = find.byTooltip(l10n.mealAddFoodTo(l10n.mealBreakfast));
+    await tester.scrollUntilVisible(add, 300);
+    await tester.pumpAndSettle();
+    await tester.tap(add);
+    await tester.pumpAndSettle();
+
+    expect(find.byType(FoodSearchPage), findsOneWidget);
+    expect(find.text(l10n.foodAddToMeal(l10n.mealBreakfast)), findsOneWidget);
+    expect(
+      find.descendant(
+        of: find.byType(FoodSearchPage),
+        matching: find.byType(MealTypeSelector),
+      ),
+      findsNothing,
+    );
+    expect(
+      find.descendant(
+        of: find.byType(FoodSearchPage),
+        matching: find.text(l10n.mealLunch),
+      ),
+      findsNothing,
+    );
+    expect(
+      find.descendant(
+        of: find.byType(FoodSearchPage),
+        matching: find.text(l10n.mealDinner),
+      ),
+      findsNothing,
+    );
+    expect(
+      find.descendant(
+        of: find.byType(FoodSearchPage),
+        matching: find.text(l10n.mealSnack),
+      ),
+      findsNothing,
+    );
   });
 
   testWidgets('skor detayında tıbbi teşhis olmadığı belirtilir', (

@@ -137,51 +137,47 @@ void main() {
     targets: NutritionTargets.fallback,
   );
 
-  test('beslenme ve sağlıklı yaşam kategorileri sorularıyla birlikte durur', () {
-    expect(AssistantCatalog.nutrition, hasLength(16));
-    expect(AssistantCatalog.wellness, hasLength(12));
+  test('elli kategori benzersiz kimlikle ve bilgi kaydıyla durur', () {
+    expect(AssistantCatalog.categories, hasLength(50));
     expect(
-      AssistantCatalog.nutrition.map((c) => c.titleTr),
-      [
-        'Günlük Beslenme Değerlendirmesi',
-        'Kalori ve Günlük Hedefler',
-        'Protein, Karbonhidrat ve Yağ',
-        'Kahvaltı Önerileri',
-        'Öğle ve Akşam Yemekleri',
-        'Ara Öğünler ve Atıştırmalıklar',
-        'Tarifler ve Yemek Hazırlama',
-        'Besin Değişimleri ve Alternatifler',
-        'Su Tüketimi ve Günlük Alışkanlıklar',
-        'Kilo Yönetimi ve Hedefler',
-        'Öğün Planlama ve Zaman Yönetimi',
-        'Alışveriş ve Malzeme Seçimi',
-        'Dışarıda ve Sosyal Ortamlarda Beslenme',
-        'Beslenme Bilgisi ve Doğru Bilinen Yanlışlar',
-        'Beslenme Tercihleri ve Beslenme Düzenleri',
-        'Haftalık Beslenme Özeti',
-      ],
+      AssistantCatalog.categories.map((c) => c.id).toSet(),
+      hasLength(50),
     );
     expect(
-      AssistantCatalog.wellness.map((c) => c.titleTr),
+      AssistantCatalog.inSection(AssistantSection.diet).map((c) => c.titleTr),
       [
-        'Sağlıklı Yaşam ve Genel Sağlık',
+        'Sağlıklı ve Dengeli Beslenme',
+        'Kilo Verme ve Kilo Yönetimi',
+        'Kilo Koruma',
+        'Kalori ve Enerji İhtiyacı',
+        'Protein Kaynakları',
+        'Karbonhidratlar',
+        'Sağlıklı Yağlar',
+        'Lif ve Bağırsak Sağlığı',
         'Vitaminler ve Mineraller',
-        'Sindirim ve Bağırsak Sağlığı',
-        'Uyku ve Dinlenme',
-        'Enerji ve Günlük Zindelik',
-        'Kalp ve Damar Sağlığını Destekleyen Beslenme',
-        'Kan Şekeri ve Karbonhidratlar',
-        'Kemik ve Kas Sağlığı',
-        'Bağışıklık ve Besin Çeşitliliği',
-        'Stres, Duygusal Yeme ve Beslenme Alışkanlıkları',
-        'Metabolizma ve Kilo Hakkında Genel Bilgiler',
-        'Kadın Sağlığı ve Beslenme Hakkında Genel Bilgiler',
+        'Porsiyon Kontrolü',
       ],
     );
     expect(
-      AssistantCatalog.questions,
-      hasLength(96 + 64),
+      AssistantCatalog.inSection(AssistantSection.special).map((c) => c.titleTr),
+      [
+        'Kan Şekeri ve Beslenme',
+        'Kolesterol ve Beslenme',
+        'Tansiyon ve Beslenme',
+        'Kansızlık ve Beslenme',
+        'Kadın Sağlığı ve Beslenme',
+        'Menopoz Döneminde Beslenme',
+        'Gebelikte Beslenme',
+        'Çocuklarda Dengeli Beslenme',
+        'İleri Yaşta Beslenme',
+        'Takviyeler ve Vitamin Kullanımı',
+      ],
     );
+    expect(AssistantCatalog.questions.length, greaterThanOrEqualTo(160));
+    expect(AssistantCatalog.questionById('fact.fiber'), isNotNull);
+    expect(AssistantCatalog.questionById('met.what'), isNotNull);
+    expect(AssistantCatalog.questionById('wom.pregnancy'), isNotNull);
+    expect(AssistantCatalog.questionById('cal.consumed'), isNotNull);
     for (final category in AssistantCatalog.categories) {
       expect(category.questions, isNotEmpty);
       for (final question in category.questions) {
@@ -330,9 +326,11 @@ void main() {
       ].join('\n');
       expect(text, isNot(matches(forbidden)));
     }
-    for (final category in AssistantCatalog.wellness) {
-      for (final question in category.questions) {
-        expect(question.route, AssistantRoute.guide);
+    for (final section in [AssistantSection.digestion, AssistantSection.special]) {
+      for (final category in AssistantCatalog.inSection(section)) {
+        for (final question in category.questions) {
+          expect(question.route, AssistantRoute.guide, reason: question.id);
+        }
       }
     }
   });

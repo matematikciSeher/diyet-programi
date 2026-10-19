@@ -45,7 +45,8 @@ class DiaryPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final status = ref.watch(diaryStatusProvider);
-    final handler = _DiaryHandler(context, ref);
+    final focusedMeal = ref.watch(diaryMealFilterProvider);
+    final handler = _DiaryHandler(context, ref, focusedMeal: focusedMeal);
 
     final Widget body;
     if (status.error != null) {
@@ -60,6 +61,7 @@ class DiaryPage extends ConsumerWidget {
         builder: (context, constraints) => _DiaryContent(
           handler: handler,
           isEmpty: status.isEmpty,
+          focusedMeal: focusedMeal,
           twoColumns: constraints.maxWidth >= _twoColumnWidth,
         ),
       );
@@ -77,10 +79,10 @@ class DiaryPage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             AppSpacing.gapSm,
-            const ResponsiveCenter(
+            ResponsiveCenter(
               padding: EdgeInsets.zero,
               maxWidth: _wideMaxWidth,
-              child: DiaryHeader(),
+              child: DiaryHeader(title: focusedMeal?.label(context.l10n)),
             ),
             const Divider(),
             Expanded(child: body),
@@ -95,41 +97,49 @@ class _DiaryContent extends ConsumerWidget {
   const _DiaryContent({
     required this.handler,
     required this.isEmpty,
+    required this.focusedMeal,
     required this.twoColumns,
   });
 
   final _DiaryHandler handler;
   final bool isEmpty;
+  final MealType? focusedMeal;
   final bool twoColumns;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     const gap = SizedBox(height: AppSpacing.lg);
+    final mealTypes = focusedMeal == null ? MealType.values : [focusedMeal!];
     final meals = [
-      for (final type in MealType.values)
+      for (final type in mealTypes)
         MealSectionCard(
           key: ValueKey(type),
           type: type,
+          lockExpanded: focusedMeal != null,
           onAddFood: () => handler.addFood(type),
           onEntryAction: handler.onEntryAction,
         ),
     ];
     final primary = <Widget>[
       const _DayNote(),
-      const DiaryCalorieCard(),
-      if (isEmpty) _EmptyDayCard(onAddFood: () => handler.addFood(null)),
+      if (focusedMeal == null) const DiaryCalorieCard(),
+      if (focusedMeal == null && isEmpty)
+        _EmptyDayCard(onAddFood: () => handler.addFood(null)),
+      if (focusedMeal != null) const _ShowAllMealsButton(),
       ...meals,
     ];
-    final secondary = <Widget>[
-      DiaryWaterCard(
-        key: const ValueKey('diary-water'),
-        onAdd: handler.addWater,
-        onRemove: handler.removeWater,
-      ),
-      const _DiaryActivityCard(),
-      _DiaryWeightCard(onAdd: handler.addWeight),
-      const DiaryScoreCard(),
-    ];
+    final secondary = focusedMeal != null
+        ? const <Widget>[]
+        : <Widget>[
+            DiaryWaterCard(
+              key: const ValueKey('diary-water'),
+              onAdd: handler.addWater,
+              onRemove: handler.removeWater,
+            ),
+            const _DiaryActivityCard(),
+            _DiaryWeightCard(onAdd: handler.addWeight),
+            const DiaryScoreCard(),
+          ];
 
     ref.listen(diaryFocusProvider, (previous, next) {
       if (next == null) return;
@@ -154,7 +164,7 @@ class _DiaryContent extends ConsumerWidget {
       bottom: AppSpacing.xxxl + AppSpacing.xxxl,
     );
 
-    if (twoColumns) {
+    if (twoColumns && secondary.isNotEmpty) {
       Widget column(List<Widget> children) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -361,11 +371,28 @@ class _DiaryWeightCard extends ConsumerWidget {
 
 /// Sayfadaki kullanıcı etkileşimlerini [DiaryActions]'a bağlar ve sonuç
 /// bildirimlerini gösterir.
+class _ShowAllMealsButton extends ConsumerWidget {
+  const _ShowAllMealsButton();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Align(
+      alignment: AlignmentDirectional.centerStart,
+      child: TextButton.icon(
+        onPressed: () => ref.read(diaryMealFilterProvider.notifier).clear(),
+        icon: const Icon(Icons.restaurant_menu_outlined),
+        label: Text(context.l10n.diaryShowAllMeals),
+      ),
+    );
+  }
+}
+
 class _DiaryHandler {
-  const _DiaryHandler(this.context, this.ref);
+  const _DiaryHandler(this.context, this.ref, {this.focusedMeal});
 
   final BuildContext context;
   final WidgetRef ref;
+  final MealType? focusedMeal;
 
   DateTime get _day => ref.read(selectedDateProvider);
   DateTime get _now => ref.read(clockProvider)();
@@ -387,14 +414,16 @@ class _DiaryHandler {
       );
   }
 
-  /// [type] verilmezse bugün için saate göre öğün önerilir.
+  /// [type] verilmezse açık öğün, o da yoksa bugün için saate göre öğün önerilir.
   void addFood(MealType? type) {
-    final meal = type ?? (_isToday ? LogFood.suggestedMeal(_now) : null);
+    final chosen = type ?? focusedMeal;
+    final meal = chosen ?? (_isToday ? LogFood.suggestedMeal(_now) : null);
     _push(
       AppRoutes.withMeal(
         AppRoutes.foodSearch,
         meal,
         date: _isToday ? null : _day,
+        lockMeal: chosen != null,
       ),
     );
   }
@@ -456,17 +485,39 @@ class _DiaryHandler {
   Future<void> openQuickAdd() async {
     final action = await showQuickAddSheet(context);
     if (action == null || !context.mounted) return;
-    final meal = _isToday ? LogFood.suggestedMeal(_now) : null;
+    final meal = focusedMeal ?? (_isToday ? LogFood.suggestedMeal(_now) : null);
     final date = _isToday ? null : _day;
+    final locked = focusedMeal != null;
     switch (action) {
       case DiaryQuickAction.food:
         addFood(null);
       case DiaryQuickAction.photo:
-        _push(AppRoutes.withMeal(AppRoutes.photoLog, meal, date: date));
+        _push(
+          AppRoutes.withMeal(
+            AppRoutes.photoLog,
+            meal,
+            date: date,
+            lockMeal: locked,
+          ),
+        );
       case DiaryQuickAction.barcode:
-        _push(AppRoutes.withMeal(AppRoutes.barcodeScanner, meal, date: date));
+        _push(
+          AppRoutes.withMeal(
+            AppRoutes.barcodeScanner,
+            meal,
+            date: date,
+            lockMeal: locked,
+          ),
+        );
       case DiaryQuickAction.voice:
-        _push(AppRoutes.withMeal(AppRoutes.voiceLog, meal, date: date));
+        _push(
+          AppRoutes.withMeal(
+            AppRoutes.voiceLog,
+            meal,
+            date: date,
+            lockMeal: locked,
+          ),
+        );
       case DiaryQuickAction.water:
         final ml = await _pickWaterAmount();
         if (ml != null) await addWater(ml);

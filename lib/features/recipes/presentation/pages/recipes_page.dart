@@ -74,10 +74,11 @@ class _RecipesPageState extends ConsumerState<RecipesPage> {
       ),
     );
 
-    void clearAll() {
+    void resetBrowse() {
       _debounce?.cancel();
       _search.clear();
       controller.clear();
+      setState(() {});
     }
 
     return Scaffold(
@@ -122,11 +123,6 @@ class _RecipesPageState extends ConsumerState<RecipesPage> {
               padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
               children: [
                 chip(
-                  label: l10n.recipeCategoryAll,
-                  selected: filter.isEmpty,
-                  onTap: clearAll,
-                ),
-                chip(
                   label: l10n.recipeFavorites,
                   icon: Icons.favorite_outline_rounded,
                   selected: filter.favoritesOnly,
@@ -153,42 +149,40 @@ class _RecipesPageState extends ConsumerState<RecipesPage> {
                   label: l10n.recipeCategoryHighProtein,
                   icon: RecipeCategory.highProtein.icon,
                   selected: filter.tags.contains(RecipeTags.highProtein),
-                  onTap: () => controller.toggleTag(RecipeTags.highProtein),
+                  onTap: () => controller.selectTag(RecipeTags.highProtein),
                 ),
                 chip(
                   label: l10n.recipeCategoryLowCalorie,
                   icon: RecipeCategory.lowCalorie.icon,
                   selected: filter.tags.contains(RecipeTags.lowCalorie),
-                  onTap: () => controller.toggleTag(RecipeTags.lowCalorie),
+                  onTap: () => controller.selectTag(RecipeTags.lowCalorie),
                 ),
                 chip(
                   label: l10n.recipeVegetarian,
                   icon: Icons.spa_outlined,
                   selected: filter.tags.contains(RecipeTags.vegetarian),
-                  onTap: () => controller.toggleTag(RecipeTags.vegetarian),
+                  onTap: () => controller.selectTag(RecipeTags.vegetarian),
                 ),
                 chip(
                   label: l10n.recipeSalad,
                   selected: filter.tags.contains(RecipeTags.salad),
-                  onTap: () => controller.toggleTag(RecipeTags.salad),
+                  onTap: () => controller.selectTag(RecipeTags.salad),
                 ),
                 chip(
                   label: l10n.recipeSoup,
                   selected: filter.tags.contains(RecipeTags.soup),
-                  onTap: () => controller.toggleTag(RecipeTags.soup),
+                  onTap: () => controller.selectTag(RecipeTags.soup),
                 ),
                 chip(
                   label: l10n.recipePractical,
                   selected: filter.tags.contains(RecipeTags.practical),
-                  onTap: () => controller.toggleTag(RecipeTags.practical),
+                  onTap: () => controller.selectTag(RecipeTags.practical),
                 ),
                 for (final cap in const [300, 500])
                   chip(
                     label: l10n.recipeCalorieMax(cap),
                     selected: filter.maxCalories == cap,
-                    onTap: () => controller.setMaxCalories(
-                      filter.maxCalories == cap ? null : cap.toDouble(),
-                    ),
+                    onTap: () => controller.selectMaxCalories(cap.toDouble()),
                   ),
               ],
             ),
@@ -211,7 +205,7 @@ class _RecipesPageState extends ConsumerState<RecipesPage> {
                           icon: Icons.search_off_rounded,
                           title: l10n.recipeNoResults,
                           actionLabel: l10n.recipeClearFilters,
-                          onAction: clearAll,
+                          onAction: resetBrowse,
                         );
                 }
                 final visible = window < list.length ? window : list.length;

@@ -178,6 +178,18 @@ class Recipe extends Equatable {
 
   int get totalMinutes => (prepMinutes ?? 0) + (cookMinutes ?? 0);
 
+  /// Malzeme gramlarının porsiyon başına toplamı. Bir malzemenin gramı
+  /// yoksa `null`; su gibi ölçülemeyen ekler bu toplama girmez.
+  double? get gramsPerServing {
+    if (servings < 1 || ingredients.isEmpty) return null;
+    if (ingredients.any((ingredient) => ingredient.grams == null)) return null;
+    final total = ingredients.fold<double>(
+      0,
+      (sum, ingredient) => sum + ingredient.grams!,
+    );
+    return total / servings;
+  }
+
   Recipe copyWith({
     String? id,
     String? title,

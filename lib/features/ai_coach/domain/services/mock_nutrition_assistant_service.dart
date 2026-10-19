@@ -13,24 +13,13 @@ import '../catalog/assistant_catalog.dart';
 import '../models/assistant_context.dart';
 import '../models/assistant_reply.dart';
 import 'assistant_guide_engine.dart';
+import 'assistant_intent.dart';
+import 'assistant_phrasing.dart';
 import 'assistant_safety.dart';
+import 'assistant_utterance_matcher.dart';
 import 'nutrition_assistant_service.dart';
 
-enum AssistantIntent {
-  overTarget,
-  swapPlan,
-  planReview,
-  dailyReview,
-  protein,
-  carbs,
-  fat,
-  mealSuggestion,
-  remainingCalories,
-  water,
-  weight,
-  fasting,
-  unknown,
-}
+export 'assistant_intent.dart';
 
 /// Kayıtlı verilere bakan kural tabanlı asistan.
 ///
@@ -85,33 +74,42 @@ class MockNutritionAssistantService implements NutritionAssistantService {
     }
     if (any(['protein'])) return AssistantIntent.protein;
     if (any(['karbonhidrat', 'carb'])) return AssistantIntent.carbs;
-    if (any(['yağ', 'yag', ' fat'])) return AssistantIntent.fat;
+    if (AssistantPhrasing.has(normalized, 'yag') || any([' fat'])) {
+      return AssistantIntent.fat;
+    }
     if (any(['ne yiyebilirim', 'ne yesem', 'ne yiyeyim', 'öner', 'için ne', 'what can i eat', 'what should i eat', 'suggest'])) {
       return AssistantIntent.mealSuggestion;
     }
-    if (any(['kalori', 'kcal', 'hakkım', 'calorie'])) {
+    if (AssistantPhrasing.has(normalized, 'kalori') ||
+        any(['kcal', 'hakkım', 'calorie'])) {
       return AssistantIntent.remainingCalories;
     }
     if (any(['oruç', 'fasting', 'fast '])) return AssistantIntent.fasting;
-    if (any(['su ', 'su?', 'suyu', 'su içt', 'water'])) {
+    if (AssistantPhrasing.has(normalized, 'su') || any(['water'])) {
       return AssistantIntent.water;
     }
-    if (any(['kilo', 'ölçü', 'bel ', 'weight'])) return AssistantIntent.weight;
+    if (AssistantPhrasing.has(normalized, 'kilo') ||
+        any(['ölçü', 'bel ', 'weight'])) {
+      return AssistantIntent.weight;
+    }
     return AssistantIntent.unknown;
   }
 
   static MealType? mealTypeIn(String normalized) {
-    if (normalized.contains('kahvaltı') || normalized.contains('breakfast')) {
+    if (AssistantPhrasing.has(normalized, 'kahvalti') ||
+        normalized.contains('breakfast')) {
       return MealType.breakfast;
     }
-    if (normalized.contains('öğle') || normalized.contains('lunch')) {
+    if (AssistantPhrasing.has(normalized, 'ogle') ||
+        normalized.contains('lunch')) {
       return MealType.lunch;
     }
-    if (normalized.contains('akşam') || normalized.contains('dinner')) {
+    if (AssistantPhrasing.has(normalized, 'aksam') ||
+        normalized.contains('dinner')) {
       return MealType.dinner;
     }
-    if (normalized.contains('atıştır') ||
-        normalized.contains('ara öğün') ||
+    if (AssistantPhrasing.has(normalized, 'atistir') ||
+        AssistantPhrasing.has(normalized, 'ara ogun') ||
         normalized.contains('snack')) {
       return MealType.snack;
     }
@@ -123,17 +121,69 @@ class MockNutritionAssistantService implements NutritionAssistantService {
   @override
   Future<AssistantReply> reply(String question, AssistantContext c) async {
     final q = normalize(question);
-    final matched = AssistantCatalog.match(q);
-    if (matched != null) {
-      if (AssistantSafety.checkUrgent(q) case final concern?) {
-        return SafetyReply(concern);
-      }
-      return _fromCatalog(matched, c);
+    if (AssistantSafety.checkUrgent(q) case final concern?) {
+      return SafetyReply(concern);
     }
+
+    final pinned = c.pinnedQuestionId == null
+        ? null
+        : AssistantCatalog.questionById(c.pinnedQuestionId!);
+    if (pinned != null) return _fromCatalog(pinned, c);
+
+    final exact = AssistantCatalog.exactMatches(question);
+    if (exact.isNotEmpty) {
+      final ids = AssistantUtteranceMatcher.preferCategory(
+        AssistantUtteranceMatcher.narrow(
+          [for (final item in exact) item.id],
+          c.priorUserQuestion,
+        ),
+        c.categoryId,
+      );
+      if (ids.length == 1) {
+        final selected = AssistantCatalog.questionById(ids.first);
+        if (selected != null) return _fromCatalog(selected, c);
+      }
+      return _clarify(ids.isEmpty ? [for (final item in exact) item.id] : ids, c);
+    }
+
     if (AssistantSafety.check(q) case final concern?) {
       return SafetyReply(concern);
     }
-    return switch (intentOf(q)) {
+
+    switch (AssistantUtteranceMatcher.resolve(
+      question,
+      prior: c.priorUserQuestion,
+      categoryId: c.categoryId,
+    )) {
+      case UtteranceQuestion(:final id):
+        final selected = AssistantCatalog.questionById(id);
+        if (selected != null) return _fromCatalog(selected, c);
+      case UtteranceIntent(:final intent):
+        return _byIntent(intent, q, c);
+      case UtteranceAmbiguous(:final questionIds):
+        return _clarify(questionIds, c);
+      case UtteranceUnclear():
+        return const DetailRequestReply();
+      case UtteranceNone():
+        break;
+    }
+
+    final near = AssistantCatalog.closest(
+      question,
+      categoryId: c.categoryId,
+    );
+    if (near.length == 1) return _fromCatalog(near.single, c);
+    if (near.length > 1) {
+      return _clarify([for (final item in near) item.id], c);
+    }
+
+    final contained = AssistantCatalog.matchContained(question);
+    if (contained != null) return _fromCatalog(contained, c);
+    return _byIntent(intentOf(q), q, c);
+  }
+
+  AssistantReply _byIntent(AssistantIntent intent, String q, AssistantContext c) {
+    return switch (intent) {
       AssistantIntent.overTarget => _overTarget(c),
       AssistantIntent.swapPlan => SwapPlanReply(
         meal: c.plannedFor(mealTypeIn(q) ?? c.upcomingMealType),
@@ -164,6 +214,33 @@ class MockNutritionAssistantService implements NutritionAssistantService {
       AssistantIntent.fasting => _fasting(c),
       AssistantIntent.unknown => const HelpReply(),
     };
+  }
+
+  AssistantReply _clarify(List<String> ids, AssistantContext c) {
+    final choices = <ClarificationChoice>[];
+    final seen = <String>{};
+    for (final id in ids) {
+      if (!seen.add(id)) continue;
+      final question = AssistantCatalog.questionById(id);
+      if (question == null) continue;
+      final category = AssistantCatalog.categoryOf(id);
+      choices.add(
+        ClarificationChoice(
+          questionId: question.id,
+          labelTr: category?.titleTr ?? question.tr,
+          labelEn: category?.titleEn ?? question.en,
+          promptTr: question.tr,
+          promptEn: question.en,
+        ),
+      );
+      if (choices.length == 3) break;
+    }
+    if (choices.length == 1) {
+      final selected = AssistantCatalog.questionById(choices.first.questionId!);
+      if (selected != null) return _fromCatalog(selected, c);
+    }
+    if (choices.length < 2) return const HelpReply();
+    return ClarificationReply(choices: choices);
   }
 
   AssistantReply _fromCatalog(AssistantQuestion question, AssistantContext c) {
@@ -230,14 +307,24 @@ class MockNutritionAssistantService implements NutritionAssistantService {
     return MacroStatusReply(macro: macro, consumed: consumed, target: target);
   }
 
+  List<PlannedMeal> _plannedToday(AssistantContext c) {
+    if (c.todayPlan.isNotEmpty) return c.todayPlan;
+    final key = c.now.dayKey;
+    return [
+      for (final meal in c.weekPlan)
+        if (meal.dayKey == key) meal,
+    ];
+  }
+
   AssistantReply _planReview(AssistantContext c) {
-    if (c.todayPlan.isEmpty) {
+    final meals = _plannedToday(c);
+    if (meals.isEmpty) {
       return const MissingRecordReply(
         MissingRecord.plan,
         actions: [AssistantAction.openPlan],
       );
     }
-    return PlanStatusReply(meals: c.todayPlan);
+    return PlanStatusReply(meals: meals);
   }
 
   AssistantReply _dailyReview(AssistantContext c) {

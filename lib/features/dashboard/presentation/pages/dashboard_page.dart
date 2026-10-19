@@ -16,6 +16,7 @@ import '../../../../core/widgets/section_header.dart';
 import '../../../../shared/models/enums.dart';
 import '../../../../shared/services/service_providers.dart';
 import '../../../meal_plans/presentation/providers/meal_plan_providers.dart';
+import '../../../meals/presentation/providers/diary_providers.dart';
 import '../../../subscription/domain/models/app_feature.dart';
 import '../../../subscription/presentation/widgets/premium_gate.dart';
 import '../../domain/daily_dashboard.dart';
@@ -127,12 +128,15 @@ class _DashboardBody extends ConsumerWidget {
         SectionHeader(
           title: l10n.dashboardMealsTitle,
           actionLabel: l10n.actionSeeAll,
-          onAction: () => context.go(AppRoutes.diary),
+          onAction: () {
+            ref.read(diaryMealFilterProvider.notifier).clear();
+            context.go(AppRoutes.diary);
+          },
         ),
         TodaysMealsCard(
           dashboard: data,
           onAddFood: (type) => _addFood(context, type),
-          onOpenMeal: (_) => context.go(AppRoutes.diary),
+          onOpenMeal: (type) => _openMeal(context, ref, type),
         ),
       ],
     );
@@ -224,8 +228,16 @@ class _DashboardBody extends ConsumerWidget {
     );
   }
 
-  void _addFood(BuildContext context, MealType type) =>
-      context.push(AppRoutes.withMeal(AppRoutes.foodSearch, type));
+  void _addFood(BuildContext context, MealType type) => context.push(
+    AppRoutes.withMeal(AppRoutes.foodSearch, type, lockMeal: true),
+  );
+
+  void _openMeal(BuildContext context, WidgetRef ref, MealType type) {
+    ref
+      ..read(collapsedMealsProvider.notifier).expand(type)
+      ..read(diaryMealFilterProvider.notifier).select(type);
+    context.go(AppRoutes.diary);
+  }
 
   Future<void> _addWater(BuildContext context, WidgetRef ref) async {
     final actions = ref.read(dashboardActionsProvider);

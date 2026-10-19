@@ -36,19 +36,29 @@ class RecipeImage extends StatelessWidget {
         ),
       ),
     );
+    final asset = RecipeImages.assetFor(recipe);
     final url = RecipeImages.urlFor(recipe);
-    return ExcludeSemantics(
-      child: url == null || url.isEmpty
-          ? placeholder
-          : Image.network(
-              url,
-              fit: BoxFit.cover,
-              gaplessPlayback: true,
-              loadingBuilder: (context, child, progress) =>
-                  progress == null ? child : placeholder,
-              errorBuilder: (_, _, _) => placeholder,
-            ),
-    );
+    final Widget image;
+    if (asset != null) {
+      image = Image.asset(
+        asset,
+        fit: BoxFit.cover,
+        gaplessPlayback: true,
+        errorBuilder: (_, _, _) => placeholder,
+      );
+    } else if (url != null && url.isNotEmpty) {
+      image = Image.network(
+        url,
+        fit: BoxFit.cover,
+        gaplessPlayback: true,
+        loadingBuilder: (context, child, progress) =>
+            progress == null ? child : placeholder,
+        errorBuilder: (_, _, _) => placeholder,
+      );
+    } else {
+      image = placeholder;
+    }
+    return ExcludeSemantics(child: image);
   }
 }
 

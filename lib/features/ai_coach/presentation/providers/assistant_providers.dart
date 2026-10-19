@@ -8,7 +8,9 @@ import '../../../subscription/domain/premium_access.dart';
 import '../../../meal_plans/data/repositories/meal_plan_repository_impl.dart';
 import '../../../meal_plans/presentation/providers/meal_plan_providers.dart';
 import '../../../recipes/data/repositories/recipe_repository_impl.dart';
+import '../../data/assistant_category_store.dart';
 import '../../data/assistant_chat_store.dart';
+import '../../domain/catalog/assistant_catalog.dart';
 import '../../data/repositories/assistant_context_repository_impl.dart';
 import '../../domain/models/assistant_context.dart';
 import '../../domain/models/assistant_reply.dart';
@@ -33,7 +35,7 @@ final nutritionAssistantServiceProvider = Provider<NutritionAssistantService>((
   return PremiumAwareNutritionAssistant(
     inner: inner,
     allowed: () => canAccessFeature(
-      ref.read(subscriptionStatusProvider).asData?.value,
+      ref.read(subscriptionStatusProvider).value,
       AppFeature.aiCoach,
     ),
   );
@@ -45,6 +47,10 @@ final assistantTodayProvider = FutureProvider<AssistantContext>(
 
 final assistantChatStoreProvider = Provider<AssistantChatStore>(
   (ref) => AssistantChatStore(ref.watch(localDocumentDatabaseProvider)),
+);
+
+final assistantCategoryStoreProvider = Provider<AssistantCategoryStore>(
+  (ref) => AssistantCategoryStore(ref.watch(localDocumentDatabaseProvider)),
 );
 
 sealed class AssistantMessage extends Equatable {
@@ -87,24 +93,29 @@ class AssistantChatState extends Equatable {
     this.messages = const [],
     this.busy = false,
     this.historyReady = false,
+    this.categoryId,
   });
 
   final List<AssistantMessage> messages;
   final bool busy;
   final bool historyReady;
+  final String? categoryId;
 
   AssistantChatState copyWith({
     List<AssistantMessage>? messages,
     bool? busy,
     bool? historyReady,
+    String? categoryId,
+    bool clearCategory = false,
   }) => AssistantChatState(
     messages: messages ?? this.messages,
     busy: busy ?? this.busy,
     historyReady: historyReady ?? this.historyReady,
+    categoryId: clearCategory ? null : categoryId ?? this.categoryId,
   );
 
   @override
-  List<Object?> get props => [messages, busy, historyReady];
+  List<Object?> get props => [messages, busy, historyReady, categoryId];
 }
 
 /// Sohbet cihazdaki belge veritabanında durur. Firebase kuyruğuna yazılmaz.
@@ -119,15 +130,30 @@ class AssistantChatController extends Notifier<AssistantChatState> {
   }
 
   Future<void> _restore() async {
-    final loaded = await ref.read(assistantChatStoreProvider).load();
+    final store = ref.read(assistantChatStoreProvider);
+    final loaded = await store.load();
+    final categoryId = await store.loadCategory();
+    if (!ref.mounted) return;
+    await ref.read(assistantCategoryStoreProvider).ensureSeeded();
     if (!ref.mounted) return;
     state = AssistantChatState(
       messages: [for (final item in loaded) ?_messageOf(item)],
       historyReady: true,
+      categoryId: AssistantCatalog.categoryById(categoryId ?? '') == null
+          ? null
+          : categoryId,
     );
   }
 
-  Future<void> send(String text) async {
+  Future<void> openCategory(String id) async {
+    await ready;
+    if (!ref.mounted) return;
+    if (AssistantCatalog.categoryById(id) == null) return;
+    state = state.copyWith(categoryId: id);
+    await ref.read(assistantChatStoreProvider).saveCategory(id);
+  }
+
+  Future<void> send(String text, {String? questionId}) async {
     await ready;
     final question = text.trim();
     if (question.isEmpty || state.busy) return;
@@ -137,7 +163,7 @@ class AssistantChatController extends Notifier<AssistantChatState> {
     state = state.copyWith(messages: messages, busy: true);
     if (epoch != _epoch || !ref.mounted) return;
     await _persist(messages);
-    await _complete(question, messages, epoch);
+    await _complete(question, messages, epoch, questionId: questionId);
   }
 
   Future<void> retry(String question) async {
@@ -158,19 +184,22 @@ class AssistantChatController extends Notifier<AssistantChatState> {
     await ready;
     _epoch++;
     state = const AssistantChatState(historyReady: true);
-    await ref.read(assistantChatStoreProvider).replaceAll(const []);
+    final store = ref.read(assistantChatStoreProvider);
+    await store.replaceAll(const []);
+    await store.saveCategory(null);
   }
 
   bool _hasPremium() => canAccessFeature(
-    ref.read(subscriptionStatusProvider).asData?.value,
+    ref.read(subscriptionStatusProvider).value,
     AppFeature.aiCoach,
   );
 
   Future<void> _complete(
     String question,
     List<AssistantMessage> base,
-    int epoch,
-  ) async {
+    int epoch, {
+    String? questionId,
+  }) async {
     AssistantMessage answer;
     try {
       final context = await ref
@@ -178,7 +207,14 @@ class AssistantChatController extends Notifier<AssistantChatState> {
           .snapshot();
       final reply = await ref
           .read(nutritionAssistantServiceProvider)
-          .reply(question, context);
+          .reply(
+            question,
+            context.withDialogue(
+            pinnedQuestionId: questionId,
+            priorUserQuestion: _priorQuestion(base),
+            categoryId: state.categoryId,
+          ),
+          );
       answer = AssistantBotMessage(reply);
     } on Object {
       answer = AssistantErrorMessage(
@@ -197,6 +233,16 @@ class AssistantChatController extends Notifier<AssistantChatState> {
     await ref.read(assistantChatStoreProvider).replaceAll([
       for (final message in messages) ?_transcriptOf(message),
     ]);
+  }
+
+  String? _priorQuestion(List<AssistantMessage> messages) {
+    final users = [
+      for (final message in messages)
+        if (message is AssistantUserMessage && message.text.trim().isNotEmpty)
+          message.text,
+    ];
+    if (users.length < 2) return null;
+    return users[users.length - 2];
   }
 
   bool _isRetryable(AssistantMessage message) => switch (message) {

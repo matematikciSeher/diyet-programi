@@ -28,9 +28,15 @@ import '../widgets/food_picker_sheet.dart';
 
 /// Fotoğraf adayları onaylanmadan günlüğe yazılmaz.
 class PhotoLogPage extends ConsumerStatefulWidget {
-  const PhotoLogPage({super.key, this.initialMeal, this.logDate});
+  const PhotoLogPage({
+    super.key,
+    this.initialMeal,
+    this.lockMeal = false,
+    this.logDate,
+  });
 
   final MealType? initialMeal;
+  final bool lockMeal;
   final DateTime? logDate;
 
   @override
@@ -91,16 +97,18 @@ class _PhotoLogPageState extends ConsumerState<PhotoLogPage> {
   Future<void> _analyze(Uint8List bytes) async {
     final generation = ++_generation;
     setState(() => _phase = FoodCapturePhase.uploading);
-    final result = await ref.read(foodCaptureActionsProvider).analyzePhoto(
-      bytes,
-      profile: ref.read(userProfileProvider).value,
-      locale: Localizations.localeOf(context).toLanguageTag(),
-      requestId: 'photo-$generation',
-      onPhase: (phase) {
-        if (!mounted || generation != _generation) return;
-        setState(() => _phase = phase);
-      },
-    );
+    final result = await ref
+        .read(foodCaptureActionsProvider)
+        .analyzePhoto(
+          bytes,
+          profile: ref.read(userProfileProvider).value,
+          locale: Localizations.localeOf(context).toLanguageTag(),
+          requestId: 'photo-$generation',
+          onPhase: (phase) {
+            if (!mounted || generation != _generation) return;
+            setState(() => _phase = phase);
+          },
+        );
     if (!mounted || generation != _generation) return;
     switch (result) {
       case Success(:final value):
@@ -139,11 +147,13 @@ class _PhotoLogPageState extends ConsumerState<PhotoLogPage> {
     );
     if (!mounted) return;
     _replace(
-      ref.read(foodDraftBuilderProvider).applyMatch(
-        draft.copyWith(queryName: name),
-        match,
-        profile: ref.read(userProfileProvider).value,
-      ),
+      ref
+          .read(foodDraftBuilderProvider)
+          .applyMatch(
+            draft.copyWith(queryName: name),
+            match,
+            profile: ref.read(userProfileProvider).value,
+          ),
     );
   }
 
@@ -151,11 +161,9 @@ class _PhotoLogPageState extends ConsumerState<PhotoLogPage> {
     final food = await pickFood(context);
     if (food == null || !mounted) return;
     _replace(
-      ref.read(foodDraftBuilderProvider).relink(
-        draft,
-        food,
-        profile: ref.read(userProfileProvider).value,
-      ),
+      ref
+          .read(foodDraftBuilderProvider)
+          .relink(draft, food, profile: ref.read(userProfileProvider).value),
     );
   }
 
@@ -166,32 +174,36 @@ class _PhotoLogPageState extends ConsumerState<PhotoLogPage> {
     final grams = ref
         .read(foodCalculationServiceProvider)
         .gramsFor(food, selection);
-    final draft = ref.read(foodDraftBuilderProvider).relink(
-      FoodLogDraft(
-        localId: 'add-${food.id}-${_drafts.length}',
-        queryName: food.name,
-        matchStatus: FoodMatchStatus.matched,
-        quantity: selection.quantity,
-        unit: selection.portion.unit,
-        source: FoodSource.aiPhoto,
-        baseAmount: grams ?? selection.baseAmount,
-      ),
-      food,
-      profile: ref.read(userProfileProvider).value,
-    );
+    final draft = ref
+        .read(foodDraftBuilderProvider)
+        .relink(
+          FoodLogDraft(
+            localId: 'add-${food.id}-${_drafts.length}',
+            queryName: food.name,
+            matchStatus: FoodMatchStatus.matched,
+            quantity: selection.quantity,
+            unit: selection.portion.unit,
+            source: FoodSource.aiPhoto,
+            baseAmount: grams ?? selection.baseAmount,
+          ),
+          food,
+          profile: ref.read(userProfileProvider).value,
+        );
     setState(() => _drafts = [..._drafts, draft]);
   }
 
   Future<void> _save() async {
     if (_saving || _submissionId == null || _meal == null) return;
     setState(() => _saving = true);
-    final result = await ref.read(confirmCapturedFoodsProvider).call(
-      drafts: _drafts,
-      mealType: _meal,
-      submissionId: _submissionId!,
-      day: widget.logDate,
-      confirmed: true,
-    );
+    final result = await ref
+        .read(confirmCapturedFoodsProvider)
+        .call(
+          drafts: _drafts,
+          mealType: _meal,
+          submissionId: _submissionId!,
+          day: widget.logDate,
+          confirmed: true,
+        );
     if (!mounted) return;
     setState(() => _saving = false);
     switch (result) {
@@ -210,23 +222,29 @@ class _PhotoLogPageState extends ConsumerState<PhotoLogPage> {
     return Scaffold(
       appBar: AppBar(title: Text(l10n.featurePhotoLog)),
       body: ListView(
-        padding: const EdgeInsets.only(top: AppSpacing.lg, bottom: AppSpacing.xxxl),
+        padding: const EdgeInsets.only(
+          top: AppSpacing.lg,
+          bottom: AppSpacing.xxxl,
+        ),
         children: [
           ResponsiveCenter(
             child: reviewing
                 ? FoodCaptureReview(
                     drafts: _drafts,
                     meal: _meal,
+                    lockMeal: widget.lockMeal,
                     saving: _saving,
                     calculator: ref.watch(foodCalculationServiceProvider),
                     onMeal: (meal) => setState(() => _meal = meal),
                     onChanged: _replace,
                     onSelectFood: (draft, food) => _replace(
-                      ref.read(foodDraftBuilderProvider).relink(
-                        draft,
-                        food,
-                        profile: ref.read(userProfileProvider).value,
-                      ),
+                      ref
+                          .read(foodDraftBuilderProvider)
+                          .relink(
+                            draft,
+                            food,
+                            profile: ref.read(userProfileProvider).value,
+                          ),
                     ),
                     onRemove: (draft) => setState(
                       () => _drafts = [
@@ -238,7 +256,10 @@ class _PhotoLogPageState extends ConsumerState<PhotoLogPage> {
                     onPickReplacement: _pickReplacement,
                     onAddFood: _addFood,
                     onCreateCustom: () => context.push(
-                      AppRoutes.customFoodPath(meal: _meal, date: widget.logDate),
+                      AppRoutes.customFoodPath(
+                        meal: _meal,
+                        date: widget.logDate,
+                      ),
                     ),
                     onSave: _save,
                   )
@@ -249,7 +270,8 @@ class _PhotoLogPageState extends ConsumerState<PhotoLogPage> {
                     permissionDenied: _permissionDenied,
                     onCamera: () => _pick(PhotoSource.camera),
                     onGallery: () => _pick(PhotoSource.gallery),
-                    onSettings: () => ref.read(mediaPermissionGatewayProvider).openSettings(),
+                    onSettings: () =>
+                        ref.read(mediaPermissionGatewayProvider).openSettings(),
                   ),
           ),
         ],
@@ -300,7 +322,9 @@ class _Picker extends StatelessWidget {
             icon: const Icon(Icons.photo_camera_outlined),
             label: Text(l10n.photoLogCamera),
             style: const ButtonStyle(
-              minimumSize: WidgetStatePropertyAll(Size(48, AppSizes.minTouchTarget)),
+              minimumSize: WidgetStatePropertyAll(
+                Size(48, AppSizes.minTouchTarget),
+              ),
             ),
           ),
         ),
@@ -314,7 +338,9 @@ class _Picker extends StatelessWidget {
             icon: const Icon(Icons.photo_outlined),
             label: Text(l10n.photoLogGallery),
             style: const ButtonStyle(
-              minimumSize: WidgetStatePropertyAll(Size(48, AppSizes.minTouchTarget)),
+              minimumSize: WidgetStatePropertyAll(
+                Size(48, AppSizes.minTouchTarget),
+              ),
             ),
           ),
         ),
@@ -323,7 +349,10 @@ class _Picker extends StatelessWidget {
           const Center(child: CircularProgressIndicator()),
           if (status != null) ...[
             AppSpacing.gapSm,
-            Semantics(liveRegion: true, child: Text(status, textAlign: TextAlign.center)),
+            Semantics(
+              liveRegion: true,
+              child: Text(status, textAlign: TextAlign.center),
+            ),
           ],
         ],
         if (failure != null) ...[

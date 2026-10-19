@@ -29,9 +29,17 @@ import '../widgets/meal_type_selector.dart';
 /// Yemek ekleme giriş noktası: arama, barkod/fotoğraf/ses kısayolları,
 /// son kullanılanlar, favoriler ve kullanıcının kendi yiyecekleri.
 class FoodSearchPage extends ConsumerStatefulWidget {
-  const FoodSearchPage({super.key, this.initialMeal, this.logDate});
+  const FoodSearchPage({
+    super.key,
+    this.initialMeal,
+    this.lockMeal = false,
+    this.logDate,
+  });
 
   final MealType? initialMeal;
+
+  /// Öğün anasayfa veya günlükteki artıdan geldiyse değiştirilemez.
+  final bool lockMeal;
 
   /// Verilirse yemekler bu güne eklenir (Günlük'te seçili gün).
   final DateTime? logDate;
@@ -81,7 +89,12 @@ class _FoodSearchPageState extends ConsumerState<FoodSearchPage> {
       ref.read(analyticsServiceProvider).logEvent(AnalyticsEvents.foodSelected),
     );
     context.push(
-      AppRoutes.foodDetailPath(food.id, meal: _meal, date: widget.logDate),
+      AppRoutes.foodDetailPath(
+        food.id,
+        meal: _meal,
+        date: widget.logDate,
+        lockMeal: widget.lockMeal,
+      ),
       extra: food,
     );
   }
@@ -102,12 +115,17 @@ class _FoodSearchPageState extends ConsumerState<FoodSearchPage> {
     final logDate = widget.logDate;
     final showDate =
         logDate != null && !logDate.isSameDay(ref.watch(clockProvider)());
+    final locked = widget.lockMeal;
     return Scaffold(
       appBar: AppBar(
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(l10n.foodAddTitle),
+            Text(
+              locked
+                  ? l10n.foodAddToMeal(_meal.label(l10n))
+                  : l10n.foodAddTitle,
+            ),
             if (showDate)
               Text(
                 AppFormat.date(context, logDate),
@@ -149,13 +167,14 @@ class _FoodSearchPageState extends ConsumerState<FoodSearchPage> {
                 ),
               ),
               AppSpacing.gapMd,
-              MealTypeSelector(
-                value: _meal,
-                scrollable: true,
-                onChanged: (meal) => setState(() => _meal = meal),
-              ),
-              AppSpacing.gapSm,
-              _InputShortcuts(meal: _meal, date: logDate),
+              if (!locked)
+                MealTypeSelector(
+                  value: _meal,
+                  scrollable: true,
+                  onChanged: (meal) => setState(() => _meal = meal),
+                ),
+              if (!locked) AppSpacing.gapSm,
+              _InputShortcuts(meal: _meal, date: logDate, lockMeal: locked),
               if (_query.isEmpty) ...[
                 AppSpacing.gapSm,
                 FoodCategoryChips(onSelected: _applyQuery),
@@ -187,10 +206,11 @@ class _FoodSearchPageState extends ConsumerState<FoodSearchPage> {
 
 /// Yazmak dışındaki ekleme yolları.
 class _InputShortcuts extends StatelessWidget {
-  const _InputShortcuts({required this.meal, this.date});
+  const _InputShortcuts({required this.meal, this.date, this.lockMeal = false});
 
   final MealType meal;
   final DateTime? date;
+  final bool lockMeal;
 
   @override
   Widget build(BuildContext context) {
@@ -214,8 +234,9 @@ class _InputShortcuts extends StatelessWidget {
             ActionChip(
               avatar: Icon(icon, size: AppSizes.iconSm),
               label: Text(label),
-              onPressed: () =>
-                  context.push(AppRoutes.withMeal(route, meal, date: date)),
+              onPressed: () => context.push(
+                AppRoutes.withMeal(route, meal, date: date, lockMeal: lockMeal),
+              ),
             ),
           ],
         ],

@@ -31,6 +31,10 @@ abstract final class FirestorePaths {
   /// yoktur; Firebase'e yazılmaz.
   static const assistantChatLocal = 'assistant_chat_local';
 
+  /// Kategori kataloğu ve seçili sohbet kategorisi yalnızca cihazda durur.
+  static const assistantCategoriesLocal = 'assistant_categories_local';
+  static const assistantChatMetaLocal = 'assistant_chat_meta_local';
+
   /// Kullanıcı alt koleksiyonları (senkron/hydrate için).
   ///
   /// [assistantChatLocal] bilerek yoktur: sohbet geçmişi Firebase'e gitmez.

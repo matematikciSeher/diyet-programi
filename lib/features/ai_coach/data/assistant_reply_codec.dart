@@ -67,6 +67,20 @@ abstract final class AssistantReplyCodec {
       'concern': concern.name,
     },
     HelpReply() => {'type': 'help'},
+    ClarificationReply(:final choices) => {
+      'type': 'clarify',
+      'choices': [
+        for (final choice in choices)
+          {
+            'questionId': choice.questionId,
+            'labelTr': choice.labelTr,
+            'labelEn': choice.labelEn,
+            'promptTr': choice.promptTr,
+            'promptEn': choice.promptEn,
+          },
+      ],
+    },
+    DetailRequestReply() => {'type': 'detail'},
     MacroStatusReply(:final macro, :final consumed, :final target) => {
       'type': 'macro',
       'macro': macro.name,
@@ -202,6 +216,20 @@ abstract final class AssistantReplyCodec {
             SafetyConcern.medical,
       ),
       'help' => const HelpReply(),
+      'clarify' => ClarificationReply(
+        choices: [
+          for (final item in json['choices'] is List ? json['choices'] as List : const [])
+            if (item is Map)
+              ClarificationChoice(
+                questionId: item['questionId'] as String?,
+                labelTr: item['labelTr'] as String? ?? '',
+                labelEn: item['labelEn'] as String? ?? '',
+                promptTr: item['promptTr'] as String? ?? '',
+                promptEn: item['promptEn'] as String? ?? '',
+              ),
+        ],
+      ),
+      'detail' => const DetailRequestReply(),
       'macro' => MacroStatusReply(
         macro: TrackedMacro.values
                 .where((item) => item.name == json['macro'])

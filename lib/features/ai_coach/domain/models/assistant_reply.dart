@@ -108,7 +108,7 @@ final class SwapPlanReply extends AssistantReply {
 final class OverTargetReply extends AssistantReply {
   const OverTargetReply({
     required this.overCalories,
-    super.actions = const [AssistantAction.openPlan],
+    super.actions = const [AssistantAction.openDiary],
   });
 
   /// Hedefin üzerindeki kalori; hedef aşılmadıysa 0 veya negatif.
@@ -119,7 +119,11 @@ final class OverTargetReply extends AssistantReply {
 }
 
 final class WaterStatusReply extends AssistantReply {
-  const WaterStatusReply({required this.consumedMl, required this.goalMl});
+  const WaterStatusReply({
+    required this.consumedMl,
+    required this.goalMl,
+    super.actions = const [AssistantAction.openWater],
+  });
 
   final int consumedMl;
   final int goalMl;
@@ -176,6 +180,44 @@ final class SafetyReply extends AssistantReply {
 
 final class HelpReply extends AssistantReply {
   const HelpReply();
+
+  @override
+  List<Object?> get props => const [];
+}
+
+/// Belirsiz soruda kullanıcının seçeceği katalog konusu.
+class ClarificationChoice extends Equatable {
+  const ClarificationChoice({
+    required this.labelTr,
+    required this.labelEn,
+    required this.promptTr,
+    required this.promptEn,
+    this.questionId,
+  });
+
+  final String? questionId;
+  final String labelTr;
+  final String labelEn;
+  final String promptTr;
+  final String promptEn;
+
+  @override
+  List<Object?> get props => [questionId, labelTr, labelEn, promptTr, promptEn];
+}
+
+/// Birden fazla konu gerçekten uygunsa kısa bir seçim.
+final class ClarificationReply extends AssistantReply {
+  const ClarificationReply({required this.choices});
+
+  final List<ClarificationChoice> choices;
+
+  @override
+  List<Object?> get props => [choices];
+}
+
+/// Soru konu taşımıyorsa kısa bir açıklama istenir.
+final class DetailRequestReply extends AssistantReply {
+  const DetailRequestReply();
 
   @override
   List<Object?> get props => const [];
