@@ -30,6 +30,9 @@ class SpokenMealParser {
   static const samplePhrase =
       'İki yumurta, elli gram peynir ve iki dilim ekmek yedim.';
 
+  static const samplePhraseEn =
+      'Two eggs, fifty grams of cheese and two slices of bread.';
+
   List<SpokenFoodMention> parse(String text) {
     final original = text.replaceAll(RegExp(r'\s+'), ' ').trim();
     if (original.isEmpty) return const [];
@@ -55,6 +58,7 @@ class SpokenMealParser {
     var f = folded.replaceAll(RegExp(r'[.!?]+$'), '');
     var o = original.replaceAll(RegExp(r'[.!?]+$'), '');
     const leading = [
+      'i ate',
       'aksam',
       'aksamleyin',
       'sabah',
@@ -73,7 +77,15 @@ class SpokenMealParser {
         break;
       }
     }
-    const trailing = [' yedim', ' yedik', ' ictim', ' ictik', ' aldim', ' aldik'];
+    const trailing = [
+      ' yedim',
+      ' yedik',
+      ' ictim',
+      ' ictik',
+      ' aldim',
+      ' aldik',
+      ' i ate',
+    ];
     for (final suffix in trailing) {
       if (f.endsWith(suffix)) {
         f = f.substring(0, f.length - suffix.length);
@@ -85,7 +97,7 @@ class SpokenMealParser {
   }
 
   List<(String, String)> _split(String folded, String original) {
-    final pattern = RegExp(r',|\s+ve\s+|\s+ile\s+|\s+arti\s+');
+    final pattern = RegExp(r',|\s+ve\s+|\s+ile\s+|\s+arti\s+|\s+and\s+');
     final parts = <(String, String)>[];
     var start = 0;
     for (final match in pattern.allMatches(folded)) {
@@ -124,7 +136,8 @@ class SpokenMealParser {
       );
     }
     final unit = _takeUnit(amount.rest);
-    final nameFolded = (unit == null ? amount.rest : unit.rest).trim();
+    var nameFolded = (unit == null ? amount.rest : unit.rest).trim();
+    if (nameFolded.startsWith('of ')) nameFolded = nameFolded.substring(3);
     if (nameFolded.isEmpty) return null;
     final name = _originalTail(original, folded, nameFolded);
     var quantity = amount.quantity!;
@@ -203,10 +216,15 @@ class SpokenMealParser {
 
   _UnitMatch? _takeUnit(String rest) {
     const units = <(String, PortionUnit, double?, String?)>[
+      ('tablespoons', PortionUnit.tablespoon, null, null),
+      ('tablespoon', PortionUnit.tablespoon, null, null),
+      ('teaspoons', PortionUnit.teaspoon, null, 'tea'),
+      ('teaspoon', PortionUnit.teaspoon, null, 'tea'),
       ('yemek kasigi', PortionUnit.tablespoon, null, null),
       ('tatli kasigi', PortionUnit.teaspoon, null, 'dessert'),
       ('cay kasigi', PortionUnit.teaspoon, null, 'tea'),
       ('kilogram', PortionUnit.gram, 1000, null),
+      ('grams', PortionUnit.gram, null, null),
       ('mililitre', PortionUnit.milliliter, null, null),
       ('gram', PortionUnit.gram, null, null),
       ('kg', PortionUnit.gram, 1000, null),
@@ -215,6 +233,14 @@ class SpokenMealParser {
       ('adet', PortionUnit.piece, null, null),
       ('tane', PortionUnit.piece, null, null),
       ('dilim', PortionUnit.slice, null, null),
+      ('slices', PortionUnit.slice, null, null),
+      ('slice', PortionUnit.slice, null, null),
+      ('pieces', PortionUnit.piece, null, null),
+      ('piece', PortionUnit.piece, null, null),
+      ('glasses', PortionUnit.glass, null, null),
+      ('glass', PortionUnit.glass, null, null),
+      ('cups', PortionUnit.glass, null, null),
+      ('cup', PortionUnit.glass, null, null),
       ('bardak', PortionUnit.glass, null, null),
       ('porsiyon', PortionUnit.serving, null, null),
       ('kase', PortionUnit.bowl, null, null),
@@ -250,15 +276,11 @@ class SpokenMealParser {
   }
 
   String _fold(String input) {
-    const map = {
-      'ç': 'c',
-      'ğ': 'g',
-      'ı': 'i',
-      'ö': 'o',
-      'ş': 's',
-      'ü': 'u',
-    };
-    final prepared = input.replaceAll('İ', 'i').replaceAll('I', 'ı').toLowerCase();
+    const map = {'ç': 'c', 'ğ': 'g', 'ı': 'i', 'ö': 'o', 'ş': 's', 'ü': 'u'};
+    final prepared = input
+        .replaceAll('İ', 'i')
+        .replaceAll('I', 'ı')
+        .toLowerCase();
     final buffer = StringBuffer();
     for (final char in prepared.split('')) {
       buffer.write(map[char] ?? char);
@@ -288,6 +310,27 @@ class SpokenMealParser {
     'doksan': 90.0,
     'yarim': 0.5,
     'ceyrek': 0.25,
+    'zero': 0.0,
+    'one': 1.0,
+    'two': 2.0,
+    'three': 3.0,
+    'four': 4.0,
+    'five': 5.0,
+    'six': 6.0,
+    'seven': 7.0,
+    'eight': 8.0,
+    'nine': 9.0,
+    'ten': 10.0,
+    'twenty': 20.0,
+    'thirty': 30.0,
+    'forty': 40.0,
+    'fifty': 50.0,
+    'sixty': 60.0,
+    'seventy': 70.0,
+    'eighty': 80.0,
+    'ninety': 90.0,
+    'half': 0.5,
+    'quarter': 0.25,
   };
 }
 

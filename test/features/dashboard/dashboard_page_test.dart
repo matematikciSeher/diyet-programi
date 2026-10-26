@@ -58,6 +58,9 @@ void main() {
     expect(find.text(l10n.quickAddPhoto), findsOneWidget);
     expect(find.byType(NavigationBar), findsOneWidget);
     expect(find.byType(NutritionScoreCard), findsOneWidget);
+    expect(find.textContaining('Boiled egg'), findsWidgets);
+    expect(find.textContaining('Haşlanmış yumurta'), findsNothing);
+    expect(find.textContaining('Muz ve badem kasesi'), findsNothing);
   });
 
   testWidgets('+250 ml su ekler ve geri alınabilir', (tester) async {
@@ -86,8 +89,8 @@ void main() {
     await tester.tap(breakfast);
     await tester.pumpAndSettle();
 
-    expect(find.text('Haşlanmış yumurta'), findsOneWidget);
-    expect(find.text('Mercimek çorbası'), findsNothing);
+    expect(find.text('Boiled egg'), findsOneWidget);
+    expect(find.text('Lentil soup'), findsNothing);
     expect(find.text(l10n.mealLunch), findsNothing);
     expect(find.text(l10n.diaryShowAllMeals), findsOneWidget);
 
@@ -105,7 +108,7 @@ void main() {
     );
     await tester.pumpAndSettle();
     expect(find.text(l10n.mealLunch), findsOneWidget);
-    expect(find.text('Mercimek çorbası'), findsOneWidget);
+    expect(find.text('Lentil soup'), findsOneWidget);
   });
 
   testWidgets('öğün artısı yalnızca o öğünün ekleme sayfasını açar', (

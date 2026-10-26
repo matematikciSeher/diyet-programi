@@ -1,7 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/errors/result.dart';
+import '../../../../core/locale/app_language_controller.dart';
 import '../../../../core/utils/extensions/date_extensions.dart';
+import '../../../../l10n/catalog_view.dart';
 import '../../../../shared/models/meal_entry.dart';
 import '../../../../shared/models/nutrition_targets.dart';
 import '../../../../shared/models/water_log.dart';
@@ -25,8 +27,13 @@ final dashboardDayProvider = Provider<DateTime>(
 final todayMealsProvider = StreamProvider<List<MealEntry>>((ref) async* {
   final repo = ref.watch(mealLogRepositoryProvider);
   final day = ref.watch(dashboardDayProvider);
+  final language = ref.watch(appLocaleProvider).languageCode;
   await ref.watch(demoDaySeederProvider.future);
-  yield* repo.watchDay(day);
+  yield* repo.watchDay(day).map(
+    (meals) => [
+      for (final meal in meals) localizeMealEntry(meal, language),
+    ],
+  );
 });
 
 final todayWaterLogsProvider = StreamProvider<List<WaterLog>>((ref) async* {

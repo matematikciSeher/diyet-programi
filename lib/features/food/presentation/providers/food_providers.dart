@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/locale/app_language_controller.dart';
+import '../../../../l10n/catalog_view.dart';
 import '../../../../shared/models/food.dart';
 import '../../../../shared/services/service_providers.dart';
 import '../../../meals/data/repositories/meal_log_repository_impl.dart';
@@ -20,9 +22,12 @@ final foodSearchServiceProvider = Provider<FoodSearchService>(
 /// Arama sonuçları; sorgu boşsa boş liste.
 final foodSearchResultsProvider = FutureProvider.autoDispose
     .family<List<Food>, String>((ref, query) async {
+      final language = ref.watch(appLocaleProvider).languageCode;
       final result = await ref.watch(foodRepositoryProvider).search(query);
       return result.when(
-        success: (foods) => foods,
+        success: (foods) => [
+          for (final food in foods) localizeFood(food, language),
+        ],
         failure: (failure) => throw failure,
       );
     });
@@ -31,17 +36,33 @@ final foodByIdProvider = FutureProvider.autoDispose.family<Food?, String>((
   ref,
   id,
 ) async {
+  final language = ref.watch(appLocaleProvider).languageCode;
   final result = await ref.watch(foodRepositoryProvider).getById(id);
-  return result.when(success: (food) => food, failure: (f) => throw f);
+  return result.when(
+    success: (food) => food == null ? null : localizeFood(food, language),
+    failure: (f) => throw f,
+  );
 });
 
-final recentFoodsProvider = StreamProvider<List<RecentFood>>(
-  (ref) => ref.watch(foodRepositoryProvider).watchRecents(),
-);
+final recentFoodsProvider = StreamProvider<List<RecentFood>>((ref) {
+  final language = ref.watch(appLocaleProvider).languageCode;
+  return ref
+      .watch(foodRepositoryProvider)
+      .watchRecents()
+      .map(
+        (foods) => [
+          for (final food in foods) localizeRecentFood(food, language),
+        ],
+      );
+});
 
-final favoriteFoodsProvider = StreamProvider<List<Food>>(
-  (ref) => ref.watch(foodRepositoryProvider).watchFavorites(),
-);
+final favoriteFoodsProvider = StreamProvider<List<Food>>((ref) {
+  final language = ref.watch(appLocaleProvider).languageCode;
+  return ref
+      .watch(foodRepositoryProvider)
+      .watchFavorites()
+      .map((foods) => [for (final food in foods) localizeFood(food, language)]);
+});
 
 final favoriteFoodIdsProvider = Provider<Set<String>>(
   (ref) => {
@@ -51,9 +72,13 @@ final favoriteFoodIdsProvider = Provider<Set<String>>(
 );
 
 /// Kullanıcının oluşturduğu yiyecekler ve tarifler.
-final customFoodsProvider = StreamProvider<List<Food>>(
-  (ref) => ref.watch(foodRepositoryProvider).watchCustomFoods(),
-);
+final customFoodsProvider = StreamProvider<List<Food>>((ref) {
+  final language = ref.watch(appLocaleProvider).languageCode;
+  return ref
+      .watch(foodRepositoryProvider)
+      .watchCustomFoods()
+      .map((foods) => [for (final food in foods) localizeFood(food, language)]);
+});
 
 final logFoodProvider = Provider<LogFood>(
   (ref) => LogFood(

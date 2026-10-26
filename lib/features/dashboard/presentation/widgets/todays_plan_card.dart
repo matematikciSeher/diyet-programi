@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/utils/extensions/context_extensions.dart';
 import '../../../../core/widgets/app_card.dart';
+import '../../../../l10n/catalog_text.dart';
 import '../../../../shared/models/enums.dart';
 import '../../../../shared/presentation/enum_labels.dart';
 import '../../../meal_plans/domain/models/planned_meal.dart';
@@ -114,7 +115,10 @@ class _PlanRow extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  meal.title,
+                  CatalogText.localize(
+                    meal.title,
+                    Localizations.localeOf(context).languageCode,
+                  ),
                   style: context.textStyles.bodyMedium?.copyWith(
                     fontWeight: isNext ? FontWeight.w600 : null,
                     decoration: logged ? TextDecoration.lineThrough : null,

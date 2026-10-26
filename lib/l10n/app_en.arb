@@ -218,8 +218,17 @@
   "errorGeneric": "Something went wrong. Please try again.",
   "errorNetwork": "Please check your internet connection.",
 
+  "settingsLanguage": "Language",
+  "languageTurkish": "Turkish",
+  "languageEnglish": "English",
   "settingsTheme": "Appearance",
   "themeSystem": "System",
+  "notificationChannelMeal": "Meals",
+  "notificationChannelWater": "Water",
+  "notificationChannelFasting": "Fasting",
+  "notificationChannelWeight": "Weight",
+  "notificationChannelMotivation": "Motivation",
+  "notificationChannelPlan": "Plan",
   "themeLight": "Light",
   "themeDark": "Dark",
 

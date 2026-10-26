@@ -5,6 +5,8 @@ import '../../../../core/errors/result.dart';
 import '../../../../core/utils/extensions/date_extensions.dart';
 import '../../../../shared/models/enums.dart';
 import '../../../../shared/repositories/user_profile_repository.dart';
+import '../../../../core/locale/app_language_controller.dart';
+import '../../../../l10n/catalog_view.dart';
 import '../../../../shared/services/service_providers.dart';
 import '../../../meals/data/repositories/meal_log_repository_impl.dart';
 import '../../../recipes/data/repositories/recipe_repository_impl.dart';
@@ -106,24 +108,34 @@ final planScreenDayProvider = NotifierProvider<PlanScreenDay, DateTime>(
 /// yenileme ayrıca onay ister.
 final weeklyMealPlanProvider = StreamProvider<List<PlannedMeal>>((ref) async* {
   final today = ref.watch(planDayProvider);
+  final language = ref.watch(appLocaleProvider).languageCode;
   await ref.read(userProfileProvider.future);
   final planner = ref.read(weeklyMealPlannerProvider);
   final prefs = ref.read(mealPlanPreferencesProvider);
   for (final day in WeeklyMealPlanner.weekDays(today)) {
     await planner.ensureDay(day, prefs);
   }
-  yield* ref.watch(mealPlanRepositoryProvider).watchWeek(today);
+  yield* ref.watch(mealPlanRepositoryProvider).watchWeek(today).map(
+    (meals) => [
+      for (final meal in meals) localizePlannedMeal(meal, language),
+    ],
+  );
 });
 
 /// Günün planı; henüz plan yoksa profile göre üretilip kaydedilir.
 final mealPlanForDayProvider =
     StreamProvider.family<List<PlannedMeal>, DateTime>((ref, day) async* {
       final repo = ref.watch(mealPlanRepositoryProvider);
+      final language = ref.watch(appLocaleProvider).languageCode;
       await ref.read(userProfileProvider.future);
       await ref
           .read(weeklyMealPlannerProvider)
           .ensureDay(day, ref.read(mealPlanPreferencesProvider));
-      yield* repo.watchDay(day);
+      yield* repo.watchDay(day).map(
+        (meals) => [
+          for (final meal in meals) localizePlannedMeal(meal, language),
+        ],
+      );
     });
 
 /// Günlüğe kaydı yapılmış öğün tipleri; plan kartlarında "eklendi" durumu.

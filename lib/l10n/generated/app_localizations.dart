@@ -1322,6 +1322,24 @@ abstract class AppLocalizations {
   /// **'İnternet bağlantınızı kontrol edin.'**
   String get errorNetwork;
 
+  /// No description provided for @settingsLanguage.
+  ///
+  /// In tr, this message translates to:
+  /// **'Dil'**
+  String get settingsLanguage;
+
+  /// No description provided for @languageTurkish.
+  ///
+  /// In tr, this message translates to:
+  /// **'Türkçe'**
+  String get languageTurkish;
+
+  /// No description provided for @languageEnglish.
+  ///
+  /// In tr, this message translates to:
+  /// **'İngilizce'**
+  String get languageEnglish;
+
   /// No description provided for @settingsTheme.
   ///
   /// In tr, this message translates to:
@@ -1333,6 +1351,42 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Sistem'**
   String get themeSystem;
+
+  /// No description provided for @notificationChannelMeal.
+  ///
+  /// In tr, this message translates to:
+  /// **'Öğün'**
+  String get notificationChannelMeal;
+
+  /// No description provided for @notificationChannelWater.
+  ///
+  /// In tr, this message translates to:
+  /// **'Su'**
+  String get notificationChannelWater;
+
+  /// No description provided for @notificationChannelFasting.
+  ///
+  /// In tr, this message translates to:
+  /// **'Oruç'**
+  String get notificationChannelFasting;
+
+  /// No description provided for @notificationChannelWeight.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kilo'**
+  String get notificationChannelWeight;
+
+  /// No description provided for @notificationChannelMotivation.
+  ///
+  /// In tr, this message translates to:
+  /// **'Motivasyon'**
+  String get notificationChannelMotivation;
+
+  /// No description provided for @notificationChannelPlan.
+  ///
+  /// In tr, this message translates to:
+  /// **'Plan'**
+  String get notificationChannelPlan;
 
   /// No description provided for @themeLight.
   ///

@@ -1,0 +1,7 @@
+CFBundleDisplayName = "Diet Program";
+NSHealthShareUsageDescription = "We read your Apple Health steps, walking and running distance, active calories and workout summary to show them in your diary. This data is not written to Firebase. If you ask the nutrition assistant about activity or your day, that summary may be sent with the question.";
+NSHealthUpdateUsageDescription = "The app does not write data to Apple Health. This description is required for HealthKit access; records are read only.";
+NSCameraUsageDescription = "Camera access is needed to scan barcodes, take progress photos and recognize food. Food photos are not stored permanently.";
+NSPhotoLibraryUsageDescription = "Photo library access is needed to pick a progress photo or a food image. The selected food photo is not stored permanently.";
+NSMicrophoneUsageDescription = "The microphone is needed to log food by voice. The recording is not stored permanently.";
+NSSpeechRecognitionUsageDescription = "Speech recognition turns what you say into text so food can be logged. The recording is not stored permanently.";

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/config/app_config.dart';
+import '../../../../core/locale/app_language_controller.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/constants/firestore_paths.dart';
 import '../../../../core/errors/error_mapper.dart';
@@ -40,12 +41,14 @@ final class FoodRepositoryImpl extends UserScopedRepository
     DateTime Function() clock = DateTime.now,
     AnalyticsService? analytics,
     FoodLookupCache? lookupCache,
+    String Function()? localeCode,
   }) : _foodDatabase = foodDatabase,
        _barcodeLookup = barcodeLookup,
        _search = search,
        _clock = clock,
        _analytics = analytics,
-       _lookupCache = lookupCache;
+       _lookupCache = lookupCache,
+       _localeCode = localeCode;
 
   static const maxRecents = 30;
 
@@ -55,6 +58,7 @@ final class FoodRepositoryImpl extends UserScopedRepository
   final DateTime Function() _clock;
   final AnalyticsService? _analytics;
   final FoodLookupCache? _lookupCache;
+  final String Function()? _localeCode;
 
   Future<List<Food>> _customFoods() async {
     final id = uid;
@@ -101,7 +105,7 @@ final class FoodRepositoryImpl extends UserScopedRepository
           trimmed,
           page: page,
           pageSize: FoodApiConfig.searchPageSize,
-          locale: AppConstants.defaultLocale,
+          locale: _localeCode?.call() ?? AppConstants.defaultLocale,
         );
       } on Object catch (error) {
         remoteError = error;
@@ -295,6 +299,7 @@ final openFoodFactsFoodServiceProvider = Provider<OpenFoodFactsFoodService>((
         ),
       },
     ),
+    localeCode: () => ref.watch(appLocaleProvider).languageCode,
   );
 });
 
@@ -328,5 +333,6 @@ final foodRepositoryProvider = Provider<FoodRepository>((ref) {
     clock: ref.watch(clockProvider),
     analytics: ref.watch(analyticsServiceProvider),
     lookupCache: useSample ? null : ref.watch(foodLookupCacheProvider),
+    localeCode: () => ref.watch(appLocaleProvider).languageCode,
   );
 });

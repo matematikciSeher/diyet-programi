@@ -728,10 +728,37 @@ class AppLocalizationsTr extends AppLocalizations {
   String get errorNetwork => 'İnternet bağlantınızı kontrol edin.';
 
   @override
+  String get settingsLanguage => 'Dil';
+
+  @override
+  String get languageTurkish => 'Türkçe';
+
+  @override
+  String get languageEnglish => 'İngilizce';
+
+  @override
   String get settingsTheme => 'Görünüm';
 
   @override
   String get themeSystem => 'Sistem';
+
+  @override
+  String get notificationChannelMeal => 'Öğün';
+
+  @override
+  String get notificationChannelWater => 'Su';
+
+  @override
+  String get notificationChannelFasting => 'Oruç';
+
+  @override
+  String get notificationChannelWeight => 'Kilo';
+
+  @override
+  String get notificationChannelMotivation => 'Motivasyon';
+
+  @override
+  String get notificationChannelPlan => 'Plan';
 
   @override
   String get themeLight => 'Açık';

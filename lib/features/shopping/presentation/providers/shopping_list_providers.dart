@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/errors/result.dart';
 import '../../../../core/utils/extensions/date_extensions.dart';
 import '../../../../shared/models/recipe.dart';
+import '../../../../core/locale/app_language_controller.dart';
+import '../../../../l10n/catalog_view.dart';
 import '../../../../shared/services/service_providers.dart';
 import '../../../meal_plans/data/repositories/meal_plan_repository_impl.dart';
 import '../../../meal_plans/domain/models/planned_meal.dart';
@@ -21,9 +23,16 @@ final shoppingListAggregatorProvider = Provider<ShoppingListAggregator>(
   ),
 );
 
-final shoppingListItemsProvider = StreamProvider<List<ShoppingListItem>>(
-  (ref) => ref.watch(shoppingListRepositoryProvider).watchItems(),
-);
+final shoppingListItemsProvider = StreamProvider<List<ShoppingListItem>>((
+  ref,
+) {
+  final language = ref.watch(appLocaleProvider).languageCode;
+  return ref.watch(shoppingListRepositoryProvider).watchItems().map(
+    (items) => [
+      for (final item in items) localizeShoppingItem(item, language),
+    ],
+  );
+});
 
 class ShoppingListActions {
   const ShoppingListActions(this._ref);

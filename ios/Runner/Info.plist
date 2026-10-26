@@ -3,17 +3,22 @@
 <plist version="1.0">
 <dict>
 	<key>NSHealthShareUsageDescription</key>
-	<string>Adım, yürüme ve koşu mesafesi, aktif kalori ve antrenman özetini günlüğünüzde göstermek için Apple Health verilerinizi okuruz. Bu veriler Firebase'e yazılmaz. Beslenme asistanına aktivite veya gün özeti sorduğunuzda ilgili özet, yapılandırılmış servise o soruyla gidebilir.</string>
+	<string>We read your Apple Health steps, walking and running distance, active calories and workout summary to show them in your diary. This data is not written to Firebase. If you ask the nutrition assistant about activity or your day, that summary may be sent with the question.</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>Uygulama Apple Health'e veri yazmaz. HealthKit erişimi için bu açıklama gerekir; kayıtlar yalnızca okunur.</string>
+	<string>The app does not write data to Apple Health. This description is required for HealthKit access; records are read only.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Barkod taramak, ilerleme fotoğrafı çekmek ve yiyecek tanımak için kameraya erişim gerekir. Yiyecek fotoğrafı kalıcı olarak saklanmaz.</string>
+	<string>Camera access is needed to scan barcodes, take progress photos and recognize food. Food photos are not stored permanently.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>İlerleme fotoğrafı veya yiyecek tanıma için bir görsel seçmek üzere fotoğraf arşivine erişim gerekir. Seçilen yiyecek fotoğrafı kalıcı olarak saklanmaz.</string>
+	<string>Photo library access is needed to pick a progress photo or a food image. The selected food photo is not stored permanently.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Yiyecekleri sesle eklemek için mikrofon gerekir. Ses kaydı kalıcı olarak saklanmaz.</string>
+	<string>The microphone is needed to log food by voice. The recording is not stored permanently.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>Söylediğiniz yiyecekleri metne çevirmek için konuşma tanıma kullanılır. Ses kaydı kalıcı olarak saklanmaz.</string>
+	<string>Speech recognition turns what you say into text so food can be logged. The recording is not stored permanently.</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>tr</string>
+	</array>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>https</string>
@@ -24,7 +29,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Diyet Programi</string>
+	<string>Diet Program</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

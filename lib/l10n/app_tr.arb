@@ -346,8 +346,17 @@
   "errorGeneric": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
   "errorNetwork": "İnternet bağlantınızı kontrol edin.",
 
+  "settingsLanguage": "Dil",
+  "languageTurkish": "Türkçe",
+  "languageEnglish": "İngilizce",
   "settingsTheme": "Görünüm",
   "themeSystem": "Sistem",
+  "notificationChannelMeal": "Öğün",
+  "notificationChannelWater": "Su",
+  "notificationChannelFasting": "Oruç",
+  "notificationChannelWeight": "Kilo",
+  "notificationChannelMotivation": "Motivasyon",
+  "notificationChannelPlan": "Plan",
   "themeLight": "Açık",
   "themeDark": "Koyu",
 

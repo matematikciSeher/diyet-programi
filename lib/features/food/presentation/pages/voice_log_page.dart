@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/config/app_config.dart';
+import '../../../../core/locale/app_language.dart';
 import '../../../../core/errors/failure_messages.dart';
 import '../../../../core/errors/result.dart';
 import '../../../../core/routing/app_routes.dart';
@@ -94,7 +95,10 @@ class _VoiceLogPageState extends ConsumerState<VoiceLogPage> {
       seconds: ref.read(appConfigProvider).effectiveVoiceMaxDurationSeconds,
     );
     _speech = speech
-        .listen(localeId: 'tr_TR', listenFor: limit)
+        .listen(
+          localeId: speechLocaleIdFor(Localizations.localeOf(context)),
+          listenFor: limit,
+        )
         .listen(
           (words) {
             if (!mounted || words.trim().isEmpty) return;
@@ -309,7 +313,11 @@ class _VoiceLogPageState extends ConsumerState<VoiceLogPage> {
                       OutlinedButton(
                         key: const ValueKey('voice-sample'),
                         onPressed: () {
-                          _text.text = SpokenMealParser.samplePhrase;
+                          _text.text =
+                              Localizations.localeOf(context).languageCode ==
+                                  'tr'
+                              ? SpokenMealParser.samplePhrase
+                              : SpokenMealParser.samplePhraseEn;
                           _parse();
                         },
                         child: Text(l10n.voiceLogSimulate),

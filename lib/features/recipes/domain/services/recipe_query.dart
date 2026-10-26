@@ -1,3 +1,4 @@
+import '../../../../l10n/catalog_text.dart';
 import '../../../../shared/models/enums.dart';
 import '../../../../shared/models/recipe.dart';
 import '../models/recipe_category.dart';
@@ -72,12 +73,18 @@ abstract final class RecipeQuery {
   }
 
   static bool _matchesQuery(Recipe recipe, String query) =>
-      normalizeRecipeSearch(recipe.title).contains(query) ||
-      normalizeRecipeSearch(recipe.description ?? '').contains(query) ||
-      recipe.ingredients.any(
-        (i) => normalizeRecipeSearch(i.name).contains(query),
-      ) ||
+      _contains(recipe.title, query) ||
+      _contains(recipe.description ?? '', query) ||
+      recipe.ingredients.any((i) => _contains(i.name, query)) ||
       recipe.tags.any((t) => normalizeRecipeSearch(t).contains(query));
+
+  static bool _contains(String value, String query) {
+    if (value.isEmpty) return false;
+    if (normalizeRecipeSearch(value).contains(query)) return true;
+    final english = normalizeRecipeSearch(CatalogText.localize(value, 'en'));
+    final turkish = normalizeRecipeSearch(CatalogText.localize(value, 'tr'));
+    return english.contains(query) || turkish.contains(query);
+  }
 
   static bool _matchesCategory(Recipe recipe, String category) {
     if (recipe.category == category || recipe.tags.contains(category)) {

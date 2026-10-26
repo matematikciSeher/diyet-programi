@@ -201,19 +201,25 @@ class Food extends Equatable {
   bool get isUserCreated =>
       source == FoodSource.custom || source == FoodSource.recipe;
 
-  Food copyWith({String? id, FoodSource? source}) => Food(
+  Food copyWith({
+    String? id,
+    FoodSource? source,
+    String? name,
+    List<FoodPortion>? portions,
+    List<FoodIngredient>? ingredients,
+  }) => Food(
     id: id ?? this.id,
-    name: name,
+    name: name ?? this.name,
     nutritionPer100: nutritionPer100,
     basis: basis,
     gramsPerMl: gramsPerMl,
     brand: brand,
     barcode: barcode,
     imageUrl: imageUrl,
-    portions: portions,
+    portions: portions ?? this.portions,
     keywords: keywords,
     tags: tags,
-    ingredients: ingredients,
+    ingredients: ingredients ?? this.ingredients,
     source: source ?? this.source,
     isVerified: isVerified,
     isSample: isSample,

@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app.dart';
 import 'core/config/app_config.dart';
+import 'core/locale/app_language_controller.dart';
 import 'core/config/firebase_bootstrap.dart';
 import 'core/routing/notification_navigation.dart';
 import 'core/utils/app_logger.dart';
@@ -98,7 +99,12 @@ Future<void> bootstrap() async {
         return repo;
       }),
       localNotificationServiceProvider.overrideWith((ref) {
-        final service = FlutterLocalNotificationService();
+        final service = FlutterLocalNotificationService(
+          localeCode: () => ref.read(appLocaleProvider).languageCode,
+        );
+        ref.listen(appLocaleProvider, (_, _) {
+          service.refreshChannels();
+        });
         ref.onDispose(service.dispose);
         return service;
       }),

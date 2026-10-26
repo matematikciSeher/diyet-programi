@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 import '../../../core/utils/extensions/context_extensions.dart';
+import '../../../l10n/catalog_text.dart';
 import '../../../shared/models/enums.dart';
 import '../../../shared/presentation/enum_labels.dart';
 import '../../progress/presentation/progress_labels.dart';
@@ -15,7 +16,9 @@ abstract final class AssistantGuideText {
   static String of(BuildContext context, GuideReply reply) {
     final l10n = context.l10n;
     final language = Localizations.localeOf(context).languageCode;
-    final copy = AssistantGuideLibrary.of(reply.questionId)?.forLanguage(language);
+    final copy = AssistantGuideLibrary.of(
+      reply.questionId,
+    )?.forLanguage(language);
     final lines = <String>[];
     if (copy == null) {
       lines.add(l10n.assistantGuideBoundary);
@@ -64,10 +67,19 @@ abstract final class AssistantGuideText {
       final gap = target - snapshot.consumedCalories!;
       lines.add(
         gap >= 0
-            ? l10n.assistantRemainingCalories(consumed, _kcal(context, target), _kcal(context, gap))
-            : l10n.assistantOverCaloriesInfo(consumed, _kcal(context, target), _kcal(context, -gap)),
+            ? l10n.assistantRemainingCalories(
+                consumed,
+                _kcal(context, target),
+                _kcal(context, gap),
+              )
+            : l10n.assistantOverCaloriesInfo(
+                consumed,
+                _kcal(context, target),
+                _kcal(context, -gap),
+              ),
       );
-      if (snapshot.targetBelowSafeFloor) lines.add(l10n.assistantDailyTargetLow);
+      if (snapshot.targetBelowSafeFloor)
+        lines.add(l10n.assistantDailyTargetLow);
     } else {
       lines.add(l10n.assistantSummaryNoTarget(consumed));
     }
@@ -78,7 +90,8 @@ abstract final class AssistantGuideText {
     final l10n = context.l10n;
     if (snapshot.recordsMissing) return l10n.assistantGuideMissingMeals;
     final lines = <String>[_calories(context, snapshot)];
-    if (snapshot.loggedMealTypes.isNotEmpty || snapshot.missingMealTypes.isNotEmpty) {
+    if (snapshot.loggedMealTypes.isNotEmpty ||
+        snapshot.missingMealTypes.isNotEmpty) {
       lines.add(
         l10n.assistantGuideMealCoverage(
           _meals(context, snapshot.loggedMealTypes),
@@ -89,19 +102,42 @@ abstract final class AssistantGuideText {
     if (!snapshot.foodTagsKnown) {
       lines.add(l10n.assistantGuideTagsMissing);
     } else {
-      lines.add(l10n.assistantGuideTags(_tags(context, snapshot.presentFoodTags)));
+      lines.add(
+        l10n.assistantGuideTags(_tags(context, snapshot.presentFoodTags)),
+      );
     }
     if (!snapshot.macrosRecorded) {
       lines.add(l10n.assistantMissingMacros);
     } else if (snapshot.personalTarget) {
-      lines.add(_macro(context, l10n.macroProtein, snapshot.proteinG, snapshot.proteinTargetG));
-      lines.add(_macro(context, l10n.macroCarbs, snapshot.carbsG, snapshot.carbsTargetG));
-      lines.add(_macro(context, l10n.macroFat, snapshot.fatG, snapshot.fatTargetG));
+      lines.add(
+        _macro(
+          context,
+          l10n.macroProtein,
+          snapshot.proteinG,
+          snapshot.proteinTargetG,
+        ),
+      );
+      lines.add(
+        _macro(
+          context,
+          l10n.macroCarbs,
+          snapshot.carbsG,
+          snapshot.carbsTargetG,
+        ),
+      );
+      lines.add(
+        _macro(context, l10n.macroFat, snapshot.fatG, snapshot.fatTargetG),
+      );
     }
     return lines.where((line) => line.isNotEmpty).join('\n');
   }
 
-  static String _macro(BuildContext context, String name, double? consumed, double? target) {
+  static String _macro(
+    BuildContext context,
+    String name,
+    double? consumed,
+    double? target,
+  ) {
     if (consumed == null || target == null) return '';
     return context.l10n.assistantMacroLine(
       name,
@@ -130,7 +166,10 @@ abstract final class AssistantGuideText {
     final l10n = context.l10n;
     final snapshot = reply.snapshot;
     final lines = <String>[
-      l10n.assistantGuideWeekIntro(snapshot.elapsedDays, snapshot.mealDays.length),
+      l10n.assistantGuideWeekIntro(
+        snapshot.elapsedDays,
+        snapshot.mealDays.length,
+      ),
     ];
     if (snapshot.mealDays.isEmpty) {
       lines.add(l10n.assistantGuideWeekNoMeals);
@@ -141,7 +180,11 @@ abstract final class AssistantGuideText {
         final target = snapshot.targetCalories;
         lines.add(
           snapshot.personalTarget && target != null
-              ? l10n.assistantGuideWeekDayTarget(label, kcal, _kcal(context, target))
+              ? l10n.assistantGuideWeekDayTarget(
+                  label,
+                  kcal,
+                  _kcal(context, target),
+                )
               : l10n.assistantGuideWeekDay(label, kcal),
         );
       }
@@ -149,7 +192,10 @@ abstract final class AssistantGuideText {
     if (snapshot.waterDays.isEmpty) {
       lines.add(l10n.assistantGuideWeekWaterNone);
     } else {
-      final total = snapshot.waterDays.fold<int>(0, (sum, day) => sum + day.amount.round());
+      final total = snapshot.waterDays.fold<int>(
+        0,
+        (sum, day) => sum + day.amount.round(),
+      );
       lines.add(
         l10n.assistantGuideWeekWater(
           snapshot.waterDays.length,
@@ -164,14 +210,15 @@ abstract final class AssistantGuideText {
   static String _recipes(BuildContext context, GuideReply reply) {
     final l10n = context.l10n;
     final snapshot = reply.snapshot;
-    if (snapshot.recipeCatalogCount == 0) return l10n.assistantGuideRecipesEmpty;
+    if (snapshot.recipeCatalogCount == 0)
+      return l10n.assistantGuideRecipesEmpty;
     if (snapshot.recipeMatchCount == 0 || reply.recipes.isEmpty) {
       return l10n.assistantGuideRecipesNone;
     }
     final lines = <String>[
       l10n.assistantGuideRecipesIntro,
       for (final recipe in reply.recipes)
-        '• ${l10n.assistantRecipeLine(recipe.title, _kcal(context, recipe.calories), _kcal(context, recipe.proteinG))}',
+        '• ${l10n.assistantRecipeLine(CatalogText.localize(recipe.title, Localizations.localeOf(context).languageCode), _kcal(context, recipe.calories), _kcal(context, recipe.proteinG))}',
     ];
     return lines.join('\n');
   }
@@ -200,7 +247,7 @@ abstract final class AssistantGuideText {
       }
       final calories = double.tryParse(parts[3]) ?? 0;
       lines.add(
-        '• ${_day(context, parts[0])} ${_meal(context, parts[1])}: ${parts[2]} (${l10n.kcalValue(_kcal(context, calories))})',
+        '• ${_day(context, parts[0])} ${_meal(context, parts[1])}: ${CatalogText.localize(parts[2], Localizations.localeOf(context).languageCode)} (${l10n.kcalValue(_kcal(context, calories))})',
       );
     }
     return lines.join('\n');
@@ -210,10 +257,24 @@ abstract final class AssistantGuideText {
     final l10n = context.l10n;
     if (snapshot.recordsMissing) return l10n.assistantGuideShoppingEmpty;
     final lines = <String>[
-      l10n.assistantGuideShopping(snapshot.shoppingManual, snapshot.shoppingFromPlan),
+      l10n.assistantGuideShopping(
+        snapshot.shoppingManual,
+        snapshot.shoppingFromPlan,
+      ),
     ];
     if (snapshot.shoppingManualNames.isNotEmpty) {
-      lines.add(l10n.assistantGuideShoppingManual(snapshot.shoppingManualNames.join(', ')));
+      lines.add(
+        l10n.assistantGuideShoppingManual(
+          snapshot.shoppingManualNames
+              .map(
+                (name) => CatalogText.localize(
+                  name,
+                  Localizations.localeOf(context).languageCode,
+                ),
+              )
+              .join(', '),
+        ),
+      );
     }
     return lines.join('\n');
   }
@@ -243,7 +304,8 @@ abstract final class AssistantGuideText {
     return lines.join('\n');
   }
 
-  static String _kcal(BuildContext context, double value) => AppFormat.integer(context, value);
+  static String _kcal(BuildContext context, double value) =>
+      AppFormat.integer(context, value);
 
   static String _day(BuildContext context, String dayKey) {
     final date = AssistantCalendar.tryParseDayKey(dayKey);

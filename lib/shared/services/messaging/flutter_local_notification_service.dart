@@ -2,14 +2,16 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:timezone/data/latest.dart' as tzdata;
 import 'package:timezone/timezone.dart' as tz;
 
-import 'push_notification_service.dart';
 import '../../../features/notifications/domain/models/notification_settings.dart';
+import '../../../l10n/generated/app_localizations.dart';
+import 'push_notification_service.dart';
 
 @pragma('vm:entry-point')
 void localNotificationTapBackground(NotificationResponse response) {
@@ -20,15 +22,24 @@ void localNotificationTapBackground(NotificationResponse response) {
 /// flutter_local_notifications tabanlı gerçek yerel bildirimler.
 /// İzin uygulama açılışında değil, kullanıcı hatırlatıcıları açınca istenir.
 class FlutterLocalNotificationService implements LocalNotificationService {
-  FlutterLocalNotificationService({FlutterLocalNotificationsPlugin? plugin})
-    : _plugin = plugin ?? FlutterLocalNotificationsPlugin();
+  FlutterLocalNotificationService({
+    FlutterLocalNotificationsPlugin? plugin,
+    String Function()? localeCode,
+  }) : _plugin = plugin ?? FlutterLocalNotificationsPlugin(),
+       _localeCode = localeCode;
 
   final FlutterLocalNotificationsPlugin _plugin;
+  final String Function()? _localeCode;
   final _taps = StreamController<String>.broadcast();
   var _initialized = false;
 
   @override
   Stream<String> get onNotificationTapped => _taps.stream;
+
+  Future<void> refreshChannels() async {
+    if (!_initialized) return;
+    await _createChannels();
+  }
 
   @override
   Future<void> initialize() async {
@@ -47,7 +58,8 @@ class FlutterLocalNotificationService implements LocalNotificationService {
         macOS: darwin,
       ),
       onDidReceiveNotificationResponse: _onTap,
-      onDidReceiveBackgroundNotificationResponse: localNotificationTapBackground,
+      onDidReceiveBackgroundNotificationResponse:
+          localNotificationTapBackground,
     );
     await _createChannels();
     final launch = await _plugin.getNotificationAppLaunchDetails();
@@ -69,8 +81,7 @@ class FlutterLocalNotificationService implements LocalNotificationService {
             .resolvePlatformSpecificImplementation<
               AndroidFlutterLocalNotificationsPlugin
             >();
-        final granted =
-            await android?.requestNotificationsPermission() ?? true;
+        final granted = await android?.requestNotificationsPermission() ?? true;
         if (granted) {
           await android?.requestExactAlarmsPermission();
         }
@@ -300,14 +311,18 @@ class FlutterLocalNotificationService implements LocalNotificationService {
 
   static String _channelId(ReminderGroup group) => 'reminders_${group.name}';
 
-  static String _channelName(ReminderGroup group) => switch (group) {
-    ReminderGroup.meal => 'Öğün',
-    ReminderGroup.water => 'Su',
-    ReminderGroup.fasting => 'Oruç',
-    ReminderGroup.goal => 'Kilo',
-    ReminderGroup.motivation => 'Motivasyon',
-    ReminderGroup.plan => 'Plan',
-  };
+  String _channelName(ReminderGroup group) {
+    final code = _localeCode?.call();
+    final l10n = lookupAppLocalizations(Locale(code == 'tr' ? 'tr' : 'en'));
+    return switch (group) {
+      ReminderGroup.meal => l10n.notificationChannelMeal,
+      ReminderGroup.water => l10n.notificationChannelWater,
+      ReminderGroup.fasting => l10n.notificationChannelFasting,
+      ReminderGroup.goal => l10n.notificationChannelWeight,
+      ReminderGroup.motivation => l10n.notificationChannelMotivation,
+      ReminderGroup.plan => l10n.notificationChannelPlan,
+    };
+  }
 
   static ReminderGroup _groupOf(String? payload) {
     final path = payload ?? '';

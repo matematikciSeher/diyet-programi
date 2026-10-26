@@ -13,9 +13,10 @@ abstract final class OpenFoodFactsMapper {
     Map<String, dynamic> product, {
     FoodSource source = FoodSource.database,
     String? fallbackBarcode,
+    String? locale,
   }) {
     final code = _barcode(product, fallbackBarcode);
-    final name = _name(product);
+    final name = _name(product, locale: locale);
     if (code == null || name == null) return null;
 
     final nutriments = JsonUtils.readMap(product['nutriments']);
@@ -67,17 +68,29 @@ abstract final class OpenFoodFactsMapper {
     return null;
   }
 
-  static String? peekName(Map<String, dynamic> product) => _name(product);
+  static String? peekName(Map<String, dynamic> product, {String? locale}) =>
+      _name(product, locale: locale);
 
-  static String? _name(Map<String, dynamic> product) {
-    for (final key in [
-      'product_name_tr',
-      'product_name',
-      'product_name_en',
-      'generic_name_tr',
-      'generic_name',
-      'generic_name_en',
-    ]) {
+  static String? _name(Map<String, dynamic> product, {String? locale}) {
+    final english = locale != null && !locale.toLowerCase().startsWith('tr');
+    final keys = english
+        ? const [
+            'product_name_en',
+            'product_name',
+            'generic_name_en',
+            'generic_name',
+            'product_name_tr',
+            'generic_name_tr',
+          ]
+        : const [
+            'product_name_tr',
+            'product_name',
+            'product_name_en',
+            'generic_name_tr',
+            'generic_name',
+            'generic_name_en',
+          ];
+    for (final key in keys) {
       final value = JsonUtils.readStringOrNull(product[key]);
       if (value != null) return value;
     }

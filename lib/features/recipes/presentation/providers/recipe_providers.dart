@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/locale/app_language_controller.dart';
+import '../../../../l10n/catalog_view.dart';
 import '../../../../shared/models/enums.dart';
 import '../../../../shared/models/recipe.dart';
 import '../../../../shared/repositories/user_profile_repository.dart';
@@ -14,25 +16,42 @@ import '../../domain/services/recipe_portion_service.dart';
 import '../../domain/services/recipe_query.dart';
 import '../../domain/usecases/recipe_usecases.dart';
 
-final recipesProvider = StreamProvider<List<Recipe>>(
-  (ref) => ref.watch(recipeRepositoryProvider).watchRecipes(),
-);
+final recipesProvider = StreamProvider<List<Recipe>>((ref) {
+  final language = ref.watch(appLocaleProvider).languageCode;
+  return ref.watch(recipeRepositoryProvider).watchRecipes().map(
+    (recipes) => [
+      for (final recipe in recipes) localizeRecipe(recipe, language),
+    ],
+  );
+});
 
-final recipeProvider = StreamProvider.family<Recipe?, String>(
-  (ref, id) => ref.watch(recipeRepositoryProvider).watchRecipe(id),
-);
+final recipeProvider = StreamProvider.family<Recipe?, String>((ref, id) {
+  final language = ref.watch(appLocaleProvider).languageCode;
+  return ref.watch(recipeRepositoryProvider).watchRecipe(id).map(
+    (recipe) => recipe == null ? null : localizeRecipe(recipe, language),
+  );
+});
 
 final favoriteRecipeIdsProvider = StreamProvider<Set<String>>(
   (ref) => ref.watch(recipeRepositoryProvider).watchFavoriteIds(),
 );
 
-final recentRecipesProvider = StreamProvider<List<Recipe>>(
-  (ref) => ref.watch(recipeRepositoryProvider).watchRecent(),
-);
+final recentRecipesProvider = StreamProvider<List<Recipe>>((ref) {
+  final language = ref.watch(appLocaleProvider).languageCode;
+  return ref.watch(recipeRepositoryProvider).watchRecent().map(
+    (recipes) => [
+      for (final recipe in recipes) localizeRecipe(recipe, language),
+    ],
+  );
+});
 
 final recommendedRecipesProvider = FutureProvider<List<Recipe>>((ref) async {
+  final language = ref.watch(appLocaleProvider).languageCode;
   final profile = ref.watch(userProfileProvider).value;
-  return ref.watch(recipeRepositoryProvider).getRecommendedRecipes(profile);
+  final recipes = await ref
+      .watch(recipeRepositoryProvider)
+      .getRecommendedRecipes(profile);
+  return [for (final recipe in recipes) localizeRecipe(recipe, language)];
 });
 
 final recipePortionServiceProvider = Provider<RecipePortionService>(

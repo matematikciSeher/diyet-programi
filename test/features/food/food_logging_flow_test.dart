@@ -105,12 +105,12 @@ void main() {
 
     expect(find.byType(FoodSearchPage), findsOneWidget);
     expect(
-      find.text(l10n.foodAddedTo('Haşlanmış yumurta', l10n.mealBreakfast)),
+      find.text(l10n.foodAddedTo('Boiled egg', l10n.mealBreakfast)),
       findsOneWidget,
     );
 
     await _search(tester, '');
-    expect(find.text('Haşlanmış yumurta'), findsOneWidget);
+    expect(find.text('Boiled egg'), findsOneWidget);
 
     await tester.pageBack();
     await tester.pumpAndSettle();

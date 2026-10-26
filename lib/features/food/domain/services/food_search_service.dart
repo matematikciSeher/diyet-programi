@@ -1,3 +1,4 @@
+import '../../../../l10n/catalog_text.dart';
 import '../../../../shared/models/food.dart';
 
 /// Yerel eşleştirme ve sıralama. Büyük uzak veritabanı bağlandığında sunucu
@@ -45,6 +46,8 @@ class FoodSearchService {
     final name = normalize(food.name);
     final haystack = [
       name,
+      normalize(CatalogText.localize(food.name, 'en')),
+      normalize(CatalogText.localize(food.name, 'tr')),
       if (food.brand != null) normalize(food.brand!),
       for (final k in food.keywords) normalize(k),
     ].join(' ');

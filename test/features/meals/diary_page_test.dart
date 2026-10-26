@@ -245,14 +245,14 @@ void main() {
     await tester.enterText(find.byType(TextField).first, 'süt');
     await tester.pump(const Duration(milliseconds: 500));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Süt (tam yağlı)'));
+    await tester.tap(find.text('Milk (whole)'));
     await tester.pumpAndSettle();
     expect(find.byType(FoodDetailPage), findsOneWidget);
 
     await tester.tap(find.text(l10n.foodAddToMeal(l10n.mealBreakfast)));
     await tester.pumpAndSettle();
     expect(
-      find.text(l10n.foodAddedTo('Süt (tam yağlı)', l10n.mealBreakfast)),
+      find.text(l10n.foodAddedTo('Milk (whole)', l10n.mealBreakfast)),
       findsOneWidget,
     );
 

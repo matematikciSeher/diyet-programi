@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/utils/extensions/context_extensions.dart';
 import '../../../../core/widgets/app_card.dart';
+import '../../../../l10n/catalog_text.dart';
 import '../../../../shared/models/enums.dart';
 import '../../../../shared/models/meal_entry.dart';
 import '../../../../shared/models/nutrition_facts.dart';
@@ -186,7 +187,11 @@ class _FoodLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final language = Localizations.localeOf(context).languageCode;
     final serving = entry.servingLabel;
+    final servingText = serving == null
+        ? null
+        : CatalogText.localize(serving, language);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: AppSpacing.xxs),
       child: Row(
@@ -194,11 +199,11 @@ class _FoodLine extends StatelessWidget {
           Expanded(
             child: Text.rich(
               TextSpan(
-                text: entry.name,
+                text: CatalogText.localize(entry.name, language),
                 children: [
-                  if (serving != null)
+                  if (servingText != null)
                     TextSpan(
-                      text: ' · $serving',
+                      text: ' · $servingText',
                       style: TextStyle(color: context.colors.onSurfaceVariant),
                     ),
                 ],

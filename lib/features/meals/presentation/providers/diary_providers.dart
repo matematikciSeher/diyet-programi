@@ -1,7 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/locale/app_language_controller.dart';
 import '../../../../core/utils/extensions/date_extensions.dart';
+import '../../../../l10n/catalog_view.dart';
 import '../../../../shared/models/enums.dart';
 import '../../../../shared/models/nutrition_facts.dart';
 import '../../../../shared/models/nutrition_targets.dart';
@@ -73,13 +75,14 @@ final dailyLogProvider = StreamProvider<DailyLog>((ref) async* {
   final scores = ref.watch(nutritionScoreRepositoryProvider);
   final targets = ref.watch(diaryTargetsProvider);
   final clock = ref.watch(clockProvider);
+  final language = ref.watch(appLocaleProvider).languageCode;
   await ref.watch(demoHistorySeederProvider.future);
-  yield* repo
-      .watchDay(date)
-      .map(
-        (log) =>
-            log.withScore(scores.scoreFor(log, targets: targets, now: clock())),
-      );
+  yield* repo.watchDay(date).map(
+    (log) => localizeDailyLog(
+      log.withScore(scores.scoreFor(log, targets: targets, now: clock())),
+      language,
+    ),
+  );
 });
 
 /// Sayfa iskeleti yalnızca bu durum değişince yeniden çizilir.

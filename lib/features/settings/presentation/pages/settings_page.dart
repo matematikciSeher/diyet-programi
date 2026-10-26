@@ -6,6 +6,8 @@ import '../../../../core/config/app_config.dart';
 import '../../../../core/errors/failure_messages.dart';
 import '../../../../core/errors/result.dart';
 import '../../../../core/legal/privacy_policy_link.dart';
+import '../../../../core/locale/app_language.dart';
+import '../../../../core/locale/app_language_controller.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/theme_mode_controller.dart';
 import '../../../../core/utils/extensions/context_extensions.dart';
@@ -22,6 +24,7 @@ class SettingsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    final language = ref.watch(appLanguageProvider);
     final themeMode = ref.watch(themeModeProvider);
     final service = ref.watch(subscriptionServiceProvider);
     final config = ref.watch(appConfigProvider);
@@ -33,6 +36,29 @@ class SettingsPage extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              SectionHeader(title: l10n.settingsLanguage),
+              SegmentedButton<AppLanguageChoice>(
+                segments: [
+                  ButtonSegment(
+                    value: AppLanguageChoice.system,
+                    icon: const Icon(Icons.phone_android_outlined),
+                    label: Text(l10n.themeSystem),
+                  ),
+                  ButtonSegment(
+                    value: AppLanguageChoice.turkish,
+                    label: Text(l10n.languageTurkish),
+                  ),
+                  ButtonSegment(
+                    value: AppLanguageChoice.english,
+                    label: Text(l10n.languageEnglish),
+                  ),
+                ],
+                selected: {language},
+                onSelectionChanged: (selection) => ref
+                    .read(appLanguageProvider.notifier)
+                    .setChoice(selection.first),
+              ),
+              AppSpacing.gapXl,
               SectionHeader(title: l10n.settingsTheme),
               SegmentedButton<ThemeMode>(
                 segments: [

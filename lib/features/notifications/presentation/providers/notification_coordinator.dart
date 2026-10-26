@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/locale/app_language_controller.dart';
 import '../../../../shared/repositories/user_profile_repository.dart';
 import '../../../../shared/services/service_providers.dart';
 import '../../../meal_plans/data/repositories/meal_plan_repository_impl.dart';
@@ -25,6 +26,11 @@ final notificationCoordinatorProvider = Provider<void>((ref) {
   }
 
   void schedule() => unawaited(sync());
+
+  ref.listen(appLocaleProvider, (previous, next) {
+    if (previous == next) return;
+    schedule();
+  });
 
   ref.listen(notificationSettingsProvider, (previous, next) {
     if (!next.hasValue || previous?.value == next.value) return;

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ui';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -7,6 +6,7 @@ import '../../../../core/constants/app_constants.dart';
 import '../../../../core/constants/storage_keys.dart';
 import '../../../../core/errors/result.dart';
 import '../../../../core/routing/app_routes.dart';
+import '../../../../core/locale/app_language_controller.dart';
 import '../../../../l10n/generated/app_localizations.dart';
 import '../../../../shared/models/enums.dart';
 import '../../../../shared/models/fasting_session.dart';
@@ -373,11 +373,7 @@ class NotificationService {
 
 /// Bildirim metinleri arka planda, `BuildContext` olmadan üretilir.
 final notificationLocalizationsProvider = Provider<AppLocalizations>((ref) {
-  final locale = PlatformDispatcher.instance.locale;
-  final supported = AppLocalizations.supportedLocales.any(
-    (l) => l.languageCode == locale.languageCode,
-  );
-  return lookupAppLocalizations(supported ? locale : const Locale('tr'));
+  return lookupAppLocalizations(ref.watch(appLocaleProvider));
 });
 
 final notificationServiceProvider = Provider<NotificationService>(

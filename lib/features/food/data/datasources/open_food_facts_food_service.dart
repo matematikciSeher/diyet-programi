@@ -14,9 +14,13 @@ import 'open_food_facts_mapper.dart';
 /// doğrudan bağlanmaz.
 class OpenFoodFactsFoodService
     implements FoodDatabaseService, BarcodeLookupService {
-  OpenFoodFactsFoodService(this._client);
+  OpenFoodFactsFoodService(this._client, {String Function()? localeCode})
+    : _localeCode = localeCode;
 
   final ApiClient _client;
+  final String Function()? _localeCode;
+
+  String? get _locale => _localeCode?.call();
 
   static const _fields =
       'code,product_name,product_name_en,product_name_tr,'
@@ -56,6 +60,7 @@ class OpenFoodFactsFoodService
           if (item is Map)
             ?OpenFoodFactsMapper.fromProduct(
               Map<String, dynamic>.from(item),
+              locale: locale ?? _locale,
             ),
       ];
     } on AppException {
@@ -156,6 +161,7 @@ class OpenFoodFactsFoodService
       product,
       source: FoodSource.barcode,
       fallbackBarcode: barcode,
+      locale: _locale,
     );
     BarcodeLookupLog.write(
       barcode: barcode,

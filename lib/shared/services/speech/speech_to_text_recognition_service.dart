@@ -44,7 +44,7 @@ class SpeechToTextRecognitionService implements SpeechRecognitionService {
             partialResults: true,
             cancelOnError: true,
             listenFor: listenFor ?? maxDuration,
-            localeId: localeId ?? 'tr_TR',
+            localeId: localeId ?? 'en_US',
           ),
         );
       } on Object catch (error) {

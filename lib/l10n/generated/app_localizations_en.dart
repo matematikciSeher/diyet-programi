@@ -732,10 +732,37 @@ class AppLocalizationsEn extends AppLocalizations {
   String get errorNetwork => 'Please check your internet connection.';
 
   @override
+  String get settingsLanguage => 'Language';
+
+  @override
+  String get languageTurkish => 'Turkish';
+
+  @override
+  String get languageEnglish => 'English';
+
+  @override
   String get settingsTheme => 'Appearance';
 
   @override
   String get themeSystem => 'System';
+
+  @override
+  String get notificationChannelMeal => 'Meals';
+
+  @override
+  String get notificationChannelWater => 'Water';
+
+  @override
+  String get notificationChannelFasting => 'Fasting';
+
+  @override
+  String get notificationChannelWeight => 'Weight';
+
+  @override
+  String get notificationChannelMotivation => 'Motivation';
+
+  @override
+  String get notificationChannelPlan => 'Plan';
 
   @override
   String get themeLight => 'Light';

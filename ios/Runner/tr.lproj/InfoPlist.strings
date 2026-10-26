@@ -1,0 +1,7 @@
+CFBundleDisplayName = "Diyet Programı";
+NSHealthShareUsageDescription = "Adım, yürüme ve koşu mesafesi, aktif kalori ve antrenman özetini günlüğünüzde göstermek için Apple Health verilerinizi okuruz. Bu veriler Firebase'e yazılmaz. Beslenme asistanına aktivite veya gün özeti sorduğunuzda ilgili özet, yapılandırılmış servise o soruyla gidebilir.";
+NSHealthUpdateUsageDescription = "Uygulama Apple Health'e veri yazmaz. HealthKit erişimi için bu açıklama gerekir; kayıtlar yalnızca okunur.";
+NSCameraUsageDescription = "Barkod taramak, ilerleme fotoğrafı çekmek ve yiyecek tanımak için kameraya erişim gerekir. Yiyecek fotoğrafı kalıcı olarak saklanmaz.";
+NSPhotoLibraryUsageDescription = "İlerleme fotoğrafı veya yiyecek tanıma için bir görsel seçmek üzere fotoğraf arşivine erişim gerekir. Seçilen yiyecek fotoğrafı kalıcı olarak saklanmaz.";
+NSMicrophoneUsageDescription = "Yiyecekleri sesle eklemek için mikrofon gerekir. Ses kaydı kalıcı olarak saklanmaz.";
+NSSpeechRecognitionUsageDescription = "Söylediğiniz yiyecekleri metne çevirmek için konuşma tanıma kullanılır. Ses kaydı kalıcı olarak saklanmaz.";

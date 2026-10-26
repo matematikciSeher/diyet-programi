@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 import '../../../core/utils/extensions/context_extensions.dart';
+import '../../../l10n/catalog_text.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../shared/presentation/enum_labels.dart';
 import '../../fasting/domain/models/fasting_schedule.dart';
@@ -14,11 +15,17 @@ import 'assistant_guide_text.dart';
 abstract final class AssistantReplyText {
   static String of(BuildContext context, AssistantReply reply) {
     final l10n = context.l10n;
+    final language = Localizations.localeOf(context).languageCode;
+    String food(String text) => CatalogText.localize(text, language);
     String kcal(double v) => AppFormat.integer(context, v);
     String g(double v) => AppFormat.integer(context, v);
 
     return switch (reply) {
-      RemainingCaloriesReply(:final consumed, :final target, :final remaining) =>
+      RemainingCaloriesReply(
+        :final consumed,
+        :final target,
+        :final remaining,
+      ) =>
         remaining >= 0
             ? l10n.assistantRemainingCalories(
                 kcal(consumed),
@@ -33,7 +40,11 @@ abstract final class AssistantReplyText {
       ProteinStatusReply(:final consumed, :final target, :final remaining) =>
         consumed >= target
             ? l10n.assistantProteinReached(g(consumed), g(target))
-            : l10n.assistantProteinRemaining(g(consumed), g(target), g(remaining)),
+            : l10n.assistantProteinRemaining(
+                g(consumed),
+                g(target),
+                g(remaining),
+              ),
       MealSuggestionReply(
         :final mealType,
         :final remainingCalories,
@@ -54,9 +65,9 @@ abstract final class AssistantReplyText {
               kcal(remainingCalories),
             ),
           if (fromPlan != null)
-            '• ${l10n.assistantSuggestionFromPlan(fromPlan.title, kcal(fromPlan.nutrition.calories))}',
+            '• ${l10n.assistantSuggestionFromPlan(food(fromPlan.title), kcal(fromPlan.nutrition.calories))}',
           for (final s in suggestions)
-            '• ${s.title} (${l10n.kcalValue(kcal(s.nutrition.calories))}, '
+            '• ${food(s.title)} (${l10n.kcalValue(kcal(s.nutrition.calories))}, '
                 '${l10n.gramsValue(g(s.nutrition.proteinG))} ${l10n.macroProtein.toLowerCase()})',
           if (fromPlan == null && suggestions.isEmpty)
             l10n.assistantSuggestionNone,
@@ -64,16 +75,17 @@ abstract final class AssistantReplyText {
       SwapPlanReply(:final meal) =>
         meal == null
             ? l10n.assistantSwapGeneral
-            : l10n.assistantSwapMeal(meal.mealType.label(l10n), meal.title),
+            : l10n.assistantSwapMeal(
+                meal.mealType.label(l10n),
+                food(meal.title),
+              ),
       OverTargetReply(:final overCalories) =>
         overCalories > 0
             ? l10n.assistantOverTarget(kcal(overCalories))
             : l10n.assistantOverTargetNotReally,
       WaterStatusReply(:final consumedMl, :final goalMl) =>
         consumedMl >= goalMl
-            ? l10n.assistantWaterReached(
-                AppFormat.liters(context, consumedMl),
-              )
+            ? l10n.assistantWaterReached(AppFormat.liters(context, consumedMl))
             : l10n.assistantWaterRemaining(
                 AppFormat.liters(context, consumedMl),
                 AppFormat.liters(context, goalMl),
@@ -91,7 +103,10 @@ abstract final class AssistantReplyText {
                 l10n.assistantWeightProgress(
                   ProgressFormat.kg(context, startKg ?? currentKg),
                   ProgressFormat.kg(context, currentKg),
-                  ProgressFormat.signed(context, currentKg - (startKg ?? currentKg)),
+                  ProgressFormat.signed(
+                    context,
+                    currentKg - (startKg ?? currentKg),
+                  ),
                 ),
                 if (targetKg != null)
                   l10n.assistantWeightTarget(
@@ -113,7 +128,12 @@ abstract final class AssistantReplyText {
           formatClock(remaining ?? Duration.zero),
         ),
       },
-      MacroStatusReply(:final macro, :final consumed, :final target, :final remaining) =>
+      MacroStatusReply(
+        :final macro,
+        :final consumed,
+        :final target,
+        :final remaining,
+      ) =>
         consumed >= target
             ? l10n.assistantMacroReached(
                 _macroName(l10n, macro),
@@ -186,14 +206,13 @@ abstract final class AssistantReplyText {
         l10n.assistantPlanHeading,
         for (final meal in meals)
           meal.nutrition.calories > 0
-              ? '• ${meal.mealType.label(l10n)}: ${meal.title} (${l10n.kcalValue(kcal(meal.nutrition.calories))})'
-              : '• ${meal.mealType.label(l10n)}: ${meal.title} (${l10n.assistantNutritionUnrecorded})',
+              ? '• ${meal.mealType.label(l10n)}: ${food(meal.title)} (${l10n.kcalValue(kcal(meal.nutrition.calories))})'
+              : '• ${meal.mealType.label(l10n)}: ${food(meal.title)} (${l10n.assistantNutritionUnrecorded})',
       ].join('\n'),
       SafetyReply(:final concern) => switch (concern) {
         SafetyConcern.medical => l10n.assistantSafetyMedical,
         SafetyConcern.eatingDisorder => l10n.assistantSafetyEatingDisorder,
-        SafetyConcern.extremeRestriction =>
-          l10n.assistantSafetyRestriction,
+        SafetyConcern.extremeRestriction => l10n.assistantSafetyRestriction,
         SafetyConcern.emergency => l10n.assistantSafetyEmergency,
       },
       HelpReply() => l10n.assistantHelp,
@@ -243,6 +262,8 @@ abstract final class AssistantReplyText {
     required bool commentarySuppressed,
   }) {
     final l10n = context.l10n;
+    final language = Localizations.localeOf(context).languageCode;
+    String food(String text) => CatalogText.localize(text, language);
     String kcal(double value) => AppFormat.integer(context, value);
     final lines = <String>[];
     if (facts.hasVisibleRecord) {
@@ -264,9 +285,7 @@ abstract final class AssistantReplyText {
                   ),
           );
         } else {
-          lines.add(
-            l10n.assistantConsumedOnly(kcal(facts.consumedCalories!)),
-          );
+          lines.add(l10n.assistantConsumedOnly(kcal(facts.consumedCalories!)));
           if (facts.missing.contains('targets')) {
             lines.add(l10n.assistantMissingInfo);
           }
@@ -289,7 +308,9 @@ abstract final class AssistantReplyText {
           );
         }
       }
-      if (facts.showCarbs && facts.consumedCarbsG != null && facts.carbTargetG != null) {
+      if (facts.showCarbs &&
+          facts.consumedCarbsG != null &&
+          facts.carbTargetG != null) {
         lines.add(
           l10n.assistantMacroLine(
             l10n.macroCarbs,
@@ -298,7 +319,9 @@ abstract final class AssistantReplyText {
           ),
         );
       }
-      if (facts.showFat && facts.consumedFatG != null && facts.fatTargetG != null) {
+      if (facts.showFat &&
+          facts.consumedFatG != null &&
+          facts.fatTargetG != null) {
         lines.add(
           l10n.assistantMacroLine(
             l10n.macroFat,
@@ -311,9 +334,13 @@ abstract final class AssistantReplyText {
         final goal = facts.waterGoalMl;
         lines.add(
           goal == null
-              ? l10n.assistantWaterOnly(AppFormat.liters(context, facts.waterMl!))
+              ? l10n.assistantWaterOnly(
+                  AppFormat.liters(context, facts.waterMl!),
+                )
               : facts.waterMl! >= goal
-              ? l10n.assistantWaterReached(AppFormat.liters(context, facts.waterMl!))
+              ? l10n.assistantWaterReached(
+                  AppFormat.liters(context, facts.waterMl!),
+                )
               : l10n.assistantWaterRemaining(
                   AppFormat.liters(context, facts.waterMl!),
                   AppFormat.liters(context, goal),
@@ -336,7 +363,9 @@ abstract final class AssistantReplyText {
           );
         }
         if (facts.activeCaloriesKnown && facts.activeCalories != null) {
-          lines.add(l10n.assistantActivityCalories(kcal(facts.activeCalories!)));
+          lines.add(
+            l10n.assistantActivityCalories(kcal(facts.activeCalories!)),
+          );
         }
         if (facts.workoutsKnown && facts.workoutCount != null) {
           lines.add(l10n.assistantActivityWorkouts(facts.workoutCount!));
@@ -354,7 +383,7 @@ abstract final class AssistantReplyText {
       lines.add(l10n.assistantRecipeHeading);
       for (final recipe in recipes) {
         lines.add(
-          '• ${l10n.assistantRecipeLine(recipe.title, kcal(recipe.calories), kcal(recipe.proteinG))}',
+          '• ${l10n.assistantRecipeLine(food(recipe.title), kcal(recipe.calories), kcal(recipe.proteinG))}',
         );
       }
     }
